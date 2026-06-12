@@ -1,7 +1,12 @@
 {
   "cleanUrls": true,
   "redirects": [
-    { "source": "/", "destination": "/landing.html", "permanent": false }
+    { "source": "/", "destination": "/landing.html", "permanent": false },
+    { "source": "/00-public", "destination": "/00-public/catalog", "permanent": false },
+    { "source": "/10-clube", "destination": "/10-clube/01-dashboard", "permanent": false },
+    { "source": "/20-mentor", "destination": "/20-mentor/studio-home", "permanent": false },
+    { "source": "/30-mentorado", "destination": "/30-mentorado/biblioteca", "permanent": false },
+    { "source": "/40-curator", "destination": "/40-curator/aprovacoes", "permanent": false }
   ],
   "headers": [
     {
