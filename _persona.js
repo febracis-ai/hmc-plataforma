@@ -207,12 +207,15 @@
     return Object.values(PERSONAS);
   }
   function locationBase() {
-    // Calcula caminho relativo até a raiz Plataforma-v1
+    // Calcula caminho relativo até a raiz do projeto.
+    // Funciona com qualquer raiz (/ no Vercel, /Plataforma-v1/ no legado, etc).
+    // Conta quantas pastas precisam ser "subidas" desde a página atual.
     const path = window.location.pathname;
-    // se estiver em /Plataforma-v1/30-mentorado/biblioteca.html, sobe 1 nível
-    const depth = path.split('/').filter(Boolean).length - 1;
-    if (depth > 1) return '../'.repeat(depth - 1);
-    return '';
+    const parts = path.split('/').filter(Boolean);
+    // Última parte é o nome do arquivo (ex: 'studio-home.html')
+    // Pastas acima = parts.length - 1
+    const depth = Math.max(0, parts.length - 1);
+    return '../'.repeat(depth);
   }
 
   /* ─── APLICAR NA SIDEBAR (telas cross-context) ───────── */
