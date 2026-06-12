@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mentor de Líderes · Sua porta de entrada · HMC</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_shared.css?v=16">
+<script src="_icons.js?v=16" defer></script>
+<style>
+html, body { overflow-x: clip; max-width: 100%; }
+body { background: var(--blue-deep); color: white; min-height: 100vh; }
+
+/* ─── TOP NAV simples ─── */
+.mb-nav { display: flex; align-items: center; justify-content: space-between; padding: 18px clamp(20px, 4vw, 56px); border-bottom: 1px solid var(--divider-on-dark); }
+.mb-nav-brand { display: flex; align-items: center; gap: 10px; color: white; text-decoration: none; }
+.mb-nav-brand img { width: 28px; height: 28px; }
+.mb-nav-brand span { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 500; }
+.mb-nav-back { font-size: 13px; color: rgba(255,255,255,0.65); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+.mb-nav-back:hover { color: white; }
+
+/* ─── HERO ─── */
+.mb-hero { padding: clamp(48px, 7vw, 80px) clamp(20px, 4vw, 56px); text-align: center; position: relative; overflow: hidden; }
+.mb-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at center top, rgba(210,163,68,0.10) 0%, transparent 60%); pointer-events: none; }
+.mb-hero-inner { max-width: 760px; margin: 0 auto; position: relative; z-index: 1; }
+.mb-tag-row { display: inline-flex; align-items: center; gap: 14px; padding: 8px 18px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); border-radius: 999px; margin-bottom: 24px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; }
+.mb-tag-row .pill-gold { color: #d2a344; font-weight: 700; }
+.mb-tag-row .arrow { color: rgba(255,255,255,0.40); }
+.mb-tag-row .pill-blue { color: var(--blue-highlight); font-weight: 700; }
+
+.mb-eyebrow { font-size: 11px; color: #d2a344; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 600; margin-bottom: 18px; }
+.mb-h1 { font-family: 'Playfair Display', serif; font-size: clamp(36px, 6vw, 64px); font-weight: 500; letter-spacing: -0.035em; line-height: 1.05; margin-bottom: 22px; }
+.mb-h1 .grad-gold { background: linear-gradient(135deg, #fff1b5, #d2a344); -webkit-background-clip: text; background-clip: text; color: transparent; font-style: italic; }
+.mb-lead { font-size: clamp(15px, 1.8vw, 18px); line-height: 1.65; color: rgba(255,255,255,0.75); max-width: 620px; margin: 0 auto 32px; }
+
+/* ─── CASCATA VISUAL ─── */
+.mb-cascata { display: grid; grid-template-columns: 1fr auto 1fr; gap: 18px; max-width: 720px; margin: 0 auto 48px; align-items: stretch; }
+.mb-cascata-card { padding: 24px 22px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.10); border-radius: 14px; text-align: left; }
+.mb-cascata-card.gold { border-color: rgba(210,163,68,0.30); background: linear-gradient(160deg, rgba(210,163,68,0.10), rgba(255,255,255,0.03)); }
+.mb-cascata-card.blue { border-color: rgba(77,184,255,0.30); background: linear-gradient(160deg, rgba(77,184,255,0.08), rgba(255,255,255,0.03)); }
+.mb-cascata-eyebrow { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; margin-bottom: 8px; }
+.mb-cascata-card.gold .mb-cascata-eyebrow { color: #d2a344; }
+.mb-cascata-card.blue .mb-cascata-eyebrow { color: var(--blue-highlight); }
+.mb-cascata-name { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; margin-bottom: 6px; color: white; }
+.mb-cascata-desc { font-size: 12px; color: rgba(255,255,255,0.65); line-height: 1.55; }
+.mb-cascata-arrow { display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.40); font-size: 22px; }
+@media (max-width: 600px) {
+  .mb-cascata { grid-template-columns: 1fr; gap: 12px; }
+  .mb-cascata-arrow { transform: rotate(90deg); margin: 4px 0; }
+}
+
+.mb-cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+@media (max-width: 520px) { .mb-cta-row { flex-direction: column; } .mb-cta-row .btn { width: 100%; } }
+
+/* ─── SECTION ─── */
+.mb-section { padding: clamp(56px, 8vw, 100px) clamp(20px, 4vw, 56px); position: relative; }
+.mb-section.alt { background: rgba(255,255,255,0.02); }
+.mb-section-inner { max-width: 1100px; margin: 0 auto; }
+.mb-section-head { text-align: center; margin-bottom: 48px; }
+.mb-section-h2 { font-family: 'Playfair Display', serif; font-size: clamp(28px, 4.5vw, 44px); font-weight: 500; letter-spacing: -0.025em; line-height: 1.1; margin-bottom: 16px; color: white; }
+.mb-section-lead { font-size: clamp(14px, 1.5vw, 16px); line-height: 1.65; color: rgba(255,255,255,0.65); max-width: 620px; margin: 0 auto; }
+
+/* ─── 4 PILARES ─── */
+.mb-pilares { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+@media (max-width: 720px) { .mb-pilares { grid-template-columns: 1fr; } }
+.mb-pilar { padding: 28px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.10); border-radius: 14px; }
+.mb-pilar-icon { width: 42px; height: 42px; border-radius: 12px; background: rgba(210,163,68,0.12); color: #d2a344; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+.mb-pilar-title { font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 500; letter-spacing: -0.015em; color: white; margin-bottom: 8px; }
+.mb-pilar-desc { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.65; }
+
+/* ─── DEPOIMENTOS ─── */
+.mb-depo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+.mb-depo { padding: 24px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.10); border-radius: 14px; border-left: 3px solid #d2a344; }
+.mb-depo-quote { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; line-height: 1.55; color: rgba(255,255,255,0.85); margin-bottom: 18px; }
+.mb-depo-author { display: flex; align-items: center; gap: 12px; }
+.mb-depo-avatar { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, var(--blue-realce), var(--blue-chrome)); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 600; color: white; font-size: 13px; }
+.mb-depo-name { font-size: 13px; font-weight: 600; color: white; }
+.mb-depo-role { font-size: 11px; color: rgba(255,255,255,0.55); margin-top: 2px; }
+
+/* ─── COMPARISON ─── */
+.mb-comp { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; max-width: 900px; margin: 0 auto; }
+@media (max-width: 720px) { .mb-comp { grid-template-columns: 1fr; } }
+.mb-comp-card { padding: 28px; border-radius: 14px; }
+.mb-comp-card.melid { background: rgba(210,163,68,0.06); border: 1px solid rgba(210,163,68,0.20); }
+.mb-comp-card.hmc { background: rgba(77,184,255,0.06); border: 1px solid rgba(77,184,255,0.20); }
+.mb-comp-head { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.mb-comp-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 600; font-size: 14px; }
+.mb-comp-card.melid .mb-comp-icon { background: rgba(210,163,68,0.20); color: #d2a344; }
+.mb-comp-card.hmc .mb-comp-icon { background: rgba(77,184,255,0.20); color: var(--blue-highlight); }
+.mb-comp-name { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 500; color: white; }
+.mb-comp-tag { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; color: rgba(255,255,255,0.55); margin-top: 2px; }
+.mb-comp-list { list-style: none; padding: 0; font-size: 13px; line-height: 1.85; color: rgba(255,255,255,0.78); }
+.mb-comp-list li::before { content: '↳ '; opacity: 0.5; margin-right: 4px; }
+.mb-comp-card.melid .mb-comp-list li::before { color: #d2a344; }
+.mb-comp-card.hmc .mb-comp-list li::before { color: var(--blue-highlight); }
+
+/* ─── CTA FINAL ─── */
+.mb-final { padding: clamp(60px, 8vw, 96px) clamp(20px, 4vw, 56px); text-align: center; position: relative; overflow: hidden; }
+.mb-final::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at center, rgba(210,163,68,0.10) 0%, transparent 60%); pointer-events: none; }
+.mb-final-inner { max-width: 680px; margin: 0 auto; position: relative; z-index: 1; }
+.mb-final h2 { font-family: 'Playfair Display', serif; font-size: clamp(32px, 5.5vw, 52px); font-weight: 500; letter-spacing: -0.035em; line-height: 1.05; margin-bottom: 20px; color: white; }
+.mb-final p { font-size: clamp(15px, 1.6vw, 17px); line-height: 1.65; color: rgba(255,255,255,0.65); margin-bottom: 36px; max-width: 520px; margin-left: auto; margin-right: auto; }
+.mb-final .btn-gold { background: linear-gradient(135deg, #d2a344, #8c6b1f); border: 1px solid #d2a344; color: white; padding: 16px 32px; font-weight: 600; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; border-radius: 10px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 200ms; }
+.mb-final .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(210,163,68,0.30); }
+
+footer { padding: clamp(28px, 4vw, 40px) clamp(20px, 4vw, 56px); border-top: 1px solid var(--divider-on-dark); text-align: center; font-size: 10px; color: rgba(255,255,255,0.40); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<nav class="mb-nav">
+  <a href="landing.html" class="mb-nav-brand">
+    <img src="hmc-logo.png" alt="">
+    <span>High Mentor Club</span>
+  </a>
+  <a href="signup.html" class="mb-nav-back"><i data-icon="chevron-left" class="icon icon-sm"></i> Voltar pra escolha de jornada</a>
+</nav>
+
+<!-- HERO -->
+<section class="mb-hero">
+  <div class="mb-hero-inner">
+
+    <div class="mb-tag-row">
+      <span class="pill-gold">MELID</span>
+      <span class="arrow">→</span>
+      <span class="pill-blue">HMC</span>
+    </div>
+
+    <div class="mb-eyebrow">— A porta de entrada do ecossistema</div>
+    <h1 class="mb-h1">Antes da cadeira, <span class="grad-gold">o caminho</span>.</h1>
+    <p class="mb-lead">
+      Você quer ser mentor high-ticket mas ainda não opera um. <strong style="color: white;">Mentor de Líderes (MELID)</strong> é o programa de 12 meses que forma exatamente isso — e é comandado por Paulo Vieira, o mesmo Curador do HMC.
+    </p>
+
+    <!-- Cascata visual destacada -->
+    <div class="mb-cascata">
+      <div class="mb-cascata-card gold">
+        <div class="mb-cascata-eyebrow">— 01 · Forma</div>
+        <div class="mb-cascata-name">MELID</div>
+        <div class="mb-cascata-desc">12 meses · 4 pilares · você sai como mentor high-ticket de R$ 25k+ com programa, posicionamento e clientes pagantes.</div>
+      </div>
+      <div class="mb-cascata-arrow">→</div>
+      <div class="mb-cascata-card blue">
+        <div class="mb-cascata-eyebrow">— 02 · Abraça</div>
+        <div class="mb-cascata-name">HMC</div>
+        <div class="mb-cascata-desc">Você se candidata ao clube quando ticket está validado · Council, Codex, Cross-Floor, Studio, Yield CIS.</div>
+      </div>
+    </div>
+
+    <div class="mb-cta-row">
+      <a href="https://mentordelideres.com.br" target="_blank" rel="noopener" class="btn btn-chrome btn-lg" style="background: linear-gradient(135deg, #d2a344, #8c6b1f); border-color: #d2a344;">Conhecer o MELID <i data-icon="external" class="icon icon-sm"></i></a>
+      <a href="signup-mentor-1.html" class="btn btn-outline btn-lg" style="color: white; border-color: rgba(255,255,255,0.30);">Já fiz MELID · candidatar ao HMC</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- 4 PILARES MELID -->
+<section class="mb-section alt">
+  <div class="mb-section-inner">
+    <div class="mb-section-head">
+      <div class="mb-eyebrow">— Programa MELID · 3ª turma</div>
+      <h2 class="mb-section-h2">O que você sai sendo capaz de fazer.</h2>
+      <p class="mb-section-lead">4 pilares trabalhados ao longo de 12 meses. Não é palestra, não é curso gravado — é mentoria coletiva com PV + time + cohort.</p>
+    </div>
+
+    <div class="mb-pilares">
+      <div class="mb-pilar">
+        <div class="mb-pilar-icon"><i data-icon="mic" class="icon icon-lg"></i></div>
+        <div class="mb-pilar-title">Mentor High Ticket</div>
+        <div class="mb-pilar-desc">Construir mentoria de R$ 25k+ com transformação real, programa estruturado, posicionamento defensável e primeiros clientes pagantes ainda dentro do programa.</div>
+      </div>
+      <div class="mb-pilar">
+        <div class="mb-pilar-icon"><i data-icon="users" class="icon icon-lg"></i></div>
+        <div class="mb-pilar-title">Palestrante Poderoso</div>
+        <div class="mb-pilar-desc">Palco como ativo de marca + lead. Estrutura, presença, narrativa e desdobramento comercial pós-palestra.</div>
+      </div>
+      <div class="mb-pilar">
+        <div class="mb-pilar-icon"><i data-icon="video" class="icon icon-lg"></i></div>
+        <div class="mb-pilar-title">Influenciador Digital</div>
+        <div class="mb-pilar-desc">Presença orgânica focada (não vaidade): conteúdo que atrai mentorado high-ticket sem queimar você como "criador".</div>
+      </div>
+      <div class="mb-pilar">
+        <div class="mb-pilar-icon"><i data-icon="book" class="icon icon-lg"></i></div>
+        <div class="mb-pilar-title">Escritor Best-Seller</div>
+        <div class="mb-pilar-desc">Livro como porta de entrada de mentoria, não fim em si. Estrutura, escrita assistida e lançamento que vira aquisição.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARAÇÃO MELID vs HMC -->
+<section class="mb-section">
+  <div class="mb-section-inner">
+    <div class="mb-section-head">
+      <div class="mb-eyebrow">— Mesma família, papéis diferentes</div>
+      <h2 class="mb-section-h2">MELID forma. HMC abraça.</h2>
+      <p class="mb-section-lead">Os dois são produtos do ecossistema Paulo Vieira/Febracis. Não competem — operam em momentos diferentes da jornada.</p>
+    </div>
+
+    <div class="mb-comp">
+      <div class="mb-comp-card melid">
+        <div class="mb-comp-head">
+          <div class="mb-comp-icon">M</div>
+          <div>
+            <div class="mb-comp-name">MELID</div>
+            <div class="mb-comp-tag">Programa de formação · 12 meses</div>
+          </div>
+        </div>
+        <ul class="mb-comp-list">
+          <li>Quem ainda não tem ticket high validado</li>
+          <li>Cohort fechado · 3 turmas até hoje</li>
+          <li>4 pilares: mentor / palestrante / influencer / escritor</li>
+          <li>Mentoria coletiva PV + time + pares</li>
+          <li>Tem início, meio e graduation</li>
+          <li>Investimento ~R$ 150k · 12 meses</li>
+        </ul>
+      </div>
+      <div class="mb-comp-card hmc">
+        <div class="mb-comp-head">
+          <div class="mb-comp-icon">H</div>
+          <div>
+            <div class="mb-comp-name">HMC</div>
+            <div class="mb-comp-tag">Clube de mentores · sem prazo</div>
+          </div>
+        </div>
+        <ul class="mb-comp-list">
+          <li>Quem já opera com ticket validado (R$ 25k+)</li>
+          <li>Clube permanente · admissão por crivo</li>
+          <li>Council mensal, Codex, Cross-Floor, Pilgrimages</li>
+          <li>Studio próprio + checkout CISPay + 90% líquido</li>
+          <li>Não acaba · quem entra não sai</li>
+          <li>Fee HMC 10% sobre GMV (sem mensalidade)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section class="mb-section alt">
+  <div class="mb-section-inner">
+    <div class="mb-section-head">
+      <div class="mb-eyebrow">— Trajetórias reais</div>
+      <h2 class="mb-section-h2">Quem fez MELID e hoje está no HMC.</h2>
+      <p class="mb-section-lead">5 dos 12 mentores do HMC vieram dessa cascata. Não é hipótese — é o caminho mapeado.</p>
+    </div>
+
+    <div class="mb-depo-grid">
+      <div class="mb-depo">
+        <p class="mb-depo-quote">"Entrei no MELID sem ter mentoria. Saí com 8 mentorados pagantes a R$ 32k. Ano depois, candidatei ao HMC e fui aprovada. A cascata é real."</p>
+        <div class="mb-depo-author">
+          <div class="mb-depo-avatar">RM</div>
+          <div>
+            <div class="mb-depo-name">Renata Mendes</div>
+            <div class="mb-depo-role">Tier II HMC · MELID turma 1</div>
+          </div>
+        </div>
+      </div>
+      <div class="mb-depo">
+        <p class="mb-depo-quote">"O MELID me deu programa, posicionamento e os primeiros 6 clientes. O HMC me deu pares de verdade. Os dois precisam existir."</p>
+        <div class="mb-depo-author">
+          <div class="mb-depo-avatar">BV</div>
+          <div>
+            <div class="mb-depo-name">Bruno Vaz</div>
+            <div class="mb-depo-role">Tier II HMC · MELID turma 2</div>
+          </div>
+        </div>
+      </div>
+      <div class="mb-depo">
+        <p class="mb-depo-quote">"PV é o mesmo Curador nos dois. Tem coerência total. Se você não está no MELID e ainda não opera high-ticket, é por lá que começa."</p>
+        <div class="mb-depo-author">
+          <div class="mb-depo-avatar">DC</div>
+          <div>
+            <div class="mb-depo-name">Daniel Coutinho</div>
+            <div class="mb-depo-role">Tier I HMC · MELID turma 2</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="mb-final">
+  <div class="mb-final-inner">
+    <div class="mb-eyebrow" style="text-align: center;">— Próximo passo</div>
+    <h2>Conheça o <span class="serif-italic" style="background: linear-gradient(135deg, #fff1b5, #d2a344); -webkit-background-clip: text; background-clip: text; color: transparent;">MELID</span> antes de tentar a cadeira.</h2>
+    <p>Inscrições abertas pra 3ª turma. PV apresenta o programa pessoalmente em sessão aberta — você decide depois se faz sentido.</p>
+
+    <div class="mb-cta-row">
+      <a href="https://mentordelideres.com.br" target="_blank" rel="noopener" class="btn-gold">
+        Ir pro site do MELID <i data-icon="external" class="icon icon-sm"></i>
+      </a>
+      <a href="signup-mentorado.html" class="btn btn-outline btn-lg" style="color: white; border-color: rgba(255,255,255,0.30);">
+        Ou começar como mentorado no HMC
+      </a>
+    </div>
+
+    <p style="margin-top: 28px; font-size: 12px; color: rgba(255,255,255,0.45); max-width: 460px; margin-left: auto; margin-right: auto;">
+      Já tem mentoria operando com ticket ≥ R$ 25k? <a href="signup-mentor-1.html" style="color: var(--blue-highlight); font-weight: 600;">Vá direto pro crivo do HMC →</a>
+    </p>
+  </div>
+</section>
+
+<footer>
+  Mentor de Líderes · Curated by Paulo Vieira · MMXXVI · Ecossistema Febracis
+</footer>
+
+</body>
+</html>

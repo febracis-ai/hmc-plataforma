@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feature Flags · _dev · HMC</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_shared.css?v=16">
+<script src="../_icons.js?v=16" defer></script>
+<script src="../_modals.js?v=16" defer></script>
+<style>
+body { background: var(--blue-deep); min-height: 100vh; color: white; padding: 0; }
+.dev-wrap { max-width: 1280px; margin: 0 auto; padding: clamp(32px, 4vw, 48px); }
+.dev-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; flex-wrap: wrap; gap: 16px; padding-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.dev-brand { display: flex; align-items: center; gap: 12px; color: white; text-decoration: none; }
+.dev-brand img { width: 32px; height: 32px; }
+.dev-badge { padding: 8px 16px; background: rgba(229,83,83,0.15); border: 1px solid rgba(229,83,83,0.40); color: #FF8888; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; border-radius: 999px; display: inline-flex; align-items: center; gap: 8px; }
+.dev-nav { display: flex; gap: 18px; }
+.dev-nav a { font-size: 13px; color: rgba(255,255,255,0.55); text-decoration: none; padding: 6px 14px; border-radius: 6px; transition: all 150ms; }
+.dev-nav a:hover { color: white; background: rgba(255,255,255,0.04); }
+.dev-nav a.active { color: white; background: rgba(77,184,255,0.10); font-weight: 600; }
+.dev-h1 { font-family: 'Playfair Display', serif; font-size: 38px; font-weight: 500; letter-spacing: -0.025em; margin-bottom: 8px; }
+.dev-sub { font-size: 14px; color: rgba(255,255,255,0.55); margin-bottom: 36px; max-width: 640px; line-height: 1.6; }
+.flag-search { padding: 12px 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.10); border-radius: 8px; font-size: 13px; color: white; width: 360px; max-width: 100%; }
+.flag-table { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; overflow: hidden; }
+.flag-row { display: grid; grid-template-columns: 1fr 130px 130px 90px; gap: 18px; padding: 18px 24px; border-bottom: 1px solid rgba(255,255,255,0.06); align-items: center; }
+.flag-row:last-child { border-bottom: none; }
+.flag-row.head { background: rgba(255,255,255,0.04); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; color: rgba(168,230,255,0.55); }
+.flag-key { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: white; margin-bottom: 4px; }
+.flag-desc { font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.5; }
+.flag-env { font-size: 10px; padding: 3px 9px; border-radius: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+.env-dev { background: rgba(77,184,255,0.18); color: var(--blue-highlight); }
+.env-stg { background: rgba(243,156,18,0.18); color: #f39c12; }
+.env-prod { background: rgba(46,204,113,0.18); color: #2ecc71; }
+.toggle { width: 36px; height: 22px; border-radius: 12px; position: relative; cursor: pointer; transition: all 150ms; }
+.toggle.on { background: var(--blue-realce); }
+.toggle.off { background: rgba(255,255,255,0.10); }
+.toggle::after { content: ''; position: absolute; top: 2px; width: 18px; height: 18px; background: white; border-radius: 50%; transition: all 150ms; }
+.toggle.on::after { right: 2px; }
+.toggle.off::after { left: 2px; }
+.flag-rollout { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: rgba(255,255,255,0.65); }
+</style>
+</head>
+<body>
+
+<div class="dev-wrap">
+
+  <div class="dev-header">
+    <a href="../dev-login.html" class="dev-brand">
+      <img src="../hmc-logo.png" alt="">
+      <span style="font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 500;">HMC</span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: rgba(255,255,255,0.45);">/_dev</span>
+    </a>
+    <nav class="dev-nav">
+      <a href="../dev-login.html">Persona switch</a>
+      <a href="feature-flags.html" class="active">Feature flags</a>
+      <a href="seed-data.html">Seed data</a>
+      <a href="audit-viewer.html">Audit log</a>
+    </nav>
+    <div class="dev-badge"><i data-icon="alert" class="icon icon-sm"></i> Internal · Time Produto</div>
+  </div>
+
+  <h1 class="dev-h1">Feature flags</h1>
+  <p class="dev-sub">Liga/desliga features por ambiente. Mudança em prod gera audit log. Defaults conservadores: nada novo entra ligado em prod sem 2+ aprovações.</p>
+
+  <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 24px; flex-wrap: wrap;">
+    <input class="flag-search" type="search" placeholder="Buscar flag...">
+    <select style="padding: 11px 14px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.10); border-radius: 8px; font-size: 13px; color: white;">
+      <option>Todos ambientes</option><option>dev</option><option>staging</option><option>production</option>
+    </select>
+    <button class="btn btn-outline btn-sm" style="color: white; border-color: rgba(255,255,255,0.30);"><i data-icon="plus" class="icon icon-sm"></i> Nova flag</button>
+  </div>
+
+  <div class="flag-table">
+
+    <div class="flag-row head">
+      <div>Flag</div>
+      <div>Ambientes</div>
+      <div>Rollout</div>
+      <div style="text-align: right;">Estado</div>
+    </div>
+
+    <div class="flag-row">
+      <div>
+        <div class="flag-key">cross_floor_v2_marketplace</div>
+        <div class="flag-desc">Nova UX do marketplace Cross-Floor com filtros geo · em rollout gradual.</div>
+      </div>
+      <div style="display: flex; gap: 6px;"><span class="flag-env env-dev">dev</span><span class="flag-env env-stg">stg</span></div>
+      <div class="flag-rollout">50% prod</div>
+      <div style="text-align: right;"><div class="toggle on"></div></div>
+    </div>
+
+    <div class="flag-row">
+      <div>
+        <div class="flag-key">ia_curatorial_recommendations</div>
+        <div class="flag-desc">Sugestões "you might like to meet" via embeddings · sensível LGPD.</div>
+      </div>
+      <div style="display: flex; gap: 6px;"><span class="flag-env env-dev">dev</span></div>
+      <div class="flag-rollout">0% prod</div>
+      <div style="text-align: right;"><div class="toggle off"></div></div>
+    </div>
+
+    <div class="flag-row">
+      <div>
+        <div class="flag-key">cispay_webhook_v3</div>
+        <div class="flag-desc">Novo handler de webhook CISPay com HMAC + anti-replay reforçado.</div>
+      </div>
+      <div style="display: flex; gap: 6px;"><span class="flag-env env-dev">dev</span><span class="flag-env env-stg">stg</span><span class="flag-env env-prod">prod</span></div>
+      <div class="flag-rollout">100% prod</div>
+      <div style="text-align: right;"><div class="toggle on"></div></div>
+    </div>
+
+    <div class="flag-row">
+      <div>
+        <div class="flag-key">mux_offline_downloads</div>
+        <div class="flag-desc">Download de aulas pra mobile via Mux Signed URLs com cache local DRM.</div>
+      </div>
+      <div style="display: flex; gap: 6px;"><span class="flag-env env-dev">dev</span></div>
+      <div class="flag-rollout">Fase 3</div>
+      <div style="text-align: right;"><div class="toggle off"></div></div>
+    </div>
+
+    <div class="flag-row">
+      <div>
+        <div class="flag-key">studio_custom_domain</div>
+        <div class="flag-desc">Permite mentor mapear domínio próprio (lucas.hmc.club) pra vitrine.</div>
+      </div>
+      <div style="display: flex; gap: 6px;"><span class="flag-env env-dev">dev</span><span class="flag-env env-stg">stg</span></div>
+      <div class="flag-rollout">5% prod</div>
+      <div style="text-align: right;"><div class="toggle on"></div></div>
+    </div>
+
+    <div class="flag-row">
+      <div>
+        <div class="flag-key">codex_pdf_auto_generation</div>
+        <div class="flag-desc">Job Inngest noturno gera Codex em PDF via Typst · roadmap Fase 4.</div>
+      </div>
+      <div style="display: flex; gap: 6px;"><span class="flag-env env-dev">dev</span></div>
+      <div class="flag-rollout">Off</div>
+      <div style="text-align: right;"><div class="toggle off"></div></div>
+    </div>
+
+    <div class="flag-row">
+      <div>
+        <div class="flag-key">comunidade_audio_rooms</div>
+        <div class="flag-desc">Voice channels Discord-like na comunidade · alta complexidade.</div>
+      </div>
+      <div style="display: flex; gap: 6px;"><span class="flag-env env-dev">dev</span><span class="flag-env env-stg">stg</span><span class="flag-env env-prod">prod</span></div>
+      <div class="flag-rollout">100%</div>
+      <div style="text-align: right;"><div class="toggle on"></div></div>
+    </div>
+
+    <div class="flag-row">
+      <div>
+        <div class="flag-key">tier_iii_bridge_pedra_sim</div>
+        <div class="flag-desc">Sistema The Bridge ativo · integração bidirecional franquias do ecossistema PV em homologação.</div>
+      </div>
+      <div style="display: flex; gap: 6px;"><span class="flag-env env-dev">dev</span><span class="flag-env env-stg">stg</span></div>
+      <div class="flag-rollout">Tier III only</div>
+      <div style="text-align: right;"><div class="toggle on"></div></div>
+    </div>
+
+  </div>
+
+  <div style="margin-top: 24px; padding: 20px 24px; background: rgba(229,83,83,0.06); border-left: 3px solid #FF8888; border-radius: 8px; font-size: 13px; line-height: 1.7; color: rgba(255,255,255,0.85);">
+    <strong style="color: #FF8888;">⚠ Mudanças em produção:</strong> Toda alteração de flag em prod gera entrada imediata no <a href="audit-viewer.html" style="color: var(--blue-highlight);">Audit log</a> com IP, timestamp e quem alterou. Reversão automática se erro &gt; 2% por 5 min.
+  </div>
+
+</div>
+
+</body>
+</html>

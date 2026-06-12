@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HMC Studio · Lucas Vieira</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../_shared.css?v=16">
+  <script src="../_icons.js?v=16" defer></script>
+<script src="../_persona.js?v=16" defer></script>
+<script src="../_modals.js?v=16" defer></script>
+</head>
+<body data-persona-aware="mode-page" data-mode-context="studio" data-required-mode="studio">
+
+<button class="mobile-fab" data-sidebar-mobile-toggle aria-label="Menu"><i data-icon="menu" class="icon"></i></button>
+<div class="drawer-backdrop" data-sidebar-mobile-toggle></div>
+
+<div class="app">
+  <aside class="sidebar">
+    <a href="../hub.html" class="sidebar-brand">
+      <img src="../hmc-logo.png" alt="" class="brand-mark-img">
+      <div>
+        <div class="brand-text">High Mentor Club</div>
+        <div class="brand-sub">Curated by Paulo Vieira · MMXXVI</div>
+      </div>
+    </a>
+
+    <div class="mode-switch">
+      <a href="../hub.html" class="mode-switch-item" data-short="H"><i data-icon="home" class="icon"></i><span>Hub</span></a>
+      <a href="../10-clube/01-dashboard.html" class="mode-switch-item" data-short="C"><i data-icon="landmark" class="icon"></i><span>Clube</span></a>
+      <a href="../20-mentor/studio-home.html" class="mode-switch-item active" data-short="S"><i data-icon="briefcase" class="icon"></i><span>Studio</span></a>
+      <a href="../30-mentorado/biblioteca.html" class="mode-switch-item" data-short="E"><i data-icon="book-open" class="icon"></i><span>Estudos</span></a>
+    </div>
+
+    <div class="sidebar-nav-scroll">
+      <div class="nav-section">
+        <a href="../notifications.html" class="nav-item has-badge" data-tooltip="Avisos"><i data-icon="bell" class="icon icon-sm"></i>Avisos <span class="badge-count">12</span></a>
+        <a href="../agenda.html" class="nav-item" data-tooltip="Agenda"><i data-icon="calendar" class="icon icon-sm"></i>Agenda</a>
+        <a href="../buscar.html" class="nav-item" data-tooltip="Buscar"><i data-icon="search" class="icon icon-sm"></i>Buscar</a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-label">— Studio</div>
+        <a href="studio-home.html" class="nav-item active" data-tooltip="Visão geral"><i data-icon="briefcase" class="icon icon-sm"></i>Visão geral<span class="nav-dot"></span></a>
+        <a href="mentorias.html" class="nav-item" data-tooltip="Mentorias"><i data-icon="video" class="icon icon-sm"></i>Mentorias</a>
+        <a href="aulas-biblioteca.html" class="nav-item" data-tooltip="Aulas"><i data-icon="film" class="icon icon-sm"></i>Aulas</a>
+        <a href="mentorados.html" class="nav-item" data-tooltip="Mentorados"><i data-icon="users" class="icon icon-sm"></i>Mentorados</a>
+        <a href="sessoes-1-1.html" class="nav-item" data-tooltip="Sessões 1:1"><i data-icon="calendar" class="icon icon-sm"></i>Sessões 1:1</a>
+        <a href="comunidade.html" class="nav-item" data-tooltip="Comunidade"><i data-icon="message-circle" class="icon icon-sm"></i>Comunidade</a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-label">— Negócio</div>
+        <a href="receitas.html" class="nav-item" data-tooltip="Receitas"><i data-icon="dollar" class="icon icon-sm"></i>Receitas</a>
+        <a href="checkout-builder.html" class="nav-item" data-tooltip="Checkout"><i data-icon="credit-card" class="icon icon-sm"></i>Checkout</a>
+        <a href="cupons.html" class="nav-item" data-tooltip="Cupons"><i data-icon="tag" class="icon icon-sm"></i>Cupons</a>
+        <a href="pagina-publica.html" class="nav-item" data-tooltip="Página pública"><i data-icon="globe" class="icon icon-sm"></i>Página pública</a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-label">— Conta</div>
+        <a href="configuracoes.html" class="nav-item" data-tooltip="Configurações"><i data-icon="settings" class="icon icon-sm"></i>Configurações</a>
+        <a href="integracoes.html" class="nav-item" data-tooltip="Integrações"><i data-icon="external" class="icon icon-sm"></i>Integrações</a>
+      </div>
+    </div>
+
+    <div class="sidebar-footer-v3">
+      <a href="../account.html" class="user-pill-v3">
+        <div class="avatar-sm">LV</div>
+        <div>
+          <div class="user-pill-v3-name">Lucas Vieira</div>
+          <div class="user-pill-v3-role">Seat 12</div>
+        </div>
+      </a>
+      <button class="sidebar-toggle-btn" data-sidebar-toggle>
+        <i data-icon="chevron-left" class="icon"></i>
+        <span>Recolher menu</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div class="page-head">
+      <div class="page-head-text">
+        <div class="page-eyebrow">
+          <span class="gold-rule"></span>
+          <span class="page-eyebrow-text">Studio · Visão geral</span>
+        </div>
+        <h1 class="page-title">Boa tarde, <span class="page-title-serif-italic">Lucas</span>.</h1>
+        <p class="page-sub">Mariana acabou de comprar a mentoria há 12 minutos. Você tem 3 sessões agendadas para esta semana e 8 mensagens pendentes na comunidade.</p>
+      </div>
+      <button class="btn btn-chrome">Nova mentoria</button>
+    </div>
+
+    <!-- STATS -->
+    <div class="grid grid-4 mb-12" style="gap: 56px;">
+      <div class="stat-block">
+        <div class="stat-eyebrow">— Receita 30d</div>
+        <div class="stat-display">R$ 542k</div>
+        <div class="stat-delta">↗ +18% vs mês ant.</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-eyebrow">— Novos mentorados 30d</div>
+        <div class="stat-display">11</div>
+        <div class="stat-delta">↗ 3 esta semana</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-eyebrow">— Conversão página</div>
+        <div class="stat-display">8,2%</div>
+        <div class="stat-delta">↗ +1,4 p.p.</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-eyebrow">— Próximo saque</div>
+        <div class="stat-display">R$ 87,2k</div>
+        <div class="stat-delta">→ 05/12 · CISPay</div>
+      </div>
+    </div>
+
+    <!-- AÇÕES PENDENTES -->
+    <div class="grid grid-12-8 gap-loose mb-12">
+      <div class="surface" style="padding: 40px;">
+        <div class="section-head">
+          <div>
+            <div class="section-title">O que precisa de você</div>
+            <div class="section-sub">7 itens aguardando ação</div>
+          </div>
+          <a href="mentorados.html" class="section-link">Ver tudo →</a>
+        </div>
+
+        <div class="list-item">
+          <div style="flex: 1;">
+            <div class="flex gap-2 items-center mb-3">
+              <span class="badge badge-tier-3">Nova venda</span>
+              <span class="muted" style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">há 12 min</span>
+            </div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500;">Mariana Souza · R$ 6.800/mês</div>
+            <div class="list-item-meta">Inscrição completa via CISPay · cartão final 4427 · 12× sem juros. Acesso liberado automaticamente.</div>
+          </div>
+          <button class="btn btn-secondary btn-sm">Enviar boas-vindas</button>
+        </div>
+
+        <div class="list-item">
+          <div style="flex: 1;">
+            <div class="flex gap-2 items-center mb-3">
+              <span class="badge badge-accent">Comunidade</span>
+              <span class="muted" style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">8 não lidas</span>
+            </div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500;">Canal #dúvidas-modulo-3</div>
+            <div class="list-item-meta">Pedro Almeida marcou você em uma dúvida sobre o framework P&amp;L. Mais 7 mensagens não lidas em 3 canais.</div>
+          </div>
+          <button class="btn btn-secondary btn-sm">Abrir canal</button>
+        </div>
+
+        <div class="list-item">
+          <div style="flex: 1;">
+            <div class="flex gap-2 items-center mb-3">
+              <span class="badge badge-accent">Sessão 1:1</span>
+              <span class="muted" style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">Amanhã · 14h</span>
+            </div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500;">Daniel Coutinho · revisão de meta Q4</div>
+            <div class="list-item-meta">Calendly · link Google Meet enviado. Notas da sessão anterior estão no card do mentorado.</div>
+          </div>
+          <button class="btn btn-secondary btn-sm">Ver notas</button>
+        </div>
+
+        <div class="list-item">
+          <div style="flex: 1;">
+            <div class="flex gap-2 items-center mb-3">
+              <span class="badge badge-warn">Conteúdo</span>
+              <span class="muted" style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">Aula em rascunho</span>
+            </div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500;">"Como pensar P&amp;L sendo gerente" — Módulo 03</div>
+            <div class="list-item-meta">Upload Mux concluído. Aguardando revisão do título, descrição e materiais antes de publicar.</div>
+          </div>
+          <button class="btn btn-secondary btn-sm">Revisar</button>
+        </div>
+      </div>
+
+      <div class="flex-col gap-4">
+        <a href="sessoes-1-1.html" class="surface" style="padding: 28px;">
+          <div class="flex-between mb-4">
+            <div class="eyebrow-chrome">— Próximas sessões</div>
+            <span class="muted" style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">Esta semana</span>
+          </div>
+          <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 500; letter-spacing: -0.025em; margin-bottom: 8px;">3</div>
+          <div class="muted" style="font-size: 12px;">Daniel · Mariana · Patrícia</div>
+        </a>
+
+        <a href="aulas-biblioteca.html" class="surface" style="padding: 28px;">
+          <div class="flex-between mb-4">
+            <div class="eyebrow-chrome">— Biblioteca</div>
+            <span class="muted" style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">Aulas no ar</span>
+          </div>
+          <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 500; letter-spacing: -0.025em; margin-bottom: 8px;">52<span class="muted" style="font-size: 18px; font-weight: 400;"> / 64</span></div>
+          <div class="muted" style="font-size: 12px;">81% publicado · 12 em produção</div>
+        </a>
+
+        <a href="mentorados.html" class="surface" style="padding: 28px;">
+          <div class="flex-between mb-4">
+            <div class="eyebrow-chrome">— Mentorados ativos</div>
+            <span class="muted" style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">Engajados ↑</span>
+          </div>
+          <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 500; letter-spacing: -0.025em; margin-bottom: 8px;">42</div>
+          <div class="muted" style="font-size: 12px;">36 ativos últimos 7d · 6 dormentes</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- RECEITAS · GRÁFICO -->
+    <div class="surface mb-12" style="padding: 40px;">
+      <div class="section-head">
+        <div>
+          <div class="section-title">Receita por mentoria</div>
+          <div class="section-sub">Últimos 90 dias · split CISPay aplicado</div>
+        </div>
+        <a href="receitas.html" class="section-link">Ver relatório financeiro →</a>
+      </div>
+
+      <!-- Faked bar chart -->
+      <div style="display: grid; grid-template-columns: 240px 1fr; gap: 32px; align-items: center;">
+        <div>
+          <div class="stat-eyebrow">— Total bruto</div>
+          <div class="stat-display-xl" style="font-size: 56px;">R$ 1,42M</div>
+          <div class="muted mt-4" style="font-size: 13px; line-height: 1.55;">Sua receita líquida após o fee de 10% do HMC: <strong style="color: var(--text);">R$ 1,28M</strong></div>
+        </div>
+        <div style="display: flex; gap: 6px; align-items: flex-end; height: 180px;">
+          <div style="flex: 1; height: 45%; background: var(--blue-realce-muted); border-radius: 4px 4px 0 0;"></div>
+          <div style="flex: 1; height: 52%; background: var(--blue-realce-muted); border-radius: 4px 4px 0 0;"></div>
+          <div style="flex: 1; height: 38%; background: var(--blue-realce-muted); border-radius: 4px 4px 0 0;"></div>
+          <div style="flex: 1; height: 60%; background: var(--blue-realce-muted); border-radius: 4px 4px 0 0;"></div>
+          <div style="flex: 1; height: 70%; background: var(--blue-realce-muted); border-radius: 4px 4px 0 0;"></div>
+          <div style="flex: 1; height: 55%; background: var(--blue-realce-muted); border-radius: 4px 4px 0 0;"></div>
+          <div style="flex: 1; height: 82%; background: var(--blue-realce); border-radius: 4px 4px 0 0;"></div>
+          <div style="flex: 1; height: 78%; background: var(--blue-realce); border-radius: 4px 4px 0 0;"></div>
+          <div style="flex: 1; height: 88%; background: var(--blue-realce); border-radius: 4px 4px 0 0;"></div>
+          <div style="flex: 1; height: 95%; background: var(--blue-realce); border-radius: 4px 4px 0 0;"></div>
+          <div style="flex: 1; height: 92%; background: var(--blue-realce); border-radius: 4px 4px 0 0;"></div>
+          <div style="flex: 1; height: 100%; background: var(--blue-realce); border-radius: 4px 4px 0 0;"></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+</div>
+
+<div class="wf-note">Studio · Visão geral</div>
+
+</body>
+</html>

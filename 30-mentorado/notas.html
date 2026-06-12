@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minhas Notas · HMC Estudos</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_shared.css?v=16"><script src="../_icons.js?v=16" defer></script>
+<script src="../_persona.js?v=16" defer></script>
+<script src="../_modals.js?v=16" defer></script>
+<style>
+.notes-layout { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 24px; min-height: 70vh; }
+.notes-list { background: var(--bg-card); border: 1px solid var(--divider); border-radius: 12px; padding: 12px; height: fit-content; max-height: 80vh; overflow-y: auto; position: sticky; top: 24px; }
+.notes-list-search { padding: 10px 12px; background: var(--bg); border: 1px solid var(--divider); border-radius: 8px; font-size: 13px; width: 100%; margin-bottom: 12px; }
+.note-item { padding: 12px 14px; border-radius: 8px; cursor: pointer; transition: all 150ms; margin-bottom: 4px; text-decoration: none; color: inherit; display: block; }
+.note-item:hover { background: var(--bg-card-hover); }
+.note-item.active { background: var(--blue-realce-muted); }
+.note-item-course { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 4px; }
+.note-item-title { font-size: 13px; font-weight: 500; margin-bottom: 3px; line-height: 1.35; }
+.note-item-date { font-size: 11px; color: var(--text-faint); }
+.note-editor { background: var(--bg-card); border: 1px solid var(--divider); border-radius: 12px; padding: 36px 40px; min-height: 70vh; min-width: 0; }
+.note-editor-head { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 18px; margin-bottom: 24px; border-bottom: 1px solid var(--divider); }
+.note-editor-meta { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 8px; }
+.note-editor-title { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
+.note-editor-context { font-size: 13px; color: var(--text-muted); }
+.note-editor-body { font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.75; color: var(--text); min-height: 400px; outline: none; padding: 8px; border-radius: 6px; }
+.note-editor-body:focus { background: rgba(168,230,255,0.04); }
+.note-editor-body h3 { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500; margin: 20px 0 10px; }
+.note-editor-body p { margin-bottom: 12px; }
+.note-editor-body ul { padding-left: 22px; margin-bottom: 12px; }
+.note-toolbar { display: flex; gap: 8px; padding: 10px 0 16px; border-bottom: 1px solid var(--divider); margin-bottom: 14px; }
+.note-toolbar button { padding: 6px 10px; background: transparent; border: 1px solid var(--divider); border-radius: 6px; font-size: 12px; cursor: pointer; color: var(--text-muted); }
+.note-toolbar button:hover { background: var(--bg-card-hover); color: var(--text); }
+@media (max-width: 900px) { .notes-layout { grid-template-columns: 1fr; } .notes-list { position: relative; max-height: 280px; } }
+</style>
+</head>
+<body data-persona-aware="mode-page" data-mode-context="estudos" data-required-mode="estudos">
+<button class="mobile-fab" data-sidebar-mobile-toggle aria-label="Menu"><i data-icon="menu" class="icon"></i></button>
+<div class="drawer-backdrop" data-sidebar-mobile-toggle></div>
+<div class="app">
+<aside class="sidebar">
+  <a href="../hub.html" class="sidebar-brand"><img src="../hmc-logo.png" alt="" class="brand-mark-img"><div><div class="brand-text">High Mentor Club</div><div class="brand-sub">Curated by Paulo Vieira · MMXXVI</div></div></a>
+  <div class="mode-switch">
+    <a href="../hub-mentorado.html" class="mode-switch-item" data-short="H"><i data-icon="home" class="icon"></i><span>Hub</span></a>
+    <a href="../30-mentorado/biblioteca.html" class="mode-switch-item active" data-short="E"><i data-icon="book-open" class="icon"></i><span>Estudos</span></a>
+  </div>
+  <div class="sidebar-nav-scroll">
+    <div class="nav-section">
+      <a href="../notifications.html" class="nav-item has-badge"><i data-icon="bell" class="icon icon-sm"></i>Avisos <span class="badge-count">12</span></a>
+      <a href="../agenda.html" class="nav-item"><i data-icon="calendar" class="icon icon-sm"></i>Agenda</a>
+      <a href="../buscar.html" class="nav-item"><i data-icon="search" class="icon icon-sm"></i>Buscar</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">— Estudos</div>
+      <a href="biblioteca.html" class="nav-item"><i data-icon="book-open" class="icon icon-sm"></i>Biblioteca</a>
+      <a href="player.html" class="nav-item"><i data-icon="play-circle" class="icon icon-sm"></i>Continuando</a>
+      <a href="comunidade.html" class="nav-item has-badge"><i data-icon="message-circle" class="icon icon-sm"></i>Comunidades <span class="badge-count">8</span></a>
+      <a href="sessoes-1-1.html" class="nav-item"><i data-icon="calendar" class="icon icon-sm"></i>Sessões 1:1</a>
+      <a href="notas.html" class="nav-item active"><i data-icon="file-text" class="icon icon-sm"></i>Minhas notas<span class="nav-dot"></span></a>
+      <a href="progresso.html" class="nav-item"><i data-icon="trending-up" class="icon icon-sm"></i>Progresso</a>
+      <a href="certificados.html" class="nav-item"><i data-icon="award" class="icon icon-sm"></i>Certificados</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">— Conta</div>
+      <a href="../account.html" class="nav-item"><i data-icon="user" class="icon icon-sm"></i>Meu perfil</a>
+      <a href="pagamentos.html" class="nav-item"><i data-icon="credit-card" class="icon icon-sm"></i>Pagamentos</a>
+      <a href="suporte.html" class="nav-item"><i data-icon="help" class="icon icon-sm"></i>Suporte</a>
+    </div>
+  </div>
+  <div class="sidebar-footer-v3">
+    <a href="../account.html" class="user-pill-v3"><div class="avatar-sm">MS</div><div><div class="user-pill-v3-name">Mariana Souza</div><div class="user-pill-v3-role">Mentorada · 3 cursos</div></div></a>
+    <button class="sidebar-toggle-btn" data-sidebar-toggle><i data-icon="chevron-left" class="icon"></i><span>Recolher menu</span></button>
+  </div>
+</aside>
+
+<main class="main">
+
+  <div class="page-head">
+    <div class="page-head-text">
+      <div class="page-eyebrow"><span class="gold-rule"></span><span class="page-eyebrow-text">Estudos · Minhas notas</span></div>
+      <h1 class="page-title">Suas <span class="page-title-serif-italic">anotações</span> por aula.</h1>
+      <p class="page-sub">Cada nota nasce de uma aula. Marca o que importa e revisita semanas depois. 24 notas · 3 cursos · ~1h leitura total.</p>
+    </div>
+    <button class="btn btn-chrome btn-sm"><i data-icon="plus" class="icon icon-sm"></i> Nova nota livre</button>
+  </div>
+
+  <div class="notes-layout">
+
+    <aside class="notes-list">
+      <input class="notes-list-search" type="search" placeholder="Buscar notas...">
+
+      <div style="font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); font-weight: 700; padding: 8px 14px 6px;">— Recentes</div>
+
+      <a href="notas.html" class="note-item active">
+        <div class="note-item-course">Negociação · Aula 02</div>
+        <div class="note-item-title">P&L: 3 perguntas pro CEO</div>
+        <div class="note-item-date">Hoje · 14:32</div>
+      </a>
+
+      <a href="notas.html" class="note-item">
+        <div class="note-item-course">Funil B2B · Aula 11</div>
+        <div class="note-item-title">Script de discovery — versão minha</div>
+        <div class="note-item-date">Ontem</div>
+      </a>
+
+      <a href="notas.html" class="note-item">
+        <div class="note-item-course">YouTube · Pré-trabalho 03</div>
+        <div class="note-item-title">Lista de canais referência</div>
+        <div class="note-item-date">2 dias</div>
+      </a>
+
+      <a href="notas.html" class="note-item">
+        <div class="note-item-course">Negociação · Aula 01</div>
+        <div class="note-item-title">Framework BATNA pessoal</div>
+        <div class="note-item-date">5 dias</div>
+      </a>
+
+      <a href="notas.html" class="note-item">
+        <div class="note-item-course">Livre</div>
+        <div class="note-item-title">Reflexão pós sessão Renata</div>
+        <div class="note-item-date">1 sem</div>
+      </a>
+
+      <a href="notas.html" class="note-item">
+        <div class="note-item-course">Funil B2B · Aula 08</div>
+        <div class="note-item-title">Métricas que importam (e q não)</div>
+        <div class="note-item-date">2 sem</div>
+      </a>
+
+      <div style="font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); font-weight: 700; padding: 16px 14px 6px;">— Marcadas pra revisão</div>
+
+      <a href="notas.html" class="note-item">
+        <div class="note-item-course">Negociação · Aula 04</div>
+        <div class="note-item-title">★ Tática de espelho</div>
+        <div class="note-item-date">12 mai</div>
+      </a>
+
+    </aside>
+
+    <div class="note-editor">
+      <div class="note-editor-head">
+        <div>
+          <div class="note-editor-meta">— Negociação · Módulo 03 · Aula 02</div>
+          <div class="note-editor-title">P&L: 3 perguntas pro CEO</div>
+          <div class="note-editor-context">Você estava em 12:43 · marcada às 14:32 hoje</div>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn btn-outline btn-sm">Marcar revisão</button>
+          <button class="btn btn-outline btn-sm">⋯</button>
+        </div>
+      </div>
+
+      <div class="note-toolbar">
+        <button>B</button>
+        <button><em>I</em></button>
+        <button>H</button>
+        <button>—</button>
+        <button>•</button>
+        <button>"</button>
+      </div>
+
+      <div class="note-editor-body" contenteditable="true">
+        <p>Renata abriu com 3 perguntas que mudam tudo:</p>
+        <h3>1. Margem ou volume?</h3>
+        <p>O CEO precisa decidir se quer crescer faturando mais por venda OU vendendo mais quantidade. Não dá pra otimizar os dois ao mesmo tempo. Geralmente vem como "queremos crescer 30%". Tem que destravar qual.</p>
+        <h3>2. Receita ou caixa?</h3>
+        <p>"Vendi" não é "recebi". Empresa pode estar bombando em receita e morrendo em caixa. Sempre pergunto: qual o DPO médio dos clientes top 10?</p>
+        <h3>3. Cliente novo ou cliente atual?</h3>
+        <p>CAC pra novo é altíssimo. NRR (net retention) é o que move companhia madura. O CEO sabe NRR? Se não sabe = bandeira.</p>
+        <h3>Aplicação real</h3>
+        <ul>
+          <li>Trazer pra próxima sessão 1:1 com Renata</li>
+          <li>Aplicar nas conversas com Daniel C. (meu mentorado)</li>
+          <li>Adicionar no meu pitch de discovery do Studio</li>
+        </ul>
+      </div>
+
+      <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--divider); display: flex; justify-content: space-between; align-items: center;">
+        <span class="muted" style="font-size: 11px;">Salvamento automático · Última edição: agora</span>
+        <a href="player.html" class="btn btn-secondary btn-sm">← Voltar pra aula</a>
+      </div>
+
+    </div>
+
+  </div>
+
+</main>
+</div>
+<div class="wf-note">Estudos · Notas</div>
+</body>
+</html>

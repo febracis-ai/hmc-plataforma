@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Curator · Paulo Vieira · HMC</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_shared.css?v=16">
+<script src="_icons.js?v=16" defer></script>
+<script src="_modals.js?v=16" defer></script>
+<script src="_persona.js?v=16" defer></script>
+<style>
+.pv-hero { background: linear-gradient(160deg, #050A15 0%, #0A1530 45%, #0D285C 80%, #102b5e 100%); border-radius: 24px; padding: 48px 52px; margin-bottom: 36px; color: white; position: relative; overflow: hidden; }
+.pv-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 80% 0%, rgba(168,230,255,0.22) 0%, transparent 60%); pointer-events: none; }
+.pv-hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: 40px; align-items: center; position: relative; z-index: 1; }
+@media (max-width: 900px) { .pv-hero-grid { grid-template-columns: minmax(0, 1fr); } .pv-portrait { display: none; } }
+.pv-portrait { width: 200px; height: 200px; border-radius: 50%; background: linear-gradient(135deg, var(--blue-realce), var(--blue-chrome)); color: var(--blue-highlight); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 76px; font-weight: 500; box-shadow: 0 24px 60px rgba(10,21,48,0.40); margin: 0 auto; }
+
+.kpi-strategic { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 36px; }
+.kpi-card { padding: 22px 24px; background: var(--bg-card); border: 1px solid var(--divider); border-radius: 14px; position: relative; overflow: hidden; }
+.kpi-card::before { content: ''; position: absolute; left: 0; top: 18px; bottom: 18px; width: 3px; background: linear-gradient(180deg, #d2a344, #8c6b1f); border-radius: 0 3px 3px 0; }
+.kpi-label { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 10px; }
+.kpi-val { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 500; letter-spacing: -0.025em; line-height: 1; }
+.kpi-trend { font-size: 11px; color: var(--text-muted); margin-top: 8px; }
+.kpi-trend.up { color: #2ecc71; }
+.kpi-trend.down { color: #FF8888; }
+
+.pv-action-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 36px; }
+.pv-action-card { padding: 24px; background: var(--bg-card); border: 1px solid var(--divider); border-radius: 14px; text-decoration: none; color: inherit; transition: all 200ms; border-left: 3px solid transparent; }
+.pv-action-card:hover { transform: translateY(-2px); border-left-color: #d2a344; box-shadow: 0 12px 28px rgba(11,11,15,0.06); }
+.pv-action-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(210,163,68,0.12); color: #d2a344; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+.pv-action-title { font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 500; letter-spacing: -0.01em; margin-bottom: 6px; }
+.pv-action-sub { font-size: 13px; color: var(--text-muted); line-height: 1.55; margin-bottom: 12px; }
+.pv-action-cta { font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; font-weight: 700; color: #d2a344; }
+
+.section-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 18px; }
+.section-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; letter-spacing: -0.02em; }
+.section-sub { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+.queue-card { background: var(--bg-card); border: 1px solid var(--divider); border-radius: 14px; padding: 18px 22px; margin-bottom: 12px; display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; gap: 14px; align-items: center; text-decoration: none; color: inherit; transition: all 200ms; }
+.queue-card:hover { border-color: #d2a344; transform: translateY(-1px); }
+.queue-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(210,163,68,0.12); color: #d2a344; display: flex; align-items: center; justify-content: center; }
+.queue-eyebrow { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 3px; }
+.queue-title { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 500; line-height: 1.3; margin-bottom: 3px; }
+.queue-sub { font-size: 12px; color: var(--text-muted); }
+</style>
+</head>
+<body data-persona-aware="cross-context" data-active-mode="hub-pv">
+
+<button class="mobile-fab" data-sidebar-mobile-toggle aria-label="Menu"><i data-icon="menu" class="icon"></i></button>
+<div class="drawer-backdrop" data-sidebar-mobile-toggle></div>
+
+<div class="app">
+  <aside class="sidebar">
+    <a href="hub-pv.html" class="sidebar-brand"><img src="hmc-logo.png" alt="" class="brand-mark-img"><div><div class="brand-text">High Mentor Club</div><div class="brand-sub">Curated by Paulo Vieira · MMXXVI</div></div></a>
+    <div class="mode-switch">
+      <a href="hub-pv.html" class="mode-switch-item active" data-short="H"><i data-icon="home" class="icon"></i><span>Hub</span></a>
+      <a href="10-clube/01-dashboard.html" class="mode-switch-item" data-short="C"><i data-icon="landmark" class="icon"></i><span>Clube</span></a>
+      <a href="40-curator/aprovacoes.html" class="mode-switch-item" data-short="X"><i data-icon="shield-check" class="icon"></i><span>Curator</span></a>
+    </div>
+    <div class="sidebar-nav-scroll">
+      <div class="nav-section">
+        <a href="notifications.html" class="nav-item has-badge"><i data-icon="bell" class="icon icon-sm"></i>Avisos <span class="badge-count">4</span></a>
+        <a href="agenda.html" class="nav-item"><i data-icon="calendar" class="icon icon-sm"></i>Agenda</a>
+        <a href="buscar.html" class="nav-item"><i data-icon="search" class="icon icon-sm"></i>Buscar</a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">— Curadoria PV</div>
+        <a href="curator-address-editor.html" class="nav-item"><i data-icon="mic" class="icon icon-sm"></i>Address (editor)</a>
+        <a href="antechamber-pv.html" class="nav-item has-badge"><i data-icon="lock" class="icon icon-sm"></i>Antechamber <span class="badge-count">6</span></a>
+        <a href="40-curator/codex-publishing.html" class="nav-item"><i data-icon="book" class="icon icon-sm"></i>Codex publishing</a>
+        <a href="40-curator/aprovacoes.html" class="nav-item has-badge"><i data-icon="shield-check" class="icon icon-sm"></i>Aprovações <span class="badge-count">3</span></a>
+      </div>
+    </div>
+    <div class="sidebar-footer-v3">
+      <a href="account.html" class="user-pill-v3"><div class="avatar-sm" style="background: linear-gradient(135deg, var(--blue-deep), var(--blue-realce)); color: var(--blue-highlight);">PV</div><div><div class="user-pill-v3-name">Paulo Vieira</div><div class="user-pill-v3-role">The Curator · Founder</div></div></a>
+      <button class="sidebar-toggle-btn" data-sidebar-toggle><i data-icon="chevron-left" class="icon"></i><span>Recolher menu</span></button>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <section class="pv-hero">
+      <div class="pv-hero-grid">
+        <div>
+          <div style="display: inline-flex; align-items: center; gap: 10px; padding: 6px 14px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.10); border-radius: 100px; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; margin-bottom: 20px;">
+            <i data-icon="award" class="icon icon-sm"></i> The Curator · Founder
+          </div>
+          <h1 style="font-family: 'Playfair Display', serif; font-size: clamp(32px, 5vw, 52px); font-weight: 500; letter-spacing: -0.035em; line-height: 1.05; margin-bottom: 18px;">Bom dia, <span class="serif-italic" style="background: linear-gradient(135deg, #A8E6FF, #4DB8FF); -webkit-background-clip: text; background-clip: text; color: transparent;">Paulo</span>.</h1>
+          <p style="font-size: 15px; line-height: 1.65; color: rgba(255,255,255,0.75); margin-bottom: 24px; max-width: 540px;">
+            Você tem <strong style="color: white;">6 mensagens no Antechamber</strong> aguardando resposta, <strong style="color: white;">Curator's Address de julho</strong> a 5 dias de publicar e <strong style="color: white;">3 candidatos</strong> esperando decisão final pós-curadoria do Michelle.
+          </p>
+          <div style="display: flex; gap: 28px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.12);">
+            <div><div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(168,230,255,0.65); font-weight: 700; margin-bottom: 4px;">— Tempo médio resposta Antechamber</div><div style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500;">14h</div></div>
+            <div><div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(168,230,255,0.65); font-weight: 700; margin-bottom: 4px;">— Próximo Council</div><div style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500;">7 dias</div></div>
+          </div>
+        </div>
+        <div class="pv-portrait">PV</div>
+      </div>
+    </section>
+
+    <!-- KPIs estratégicos founder -->
+    <div class="kpi-strategic">
+      <div class="kpi-card"><div class="kpi-label">— GMV YTD</div><div class="kpi-val">R$ 38,4M</div><div class="kpi-trend up">↗ +24% vs ano anterior</div></div>
+      <div class="kpi-card"><div class="kpi-label">— Membros ativos</div><div class="kpi-val">68</div><div class="kpi-trend">12 Tier III · 32 Tier II · 24 Tier I</div></div>
+      <div class="kpi-card"><div class="kpi-label">— Mentorados</div><div class="kpi-val">847</div><div class="kpi-trend up">↗ +142 últimos 90d</div></div>
+      <div class="kpi-card"><div class="kpi-label">— NPS clube</div><div class="kpi-val">73</div><div class="kpi-trend up">↗ +5 vs Q1</div></div>
+      <div class="kpi-card"><div class="kpi-label">— Fee HMC YTD</div><div class="kpi-val">R$ 3,84M</div><div class="kpi-trend">10% sobre GMV</div></div>
+      <div class="kpi-card"><div class="kpi-label">— Pilgrimages 2026</div><div class="kpi-val">3</div><div class="kpi-trend">Florença · Patagônia · Atenas</div></div>
+    </div>
+
+    <!-- Áreas exclusivas PV -->
+    <div class="section-head">
+      <div><div class="section-title">Sua mesa curatorial</div><div class="section-sub">Ações exclusivas do Curator · sem delegação</div></div>
+    </div>
+
+    <div class="pv-action-row">
+      <a href="curator-address-editor.html" class="pv-action-card">
+        <div class="pv-action-icon"><i data-icon="mic" class="icon icon-lg"></i></div>
+        <div class="pv-action-title">Curator's Address</div>
+        <div class="pv-action-sub">Carta de julho em rascunho · "O que The House não viu" · 6 parágrafos · publica em 5 dias.</div>
+        <div class="pv-action-cta">Continuar escrevendo →</div>
+      </a>
+
+      <a href="antechamber-pv.html" class="pv-action-card">
+        <div class="pv-action-icon"><i data-icon="lock" class="icon icon-lg"></i></div>
+        <div class="pv-action-title">Antechamber</div>
+        <div class="pv-action-sub">6 conversas pendentes com Inner Council · 2 marcadas como urgentes (Carlos R., Marina C.) · sua linha direta.</div>
+        <div class="pv-action-cta">Responder →</div>
+      </a>
+
+      <a href="40-curator/codex-publishing.html" class="pv-action-card">
+        <div class="pv-action-icon"><i data-icon="book" class="icon icon-lg"></i></div>
+        <div class="pv-action-title">Codex publishing</div>
+        <div class="pv-action-sub">Decreto de junho aprovado · publicar antes do próximo Council (10 jul). Anuário Vol II em preparação.</div>
+        <div class="pv-action-cta">Abrir editor →</div>
+      </a>
+
+      <a href="40-curator/aprovacoes.html" class="pv-action-card">
+        <div class="pv-action-icon"><i data-icon="shield-check" class="icon icon-lg"></i></div>
+        <div class="pv-action-title">Decisão final · 3 candidatos</div>
+        <div class="pv-action-sub">Michelle pré-aprovou. Sua decisão é vinculante: Marcelo Otto (Tier I → II) + Lucas Vieira (II → III) + Júlia Fontes (I → II).</div>
+        <div class="pv-action-cta">Revisar dossiês →</div>
+      </a>
+    </div>
+
+    <!-- Atividade que precisa do Curator -->
+    <div class="section-head">
+      <div><div class="section-title">Hoje · só você decide</div><div class="section-sub">Itens não-delegáveis</div></div>
+    </div>
+
+    <a href="antechamber-pv.html" class="queue-card">
+      <div class="queue-icon"><i data-icon="message-circle" class="icon"></i></div>
+      <div>
+        <div class="queue-eyebrow">— Antechamber · há 2h</div>
+        <div class="queue-title">Carlos Ribeiro · Tier III · pergunta sobre franquia SP (rede do ecossistema PV)</div>
+        <div class="queue-sub">"PV, recebi indicação interna pra abrir nova franquia em Curitiba via Bridge. Antes de aceitar, queria sua leitura sobre saturação no Sul."</div>
+      </div>
+      <span class="btn btn-secondary btn-sm">Abrir</span>
+    </a>
+
+    <a href="40-curator/aprovacoes.html" class="queue-card">
+      <div class="queue-icon"><i data-icon="award" class="icon"></i></div>
+      <div>
+        <div class="queue-eyebrow">— Promoção Tier · escalonamento</div>
+        <div class="queue-title">Lucas Vieira · Tier II → III · pronto para sua leitura</div>
+        <div class="queue-sub">6/6 critérios objetivos cumpridos · 3 endorsos Tier III completos (Carlos R., Marina C., Michelle). Sua decisão fecha.</div>
+      </div>
+      <span class="btn btn-chrome btn-sm">Decidir</span>
+    </a>
+
+    <a href="10-clube/02-calendar.html" class="queue-card">
+      <div class="queue-icon"><i data-icon="landmark" class="icon"></i></div>
+      <div>
+        <div class="queue-eyebrow">— Council mensal · 10 jul</div>
+        <div class="queue-title">Pauta da curadoria · revisar pré-Council</div>
+        <div class="queue-sub">Hotseats: André Castelo + Patrícia Lemos. Tier promotions: 3 votos. Anúncios: Codex Vol II + Pilgrimage Atenas.</div>
+      </div>
+      <span class="btn btn-secondary btn-sm">Pauta</span>
+    </a>
+
+    <!-- Footer founder note -->
+    <div style="margin-top: 36px; padding: 24px 28px; background: linear-gradient(135deg, rgba(210,163,68,0.06), var(--bg-card)); border: 1px solid rgba(210,163,68,0.25); border-radius: 14px;">
+      <div class="eyebrow-chrome" style="margin-bottom: 10px; color: #d2a344; -webkit-text-fill-color: #d2a344;">— Founder · vista exclusiva</div>
+      <p style="font-size: 14px; line-height: 1.7; margin: 0; color: var(--text);">
+        Esta vista é exclusiva do <strong>The Curator</strong>. Curators do time (Michelle) tem acesso ao workspace operacional mas não às áreas curatoriais finais — Address, Antechamber lado-PV, Codex publishing são suas. Aprovações finais pós-curadoria também aparecem só aqui.
+      </p>
+    </div>
+
+  </main>
+</div>
+<div class="wf-note">Hub · PV (Founder)</div>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HMC · Plataforma v1 · Mapa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_shared.css?v=16">
+  <style>
+    body { background: var(--blue-deep); min-height: 100vh; color: var(--text-on-dark); }
+    .index-wrap { max-width: 1200px; margin: 0 auto; padding: 80px 56px; }
+    .flow-block {
+      padding: 40px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--divider-on-dark);
+      border-radius: 16px;
+      margin-bottom: 24px;
+    }
+    .flow-eyebrow { font-size: 10px; color: var(--blue-highlight); letter-spacing: 0.22em; font-weight: 600; text-transform: uppercase; margin-bottom: 12px; }
+    .flow-title { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 500; letter-spacing: -0.025em; color: white; margin-bottom: 6px; }
+    .flow-sub { font-size: 14px; color: var(--text-on-dark-muted); margin-bottom: 28px; max-width: 580px; line-height: 1.55; }
+    .step-row {
+      display: grid;
+      grid-template-columns: 48px 1fr auto;
+      gap: 18px;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      align-items: center;
+    }
+    .step-row:last-child { border-bottom: none; }
+    .step-row a { color: white; text-decoration: none; display: block; }
+    .step-row:hover { background: rgba(77,184,255,0.03); }
+    .step-num {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: rgba(77,184,255,0.10);
+      border: 1px solid rgba(77,184,255,0.25);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--blue-highlight);
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      font-size: 16px;
+    }
+    .step-title { font-family: 'Playfair Display', serif; font-size: 17px; color: white; font-weight: 500; }
+    .step-file { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--blue-highlight); margin-top: 2px; }
+    .step-arrow { color: var(--text-on-dark-faint); font-size: 18px; }
+  </style>
+</head>
+<body>
+
+<div class="index-wrap">
+
+  <div style="text-align: center; margin-bottom: 64px;">
+    <div style="display: flex; justify-content: center; margin-bottom: 28px;">
+      <img src="hmc-logo.png" alt="HMC" class="hmc-seal-img hmc-seal-img-xl">
+    </div>
+    <div style="width: 48px; height: 1px; background: var(--blue-realce); margin: 0 auto 16px;"></div>
+    <div class="eyebrow" style="color: var(--blue-highlight); margin-bottom: 12px;">Plataforma v1 · A jornada completa</div>
+    <h1 style="font-family: 'Playfair Display', serif; font-size: 56px; font-weight: 500; letter-spacing: -0.035em; line-height: 1.05; color: white; margin-bottom: 16px;">
+      Dois caminhos. <span class="serif-italic">Um clube.</span>
+    </h1>
+    <p style="font-size: 16px; line-height: 1.6; color: var(--text-on-dark-muted); max-width: 580px; margin: 0 auto;">
+      Cada papel tem sua jornada completa. Clica em qualquer tela pra entrar — todos os links funcionam.
+    </p>
+  </div>
+
+  <div class="flow-block">
+    <div class="flow-eyebrow">— Entrada</div>
+    <div class="flow-title">Início para todos</div>
+    <div class="flow-sub">Marketing público + escolha de papel. A partir do signup.html a jornada se divide.</div>
+
+    <div class="step-row">
+      <div class="step-num">01</div>
+      <a href="landing.html"><div class="step-title">Landing pública</div><div class="step-file">landing.html</div></a>
+      <div class="step-arrow">→</div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">02</div>
+      <a href="login.html"><div class="step-title">Login (quem já tem conta)</div><div class="step-file">login.html</div></a>
+      <div class="step-arrow">→</div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">03</div>
+      <a href="signup.html"><div class="step-title">Signup · escolha de papel</div><div class="step-file">signup.html</div></a>
+      <div class="step-arrow">↓ bifurca</div>
+    </div>
+  </div>
+
+  <div class="flow-block" style="border-color: var(--blue-chrome-translucent); background: rgba(77,184,255,0.05);">
+    <div class="flow-eyebrow">— Fluxo A · Candidatura a Mentor</div>
+    <div class="flow-title">Por crivo do clube · 4 etapas</div>
+    <div class="flow-sub">Cadeira por aval. 4 formulários, indicação preferencial, audiência com The Curator. Status acompanhado em tempo real.</div>
+
+    <div class="step-row">
+      <div class="step-num">A1</div>
+      <a href="signup-mentor-1.html"><div class="step-title">Dados pessoais &amp; foto</div><div class="step-file">signup-mentor-1.html</div></a>
+      <div class="step-arrow">→</div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">A2</div>
+      <a href="signup-mentor-2.html"><div class="step-title">Sobre sua mentoria atual</div><div class="step-file">signup-mentor-2.html</div></a>
+      <div class="step-arrow">→</div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">A3</div>
+      <a href="signup-mentor-3.html"><div class="step-title">Credenciais &amp; indicação</div><div class="step-file">signup-mentor-3.html</div></a>
+      <div class="step-arrow">→</div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">A4</div>
+      <a href="signup-mentor-4.html"><div class="step-title">Revisão &amp; envio</div><div class="step-file">signup-mentor-4.html</div></a>
+      <div class="step-arrow">→</div>
+    </div>
+    <div class="step-row">
+      <div class="step-num" style="background: rgba(77,184,255,0.20); border-color: var(--blue-highlight);">A5</div>
+      <a href="candidatura-status.html"><div class="step-title">Candidatura enviada · timeline de status</div><div class="step-file">candidatura-status.html</div></a>
+      <div class="step-arrow">⏳ aprovação</div>
+    </div>
+    <div class="step-row" style="opacity: 0.7;">
+      <div class="step-num">A6</div>
+      <a href="onboarding.html"><div class="step-title">Boas-vindas (pós-aprovação)</div><div class="step-file">onboarding.html → hub.html</div></a>
+      <div class="step-arrow">→</div>
+    </div>
+  </div>
+
+  <div class="flow-block" style="border-color: var(--blue-chrome-translucent); background: rgba(77,184,255,0.05);">
+    <div class="flow-eyebrow">— Fluxo B · Mentorado (compra direta)</div>
+    <div class="flow-title">Acesso imediato · 5 etapas com CISPay</div>
+    <div class="flow-sub">Cria conta → catálogo → ver mentor → checkout CISPay → acesso liberado → biblioteca pessoal.</div>
+
+    <div class="step-row">
+      <div class="step-num">B1</div>
+      <a href="signup-mentorado.html"><div class="step-title">Criar conta (3 campos)</div><div class="step-file">signup-mentorado.html</div></a>
+      <div class="step-arrow">→</div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">B2</div>
+      <a href="00-public/catalog.html"><div class="step-title">Catálogo de mentores</div><div class="step-file">00-public/catalog.html</div></a>
+      <div class="step-arrow">→</div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">B3</div>
+      <a href="00-public/mentor-public.html"><div class="step-title">Landing do mentor · escolher mentoria</div><div class="step-file">00-public/mentor-public.html</div></a>
+      <div class="step-arrow">→</div>
+    </div>
+    <div class="step-row">
+      <div class="step-num" style="background: rgba(77,184,255,0.20); border-color: var(--blue-highlight);">B4</div>
+      <a href="00-public/checkout.html"><div class="step-title">Checkout via CISPay 💳</div><div class="step-file">00-public/checkout.html</div></a>
+      <div class="step-arrow">→</div>
+    </div>
+    <div class="step-row">
+      <div class="step-num" style="background: rgba(26,127,75,0.15); border-color: rgba(26,127,75,0.40); color: #4ADE80;">B5</div>
+      <a href="acesso-liberado.html"><div class="step-title">Acesso liberado · boas-vindas</div><div class="step-file">acesso-liberado.html</div></a>
+      <div class="step-arrow">→</div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">B6</div>
+      <a href="30-mentorado/biblioteca.html"><div class="step-title">Biblioteca pessoal Netflix</div><div class="step-file">30-mentorado/biblioteca.html</div></a>
+      <div class="step-arrow">✓ dentro</div>
+    </div>
+  </div>
+
+  <div class="flow-block" style="border-color: var(--blue-chrome-translucent); background: rgba(77,184,255,0.06);">
+    <div class="flow-eyebrow">— Hub central (para ambos os papéis)</div>
+    <div class="flow-title">Tudo se conecta aqui</div>
+    <div class="flow-sub">Depois de entrar, o Hub é a entrada única. Mostra atividade dos 3 contextos, notificações cruzadas, agenda.</div>
+
+    <div class="grid grid-3" style="gap: 12px;">
+      <a href="hub.html" style="padding: 20px; background: rgba(255,255,255,0.04); border: 1px solid rgba(77,184,255,0.30); border-radius: 10px; text-decoration: none; color: white;">
+        <div class="step-file" style="margin-bottom: 4px;">hub.html <span style="color: var(--blue-highlight);">★</span></div>
+        <div style="font-family: 'Playfair Display', serif; font-size: 16px;">Hub central</div>
+      </a>
+      <a href="notifications.html" style="padding: 20px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; text-decoration: none; color: white;">
+        <div class="step-file" style="margin-bottom: 4px;">notifications.html</div>
+        <div style="font-family: 'Playfair Display', serif; font-size: 16px;">Notificações</div>
+      </a>
+      <a href="account.html" style="padding: 20px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; text-decoration: none; color: white;">
+        <div class="step-file" style="margin-bottom: 4px;">account.html</div>
+        <div style="font-family: 'Playfair Display', serif; font-size: 16px;">Conta &amp; perfil</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="flow-block">
+    <div class="flow-eyebrow">— 3 mundos navegáveis (mesma sidebar)</div>
+    <div class="flow-title">A partir do Hub, alterne contextos</div>
+    <div class="flow-sub">Mode-switch na sidebar troca entre Clube / Studio / Estudos. Hub, Notificações e Buscar ficam fixos no topo.</div>
+
+    <div class="grid grid-3" style="gap: 16px;">
+      <div>
+        <div class="flow-eyebrow">— Clube HMC</div>
+        <div style="display: flex; flex-direction: column; gap: 6px; font-size: 12px;">
+          <a href="10-clube/01-dashboard.html" style="padding: 8px 12px; background: rgba(255,255,255,0.04); border-radius: 6px; color: white;">Sala do Membro</a>
+          <a href="10-clube/02-calendar.html" style="padding: 8px 12px; background: rgba(255,255,255,0.04); border-radius: 6px; color: white;">Council</a>
+          <a href="10-clube/03-codex.html" style="padding: 8px 12px; background: rgba(255,255,255,0.04); border-radius: 6px; color: white;">Codex</a>
+          <a href="10-clube/04-cross-floor.html" style="padding: 8px 12px; background: rgba(255,255,255,0.04); border-radius: 6px; color: white;">Cross-Floor</a>
+          <a href="10-clube/05-yield.html" style="padding: 8px 12px; background: rgba(255,255,255,0.04); border-radius: 6px; color: white;">Yield</a>
+          <a href="10-clube/06-pilgrimages.html" style="padding: 8px 12px; background: rgba(255,255,255,0.04); border-radius: 6px; color: white;">Pilgrimages</a>
+          <a href="10-clube/07-seal.html" style="padding: 8px 12px; background: rgba(255,255,255,0.04); border-radius: 6px; color: white;">Seal</a>
+        </div>
+      </div>
+      <div>
+        <div class="flow-eyebrow">— Studio (Mentor)</div>
+        <div style="display: flex; flex-direction: column; gap: 6px; font-size: 12px;">
+          <a href="20-mentor/studio-home.html" style="padding: 8px 12px; background: rgba(255,255,255,0.04); border-radius: 6px; color: white;">Visão geral</a>
+          <a href="20-mentor/mentorias.html" style="padding: 8px 12px; background: rgba(255,255,255,0.04); border-radius: 6px; color: white;">Minhas mentorias</a>
+          <a href="20-mentor/aulas-biblioteca.html" style="padding: 8px 12px; background: rgba(255,255,255,0.04); border-radius: 6px; color: white;">Biblioteca de aulas</a>
+        </div>
+      </div>
+      <div>
+        <div class="flow-eyebrow">— Estudos (Mentorado)</div>
+        <div style="display: flex; flex-direction: column; gap: 6px; font-size: 12px;">
+          <a href="30-mentorado/biblioteca.html" style="padding: 8px 12px; background: rgba(255,255,255,0.04); border-radius: 6px; color: white;">Biblioteca Netflix</a>
+          <a href="30-mentorado/player.html" style="padding: 8px 12px; background: rgba(255,255,255,0.04); border-radius: 6px; color: white;">Player de aula</a>
+          <a href="30-mentorado/comunidade.html" style="padding: 8px 12px; background: rgba(255,255,255,0.04); border-radius: 6px; color: white;">Comunidade Discord</a>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--divider-on-dark);">
+      <div class="flow-eyebrow">— Curator (admin)</div>
+      <a href="40-curator/aprovacoes.html" style="display: inline-block; padding: 8px 16px; background: rgba(255,255,255,0.04); border-radius: 6px; color: white; font-size: 12px;">Fila de aprovações</a>
+    </div>
+  </div>
+
+  <div style="padding: 40px; background: rgba(77,184,255,0.08); border: 1px solid var(--blue-chrome-translucent); border-radius: 16px; text-align: center;">
+    <div class="flow-eyebrow">— Como testar</div>
+    <h2 style="font-family: 'Playfair Display', serif; font-size: 28px; color: white; margin-bottom: 12px;">Faça o Fluxo B do começo ao fim</h2>
+    <p style="color: var(--text-on-dark-muted); font-size: 14px; max-width: 540px; margin: 0 auto 24px; line-height: 1.65;">
+      Landing → Iniciar candidatura → Mentorado → Catálogo → Mentor → Checkout CISPay → Acesso liberado → Biblioteca. 7 telas em sequência.
+    </p>
+    <div style="display: flex; gap: 12px; justify-content: center;">
+      <a href="landing.html" class="btn btn-chrome">Começar pela landing →</a>
+      <a href="signup.html" class="btn btn-outline" style="background: transparent; border-color: rgba(255,255,255,0.20); color: white;">Pular pra signup</a>
+    </div>
+  </div>
+
+  <div style="text-align: center; margin-top: 56px; padding-top: 40px; border-top: 1px solid var(--divider-on-dark);">
+    <div style="font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-on-dark-faint); font-weight: 600;">Excelência · Conexão · Impacto · MMXXVI</div>
+  </div>
+
+</div>
+
+</body>
+</html>

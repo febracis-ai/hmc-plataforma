@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hub · Mariana · HMC Estudos</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_shared.css?v=16">
+<script src="_icons.js?v=16" defer></script>
+<script src="_modals.js?v=16" defer></script>
+<script src="_persona.js?v=16" defer></script>
+<style>
+.hm-hero { background: linear-gradient(135deg, #050A15 0%, #0A1530 60%, #0D285C 100%); border-radius: 20px; padding: 48px 52px; margin-bottom: 36px; color: white; position: relative; overflow: hidden; }
+.hm-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 80% 0%, rgba(168,230,255,0.20) 0%, transparent 60%); pointer-events: none; }
+.continue-card { background: var(--bg-card); border: 1px solid var(--divider); border-radius: 16px; padding: 28px; margin-bottom: 24px; display: grid; grid-template-columns: 240px minmax(0, 1fr) auto; gap: 28px; align-items: center; }
+.continue-cover { width: 240px; height: 140px; background: linear-gradient(135deg, var(--blue-deep), var(--blue-realce)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--blue-highlight); font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 500; position: relative; }
+.continue-progress { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: rgba(255,255,255,0.20); border-radius: 0 0 10px 10px; overflow: hidden; }
+.continue-progress > div { height: 100%; background: var(--blue-highlight); }
+.continue-meta { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 8px; }
+.continue-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; letter-spacing: -0.015em; margin-bottom: 8px; }
+.continue-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 14px; }
+.cursos-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-bottom: 36px; }
+.curso-mini { background: var(--bg-card); border: 1px solid var(--divider); border-radius: 12px; padding: 22px; text-decoration: none; color: inherit; transition: all 200ms; }
+.curso-mini:hover { border-color: var(--blue-realce); transform: translateY(-2px); }
+.curso-mini-cover { width: 100%; height: 100px; border-radius: 8px; background: linear-gradient(135deg, var(--blue-deep), var(--blue-realce)); display: flex; align-items: center; justify-content: center; color: var(--blue-highlight); font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 500; margin-bottom: 14px; }
+.curso-mini-mentor { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 4px; }
+.curso-mini-title { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 500; letter-spacing: -0.01em; margin-bottom: 10px; line-height: 1.25; }
+.curso-mini-bar { height: 4px; background: var(--bg-card-hover); border-radius: 2px; overflow: hidden; margin-bottom: 8px; }
+.curso-mini-bar > div { height: 100%; background: var(--blue-realce); }
+.curso-mini-prog { font-size: 11px; color: var(--text-muted); }
+@media (max-width: 900px) { .continue-card { grid-template-columns: 1fr; } .continue-cover { width: 100%; } .cursos-row { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body data-persona-aware="cross-context" data-active-mode="hub-mentorado">
+<button class="mobile-fab" data-sidebar-mobile-toggle aria-label="Menu"><i data-icon="menu" class="icon"></i></button>
+<div class="drawer-backdrop" data-sidebar-mobile-toggle></div>
+<div class="app">
+<aside class="sidebar">
+  <a href="hub-mentorado.html" class="sidebar-brand"><img src="hmc-logo.png" alt="" class="brand-mark-img"><div><div class="brand-text">High Mentor Club</div><div class="brand-sub">Curated by Paulo Vieira · MMXXVI</div></div></a>
+  <div class="mode-switch">
+    <a href="hub-mentorado.html" class="mode-switch-item active" data-short="H"><i data-icon="home" class="icon"></i><span>Hub</span></a>
+    <a href="30-mentorado/biblioteca.html" class="mode-switch-item" data-short="E"><i data-icon="book-open" class="icon"></i><span>Estudos</span></a>
+  </div>
+  <div class="sidebar-nav-scroll">
+    <div class="nav-section">
+      <a href="notifications.html" class="nav-item has-badge"><i data-icon="bell" class="icon icon-sm"></i>Avisos <span class="badge-count">8</span></a>
+      <a href="agenda.html" class="nav-item"><i data-icon="calendar" class="icon icon-sm"></i>Agenda</a>
+      <a href="buscar.html" class="nav-item"><i data-icon="search" class="icon icon-sm"></i>Buscar</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">— Atalhos</div>
+      <a href="30-mentorado/biblioteca.html" class="nav-item"><i data-icon="book-open" class="icon icon-sm"></i>Biblioteca</a>
+      <a href="30-mentorado/player.html" class="nav-item"><i data-icon="play-circle" class="icon icon-sm"></i>Continuando</a>
+      <a href="30-mentorado/comunidade.html" class="nav-item has-badge"><i data-icon="message-circle" class="icon icon-sm"></i>Comunidades <span class="badge-count">8</span></a>
+      <a href="30-mentorado/sessoes-1-1.html" class="nav-item"><i data-icon="calendar" class="icon icon-sm"></i>Sessões 1:1</a>
+    </div>
+  </div>
+  <div class="sidebar-footer-v3">
+    <a href="account.html" class="user-pill-v3"><div class="avatar-sm">MS</div><div><div class="user-pill-v3-name">Mariana Souza</div><div class="user-pill-v3-role">Mentorada · 3 cursos</div></div></a>
+    <button class="sidebar-toggle-btn" data-sidebar-toggle><i data-icon="chevron-left" class="icon"></i><span>Recolher menu</span></button>
+  </div>
+</aside>
+
+<main class="main">
+
+  <section class="hm-hero">
+    <div style="position: relative; z-index: 1; max-width: 720px;">
+      <div style="font-size: 11px; color: var(--blue-highlight); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; margin-bottom: 14px;">— Hub Estudos · Quarta, 03 jun · 2026</div>
+      <h1 style="font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 500; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 18px;">Boa tarde, <span class="serif-italic" style="background: linear-gradient(135deg, #A8E6FF, #4DB8FF); -webkit-background-clip: text; background-clip: text; color: transparent;">Mariana</span>.</h1>
+      <p style="font-size: 16px; line-height: 1.6; color: rgba(255,255,255,0.72); margin-bottom: 24px;">Você está a <strong style="color: white;">11 min de fechar a aula que ficou pendente</strong> com a Renata, sua sessão 1:1 é quinta às 14h e tem <strong style="color: white;">8 mensagens não lidas</strong> em 3 comunidades.</p>
+      <div style="display: flex; gap: 28px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.12);">
+        <div><div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(168,230,255,0.65); font-weight: 700; margin-bottom: 4px;">— Cursos em curso</div><div style="font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 500;">3</div></div>
+        <div><div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(168,230,255,0.65); font-weight: 700; margin-bottom: 4px;">— Progresso médio</div><div style="font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 500;">41%</div></div>
+        <div><div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(168,230,255,0.65); font-weight: 700; margin-bottom: 4px;">— Sessões 1:1 restantes</div><div style="font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 500;">14</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-head">
+    <div>
+      <div class="section-title">Continue de onde parou</div>
+      <div class="section-sub">Renata Mendes · Módulo 03 · você está em 12:43</div>
+    </div>
+  </div>
+
+  <a href="30-mentorado/player.html" class="continue-card" style="text-decoration: none; color: inherit; transition: all 200ms;">
+    <div class="continue-cover">
+      RM
+      <div class="continue-progress"><div style="width: 53%;"></div></div>
+    </div>
+    <div>
+      <div class="continue-meta">— Negociação · Módulo 03 · Aula 02</div>
+      <div class="continue-title">Como pensar P&amp;L sendo gerente</div>
+      <div class="continue-sub">Você parou em 12:43 · faltam 11 min e 28 seg · próx 1:1 com Renata em 24h</div>
+      <div style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-realce); font-weight: 700;">↳ Termine antes da sessão quinta</div>
+    </div>
+    <span class="btn btn-chrome"><i data-icon="play" class="icon icon-sm"></i> Continuar</span>
+  </a>
+
+  <div class="section-head" style="margin-top: 36px;">
+    <div>
+      <div class="section-title">Seus 3 cursos em curso</div>
+      <div class="section-sub">Clique pra entrar no curso</div>
+    </div>
+    <a href="30-mentorado/biblioteca.html" class="section-link">Ver biblioteca completa →</a>
+  </div>
+
+  <div class="cursos-row">
+
+    <a href="30-mentorado/curso-detail.html" class="curso-mini">
+      <div class="curso-mini-cover">RM</div>
+      <div class="curso-mini-mentor">— Renata Mendes · Tier II</div>
+      <div class="curso-mini-title">Negociação de Alto Valor</div>
+      <div class="curso-mini-bar"><div style="width: 26%;"></div></div>
+      <div class="curso-mini-prog">26% · 14 de 64 aulas · há 1h</div>
+    </a>
+
+    <a href="30-mentorado/curso-detail.html" class="curso-mini">
+      <div class="curso-mini-cover" style="background: linear-gradient(135deg, var(--blue-chrome), var(--blue-realce));">BV</div>
+      <div class="curso-mini-mentor">— Bruno Vaz · Tier II</div>
+      <div class="curso-mini-title">Funil B2B Premium</div>
+      <div class="curso-mini-bar"><div style="width: 66%;"></div></div>
+      <div class="curso-mini-prog">66% · 12 de 18 aulas · próx encontro sex 20h</div>
+    </a>
+
+    <a href="30-mentorado/curso-detail.html" class="curso-mini">
+      <div class="curso-mini-cover" style="background: linear-gradient(135deg, var(--blue-deep), var(--blue-chrome));">PL</div>
+      <div class="curso-mini-mentor">— Paula Lourenço · Tier I</div>
+      <div class="curso-mini-title">YouTube Poderoso</div>
+      <div class="curso-mini-bar"><div style="width: 30%;"></div></div>
+      <div class="curso-mini-prog">30% · imersão presencial em 22 nov · SP</div>
+    </a>
+
+  </div>
+
+  <div class="grid grid-12-8 gap-loose">
+
+    <div class="surface" style="padding: 28px;">
+      <div class="section-head" style="margin-bottom: 14px;">
+        <div><div class="section-title-sm">Próximos compromissos</div></div>
+        <a href="agenda.html" class="section-link">Agenda completa →</a>
+      </div>
+
+      <div class="list-item">
+        <div style="flex: 1;">
+          <div style="display: flex; gap: 8px; margin-bottom: 4px; align-items: center;">
+            <span class="badge badge-accent">Estudos</span>
+            <span class="muted" style="font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; font-weight: 600;">Amanhã · qui · 14h</span>
+          </div>
+          <div style="font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 500;">Sessão 1:1 com Renata Mendes</div>
+          <div class="list-item-meta">Revisão do M03 · Cal.com aberto · notas anteriores disponíveis</div>
+        </div>
+        <a href="30-mentorado/sessoes-1-1.html" class="btn btn-secondary btn-sm">Ver</a>
+      </div>
+
+      <div class="list-item">
+        <div style="flex: 1;">
+          <div style="display: flex; gap: 8px; margin-bottom: 4px; align-items: center;">
+            <span class="badge badge-accent">Funil B2B</span>
+            <span class="muted" style="font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; font-weight: 600;">Sex · 20h</span>
+          </div>
+          <div style="font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 500;">Encontro ao vivo · Bruno Vaz</div>
+          <div class="list-item-meta">Q&amp;A trimestral · tópico: objection handling em deal &gt; R$ 1M</div>
+        </div>
+        <a href="30-mentorado/sessoes-1-1.html" class="btn btn-secondary btn-sm">Confirmar</a>
+      </div>
+
+      <div class="list-item">
+        <div style="flex: 1;">
+          <div style="display: flex; gap: 8px; margin-bottom: 4px; align-items: center;">
+            <span class="badge badge-accent">YouTube</span>
+            <span class="muted" style="font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; font-weight: 600;">22 nov · SP</span>
+          </div>
+          <div style="font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 500;">Imersão presencial · Paula Lourenço</div>
+          <div class="list-item-meta">3 dias · pré-trabalho 30% completo · prazo restante 60 dias</div>
+        </div>
+        <a href="30-mentorado/curso-detail.html" class="btn btn-secondary btn-sm">Pré-trabalho</a>
+      </div>
+
+    </div>
+
+    <div class="flex-col gap-4">
+
+      <a href="30-mentorado/progresso.html" class="surface" style="padding: 24px; text-decoration: none; color: inherit;">
+        <div class="eyebrow-chrome" style="margin-bottom: 10px;">— Sua jornada</div>
+        <div style="font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 500;">68 / 142 aulas</div>
+        <div class="muted" style="font-size: 12px; margin-top: 4px;">48% do total · streak 18 dias · 42h estudadas</div>
+      </a>
+
+      <a href="30-mentorado/comunidade.html" class="surface" style="padding: 24px; text-decoration: none; color: inherit;">
+        <div class="eyebrow-chrome" style="margin-bottom: 10px;">— Comunidades</div>
+        <div style="font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 500;">8 não lidas</div>
+        <div class="muted" style="font-size: 12px; margin-top: 4px;">em 3 canais · Renata respondeu sua dúvida</div>
+      </a>
+
+      <a href="30-mentorado/notas.html" class="surface" style="padding: 24px; text-decoration: none; color: inherit;">
+        <div class="eyebrow-chrome" style="margin-bottom: 10px;">— Suas notas</div>
+        <div style="font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 500;">24 anotações</div>
+        <div class="muted" style="font-size: 12px; margin-top: 4px;">3 marcadas pra revisão · ~1h leitura</div>
+      </a>
+
+    </div>
+
+  </div>
+
+</main>
+</div>
+<div class="wf-note">Hub · Mentorada (single-role)</div>
+</body>
+</html>

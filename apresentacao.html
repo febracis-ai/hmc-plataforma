@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HMC · Apresentação fundadora</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_shared.css?v=16">
+<script src="_icons.js?v=16" defer></script>
+<style>
+:root {
+  --gold: #4DB8FF;                      /* highlight cyan (substitui dourado anterior) */
+  --gold-soft: rgba(77,184,255,0.12);
+  --gold-divider: rgba(77,184,255,0.30);
+  --navy-deepest: #050A15;
+  --navy-deep: #0A1530;
+  --navy-mid: #0D285C;
+  --accent-soft: #A8E6FF;               /* highlight soft (para eyebrows e detalhes) */
+  --accent-strong: #1554B3;             /* azul royal forte (gradients, base de botão) */
+}
+
+html, body { overflow-x: clip; max-width: 100%; }
+html { scroll-behavior: smooth; scroll-snap-type: y proximity; }
+body { background: var(--navy-deepest); color: white; font-family: 'Inter', sans-serif; line-height: 1.6; }
+
+/* ============ NAV TOP (sticky, transparent) ============ */
+.deck-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 18px clamp(20px, 4vw, 48px); display: flex; align-items: center; justify-content: space-between; backdrop-filter: blur(12px); background: rgba(5,10,21,0.50); border-bottom: 1px solid rgba(255,255,255,0.06); }
+.deck-nav .brand { display: flex; align-items: center; gap: 10px; color: white; text-decoration: none; }
+.deck-nav .brand img { width: 28px; height: 28px; }
+.deck-nav .brand-name { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 500; }
+.deck-nav .brand-sub { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.45); font-weight: 600; margin-top: 1px; }
+.deck-nav-right { display: flex; gap: 14px; align-items: center; font-size: 12px; }
+.deck-nav-link { color: rgba(255,255,255,0.55); text-decoration: none; transition: color 200ms; }
+.deck-nav-link:hover { color: var(--gold); }
+.deck-nav-cta { padding: 8px 16px; background: var(--gold); color: var(--navy-deepest); border-radius: 99px; font-size: 11px; letter-spacing: 0.06em; font-weight: 700; text-decoration: none; transition: all 200ms; }
+.deck-nav-cta:hover { background: white; transform: translateY(-1px); }
+
+/* ============ SCENE BASE ============ */
+.scene { min-height: 100vh; padding: 120px clamp(20px, 6vw, 96px) 100px; scroll-snap-align: start; position: relative; display: flex; flex-direction: column; justify-content: flex-start; }
+.scene-capa, .scene-cta { justify-content: center; }  /* capa e CTA centralizam (conteúdo curto, efeito hero) */
+@media (max-width: 720px) { .scene { padding: 88px 22px 60px; min-height: auto; } html { scroll-snap-type: none; } }
+
+.scene-inner { max-width: 1080px; margin: 0 auto; width: 100%; }
+.scene-marker { font-size: 10px; letter-spacing: 0.30em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 22px; display: flex; align-items: center; gap: 12px; }
+.scene-marker::before { content: ''; width: 28px; height: 1px; background: var(--gold); }
+.scene-eyebrow { font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(255,255,255,0.50); font-weight: 600; margin-bottom: 18px; }
+
+h1.scene-title { font-family: 'Playfair Display', serif; font-weight: 500; letter-spacing: -0.035em; line-height: 1.05; margin-bottom: 28px; }
+h2.scene-title { font-family: 'Playfair Display', serif; font-weight: 500; letter-spacing: -0.030em; line-height: 1.1; margin-bottom: 26px; font-size: clamp(36px, 5.5vw, 60px); }
+.scene-title .accent { background: linear-gradient(135deg, var(--accent-soft), var(--gold)); -webkit-background-clip: text; background-clip: text; color: transparent; font-style: italic; }
+.scene-title .light { color: rgba(255,255,255,0.55); font-weight: 400; }
+
+.scene-lead { font-size: clamp(17px, 2vw, 21px); line-height: 1.6; color: rgba(255,255,255,0.75); max-width: 720px; margin-bottom: 32px; }
+.scene-body { font-size: 16px; line-height: 1.75; color: rgba(255,255,255,0.70); max-width: 720px; }
+.scene-body p { margin-bottom: 18px; }
+.scene-body p:last-child { margin-bottom: 0; }
+.scene-body em { font-style: italic; color: rgba(255,255,255,0.92); }
+.scene-body strong { color: white; font-weight: 600; }
+
+/* ============ CENA 1 · CAPA ============ */
+.scene-capa { background: radial-gradient(ellipse 70% 50% at 50% 35%, rgba(168,230,255,0.08) 0%, transparent 60%), radial-gradient(ellipse 50% 40% at 70% 70%, rgba(77,184,255,0.06) 0%, transparent 50%), var(--navy-deepest); text-align: center; }
+.capa-seal { width: 180px; height: 180px; margin: 0 auto 36px; position: relative; display: block; filter: drop-shadow(0 24px 60px rgba(10,21,48,0.55)); }
+.capa-seal img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.capa-seal::after { content: ''; position: absolute; inset: -14px; border: 1px solid rgba(77,184,255,0.14); border-radius: 50%; pointer-events: none; }
+@media (max-width: 720px) { .capa-seal { width: 140px; height: 140px; margin-bottom: 28px; } }
+.capa-eyebrow { font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 22px; }
+h1.capa-title { font-family: 'Playfair Display', serif; font-size: clamp(48px, 9vw, 96px); font-weight: 500; letter-spacing: -0.045em; line-height: 1; margin-bottom: 28px; }
+h1.capa-title .italic { font-style: italic; background: linear-gradient(135deg, #A8E6FF, #4DB8FF); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.capa-sub { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(18px, 2.2vw, 24px); color: rgba(255,255,255,0.65); margin-bottom: 48px; }
+.capa-meta { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.40); font-weight: 600; margin-bottom: 60px; }
+.capa-meta .sep { color: var(--gold); margin: 0 14px; }
+.capa-scroll { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(255,255,255,0.40); font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 10px; animation: bounce 2.4s ease-in-out infinite; }
+.capa-scroll-arrow { width: 1px; height: 28px; background: linear-gradient(to bottom, var(--gold), transparent); }
+@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+
+/* ============ CENA 2 · O PROBLEMA ============ */
+.problema-quote { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(28px, 4vw, 42px); line-height: 1.35; color: white; max-width: 860px; margin: 0 auto 40px; padding-left: 28px; border-left: 2px solid var(--gold); }
+.problema-quote-att { font-family: 'Inter', sans-serif; font-style: normal; font-size: 13px; color: var(--gold); letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600; margin-top: 24px; display: block; }
+
+/* ============ CENA 3 · INSPIRAÇÃO MLS ============ */
+.split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; margin-top: 32px; }
+@media (max-width: 880px) { .split-grid { grid-template-columns: 1fr; gap: 32px; } }
+.split-col { padding: 28px 30px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; }
+.split-col-head { font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(255,255,255,0.45); font-weight: 700; margin-bottom: 14px; }
+.split-col-title { font-family: 'Playfair Display', serif; font-size: 22px; color: white; font-weight: 500; margin-bottom: 16px; }
+.split-col ul { list-style: none; padding: 0; margin: 0; }
+.split-col li { padding: 10px 0; font-size: 14px; line-height: 1.55; color: rgba(255,255,255,0.75); border-top: 1px solid rgba(255,255,255,0.06); display: flex; gap: 10px; }
+.split-col li:first-child { border-top: none; }
+.split-col li::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--gold); margin-top: 9px; flex-shrink: 0; }
+
+/* ============ CENA 4 · CASCATA ============ */
+.cascata-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 28px; position: relative; max-width: 760px; margin-left: auto; margin-right: auto; }
+@media (max-width: 880px) { .cascata-row { grid-template-columns: 1fr; gap: 18px; } }
+.cascata-step { padding: 32px 28px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.10); position: relative; text-align: center; }
+.cascata-step:nth-child(1) { border-radius: 14px 0 0 14px; border-right: none; }
+.cascata-step:nth-child(2) { background: rgba(77,184,255,0.06); border-color: rgba(77,184,255,0.30); border-radius: 0 14px 14px 0; box-shadow: 0 18px 40px rgba(0,0,0,0.30); }
+@media (max-width: 880px) {
+  .cascata-step, .cascata-step:nth-child(1), .cascata-step:nth-child(2) { border-radius: 14px; border: 1px solid rgba(255,255,255,0.10); }
+  .cascata-step:nth-child(2) { border-color: rgba(77,184,255,0.30); background: rgba(77,184,255,0.06); }
+}
+.cascata-marker { font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(255,255,255,0.45); font-weight: 700; margin-bottom: 12px; }
+.cascata-step:nth-child(2) .cascata-marker { color: var(--gold); }
+.cascata-name { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 500; margin-bottom: 8px; color: white; }
+.cascata-tag { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: rgba(255,255,255,0.55); margin-bottom: 16px; }
+.cascata-desc { font-size: 13px; line-height: 1.6; color: rgba(255,255,255,0.65); }
+.cascata-arrow { position: absolute; top: 50%; right: -12px; transform: translateY(-50%); z-index: 5; width: 24px; height: 24px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--navy-deepest); font-weight: 700; font-size: 14px; }
+.cascata-step:last-child .cascata-arrow { display: none; }
+@media (max-width: 880px) { .cascata-arrow { display: none !important; } }
+
+.cascata-paralelo { margin-top: 36px; padding: 22px 28px; background: rgba(255,255,255,0.03); border: 1px dashed rgba(255,255,255,0.18); border-radius: 12px; display: grid; grid-template-columns: 100px 1fr; gap: 22px; align-items: center; max-width: 760px; margin-left: auto; margin-right: auto; }
+@media (max-width: 720px) { .cascata-paralelo { grid-template-columns: 1fr; gap: 12px; text-align: center; } }
+.cascata-paralelo-label { font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(255,255,255,0.45); font-weight: 700; }
+.cascata-paralelo-body { font-size: 13.5px; line-height: 1.6; color: rgba(255,255,255,0.72); }
+.cascata-paralelo-body strong { color: white; font-weight: 600; }
+
+/* ============ CENA 5 · DEFESA DO NOME ============ */
+.naming-flow { margin-top: 28px; }
+.naming-row { display: grid; grid-template-columns: 180px 1fr; gap: 24px; padding: 22px 0; border-top: 1px solid rgba(255,255,255,0.08); align-items: start; }
+.naming-row:first-child { border-top: none; }
+@media (max-width: 720px) { .naming-row { grid-template-columns: 1fr; gap: 8px; } }
+.naming-label { font-size: 10px; letter-spacing: 0.20em; text-transform: uppercase; color: rgba(255,255,255,0.45); font-weight: 700; padding-top: 4px; }
+.naming-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.name-tag { padding: 7px 14px; border-radius: 99px; font-size: 13px; font-family: 'JetBrains Mono', monospace; font-weight: 500; border: 1px solid; letter-spacing: 0.04em; }
+.name-tag.vetado { background: rgba(229,83,83,0.06); border-color: rgba(229,83,83,0.30); color: #FF8888; text-decoration: line-through; opacity: 0.75; }
+.name-tag.alt { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.18); color: rgba(255,255,255,0.70); }
+.name-tag.winner { background: var(--gold); border-color: var(--gold); color: var(--navy-deepest); font-weight: 700; box-shadow: 0 8px 22px rgba(77,184,255,0.30); }
+.naming-rationale { padding: 24px 28px; background: rgba(77,184,255,0.05); border: 1px solid var(--gold-divider); border-radius: 12px; margin-top: 28px; }
+.naming-rationale-head { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 12px; }
+.naming-rationale-body { font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.85); }
+.naming-rationale-body em { font-style: italic; color: white; }
+
+/* ============ CENA 6 · DEFESA VISUAL ============ */
+.brand-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px; }
+@media (max-width: 880px) { .brand-grid { grid-template-columns: 1fr; } }
+.brand-card { padding: 26px 28px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; }
+.brand-card-head { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 14px; }
+.brand-card-title { font-family: 'Playfair Display', serif; font-size: 22px; color: white; font-weight: 500; margin-bottom: 12px; }
+.brand-card-body { font-size: 13.5px; line-height: 1.65; color: rgba(255,255,255,0.70); }
+.swatches { display: flex; gap: 12px; margin: 18px 0; }
+.swatch { flex: 1; padding: 18px 14px; border-radius: 10px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; text-align: center; }
+.swatch-navy { background: #0A1530; color: white; border: 1px solid rgba(255,255,255,0.18); }
+.swatch-mid { background: #0D285C; color: white; }
+.swatch-gold { background: #4DB8FF; color: var(--navy-deepest); }
+.brand-fonts { display: flex; flex-direction: column; gap: 16px; margin-top: 12px; }
+.brand-font-row { padding: 16px 18px; background: rgba(255,255,255,0.04); border-radius: 10px; }
+.brand-font-name { font-size: 9px; letter-spacing: 0.20em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; font-weight: 700; }
+.brand-font-sample-1 { font-family: 'Playfair Display', serif; font-size: 26px; line-height: 1; margin-bottom: 4px; color: white; }
+.brand-font-sample-2 { font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.4; color: rgba(255,255,255,0.75); }
+
+.brand-principle { padding: 24px 28px; background: linear-gradient(135deg, rgba(77,184,255,0.10), rgba(77,184,255,0.02)); border: 1px solid var(--gold-divider); border-left-width: 3px; border-radius: 0 12px 12px 0; margin-top: 30px; }
+.brand-principle-head { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 10px; }
+.brand-principle-quote { font-family: 'Playfair Display', serif; font-style: italic; font-size: 19px; line-height: 1.45; color: white; }
+
+/* ============ CENA 7 · 3 MUNDOS ============ */
+.mundos-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+@media (max-width: 880px) { .mundos-row { grid-template-columns: 1fr; } }
+.mundo { padding: 26px 24px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.10); border-radius: 14px; }
+.mundo-num { width: 32px; height: 32px; border-radius: 50%; background: rgba(77,184,255,0.10); color: var(--gold); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 600; font-size: 14px; margin-bottom: 16px; border: 1px solid var(--gold-divider); }
+.mundo-name { font-family: 'Playfair Display', serif; font-size: 26px; color: white; font-weight: 500; margin-bottom: 6px; }
+.mundo-tag { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 14px; }
+.mundo-desc { font-size: 13px; line-height: 1.6; color: rgba(255,255,255,0.68); margin-bottom: 16px; }
+.mundo-feats { display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: rgba(255,255,255,0.55); }
+.mundo-feat { display: flex; gap: 8px; align-items: baseline; }
+.mundo-feat::before { content: '·'; color: var(--gold); font-weight: 700; }
+
+/* ============ CENA 8 · 5 RITUAIS ============ */
+.rituais-list { margin-top: 32px; display: flex; flex-direction: column; gap: 14px; }
+.ritual-row { display: grid; grid-template-columns: 68px 1fr auto; gap: 22px; align-items: center; padding: 22px 26px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; transition: all 200ms; }
+.ritual-row:hover { border-color: var(--gold-divider); background: rgba(255,255,255,0.05); }
+@media (max-width: 720px) { .ritual-row { grid-template-columns: 50px 1fr; gap: 14px; padding: 18px 20px; } .ritual-cadence { grid-column: 1 / -1; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.08); } }
+.ritual-num { font-family: 'Playfair Display', serif; font-size: 44px; font-weight: 400; color: var(--gold); line-height: 1; opacity: 0.45; }
+.ritual-name { font-family: 'Playfair Display', serif; font-size: 22px; color: white; font-weight: 500; margin-bottom: 4px; }
+.ritual-desc { font-size: 13.5px; line-height: 1.55; color: rgba(255,255,255,0.65); }
+.ritual-cadence { padding: 6px 12px; background: rgba(77,184,255,0.08); border: 1px solid var(--gold-divider); border-radius: 99px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); font-weight: 700; white-space: nowrap; }
+
+/* ============ CENA 9 · 3 TIERS ============ */
+.tiers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+@media (max-width: 880px) { .tiers-grid { grid-template-columns: 1fr; } }
+.tier-card { padding: 30px 26px; background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01)); border: 1px solid rgba(255,255,255,0.10); border-radius: 14px; position: relative; }
+.tier-card.t3 { border-color: var(--gold); background: linear-gradient(135deg, rgba(77,184,255,0.10), rgba(77,184,255,0.02)); }
+.tier-seal { width: 96px; height: 96px; margin: 0 auto 18px; display: block; filter: drop-shadow(0 12px 24px rgba(0,0,0,0.40)); }
+.tier-seal img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.tier-rank { font-size: 9px; letter-spacing: 0.30em; text-transform: uppercase; color: rgba(255,255,255,0.45); font-weight: 700; margin-bottom: 10px; text-align: center; }
+.tier-card.t3 .tier-rank { color: var(--gold); }
+.tier-card .tier-name, .tier-card .tier-tag { text-align: center; }
+.tier-name { font-family: 'Playfair Display', serif; font-size: 22px; color: white; font-weight: 500; margin-bottom: 6px; }
+.tier-tag { font-family: 'Playfair Display', serif; font-style: italic; font-size: 13px; color: rgba(255,255,255,0.50); margin-bottom: 18px; }
+.tier-desc { font-size: 13px; line-height: 1.6; color: rgba(255,255,255,0.70); margin-bottom: 18px; }
+.tier-perks { display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: rgba(255,255,255,0.62); }
+.tier-perks li { list-style: none; padding-left: 14px; position: relative; line-height: 1.5; }
+.tier-perks li::before { content: ''; position: absolute; left: 0; top: 7px; width: 6px; height: 1px; background: var(--gold); }
+
+/* ============ CENA 10 · CTA ============ */
+.scene-cta { background: radial-gradient(ellipse 60% 40% at 50% 100%, rgba(77,184,255,0.08) 0%, transparent 50%), var(--navy-deepest); text-align: center; }
+.entrega-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 36px auto 50px; max-width: 880px; }
+@media (max-width: 880px) { .entrega-grid { grid-template-columns: 1fr; } }
+.entrega-card { padding: 18px 22px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; text-align: left; }
+.entrega-persona { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 6px; }
+.entrega-promise { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; line-height: 1.35; color: white; }
+
+.cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+.cta-btn { padding: 18px 36px; border-radius: 99px; font-weight: 600; text-decoration: none; font-size: 14px; letter-spacing: 0.04em; transition: all 200ms; display: inline-flex; align-items: center; gap: 8px; }
+.cta-primary { background: var(--gold); color: var(--navy-deepest); box-shadow: 0 18px 40px rgba(77,184,255,0.25); }
+.cta-primary:hover { background: white; transform: translateY(-2px); }
+.cta-secondary { background: transparent; color: white; border: 1px solid rgba(255,255,255,0.25); }
+.cta-secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+footer.deck-foot { padding: 40px 24px; border-top: 1px solid rgba(255,255,255,0.08); text-align: center; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(255,255,255,0.40); font-weight: 600; background: var(--navy-deepest); }
+footer.deck-foot .sep { color: var(--gold); margin: 0 10px; }
+
+/* ============ FADE-IN ON SCROLL ============ */
+.fade-on-scroll { opacity: 0; transform: translateY(20px); transition: opacity 800ms ease, transform 800ms ease; }
+.fade-on-scroll.visible { opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .fade-on-scroll { opacity: 1; transform: none; transition: none; }
+  .capa-scroll { animation: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV TOP -->
+<nav class="deck-nav">
+  <a href="landing.html" class="brand">
+    <img src="hmc-logo.png" alt="">
+    <div>
+      <div class="brand-name">High Mentor Club</div>
+      <div class="brand-sub">— Apresentação do produto</div>
+    </div>
+  </a>
+  <div class="deck-nav-right">
+    <a href="manual.html" class="deck-nav-link">Manual técnico</a>
+    <a href="dev-login.html" class="deck-nav-cta">Acessar plataforma</a>
+  </div>
+</nav>
+
+<!-- ============ CENA 1 · CAPA ============ -->
+<section class="scene scene-capa">
+  <div class="scene-inner">
+    <div class="capa-seal"><img src="hmc-logo.png?v=16" alt="High Mentor Club"></div>
+    <div class="capa-eyebrow">— Apresentação do produto</div>
+    <h1 class="capa-title">High Mentor <span class="italic">Club</span></h1>
+    <div class="capa-sub">Clube fechado para mentores high-ticket dentro do ecossistema Paulo Vieira.</div>
+    <div class="capa-meta">MMXXVI <span class="sep">·</span> Apresentação interna <span class="sep">·</span> v1</div>
+    <div class="capa-scroll">
+      <span>desça para começar</span>
+      <div class="capa-scroll-arrow"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CENA 2 · O QUE É ============ -->
+<section class="scene fade-on-scroll">
+  <div class="scene-inner">
+    <div class="scene-marker">Cena 02 · O que é</div>
+    <h2 class="scene-title">HMC é um clube fechado <span class="accent">para mentores que já chegaram.</span></h2>
+    <p class="scene-lead">Não é curso. Não é mastermind aberta. Não é comunidade de conteúdo. É um ambiente operacional fechado, com cadeiras numeradas, curado por Paulo Vieira, onde mentores high-ticket convivem entre pares e operam o próprio negócio dentro da mesma plataforma.</p>
+
+    <div class="split-grid" style="margin-top: 36px;">
+      <div class="split-col">
+        <div class="split-col-head">— O que define o produto</div>
+        <div class="split-col-title">Três traços inegociáveis</div>
+        <ul>
+          <li><strong>Cadeira numerada</strong> — vaga finita, ticket recorrente, identidade individual no clube</li>
+          <li><strong>Curadoria PV</strong> — admissão e tom do clube ditados pelo Curator, não por algoritmo</li>
+          <li><strong>Três mundos integrados</strong> — Clube (membro), Studio (mentor), Estudos (mentorado) na mesma conta</li>
+        </ul>
+      </div>
+      <div class="split-col">
+        <div class="split-col-head">— O que NÃO é</div>
+        <div class="split-col-title">Cortar confusão de cara</div>
+        <ul>
+          <li>Não é continuação de programa de formação — quem entra já é mentor estabelecido</li>
+          <li>Não é mastermind genérica de empresário — é vertical de mentoria high-ticket</li>
+          <li>Não é comunidade aberta — o entry depende da curadoria, sem exceção</li>
+          <li>Não é produto separado do ecossistema — convive com MELID e Black Belt em camadas distintas</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CENA 3 · DEFESA DA IDEIA ============ -->
+<section class="scene fade-on-scroll">
+  <div class="scene-inner">
+    <div class="scene-marker">Cena 03 · Defesa da ideia</div>
+    <h2 class="scene-title">Por que o HMC <span class="accent">precisa existir.</span></h2>
+    <p class="scene-lead">A defesa do produto se sustenta em três argumentos independentes. Cada um sozinho já justifica o investimento. Juntos, fecham a tese.</p>
+
+    <div class="rituais-list" style="margin-top: 32px;">
+      <div class="ritual-row">
+        <div class="ritual-num">01</div>
+        <div>
+          <div class="ritual-name">Formato comprovado</div>
+          <div class="ritual-desc">O modelo de clube fechado para alta performance, com cadeiras numeradas e curadoria forte, já foi validado pelo MLS de Flávio Augusto e por equivalentes internacionais consagrados. O HMC traduz esse formato para um vertical específico: mentoria high-ticket.</div>
+        </div>
+      </div>
+      <div class="ritual-row">
+        <div class="ritual-num">02</div>
+        <div>
+          <div class="ritual-name">Vazio claro no ecossistema PV</div>
+          <div class="ritual-desc">Hoje o ecossistema Paulo Vieira atende o mentor em duas pontas — formação (MELID) e mastermind ampla de empresário (Black Belt). Falta a camada do meio: o ambiente operacional do mentor já formado, com pares à altura, dentro do mesmo universo. O HMC ocupa exatamente esse vácuo.</div>
+        </div>
+      </div>
+      <div class="ritual-row">
+        <div class="ritual-num">03</div>
+        <div>
+          <div class="ritual-name">Plataforma como diferencial</div>
+          <div class="ritual-desc">Clubes equivalentes operam fora de uma plataforma própria, dependendo de WhatsApp, Notion, eventos avulsos. O HMC já nasce com plataforma integrada: três mundos na mesma conta, RBAC nativo, rituais agendados, Studio embutido. O membro não troca de ferramenta para operar — entra no clube e opera.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CENA 4 · LUGAR NO ECOSSISTEMA ============ -->
+<section class="scene fade-on-scroll">
+  <div class="scene-inner">
+    <div class="scene-marker">Cena 04 · Lugar no ecossistema</div>
+    <h2 class="scene-title">Como o HMC <span class="accent">se encaixa</span> nos produtos PV.</h2>
+    <p class="scene-lead">O HMC não substitui nada que já existe e não duplica esforço. Ele preenche uma lacuna específica entre a formação e a mastermind ampla — o vertical de mentoria high-ticket que hoje está ausente do portfólio.</p>
+
+    <div class="cascata-row">
+      <div class="cascata-step">
+        <div class="cascata-marker">— Formação</div>
+        <div class="cascata-name">MELID</div>
+        <div class="cascata-tag">Mentor de Líderes</div>
+        <div class="cascata-desc">Programa de 12 meses. Onde o mentor de alto impacto é formado. Pré-requisito natural pro HMC: quem termina o MELID é candidato qualificado a uma cadeira no clube.</div>
+        <div class="cascata-arrow">›</div>
+      </div>
+      <div class="cascata-step">
+        <div class="cascata-marker">— Operação entre pares</div>
+        <div class="cascata-name">HMC</div>
+        <div class="cascata-tag">High Mentor Club</div>
+        <div class="cascata-desc">Cadeira numerada. Clube fechado onde o mentor já formado opera entre pares, com rituais, Studio próprio, três tiers de profundidade. Recorrente, não single-shot.</div>
+      </div>
+    </div>
+
+    <div class="cascata-paralelo">
+      <div class="cascata-paralelo-label">— Em paralelo</div>
+      <div class="cascata-paralelo-body">
+        O <strong>Black Belt</strong> é a mastermind PV voltada a <em>negócios e família do empresário</em>. Atende outra fome — o círculo do PV em torno da vida do empresário. Pessoas podem estar nos dois; o propósito de cada um é distinto. <strong>HMC é vertical de mentoria. Black Belt é vertical de empresário.</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CENA 5 · DEFESA DO NOME ============ -->
+<section class="scene fade-on-scroll">
+  <div class="scene-inner">
+    <div class="scene-marker">Cena 05 · Defesa do nome</div>
+    <h2 class="scene-title">Por que <span class="accent">High Mentor Club.</span></h2>
+    <p class="scene-lead">Dois critérios de naming foram fixados desde o início: <strong>nada institucional</strong> (Câmara, Conselho, Pleno, Instituto e assemelhados ficaram fora antes do filtro) e <strong>nome curto e direto</strong> — conceito-soco em PT ou sigla EN de até 5 letras. Vários caminhos foram testados; um venceu por encaixe técnico.</p>
+
+    <div class="naming-flow">
+      <div class="naming-row">
+        <div class="naming-label">— Vetados de cara</div>
+        <div class="naming-list">
+          <span class="name-tag vetado">Câmara</span>
+          <span class="name-tag vetado">Conselho</span>
+          <span class="name-tag vetado">Pleno</span>
+          <span class="name-tag vetado">Instituto</span>
+          <span class="name-tag vetado">Academia</span>
+          <span class="name-tag vetado">Sociedade</span>
+        </div>
+      </div>
+      <div class="naming-row">
+        <div class="naming-label">— Favoritos secundários</div>
+        <div class="naming-list">
+          <span class="name-tag alt">HELM</span>
+          <span class="name-tag alt">LIONS</span>
+          <span class="name-tag alt">ÆON</span>
+          <span class="name-tag alt">PEAK</span>
+          <span class="name-tag alt">FORGE</span>
+        </div>
+      </div>
+      <div class="naming-row">
+        <div class="naming-label">— Escolhido</div>
+        <div class="naming-list">
+          <span class="name-tag winner">HMC · High Mentor Club</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="naming-rationale">
+      <div class="naming-rationale-head">— Por que venceu</div>
+      <div class="naming-rationale-body">
+        <strong>"High Mentor Club" diz exatamente o que o produto é</strong> sem disfarce. <em>High Mentor</em> nomeia o perfil do membro — mentor de alto nível. <em>Club</em> nomeia o formato — ambiente fechado, com cadeira numerada e curadoria. Junto, fecha sentido em PT e EN simultaneamente. A sigla <em>HMC</em> é curta, memorável e funciona como assinatura visual coerente com o resto da marca.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CENA 6 · DEFESA VISUAL ============ -->
+<section class="scene fade-on-scroll">
+  <div class="scene-inner">
+    <div class="scene-marker">Cena 06 · Defesa visual</div>
+    <h2 class="scene-title">Navy como base. <span class="accent">Azul royal</span> como assinatura.</h2>
+    <p class="scene-lead">Paleta e tipografia foram escolhidas para comunicar seriedade e exclusividade sem cair em decoração. A plataforma inteira opera em torno de cinco tons — três escalas de navy e dois azuis de destaque.</p>
+
+    <div class="brand-grid">
+      <div class="brand-card">
+        <div class="brand-card-head">— Paleta</div>
+        <div class="brand-card-title">Navy + azul royal + cyan</div>
+        <div class="swatches" style="flex-wrap: wrap;">
+          <div class="swatch swatch-navy">#0A1530</div>
+          <div class="swatch swatch-mid">#0D285C</div>
+          <div class="swatch" style="background: #1554B3; color: white;">#1554B3</div>
+          <div class="swatch swatch-gold">#4DB8FF</div>
+        </div>
+        <div class="brand-card-body">
+          O <strong>navy</strong> (<code style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A8E6FF;">#0A1530 → #0D285C</code>) sustenta toda a plataforma como fundo institucional — peso, estabilidade e contexto premium. O <strong>azul royal</strong> (<code style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A8E6FF;">#1554B3</code>) é o acento principal — botões, links, foco. O <strong>cyan</strong> (<code style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A8E6FF;">#4DB8FF</code>) é o highlight de destaque sobre fundo escuro — eyebrows, selo, badges de tier. <em>Nenhum tom preenche área grande sem motivo:</em> azul em volume vira UI azulada genérica; em traço fino e accent, vira assinatura.
+        </div>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-head">— Tipografia</div>
+        <div class="brand-card-title">Playfair Display + Inter</div>
+        <div class="brand-fonts">
+          <div class="brand-font-row">
+            <div class="brand-font-name">— Playfair Display (títulos)</div>
+            <div class="brand-font-sample-1">High Mentor Club</div>
+            <div class="brand-font-sample-2" style="font-family: 'Playfair Display', serif; font-style: italic;">Cadeira numerada · ticket recorrente</div>
+          </div>
+          <div class="brand-font-row">
+            <div class="brand-font-name">— Inter (corpo)</div>
+            <div class="brand-font-sample-2">Tipografia de leitura limpa para listas, dados e textos longos. Compensa o peso editorial do Playfair com clareza operacional.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="brand-principle">
+      <div class="brand-principle-head">— Princípio de uso da paleta</div>
+      <div class="brand-principle-quote">Sóbrio onde precisa, generoso onde merece, jamais decorativo. O azul é assinatura — não banho de tinta. Nenhuma cor entra por estética: toda cor carrega função.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CENA 7 · OS 3 MUNDOS ============ -->
+<section class="scene fade-on-scroll">
+  <div class="scene-inner">
+    <div class="scene-marker">Cena 07 · Como funciona · arquitetura</div>
+    <h2 class="scene-title">Três mundos. <span class="light">Mesma conta. Mesma cadeira.</span></h2>
+    <p class="scene-lead">O HMC entrega três contextos operacionais distintos para o mesmo membro. Cada contexto tem sidebar, navegação e permissões próprias. A plataforma alterna entre eles em um clique, sem trocar de conta nem de ambiente.</p>
+
+    <div class="mundos-row">
+      <div class="mundo">
+        <div class="mundo-num">01</div>
+        <div class="mundo-name">Clube</div>
+        <div class="mundo-tag">— Mundo da pertença</div>
+        <div class="mundo-desc">A Sala do Membro. Onde a cadeira numerada vive. Council mensal, Codex (anuário do clube), Cross-Floor (marketplace interno onde 20% das vagas de cada mentor circulam entre membros), Selo, Pilgrimages.</div>
+        <div class="mundo-feats">
+          <div class="mundo-feat">7 áreas internas, RBAC por tier</div>
+          <div class="mundo-feat">Tier III ganha acesso ao Antechamber</div>
+          <div class="mundo-feat">Acessível só pra membros aprovados</div>
+        </div>
+      </div>
+      <div class="mundo">
+        <div class="mundo-num">02</div>
+        <div class="mundo-name">Studio</div>
+        <div class="mundo-tag">— Mundo da operação</div>
+        <div class="mundo-desc">Onde o membro opera seu próprio programa de mentoria. CRM de mentorados, biblioteca de aulas, checkout, Yield.</div>
+        <div class="mundo-feats">
+          <div class="mundo-feat">Membro mentor publica e cobra</div>
+          <div class="mundo-feat">Integração CISPay nativa</div>
+          <div class="mundo-feat">Página pública por mentor</div>
+        </div>
+      </div>
+      <div class="mundo">
+        <div class="mundo-num">03</div>
+        <div class="mundo-name">Estudos</div>
+        <div class="mundo-tag">— Mundo do consumo</div>
+        <div class="mundo-desc">Onde o membro também é mentorado de outro membro. Biblioteca, player, comunidades de turma, certificados.</div>
+        <div class="mundo-feats">
+          <div class="mundo-feat">Mentorado puro só vê este mundo</div>
+          <div class="mundo-feat">Conteúdo gerado por outros mentores HMC</div>
+          <div class="mundo-feat">Acessível por convite ou compra</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CENA 8 · OS 5 RITUAIS ============ -->
+<section class="scene fade-on-scroll">
+  <div class="scene-inner">
+    <div class="scene-marker">Cena 08 · Como funciona · rituais</div>
+    <h2 class="scene-title">A cadência <span class="accent">faz o clube.</span></h2>
+    <p class="scene-lead">A plataforma é o cenário. Os rituais recorrentes são o que mantém o HMC vivo entre uma admissão e outra. Cinco rituais oficiais estruturam o ano do membro.</p>
+
+    <div class="rituais-list">
+      <div class="ritual-row">
+        <div class="ritual-num">01</div>
+        <div>
+          <div class="ritual-name">Council</div>
+          <div class="ritual-desc">Encontro recorrente do clube com Paulo Vieira. Pauta de casos reais dos próprios membros, debate aberto e replay arquivado no acervo interno do clube.</div>
+        </div>
+        <div class="ritual-cadence">recorrente</div>
+      </div>
+      <div class="ritual-row">
+        <div class="ritual-num">02</div>
+        <div>
+          <div class="ritual-name">Pilgrimages</div>
+          <div class="ritual-desc">Imersões presenciais do clube em formato de retreat. Pequenos grupos, agenda fechada, vivência de campo. Cobradas em separado do ticket base.</div>
+        </div>
+        <div class="ritual-cadence">presencial</div>
+      </div>
+      <div class="ritual-row">
+        <div class="ritual-num">03</div>
+        <div>
+          <div class="ritual-name">Antechamber</div>
+          <div class="ritual-desc">Sala privada de conversa direta entre membros Tier III e Paulo Vieira. Tópicos estratégicos que não cabem no Council, em volume baixo e ritmo próprio. <em>Antechamber é o lugar e o ritual — mesma palavra para os dois.</em></div>
+        </div>
+        <div class="ritual-cadence">Tier III</div>
+      </div>
+      <div class="ritual-row">
+        <div class="ritual-num">04</div>
+        <div>
+          <div class="ritual-name">Curator's Address</div>
+          <div class="ritual-desc">Carta escrita por Paulo Vieira ao clube. Funciona como leitura curatorial do momento — define foco, tom e direção entre um Council e outro.</div>
+        </div>
+        <div class="ritual-cadence">recorrente</div>
+      </div>
+      <div class="ritual-row">
+        <div class="ritual-num">05</div>
+        <div>
+          <div class="ritual-name">Os Quatro Motores</div>
+          <div class="ritual-desc">Sequência fechada de sessões temáticas exclusivas do clube cobrindo os pilares de operação de mentoria high-ticket. Não está disponível fora do HMC.</div>
+        </div>
+        <div class="ritual-cadence">conteúdo HMC</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CENA 9 · OS 3 TIERS ============ -->
+<section class="scene fade-on-scroll">
+  <div class="scene-inner">
+    <div class="scene-marker">Cena 09 · Como funciona · tiers</div>
+    <h2 class="scene-title">Três tiers. <span class="light">Definidos pelo tamanho do programa.</span></h2>
+    <p class="scene-lead">O número que define cada tier é o <strong>ticket que o mentor cobra dos próprios mentorados</strong> — não é anuidade do clube, não é receita anual. É qualificação: pra subir de tier, é preciso estar operando programa com ticket maior. O HMC vê o tamanho do programa, não o tamanho da carteira.</p>
+
+    <div class="tiers-grid">
+      <div class="tier-card">
+        <div class="tier-seal"><img src="tier-seals/tier-1.png?v=16" alt="Selo Tier I — Mentor of HMC"></div>
+        <div class="tier-rank">— Tier I</div>
+        <div class="tier-name">Mentor of HMC</div>
+        <div class="tier-tag">Mentor of HMC · ticket R$ 25–55k</div>
+        <div class="tier-desc">Cadeira de entrada. Membro admitido pela curadoria com programa próprio de mentoria já operando ticket validado. Acesso completo aos três mundos.</div>
+        <ul class="tier-perks">
+          <li>Clube — Council, Codex, Cross-Floor, Selo, Pilgrimages, Yield</li>
+          <li>Studio — operar o próprio programa de mentoria dentro da plataforma</li>
+          <li>Estudos — consumir conteúdo de outros membros mentores do clube</li>
+        </ul>
+      </div>
+      <div class="tier-card">
+        <div class="tier-seal"><img src="tier-seals/tier-2.png?v=16" alt="Selo Tier II — High Mentor"></div>
+        <div class="tier-rank">— Tier II</div>
+        <div class="tier-name">High Mentor</div>
+        <div class="tier-tag">High Mentor · ticket R$ 56–85k</div>
+        <div class="tier-desc">Tier intermediário. Movimento de Tier I → II reflete consolidação operacional — o mentor está cobrando ticket de outra faixa e isso é reconhecido pela curadoria.</div>
+        <ul class="tier-perks">
+          <li>Tudo do Tier I</li>
+          <li>Reconhecimento explícito de operação consolidada dentro do clube</li>
+        </ul>
+      </div>
+      <div class="tier-card t3">
+        <div class="tier-seal"><img src="tier-seals/tier-3.png?v=16" alt="Selo Tier III — Sovereign Mentor"></div>
+        <div class="tier-rank">— Tier III</div>
+        <div class="tier-name">Sovereign Mentor</div>
+        <div class="tier-tag">Sovereign Mentor · ticket R$ 86k+</div>
+        <div class="tier-desc">Camada mais profunda do HMC. Convite curatorial. Vagas escassas, definidas explicitamente pelo Curator.</div>
+        <ul class="tier-perks">
+          <li>Tudo dos tiers anteriores</li>
+          <li>Antechamber — sala privada de conversa direta com Paulo Vieira</li>
+          <li>Curator's Address — leitura curatorial recebida em primeira mão</li>
+          <li>The Bridge — ponte com o rede de franquias do ecossistema PV</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ─── BLOCO · 3 FLUXOS FINANCEIROS ─── -->
+    <div style="margin-top: 52px; padding-top: 36px; border-top: 1px solid rgba(255,255,255,0.08);">
+      <div style="font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 8px;">— Modelo financeiro do HMC</div>
+      <div style="font-family: 'Playfair Display', serif; font-size: clamp(22px, 2.6vw, 30px); font-weight: 500; line-height: 1.2; margin-bottom: 10px;">Três fluxos distintos. <span style="color: rgba(255,255,255,0.55);">Nenhuma anuidade.</span></div>
+      <p style="font-size: 14px; line-height: 1.65; color: rgba(255,255,255,0.65); max-width: 720px; margin-bottom: 24px;">O membro do HMC não paga mensalidade nem anuidade ao clube. A engenharia financeira opera em três fluxos paralelos — o ticket de mentoria não é nenhum deles em relação ao clube em si.</p>
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;">
+
+        <div style="padding: 22px 22px 24px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.10); border-radius: 12px;">
+          <div style="font-size: 10px; letter-spacing: 0.20em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 10px;">Fluxo 01</div>
+          <div style="font-family: 'Playfair Display', serif; font-size: 19px; color: white; font-weight: 500; margin-bottom: 8px;">Ticket da mentoria</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent-soft); margin-bottom: 14px;">R$ 25k – R$ 86k+</div>
+          <div style="font-size: 13px; line-height: 1.55; color: rgba(255,255,255,0.70);">Preço do programa de mentoria do membro. Pago pelo mentorado, recebido pelo mentor. <em>É isso que define o tier.</em></div>
+        </div>
+
+        <div style="padding: 22px 22px 24px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.10); border-radius: 12px;">
+          <div style="font-size: 10px; letter-spacing: 0.20em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 10px;">Fluxo 02</div>
+          <div style="font-family: 'Playfair Display', serif; font-size: 19px; color: white; font-weight: 500; margin-bottom: 8px;">Fee HMC</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent-soft); margin-bottom: 14px;">10% sobre GMV</div>
+          <div style="font-size: 13px; line-height: 1.55; color: rgba(255,255,255,0.70);">Split automático via CISPay em cada venda do membro: 90% pro mentor, 10% pro clube. <em>Sem mensalidade fixa.</em></div>
+        </div>
+
+        <div style="padding: 22px 22px 24px; background: rgba(255,255,255,0.03); border: 1px solid rgba(77,184,255,0.22); border-radius: 12px; position: relative;">
+          <div style="font-size: 10px; letter-spacing: 0.20em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 10px;">Fluxo 03</div>
+          <div style="font-family: 'Playfair Display', serif; font-size: 19px; color: white; font-weight: 500; margin-bottom: 8px;">HMC Yield</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent-soft); margin-bottom: 14px;">16% sobre indicação</div>
+          <div style="font-size: 13px; line-height: 1.55; color: rgba(255,255,255,0.70);">Comissão paga ao membro que indica venda do Método CIS. Linha de receita extra independente do Studio.</div>
+        </div>
+
+      </div>
+
+      <!-- Origem do HMC Yield -->
+      <div style="margin-top: 28px; padding: 18px 22px 20px; border-left: 2px solid var(--gold); background: rgba(77,184,255,0.04); border-radius: 0 8px 8px 0;">
+        <div style="font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 10px;">— Origem do Fluxo 03 (HMC Yield)</div>
+        <p style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 17px; line-height: 1.5; color: white; margin: 0 0 10px;">"…vende duas ou três pessoas perguntando aonde que eu tô fazendo o Método CIS, que eles querem ir. Então, você faça, seja bem-vindo. Manda o link e ganha comissão."</p>
+        <p style="font-size: 12px; color: rgba(255,255,255,0.55); margin: 0;">— Paulo Vieira, transcrição de áudio MELID. O batismo como <strong style="color: white; font-weight: 600;">HMC Yield</strong> e a taxa de <strong style="color: white; font-weight: 600;">16%</strong> foram fechados no Brand Book HMC; a mecânica (link único, dashboard, integração Salesforce) está no documento da Plataforma.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <style>
+    @media (max-width: 880px) {
+      .scene .scene-inner > div[style*="grid-template-columns: repeat(3, 1fr)"] { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</section>
+
+<!-- ============ CENA 10 · CTA ============ -->
+<section class="scene scene-cta fade-on-scroll">
+  <div class="scene-inner">
+    <div class="scene-marker" style="justify-content: center;">Cena 10 · O que entrega</div>
+    <h2 class="scene-title" style="text-align: center;">Resumo de entregas <span class="accent">por persona.</span></h2>
+    <p class="scene-lead" style="margin: 0 auto 8px; text-align: center;">A plataforma materializa o produto em sete jornadas distintas. Cada persona acessa apenas o que faz sentido pro seu papel — sidebar, navegação e permissões mudam automaticamente.</p>
+
+    <div class="entrega-grid">
+      <div class="entrega-card">
+        <div class="entrega-persona">— Membro Tier I / II</div>
+        <div class="entrega-promise">Acesso aos três mundos, rituais recorrentes e Studio para operar como mentor.</div>
+      </div>
+      <div class="entrega-card">
+        <div class="entrega-persona">— Membro Tier III</div>
+        <div class="entrega-promise">Antechamber, Curator's Address e The Bridge — camada mais íntima do clube.</div>
+      </div>
+      <div class="entrega-card">
+        <div class="entrega-persona">— Mentorado de membro</div>
+        <div class="entrega-promise">Mundo Estudos isolado — biblioteca, comunidades e sessões 1:1 com seu mentor.</div>
+      </div>
+      <div class="entrega-card">
+        <div class="entrega-persona">— Paulo Vieira</div>
+        <div class="entrega-promise">Hub curatorial próprio, editor da Curator's Address e Antechamber lado-PV.</div>
+      </div>
+      <div class="entrega-card">
+        <div class="entrega-persona">— Time Curadoria</div>
+        <div class="entrega-promise">Painel de aprovação, dossiê de candidatos, moderação e promoção entre tiers.</div>
+      </div>
+      <div class="entrega-card">
+        <div class="entrega-persona">— Time Suporte</div>
+        <div class="entrega-promise">Fila de tickets ordenada por SLA e moderação de comunidade — recorte do que precisa.</div>
+      </div>
+    </div>
+
+    <div class="cta-actions">
+      <a href="dev-login.html" class="cta-btn cta-primary">
+        Ver a plataforma rodando
+        <i data-icon="arrow-right" class="icon"></i>
+      </a>
+      <a href="manual.html" class="cta-btn cta-secondary">
+        Consultar manual técnico
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="deck-foot">
+  HMC · High Mentor Club <span class="sep">·</span> Curated by Paulo Vieira <span class="sep">·</span> MMXXVI <span class="sep">·</span> Apresentação fundadora v1
+</footer>
+
+<script>
+// Fade-in on scroll
+(function() {
+  if (typeof IntersectionObserver === 'undefined') {
+    document.querySelectorAll('.fade-on-scroll').forEach(el => el.classList.add('visible'));
+    return;
+  }
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.fade-on-scroll').forEach(el => obs.observe(el));
+})();
+</script>
+
+</body>
+</html>

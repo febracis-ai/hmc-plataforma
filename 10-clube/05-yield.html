@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HMC · Yield</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../_shared.css?v=16">
+  <script src="../_icons.js?v=16" defer></script>
+<script src="../_modals.js?v=16" defer></script>
+<script src="../_persona.js?v=16" defer></script>
+<script>document.addEventListener("DOMContentLoaded",()=>{if(window.HMC_PERSONA&&window.HMC_PERSONA.applyTierAwareSidebar)window.HMC_PERSONA.applyTierAwareSidebar();});</script>
+</head>
+<body data-persona-aware="mode-page" data-mode-context="clube" data-required-mode="clube">
+
+<button class="mobile-fab" data-sidebar-mobile-toggle aria-label="Menu"><i data-icon="menu" class="icon"></i></button>
+<div class="drawer-backdrop" data-sidebar-mobile-toggle></div>
+
+<div class="app">
+  <aside class="sidebar">
+    <a href="../hub.html" class="sidebar-brand">
+      <img src="../hmc-logo.png" alt="" class="brand-mark-img">
+      <div>
+        <div class="brand-text">High Mentor Club</div>
+        <div class="brand-sub">Curated by Paulo Vieira · MMXXVI</div>
+      </div>
+    </a>
+
+    <div class="mode-switch">
+      <a href="../hub.html" class="mode-switch-item" data-short="H"><i data-icon="home" class="icon"></i><span>Hub</span></a>
+      <a href="../10-clube/01-dashboard.html" class="mode-switch-item active" data-short="C"><i data-icon="landmark" class="icon"></i><span>Clube</span></a>
+      <a href="../20-mentor/studio-home.html" class="mode-switch-item" data-short="S"><i data-icon="briefcase" class="icon"></i><span>Studio</span></a>
+      <a href="../30-mentorado/biblioteca.html" class="mode-switch-item" data-short="E"><i data-icon="book-open" class="icon"></i><span>Estudos</span></a>
+    </div>
+
+    <div class="sidebar-nav-scroll">
+      <div class="nav-section">
+        <a href="../notifications.html" class="nav-item has-badge" data-tooltip="Avisos"><i data-icon="bell" class="icon icon-sm"></i>Avisos <span class="badge-count">12</span></a>
+        <a href="../agenda.html" class="nav-item" data-tooltip="Agenda"><i data-icon="calendar" class="icon icon-sm"></i>Agenda</a>
+        <a href="../buscar.html" class="nav-item" data-tooltip="Buscar"><i data-icon="search" class="icon icon-sm"></i>Buscar</a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-label">— A Plataforma</div>
+        <a href="01-dashboard.html" class="nav-item" data-tooltip="Sala do Membro"><i data-icon="home" class="icon icon-sm"></i>Sala do Membro</a>
+        <a href="02-calendar.html" class="nav-item" data-tooltip="Council"><i data-icon="users" class="icon icon-sm"></i>Council</a>
+        <a href="03-codex.html" class="nav-item" data-tooltip="Codex"><i data-icon="book" class="icon icon-sm"></i>Codex</a>
+        <a href="04-cross-floor.html" class="nav-item" data-tooltip="Cross-Floor"><i data-icon="compass" class="icon icon-sm"></i>Cross-Floor</a>
+        <a href="05-yield.html" class="nav-item active" data-tooltip="Yield"><i data-icon="dollar" class="icon icon-sm"></i>Yield<span class="nav-dot"></span></a>
+        <a href="06-pilgrimages.html" class="nav-item" data-tooltip="Pilgrimages"><i data-icon="map-pin" class="icon icon-sm"></i>Pilgrimages</a>
+        <a href="07-seal.html" class="nav-item" data-tooltip="Selo"><i data-icon="award" class="icon icon-sm"></i>Selo</a>
+      <a href="perfil-tier.html" class="nav-item"><i data-icon="shield" class="icon icon-sm"></i>Meu Tier</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">— Tier III · Sovereign Mentor</div>
+      <a href="quatro-motores.html" class="nav-item"><i data-icon="zap" class="icon icon-sm"></i>Os Quatro Motores</a>
+      <a href="antechamber.html" class="nav-item" data-tooltip="Antechamber"><i data-icon="lock" class="icon icon-sm"></i>Antechamber</a>
+      <a href="curator-address.html" class="nav-item"><i data-icon="mic" class="icon icon-sm"></i>Curator's Address</a>
+      <a href="bridge.html" class="nav-item"><i data-icon="link" class="icon icon-sm"></i>The Bridge</a>
+    </div>
+    </div>
+
+    <div class="sidebar-footer-v3">
+      <a href="../account.html" class="user-pill-v3">
+        <div class="avatar-sm">LV</div>
+        <div>
+          <div class="user-pill-v3-name">Lucas Vieira</div>
+          <div class="user-pill-v3-role">Seat 12</div>
+        </div>
+      </a>
+      <button class="sidebar-toggle-btn" data-sidebar-toggle>
+        <i data-icon="chevron-left" class="icon"></i>
+        <span>Recolher menu</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div class="page-head">
+      <div class="page-head-text">
+        <div class="page-eyebrow">
+          <span class="gold-rule"></span>
+          <span class="page-eyebrow-text">HMC Yield · Comissão CIS 16%</span>
+        </div>
+        <h1 class="page-title">O retorno <span class="page-title-serif-italic page-title-gold">da indicação</span>.</h1>
+        <p class="page-sub">Cada lead seu que se torna mentorado da Febracis paga 16% de comissão recorrente ao seu Yield. O clube é um ativo, não uma despesa.</p>
+      </div>
+    </div>
+
+    <!-- LINK ÚNICO DE INDICAÇÃO -->
+    <div class="surface mb-12" style="padding: 32px 36px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 32px; align-items: center;">
+      <div style="min-width: 0;">
+        <div class="eyebrow-gold mb-2">— Seu link único de indicação</div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 15px; padding: 14px 16px; background: var(--bg-card-hover); border: 1px solid var(--divider); border-radius: 8px; color: var(--text); overflow-x: auto; white-space: nowrap;">https://febracis.com/cis?ref=<strong style="color: var(--blue-realce);">lucas-vieira-seat12</strong></div>
+        <div class="muted mt-3" style="font-size: 12.5px; line-height: 1.55;">Compartilhe com quem pergunta sobre o Método CIS. Cada lead recebido é rastreado automaticamente pelo seu código de cadeira no funil Febracis (Salesforce). Atribuição irrevogável por 90 dias.</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <button class="btn btn-chrome" style="white-space: nowrap;"><i data-icon="copy" class="icon icon-sm"></i><span style="margin-left: 6px;">Copiar link</span></button>
+        <button class="btn btn-outline" style="white-space: nowrap;"><i data-icon="share" class="icon icon-sm"></i><span style="margin-left: 6px;">Compartilhar</span></button>
+        <button class="btn btn-outline" style="white-space: nowrap; padding: 6px 14px; font-size: 12px;"><i data-icon="qr-code" class="icon icon-sm"></i><span style="margin-left: 6px;">QR code</span></button>
+      </div>
+    </div>
+
+    <!-- YTD HEADLINE -->
+    <div class="surface-hero mb-12" style="padding: 56px 64px;">
+      <div class="grid grid-2 items-center" style="gap: 64px;">
+        <div>
+          <div class="eyebrow-gold mb-3">— Acumulado 2026 · YTD</div>
+          <div class="stat-display-xl tabular gradient-text-gold">R$ 184.290</div>
+          <div class="muted mt-4" style="font-size: 14px; max-width: 380px; line-height: 1.55;">Equivale a 2,7× sua mensalidade no clube. Você está no top 30% do Yield desta cohort.</div>
+        </div>
+        <div>
+          <div class="grid grid-2" style="gap: 24px;">
+            <div>
+              <div class="eyebrow-gold mb-2">— Próximo crédito</div>
+              <div class="stat-display" style="font-size: 36px;">R$ 18.400</div>
+              <div class="muted mt-2" style="font-size: 12px;">05 dez 2026 · TED Bradesco</div>
+            </div>
+            <div>
+              <div class="eyebrow-gold mb-2">— Taxa conversão</div>
+              <div class="stat-display" style="font-size: 36px;">62%</div>
+              <div class="muted mt-2" style="font-size: 12px;">28 convertidos / 45 indicados</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PIPELINE · LEADS NO FUNIL -->
+    <div class="mb-12">
+      <div class="section-head">
+        <div>
+          <div class="section-title">Pipeline · leads no funil Febracis</div>
+          <div class="section-sub">17 leads em andamento · sincronização com Salesforce a cada 6h</div>
+        </div>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <span class="muted" style="font-size: 12px;">Última sync: 14:32</span>
+          <button class="btn btn-outline" style="padding: 6px 14px; font-size: 12px;"><i data-icon="refresh" class="icon icon-sm"></i><span style="margin-left: 6px;">Sincronizar agora</span></button>
+        </div>
+      </div>
+
+      <!-- Resumo do funil em 4 cards -->
+      <div class="grid mb-6" style="grid-template-columns: repeat(4, 1fr); gap: 12px;">
+        <div class="surface" style="padding: 20px 22px;">
+          <div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 8px;">— Em conversa</div>
+          <div class="stat-display tabular" style="font-size: 28px; line-height: 1; color: var(--text);">9</div>
+          <div class="muted" style="font-size: 11px; margin-top: 4px;">leads em qualificação</div>
+        </div>
+        <div class="surface" style="padding: 20px 22px;">
+          <div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #1554B3; font-weight: 700; margin-bottom: 8px;">— Proposta enviada</div>
+          <div class="stat-display tabular" style="font-size: 28px; line-height: 1; color: var(--text);">5</div>
+          <div class="muted" style="font-size: 11px; margin-top: 4px;">aguardando decisão</div>
+        </div>
+        <div class="surface" style="padding: 20px 22px;">
+          <div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #d97706; font-weight: 700; margin-bottom: 8px;">— Em contrato</div>
+          <div class="stat-display tabular" style="font-size: 28px; line-height: 1; color: var(--text);">3</div>
+          <div class="muted" style="font-size: 11px; margin-top: 4px;">comissão potencial R$ 42k</div>
+        </div>
+        <div class="surface" style="padding: 20px 22px;">
+          <div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #6b7280; font-weight: 700; margin-bottom: 8px;">— Perdidos · 90d</div>
+          <div class="stat-display tabular" style="font-size: 28px; line-height: 1; color: var(--text);">4</div>
+          <div class="muted" style="font-size: 11px; margin-top: 4px;">sem retorno do lead</div>
+        </div>
+      </div>
+
+      <!-- Tabela do pipeline -->
+      <div class="surface" style="padding: 0;">
+        <table class="table-modern">
+          <thead>
+            <tr>
+              <th style="padding-left: 32px;">Lead</th>
+              <th>Programa interessado</th>
+              <th>Enviado</th>
+              <th>Status no funil</th>
+              <th>Próximo passo</th>
+              <th style="text-align: right; padding-right: 32px;">Comissão potencial</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding-left: 32px;"><span class="serif" style="font-size: 15px;">Marcos Holanda</span></td>
+              <td>Mentor de Líderes</td>
+              <td>05 nov 2026</td>
+              <td><span class="badge" style="background: rgba(217,119,6,0.12); color: #d97706; padding: 4px 10px; border-radius: 99px; font-size: 11px; font-weight: 600;">Em contrato</span></td>
+              <td class="muted" style="font-size: 12.5px;">Assinatura prevista 28 nov</td>
+              <td class="tabular" style="text-align: right; padding-right: 32px; font-weight: 600;">R$ 24.000</td>
+            </tr>
+            <tr>
+              <td style="padding-left: 32px;"><span class="serif" style="font-size: 15px;">Sofia Bandeira</span></td>
+              <td>Imersão CIS</td>
+              <td>02 nov 2026</td>
+              <td><span class="badge" style="background: rgba(21,84,179,0.12); color: #1554B3; padding: 4px 10px; border-radius: 99px; font-size: 11px; font-weight: 600;">Proposta</span></td>
+              <td class="muted" style="font-size: 12.5px;">Sales call 14 nov · Renata C.</td>
+              <td class="tabular" style="text-align: right; padding-right: 32px; font-weight: 600;">R$ 4.480</td>
+            </tr>
+            <tr>
+              <td style="padding-left: 32px;"><span class="serif" style="font-size: 15px;">Fernando Issa</span></td>
+              <td>Mentor de Líderes</td>
+              <td>30 out 2026</td>
+              <td><span class="badge" style="background: rgba(217,119,6,0.12); color: #d97706; padding: 4px 10px; border-radius: 99px; font-size: 11px; font-weight: 600;">Em contrato</span></td>
+              <td class="muted" style="font-size: 12.5px;">Aguardando aprovação financeira</td>
+              <td class="tabular" style="text-align: right; padding-right: 32px; font-weight: 600;">R$ 24.000</td>
+            </tr>
+            <tr>
+              <td style="padding-left: 32px;"><span class="serif" style="font-size: 15px;">Joana Bertoldo</span></td>
+              <td>Mentoria Cliente CIS</td>
+              <td>28 out 2026</td>
+              <td><span class="badge" style="background: rgba(21,84,179,0.12); color: #1554B3; padding: 4px 10px; border-radius: 99px; font-size: 11px; font-weight: 600;">Proposta</span></td>
+              <td class="muted" style="font-size: 12.5px;">Follow-up agendado 12 nov</td>
+              <td class="tabular" style="text-align: right; padding-right: 32px; font-weight: 600;">R$ 15.360</td>
+            </tr>
+            <tr>
+              <td style="padding-left: 32px;"><span class="serif" style="font-size: 15px;">Pedro Linhares</span></td>
+              <td>Imersão CIS</td>
+              <td>25 out 2026</td>
+              <td><span class="badge" style="background: var(--bg-card-hover); color: var(--text-muted); padding: 4px 10px; border-radius: 99px; font-size: 11px; font-weight: 600;">Em conversa</span></td>
+              <td class="muted" style="font-size: 12.5px;">Qualificação inicial · Beatriz S.</td>
+              <td class="tabular" style="text-align: right; padding-right: 32px; font-weight: 600;">R$ 4.480</td>
+            </tr>
+            <tr>
+              <td style="padding-left: 32px;"><span class="serif" style="font-size: 15px;">Adriana Gomes</span></td>
+              <td>Mentor de Líderes</td>
+              <td>22 out 2026</td>
+              <td><span class="badge" style="background: var(--bg-card-hover); color: var(--text-muted); padding: 4px 10px; border-radius: 99px; font-size: 11px; font-weight: 600;">Em conversa</span></td>
+              <td class="muted" style="font-size: 12.5px;">Aguardando perfil financeiro</td>
+              <td class="tabular" style="text-align: right; padding-right: 32px; font-weight: 600;">R$ 24.000</td>
+            </tr>
+            <tr>
+              <td style="padding-left: 32px;"><span class="serif" style="font-size: 15px;">Tiago Mascarenhas</span></td>
+              <td>Mentoria Cliente CIS</td>
+              <td>18 out 2026</td>
+              <td><span class="badge" style="background: var(--bg-card-hover); color: var(--text-muted); padding: 4px 10px; border-radius: 99px; font-size: 11px; font-weight: 600;">Em conversa</span></td>
+              <td class="muted" style="font-size: 12.5px;">Apresentação institucional 16 nov</td>
+              <td class="tabular" style="text-align: right; padding-right: 32px; font-weight: 600;">R$ 15.360</td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="padding: 14px 32px; border-top: 1px solid var(--divider); display: flex; justify-content: space-between; align-items: center;">
+          <span class="muted" style="font-size: 12px;">Mostrando 7 de 17 leads em andamento</span>
+          <a href="#" class="link-primary" style="font-size: 12.5px; color: var(--blue-realce); font-weight: 600;">Ver pipeline completo →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- LEADS CONVERTIDOS -->
+    <div class="mb-12">
+      <div class="section-head">
+        <div>
+          <div class="section-title">Leads convertidos · 2026</div>
+          <div class="section-sub">28 indicações que viraram mentorados Febracis</div>
+        </div>
+        <button class="btn btn-outline">Exportar planilha</button>
+      </div>
+
+      <div class="surface" style="padding: 0;">
+        <table class="table-modern">
+          <thead>
+            <tr>
+              <th style="padding-left: 32px;">Lead</th>
+              <th>Programa</th>
+              <th>Conversão</th>
+              <th>Ticket</th>
+              <th>Sua comissão</th>
+              <th style="text-align: right; padding-right: 32px;">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding-left: 32px;"><span class="serif" style="font-size: 15px;">Carlos Vilanova</span></td>
+              <td>Mentor de Líderes</td>
+              <td>02 nov 2026</td>
+              <td class="tabular">R$ 150k</td>
+              <td class="tabular gold" style="font-weight: 600;">R$ 24.000</td>
+              <td style="text-align: right; padding-right: 32px;"><span class="badge badge-tier-3">Cohort 28</span></td>
+            </tr>
+            <tr>
+              <td style="padding-left: 32px;"><span class="serif" style="font-size: 15px;">Renata Quintas</span></td>
+              <td>Imersão CIS</td>
+              <td>28 out 2026</td>
+              <td class="tabular">R$ 28k</td>
+              <td class="tabular gold" style="font-weight: 600;">R$ 4.480</td>
+              <td style="text-align: right; padding-right: 32px;"><span class="badge badge-success">Ativa</span></td>
+            </tr>
+            <tr>
+              <td style="padding-left: 32px;"><span class="serif" style="font-size: 15px;">Daniela Pires</span></td>
+              <td>Mentor de Líderes</td>
+              <td>14 out 2026</td>
+              <td class="tabular">R$ 150k</td>
+              <td class="tabular gold" style="font-weight: 600;">R$ 24.000</td>
+              <td style="text-align: right; padding-right: 32px;"><span class="badge badge-tier-3">Cohort 28</span></td>
+            </tr>
+            <tr>
+              <td style="padding-left: 32px;"><span class="serif" style="font-size: 15px;">Ricardo Penha</span></td>
+              <td>Mentoria Cliente CIS</td>
+              <td>10 out 2026</td>
+              <td class="tabular">R$ 96k</td>
+              <td class="tabular gold" style="font-weight: 600;">R$ 15.360</td>
+              <td style="text-align: right; padding-right: 32px;"><span class="badge badge-success">Ativo</span></td>
+            </tr>
+            <tr>
+              <td style="padding-left: 32px;"><span class="serif" style="font-size: 15px;">Beatriz Lopes</span></td>
+              <td>Imersão CIS</td>
+              <td>03 out 2026</td>
+              <td class="tabular">R$ 28k</td>
+              <td class="tabular gold" style="font-weight: 600;">R$ 4.480</td>
+              <td style="text-align: right; padding-right: 32px;"><span class="badge badge-success">Ativa</span></td>
+            </tr>
+            <tr>
+              <td style="padding-left: 32px;"><span class="serif" style="font-size: 15px;">Tomé Rezende</span></td>
+              <td>Mentor de Líderes</td>
+              <td>22 set 2026</td>
+              <td class="tabular">R$ 150k</td>
+              <td class="tabular gold" style="font-weight: 600;">R$ 24.000</td>
+              <td style="text-align: right; padding-right: 32px;"><span class="badge badge-tier-3">Cohort 27</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- PREMIUM BLOCK · Próximo pagamento -->
+    <div class="surface-premium">
+      <div class="grid grid-2 items-center gap-loose">
+        <div>
+          <div class="eyebrow-gold mb-3">— Próximo Crédito</div>
+          <div class="page-title" style="font-size: 44px; margin-bottom: 16px; color: var(--text-on-dark);">
+            R$ 18.400 <span class="page-title-serif-italic" style="color: var(--gold-light);">na quinta.</span>
+          </div>
+          <p style="color: var(--text-on-dark-muted); font-size: 15px; line-height: 1.6; max-width: 480px;">TED Bradesco · Agência 2271, conta 18.927-3. Comprovante disponível em PDF junto ao informe de rendimentos do mês.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-end;">
+          <button class="btn btn-gold">Baixar comprovante</button>
+          <button class="btn btn-outline">Trocar conta destino</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+</div>
+
+<div class="wf-note">Clube · Yield</div>
+
+</body>
+</html>

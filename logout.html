@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saindo · HMC</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_shared.css?v=16">
+<script src="_icons.js?v=16" defer></script>
+<style>
+body { background: var(--blue-deep); color: white; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 32px; }
+.lo-card { max-width: 480px; width: 100%; padding: 48px 40px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.10); border-radius: 18px; text-align: center; }
+.lo-seal { width: 88px; height: 88px; border-radius: 50%; background: linear-gradient(135deg, var(--blue-realce), var(--blue-chrome)); color: var(--blue-highlight); display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 500; }
+.lo-eyebrow { font-size: 11px; color: var(--blue-highlight); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; margin-bottom: 14px; }
+.lo-title { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 500; letter-spacing: -0.025em; line-height: 1.1; margin-bottom: 14px; }
+.lo-sub { font-size: 14px; line-height: 1.65; color: rgba(255,255,255,0.65); margin-bottom: 28px; }
+.lo-check-row { display: flex; gap: 10px; align-items: center; padding: 10px 14px; background: rgba(46,204,113,0.05); border: 1px solid rgba(46,204,113,0.20); border-radius: 8px; margin-bottom: 10px; font-size: 12px; text-align: left; }
+.lo-check-icon { width: 22px; height: 22px; border-radius: 50%; background: #2ecc71; color: white; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.lo-actions { margin-top: 28px; display: flex; flex-direction: column; gap: 10px; }
+</style>
+</head>
+<body>
+
+<div class="lo-card">
+  <div class="lo-seal">LV</div>
+
+  <div class="lo-eyebrow">— Sessão encerrada</div>
+  <h1 class="lo-title">Até logo, <span class="serif-italic" style="background: linear-gradient(135deg, #A8E6FF, #4DB8FF); -webkit-background-clip: text; background-clip: text; color: transparent;">Lucas</span>.</h1>
+  <p class="lo-sub">Sua sessão foi encerrada com segurança. Os dados sensíveis foram limpos deste dispositivo.</p>
+
+  <div style="text-align: left;">
+    <div class="lo-check-row">
+      <div class="lo-check-icon"><i data-icon="check" class="icon icon-sm"></i></div>
+      <div style="color: rgba(255,255,255,0.85);">Cookies de sessão limpos</div>
+    </div>
+    <div class="lo-check-row">
+      <div class="lo-check-icon"><i data-icon="check" class="icon icon-sm"></i></div>
+      <div style="color: rgba(255,255,255,0.85);">Tokens JWT revogados no servidor</div>
+    </div>
+    <div class="lo-check-row">
+      <div class="lo-check-icon"><i data-icon="check" class="icon icon-sm"></i></div>
+      <div style="color: rgba(255,255,255,0.85);">Cache local de aulas Mux preservado (acesso volta ao logar)</div>
+    </div>
+    <div class="lo-check-row">
+      <div class="lo-check-icon"><i data-icon="check" class="icon icon-sm"></i></div>
+      <div style="color: rgba(255,255,255,0.85);">Audit log registrado · evento <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--blue-highlight);">aud_logout_8b29</code></div>
+    </div>
+  </div>
+
+  <div class="lo-actions">
+    <a href="login.html" class="btn btn-chrome" style="padding: 14px;">Entrar novamente</a>
+    <a href="landing.html" class="btn btn-outline" style="color: white; border-color: rgba(255,255,255,0.30); padding: 12px;">Ir pra página inicial</a>
+  </div>
+
+  <p style="margin-top: 28px; font-size: 11px; color: rgba(255,255,255,0.40); letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;">MMXXVI · Excelência · Conexão · Impacto</p>
+</div>
+
+</body>
+</html>

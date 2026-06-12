@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comunidades · HMC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../_shared.css?v=16">
+  <script src="../_icons.js?v=16" defer></script>
+<script src="../_persona.js?v=16" defer></script>
+<script src="../_modals.js?v=16" defer></script>
+  <style>
+    .main { padding: 0; max-width: none; }
+
+    .server-bar {
+      display: flex; align-items: center;
+      padding: 16px 32px;
+      border-bottom: 1px solid var(--divider);
+      background: var(--bg-card);
+      gap: 8px; overflow-x: auto;
+    }
+    .server-bar::-webkit-scrollbar { display: none; }
+    .server-tab {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 14px; border-radius: 10px;
+      background: transparent; cursor: pointer;
+      transition: all 180ms; white-space: nowrap;
+      text-decoration: none; color: var(--text-muted);
+    }
+    .server-tab:hover { background: var(--bg-card-hover); color: var(--text); }
+    .server-tab.active {
+      background: var(--blue-realce-muted);
+      color: var(--blue-realce); font-weight: 600;
+    }
+    .server-tab-icon {
+      width: 28px; height: 28px; border-radius: 8px;
+      background: var(--blue-realce); color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-weight: 600; font-size: 11px;
+    }
+    .server-tab-unread {
+      background: var(--blue-realce); color: white;
+      font-size: 9px; padding: 2px 6px;
+      border-radius: 10px; font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+    .server-bar-actions { margin-left: auto; display: flex; gap: 8px; }
+
+    .com-shell {
+      display: grid;
+      grid-template-columns: 240px 1fr 260px;
+      height: calc(100vh - 73px);
+    }
+
+    .channels-pane {
+      background: var(--bg-card-hover);
+      border-right: 1px solid var(--divider);
+      display: flex; flex-direction: column;
+    }
+    .com-header {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--divider);
+    }
+    .com-mentor-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px; font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+    .com-mentor-sub {
+      font-size: 10px; color: var(--text-muted);
+      letter-spacing: 0.14em; text-transform: uppercase;
+      margin-top: 3px; font-weight: 600;
+    }
+    .channels-search {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--divider);
+    }
+    .channels-search input {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--divider);
+      border-radius: 8px;
+      padding: 8px 12px 8px 32px;
+      font-size: 12px; font-family: inherit;
+      background-image: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235A6478' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.3-4.3'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: 10px center;
+    }
+    .channels-list-2 { padding: 8px; flex: 1; overflow-y: auto; }
+    .ch-cat {
+      padding: 14px 10px 6px;
+      font-size: 9px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--text-muted);
+    }
+    .ch-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 7px 10px; border-radius: 6px;
+      color: var(--text-muted); font-size: 13px;
+      cursor: pointer; transition: all 150ms;
+      text-decoration: none;
+    }
+    .ch-item:hover { background: var(--bg-card); color: var(--text); }
+    .ch-item.active {
+      background: var(--blue-realce); color: white; font-weight: 500;
+    }
+    .ch-unread {
+      margin-left: auto; background: var(--blue-realce); color: white;
+      font-size: 9px; padding: 1px 6px;
+      border-radius: 8px; font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+    .ch-item.active .ch-unread { background: rgba(255,255,255,0.20); }
+    .ch-icon { color: currentColor; opacity: 0.7; }
+    .ch-item.active .ch-icon { opacity: 1; }
+
+    .chat-pane {
+      background: var(--bg-card);
+      display: flex; flex-direction: column;
+    }
+    .chat-header-2 {
+      padding: 14px 24px;
+      border-bottom: 1px solid var(--divider);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .chat-title-2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px; font-weight: 500;
+    }
+    .chat-meta {
+      font-size: 11px; color: var(--text-muted);
+      letter-spacing: 0.06em; text-transform: uppercase;
+      font-weight: 600; margin-top: 2px;
+    }
+    .chat-header-actions { margin-left: auto; display: flex; gap: 4px; }
+    .icon-btn-ghost {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: transparent; border: none;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted); cursor: pointer;
+      transition: all 150ms;
+    }
+    .icon-btn-ghost:hover { background: var(--bg-card-hover); color: var(--text); }
+
+    .pinned-banner {
+      padding: 12px 24px;
+      background: rgba(77,184,255,0.04);
+      border-bottom: 1px solid var(--divider);
+      display: flex; align-items: center; gap: 12px;
+      font-size: 12px; color: var(--text-muted);
+    }
+
+    .chat-feed-2 { flex: 1; overflow-y: auto; padding: 24px; }
+    .chat-msg-2 {
+      display: grid; grid-template-columns: 40px 1fr;
+      gap: 14px; padding: 10px 12px;
+      margin: 0 -12px; border-radius: 8px;
+      transition: background 150ms; position: relative;
+    }
+    .chat-msg-2:hover { background: var(--bg-card-hover); }
+    .chat-msg-2:hover .msg-hover-actions { opacity: 1; pointer-events: auto; }
+
+    .msg-hover-actions {
+      position: absolute; top: -14px; right: 16px;
+      display: flex; gap: 2px;
+      background: var(--bg-card);
+      border: 1px solid var(--divider);
+      border-radius: 8px; padding: 4px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      opacity: 0; pointer-events: none;
+      transition: opacity 150ms;
+    }
+    .msg-hover-actions .icon-btn-ghost { width: 28px; height: 28px; }
+
+    .chat-avatar-2 {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--blue-realce);
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-family: 'Playfair Display', serif;
+      font-weight: 600; font-size: 14px; flex-shrink: 0;
+    }
+    .chat-author-2 { font-weight: 600; font-size: 14px; color: var(--text); margin-right: 8px; }
+    .chat-time-2 { font-size: 11px; color: var(--text-faint); }
+    .chat-body-2 { font-size: 14px; color: var(--text); line-height: 1.55; margin-top: 2px; }
+    .msg-reactions { display: flex; gap: 6px; margin-top: 8px; }
+    .reaction-pill {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 2px 8px; border-radius: 10px;
+      background: var(--bg-card-hover);
+      border: 1px solid var(--divider);
+      font-size: 11px; cursor: pointer;
+    }
+    .reaction-pill:hover { border-color: var(--blue-realce); background: var(--blue-realce-muted); }
+    .reaction-pill.active {
+      background: var(--blue-realce-muted);
+      border-color: var(--blue-realce);
+      color: var(--blue-realce); font-weight: 600;
+    }
+    .msg-thread {
+      margin-top: 8px; padding: 6px 10px;
+      background: var(--bg-card-hover); border-radius: 6px;
+      font-size: 12px; color: var(--blue-realce);
+      cursor: pointer; display: inline-flex;
+      align-items: center; gap: 6px;
+    }
+
+    .chat-composer-2 { padding: 16px 24px 20px; border-top: 1px solid var(--divider); }
+    .composer-row {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--bg-card-hover);
+      border: 1px solid var(--divider);
+      border-radius: 12px; padding: 10px 14px;
+      transition: border 150ms;
+    }
+    .composer-row:focus-within { border-color: var(--blue-realce); }
+    .composer-input {
+      flex: 1; background: transparent; border: none;
+      font-family: inherit; font-size: 14px; color: var(--text); outline: none;
+    }
+    .composer-input::placeholder { color: var(--text-faint); }
+
+    .members-pane-2 {
+      background: var(--bg-card-hover);
+      border-left: 1px solid var(--divider);
+      padding: 16px; overflow-y: auto;
+    }
+    .members-cat-2 {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--text-muted);
+      padding: 14px 8px 6px;
+    }
+    .member-row-2 {
+      display: flex; align-items: center; gap: 10px;
+      padding: 6px 8px; border-radius: 6px; cursor: pointer;
+    }
+    .member-row-2:hover { background: var(--bg-card); }
+    .member-row-2-avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--blue-realce);
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 11px; font-weight: 600;
+      font-family: 'Playfair Display', serif; position: relative;
+    }
+    .member-status-dot {
+      position: absolute; bottom: -2px; right: -2px;
+      width: 10px; height: 10px; border-radius: 50%;
+      border: 2px solid var(--bg-card-hover);
+      background: #1A7F4B;
+    }
+    .member-status-dot.offline { background: var(--text-faint); }
+    .member-name-2 { font-size: 13px; color: var(--text); }
+    .mentor-badge {
+      font-size: 8px; padding: 1px 5px;
+      background: var(--blue-realce); color: white;
+      border-radius: 4px; letter-spacing: 0.04em;
+      text-transform: uppercase; font-weight: 700;
+    }
+  </style>
+</head>
+<body data-persona-aware="mode-page" data-mode-context="estudos" data-required-mode="estudos">
+
+<button class="mobile-fab" data-sidebar-mobile-toggle aria-label="Menu"><i data-icon="menu" class="icon"></i></button>
+<div class="drawer-backdrop" data-sidebar-mobile-toggle></div>
+
+<div class="app">
+  <aside class="sidebar">
+    <a href="../hub.html" class="sidebar-brand">
+      <img src="../hmc-logo.png" alt="" class="brand-mark-img">
+      <div>
+        <div class="brand-text">High Mentor Club</div>
+        <div class="brand-sub">Curated by Paulo Vieira · MMXXVI</div>
+      </div>
+    </a>
+
+    <div class="mode-switch">
+    <a href="../hub-mentorado.html" class="mode-switch-item" data-short="H"><i data-icon="home" class="icon"></i><span>Hub</span></a>
+    <a href="../30-mentorado/biblioteca.html" class="mode-switch-item active" data-short="E"><i data-icon="book-open" class="icon"></i><span>Estudos</span></a>
+  </div>
+
+    <div class="sidebar-nav-scroll">
+      <div class="nav-section">
+        <a href="../notifications.html" class="nav-item has-badge" data-tooltip="Avisos"><i data-icon="bell" class="icon icon-sm"></i>Avisos <span class="badge-count">12</span></a>
+        <a href="../agenda.html" class="nav-item" data-tooltip="Agenda"><i data-icon="calendar" class="icon icon-sm"></i>Agenda</a>
+        <a href="../buscar.html" class="nav-item" data-tooltip="Buscar"><i data-icon="search" class="icon icon-sm"></i>Buscar</a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-label">— Estudos</div>
+        <a href="biblioteca.html" class="nav-item" data-tooltip="Biblioteca"><i data-icon="book-open" class="icon icon-sm"></i>Biblioteca</a>
+        <a href="player.html" class="nav-item" data-tooltip="Continuando"><i data-icon="play-circle" class="icon icon-sm"></i>Continuando</a>
+        <a href="comunidade.html" class="nav-item active has-badge" data-tooltip="Comunidades"><i data-icon="message-circle" class="icon icon-sm"></i>Comunidades <span class="badge-count">8</span><span class="nav-dot"></span></a>
+        <a href="sessoes-1-1.html" class="nav-item" data-tooltip="Sessões 1:1"><i data-icon="calendar" class="icon icon-sm"></i>Sessões 1:1</a>
+        <a href="notas.html" class="nav-item"><i data-icon="file-text" class="icon icon-sm"></i>Minhas notas</a>
+      <a href="progresso.html" class="nav-item"><i data-icon="trending-up" class="icon icon-sm"></i>Progresso</a>
+      <a href="certificados.html" class="nav-item" data-tooltip="Certificados"><i data-icon="award" class="icon icon-sm"></i>Certificados</a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-label">— Conta</div>
+        <a href="../account.html" class="nav-item" data-tooltip="Meu perfil"><i data-icon="user" class="icon icon-sm"></i>Meu perfil</a>
+        <a href="pagamentos.html" class="nav-item" data-tooltip="Pagamentos"><i data-icon="credit-card" class="icon icon-sm"></i>Pagamentos</a>
+        <a href="suporte.html" class="nav-item" data-tooltip="Suporte"><i data-icon="help" class="icon icon-sm"></i>Suporte</a>
+      </div>
+    </div>
+
+    <div class="sidebar-footer-v3">
+      <a href="../account.html" class="user-pill-v3">
+        <div class="avatar-sm">LV</div>
+        <div>
+          <div class="user-pill-v3-name">Lucas Vieira</div>
+          <div class="user-pill-v3-role">Seat 12</div>
+        </div>
+      </a>
+      <button class="sidebar-toggle-btn" data-sidebar-toggle>
+        <i data-icon="chevron-left" class="icon"></i>
+        <span>Recolher menu</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <!-- SERVER PICKER -->
+    <div class="server-bar">
+      <div class="server-tab active">
+        <div class="server-tab-icon">LV</div>
+        <div>
+          <div style="font-size: 13px; font-weight: 600;">Negociação de Alto Valor</div>
+          <div style="font-size: 10px; color: var(--text-muted); letter-spacing: 0.04em;">42 membros · Renata Mendes</div>
+        </div>
+        <span class="server-tab-unread">8</span>
+      </div>
+      <div class="server-tab">
+        <div class="server-tab-icon" style="background: var(--blue-chrome);">PL</div>
+        <div>
+          <div style="font-size: 13px; font-weight: 600;">P&amp;L para Gerentes</div>
+          <div style="font-size: 10px; color: var(--text-muted); letter-spacing: 0.04em;">118 membros · Workshop</div>
+        </div>
+      </div>
+      <div class="server-tab">
+        <div class="server-tab-icon" style="background: linear-gradient(135deg, var(--blue-realce), var(--blue-chrome));">CM</div>
+        <div>
+          <div style="font-size: 13px; font-weight: 600;">Carreira C-Level</div>
+          <div style="font-size: 10px; color: var(--text-muted); letter-spacing: 0.04em;">38 membros · Carla Mendes</div>
+        </div>
+      </div>
+
+      <div class="server-bar-actions">
+        <button class="btn btn-outline btn-sm"><i data-icon="settings" class="icon icon-sm"></i> Notificações</button>
+      </div>
+    </div>
+
+    <!-- LAYOUT 3 PAINÉIS -->
+    <div class="com-shell">
+
+      <!-- PAINEL 1: CANAIS -->
+      <div class="channels-pane">
+        <div class="com-header">
+          <div class="com-mentor-name">Negociação de Alto Valor</div>
+          <div class="com-mentor-sub">42 membros · 12 online</div>
+        </div>
+
+        <div class="channels-search">
+          <input type="search" placeholder="Buscar canal...">
+        </div>
+
+        <div class="channels-list-2">
+          <div class="ch-cat">Boas-vindas</div>
+          <a href="comunidade-canal.html" class="ch-item"><i data-icon="hash" class="icon icon-sm ch-icon"></i>regras</a>
+          <a href="comunidade-canal.html" class="ch-item">
+            <i data-icon="hash" class="icon icon-sm ch-icon"></i>
+            <span style="flex: 1;">apresentações</span>
+            <span class="ch-unread">12</span>
+          </a>
+
+          <div class="ch-cat">Conteúdo &amp; Dúvidas</div>
+          <a href="comunidade-canal.html" class="ch-item active">
+            <i data-icon="hash" class="icon icon-sm ch-icon"></i>
+            <span style="flex: 1;">dúvidas-módulo-3</span>
+            <span class="ch-unread">8</span>
+          </a>
+          <a href="comunidade-canal.html" class="ch-item"><i data-icon="hash" class="icon icon-sm ch-icon"></i>dúvidas-módulo-2</a>
+          <a href="comunidade-canal.html" class="ch-item"><i data-icon="hash" class="icon icon-sm ch-icon"></i>dúvidas-módulo-1</a>
+          <a href="comunidade-canal.html" class="ch-item">
+            <i data-icon="hash" class="icon icon-sm ch-icon"></i>
+            <span style="flex: 1;">avisos-Lucas</span>
+            <span class="ch-unread">2</span>
+          </a>
+
+          <div class="ch-cat">Networking</div>
+          <a href="comunidade-canal.html" class="ch-item"><i data-icon="hash" class="icon icon-sm ch-icon"></i>vagas-c-level</a>
+          <a href="comunidade-canal.html" class="ch-item"><i data-icon="hash" class="icon icon-sm ch-icon"></i>parcerias</a>
+          <a href="comunidade-canal.html" class="ch-item"><i data-icon="hash" class="icon icon-sm ch-icon"></i>offtopic</a>
+
+          <div class="ch-cat">Voz</div>
+          <a href="comunidade-canal.html" class="ch-item"><i data-icon="volume" class="icon icon-sm ch-icon"></i>happy-hour-sexta</a>
+          <a href="comunidade-canal.html" class="ch-item"><i data-icon="volume" class="icon icon-sm ch-icon"></i>sala-de-estudos</a>
+        </div>
+      </div>
+
+      <!-- PAINEL 2: CHAT -->
+      <div class="chat-pane">
+        <div class="chat-header-2">
+          <i data-icon="hash" class="icon icon-lg" style="color: var(--text-muted);"></i>
+          <div>
+            <div class="chat-title-2">dúvidas-módulo-3</div>
+            <div class="chat-meta">Mentalidade de P&amp;L · 12 membros online</div>
+          </div>
+          <div class="chat-header-actions">
+            <button class="icon-btn-ghost" title="Pinos"><i data-icon="pin" class="icon icon-sm"></i></button>
+            <button class="icon-btn-ghost" title="Membros"><i data-icon="users" class="icon icon-sm"></i></button>
+            <button class="icon-btn-ghost" title="Mais"><i data-icon="more-horizontal" class="icon icon-sm"></i></button>
+          </div>
+        </div>
+
+        <div class="pinned-banner">
+          <i data-icon="pin" class="icon icon-sm" style="color: var(--blue-realce);"></i>
+          <span><strong style="color: var(--text);">Renata Mendes</strong> fixou: "Antes de postar dúvida, faça o exercício do final da aula 02..."</span>
+          <a href="comunidade-canal.html" style="margin-left: auto; color: var(--blue-realce); font-weight: 600; font-size: 12px;">Ver pinos (12)</a>
+        </div>
+
+        <div class="chat-feed-2">
+          <div style="display: flex; align-items: center; gap: 16px; margin: 16px 0;">
+            <div style="flex: 1; height: 1px; background: var(--divider);"></div>
+            <div style="font-size: 11px; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600;">Hoje</div>
+            <div style="flex: 1; height: 1px; background: var(--divider);"></div>
+          </div>
+
+          <div class="chat-msg-2">
+            <div class="msg-hover-actions">
+              <button class="icon-btn-ghost" title="Reagir"><i data-icon="sparkles" class="icon icon-sm"></i></button>
+              <button class="icon-btn-ghost" title="Responder"><i data-icon="message" class="icon icon-sm"></i></button>
+              <button class="icon-btn-ghost" title="Thread"><i data-icon="message-circle" class="icon icon-sm"></i></button>
+              <button class="icon-btn-ghost" title="Fixar"><i data-icon="pin" class="icon icon-sm"></i></button>
+              <button class="icon-btn-ghost" title="Mais"><i data-icon="more-horizontal" class="icon icon-sm"></i></button>
+            </div>
+            <div class="chat-avatar-2">PA</div>
+            <div>
+              <div><span class="chat-author-2">Pedro Almeida</span><span class="chat-time-2">14:22</span></div>
+              <div class="chat-body-2">Galera, alguém já fez o exercício de decompor o P&amp;L da própria área? Tô patinando na linha de margem de contribuição.<br><br>Acho que to misturando custo direto com despesa variável.</div>
+              <div class="msg-reactions">
+                <span class="reaction-pill">👍 3</span>
+                <span class="reaction-pill active">🤝 5</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="chat-msg-2">
+            <div class="msg-hover-actions">
+              <button class="icon-btn-ghost"><i data-icon="sparkles" class="icon icon-sm"></i></button>
+              <button class="icon-btn-ghost"><i data-icon="message" class="icon icon-sm"></i></button>
+              <button class="icon-btn-ghost"><i data-icon="pin" class="icon icon-sm"></i></button>
+            </div>
+            <div class="chat-avatar-2" style="background: linear-gradient(135deg, var(--blue-realce), var(--blue-chrome));">LV</div>
+            <div>
+              <div>
+                <span class="chat-author-2">Renata Mendes</span>
+                <span class="mentor-badge">Mentor</span>
+                <span class="chat-time-2" style="margin-left: 8px;">14:35</span>
+              </div>
+              <div class="chat-body-2">@Pedro Almeida clássico erro. Custo direto é o que VARIA com cada unidade vendida. Despesa variável é o que varia com a operação mas não com o produto.<br><br>Exemplo concreto: comissão de venda = custo direto. Energia da fábrica = despesa variável.<br><br>Quer trazer um caso real do seu P&amp;L pra sessão 1:1 da próxima quinta?</div>
+              <div class="msg-thread">
+                <i data-icon="message-circle" class="icon icon-sm"></i>
+                <span>5 respostas · última há 12 min</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="chat-msg-2">
+            <div class="msg-hover-actions">
+              <button class="icon-btn-ghost"><i data-icon="sparkles" class="icon icon-sm"></i></button>
+              <button class="icon-btn-ghost"><i data-icon="message" class="icon icon-sm"></i></button>
+              <button class="icon-btn-ghost"><i data-icon="pin" class="icon icon-sm"></i></button>
+            </div>
+            <div class="chat-avatar-2">MR</div>
+            <div>
+              <div><span class="chat-author-2">Mariana Rocha</span><span class="chat-time-2">15:48</span></div>
+              <div class="chat-body-2">Eu tava com a mesma dúvida. Salvando essa mensagem pro caderno. Lucas, posso compartilhar um print do exercício depois pra você dar um pitaco?</div>
+            </div>
+          </div>
+
+          <div class="chat-msg-2">
+            <div class="msg-hover-actions">
+              <button class="icon-btn-ghost"><i data-icon="sparkles" class="icon icon-sm"></i></button>
+              <button class="icon-btn-ghost"><i data-icon="message" class="icon icon-sm"></i></button>
+              <button class="icon-btn-ghost"><i data-icon="pin" class="icon icon-sm"></i></button>
+            </div>
+            <div class="chat-avatar-2" style="background: linear-gradient(135deg, var(--blue-realce), var(--blue-chrome));">LV</div>
+            <div>
+              <div>
+                <span class="chat-author-2">Renata Mendes</span>
+                <span class="mentor-badge">Mentor</span>
+                <span class="chat-time-2" style="margin-left: 8px;">15:51</span>
+              </div>
+              <div class="chat-body-2">Sempre. Manda aqui mesmo, todo mundo aprende junto.</div>
+              <div class="msg-reactions">
+                <span class="reaction-pill">❤️ 8</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="chat-msg-2">
+            <div class="msg-hover-actions">
+              <button class="icon-btn-ghost"><i data-icon="sparkles" class="icon icon-sm"></i></button>
+              <button class="icon-btn-ghost"><i data-icon="message" class="icon icon-sm"></i></button>
+              <button class="icon-btn-ghost"><i data-icon="pin" class="icon icon-sm"></i></button>
+            </div>
+            <div class="chat-avatar-2">LV</div>
+            <div>
+              <div><span class="chat-author-2">Lucas Vieira</span><span class="mentor-badge" style="background: rgba(77,184,255,0.15); color: var(--blue-realce);">Você</span><span class="chat-time-2" style="margin-left: 8px;">16:42</span></div>
+              <div class="chat-body-2">Acabei de fazer o exercício também. A descoberta foi: 60% do que eu achava que era "lucro" da minha área na verdade era margem contribuição. Quando subtraio despesa fixa rateada, sobra muito pouco. Vou levar essa análise pra próxima reunião com o CFO.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chat-composer-2">
+          <div class="composer-row">
+            <button class="icon-btn-ghost" title="Anexar"><i data-icon="plus" class="icon icon-sm"></i></button>
+            <input type="text" class="composer-input" placeholder="Mensagem em #dúvidas-módulo-3">
+            <button class="icon-btn-ghost" title="Reação"><i data-icon="sparkles" class="icon icon-sm"></i></button>
+            <button class="icon-btn-ghost" title="Enviar"><i data-icon="send" class="icon icon-sm" style="color: var(--blue-realce);"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAINEL 3: MEMBROS -->
+      <div class="members-pane-2">
+        <div class="members-cat-2">— Mentor</div>
+        <div class="member-row-2">
+          <div class="member-row-2-avatar" style="background: linear-gradient(135deg, var(--blue-realce), var(--blue-chrome));">LV<div class="member-status-dot"></div></div>
+          <div>
+            <div class="member-name-2" style="font-weight: 600;">Renata Mendes</div>
+            <div style="font-size: 10px; color: var(--text-muted);">online · respondendo</div>
+          </div>
+        </div>
+
+        <div class="members-cat-2">— Online · 12</div>
+        <div class="member-row-2"><div class="member-row-2-avatar">PA<div class="member-status-dot"></div></div><div class="member-name-2">Pedro Almeida</div></div>
+        <div class="member-row-2"><div class="member-row-2-avatar">MR<div class="member-status-dot"></div></div><div class="member-name-2">Mariana Rocha</div></div>
+        <div class="member-row-2"><div class="member-row-2-avatar">LV<div class="member-status-dot"></div></div><div class="member-name-2">Lucas Vieira <span style="font-size: 10px; color: var(--blue-realce);">(você)</span></div></div>
+        <div class="member-row-2"><div class="member-row-2-avatar">DC<div class="member-status-dot"></div></div><div class="member-name-2">Daniel Coutinho</div></div>
+        <div class="member-row-2"><div class="member-row-2-avatar">PS<div class="member-status-dot"></div></div><div class="member-name-2">Patrícia Soares</div></div>
+        <div class="member-row-2"><div class="member-row-2-avatar">CF<div class="member-status-dot"></div></div><div class="member-name-2">Carlos Fontes</div></div>
+        <div class="member-row-2"><div class="member-row-2-avatar">BR<div class="member-status-dot"></div></div><div class="member-name-2">Beatriz Reis</div></div>
+
+        <div class="members-cat-2">— Offline · 30</div>
+        <div class="member-row-2" style="opacity: 0.55;"><div class="member-row-2-avatar" style="background: var(--text-muted);">RM<div class="member-status-dot offline"></div></div><div class="member-name-2">Renato Mello</div></div>
+        <div class="member-row-2" style="opacity: 0.55;"><div class="member-row-2-avatar" style="background: var(--text-muted);">JS<div class="member-status-dot offline"></div></div><div class="member-name-2">Juliana Sousa</div></div>
+        <div class="member-row-2" style="opacity: 0.55;"><div class="member-row-2-avatar" style="background: var(--text-muted);">FA<div class="member-status-dot offline"></div></div><div class="member-name-2">Fernando Aragão</div></div>
+        <div class="member-row-2" style="opacity: 0.55;"><div class="member-row-2-avatar" style="background: var(--text-muted);">TC<div class="member-status-dot offline"></div></div><div class="member-name-2">Thiago Castro</div></div>
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+
+<div class="wf-note">Estudos · Comunidades</div>
+
+</body>
+</html>

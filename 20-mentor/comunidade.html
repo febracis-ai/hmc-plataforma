@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comunidade · Studio · HMC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../_shared.css?v=16">
+  <script src="../_icons.js?v=16" defer></script>
+<script src="../_persona.js?v=16" defer></script>
+<script src="../_modals.js?v=16" defer></script>
+  <style>
+    .main { padding: 0; max-width: none; }
+
+    /* Header da comunidade — identidade do servidor com ações de admin */
+    .com-admin-head {
+      padding: 20px 32px 0;
+      border-bottom: 1px solid var(--divider);
+      background: var(--bg-card);
+    }
+    .com-admin-top {
+      display: flex; align-items: center; gap: 18px;
+      padding-bottom: 16px;
+    }
+    .com-server-icon {
+      width: 56px; height: 56px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--blue-realce), var(--blue-chrome));
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-family: 'Playfair Display', serif;
+      font-weight: 600; font-size: 22px; flex-shrink: 0;
+      position: relative; cursor: pointer;
+    }
+    .com-server-icon:hover::after {
+      content: 'Trocar'; position: absolute; inset: 0;
+      background: rgba(0,0,0,0.55); border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Inter'; font-size: 9px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .com-server-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px; font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+    .com-server-meta {
+      font-size: 11px; color: var(--text-muted);
+      letter-spacing: 0.08em; text-transform: uppercase;
+      font-weight: 600; margin-top: 4px;
+    }
+    .com-server-meta .dot { margin: 0 8px; color: var(--text-faint); }
+    .com-server-actions { margin-left: auto; display: flex; gap: 8px; }
+
+    /* Tabs administrativas */
+    .admin-tabs {
+      display: flex; gap: 4px;
+      padding-top: 6px;
+    }
+    .admin-tab {
+      padding: 10px 16px;
+      font-size: 13px; color: var(--text-muted);
+      font-weight: 500; cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      display: inline-flex; align-items: center; gap: 7px;
+      text-decoration: none;
+    }
+    .admin-tab:hover { color: var(--text); }
+    .admin-tab.active {
+      color: var(--blue-realce);
+      border-bottom-color: var(--blue-realce);
+      font-weight: 600;
+    }
+    .admin-tab .tab-count {
+      font-size: 10px; padding: 1px 6px;
+      background: var(--blue-realce-muted);
+      color: var(--blue-realce); border-radius: 8px;
+      font-weight: 700;
+    }
+
+    /* CONTAINER GERAL */
+    .com-body {
+      padding: 24px 32px 32px;
+      min-height: calc(100vh - 220px);
+    }
+
+    /* SEÇÃO CHAT — versão admin (sidebar canal + chat + sidebar membros) */
+    .com-shell {
+      display: grid;
+      grid-template-columns: 240px 1fr 260px;
+      height: calc(100vh - 156px);
+      background: var(--bg-card);
+      border-radius: 12px; overflow: hidden;
+      border: 1px solid var(--divider);
+    }
+    .channels-pane {
+      background: var(--bg-card-hover);
+      border-right: 1px solid var(--divider);
+      display: flex; flex-direction: column;
+    }
+    .channels-header {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--divider);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .channels-header-title {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .channels-list-2 { padding: 8px; flex: 1; overflow-y: auto; }
+    .ch-cat {
+      padding: 14px 10px 6px;
+      font-size: 9px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--text-muted);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .ch-cat-add {
+      background: transparent; border: none;
+      color: var(--text-muted); cursor: pointer;
+      padding: 2px; border-radius: 4px;
+      display: flex; align-items: center;
+    }
+    .ch-cat-add:hover { color: var(--blue-realce); background: var(--blue-realce-muted); }
+    .ch-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 7px 10px; border-radius: 6px;
+      color: var(--text-muted); font-size: 13px;
+      cursor: pointer; transition: all 150ms;
+      text-decoration: none; position: relative;
+    }
+    .ch-item:hover { background: var(--bg-card); color: var(--text); }
+    .ch-item:hover .ch-actions { opacity: 1; }
+    .ch-item.active {
+      background: var(--blue-realce); color: white; font-weight: 500;
+    }
+    .ch-icon { color: currentColor; opacity: 0.7; }
+    .ch-actions {
+      margin-left: auto; opacity: 0;
+      display: flex; gap: 2px; transition: opacity 150ms;
+    }
+    .ch-item.active .ch-actions { opacity: 1; }
+    .ch-action-btn {
+      background: transparent; border: none;
+      color: currentColor; cursor: pointer;
+      padding: 2px; opacity: 0.7; border-radius: 4px;
+      display: flex; align-items: center;
+    }
+    .ch-action-btn:hover { opacity: 1; background: rgba(0,0,0,0.10); }
+
+    /* CHAT PANE */
+    .chat-pane {
+      background: var(--bg-card);
+      display: flex; flex-direction: column;
+    }
+    .chat-header-2 {
+      padding: 14px 24px;
+      border-bottom: 1px solid var(--divider);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .chat-title-2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px; font-weight: 500;
+    }
+    .chat-meta {
+      font-size: 11px; color: var(--text-muted);
+      letter-spacing: 0.06em; text-transform: uppercase;
+      font-weight: 600; margin-top: 2px;
+    }
+    .chat-header-actions { margin-left: auto; display: flex; gap: 4px; }
+    .icon-btn-ghost {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: transparent; border: none;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted); cursor: pointer;
+      transition: all 150ms;
+    }
+    .icon-btn-ghost:hover { background: var(--bg-card-hover); color: var(--text); }
+
+    .pinned-banner {
+      padding: 12px 24px;
+      background: rgba(77,184,255,0.04);
+      border-bottom: 1px solid var(--divider);
+      display: flex; align-items: center; gap: 12px;
+      font-size: 12px; color: var(--text-muted);
+    }
+
+    .chat-feed-2 { flex: 1; overflow-y: auto; padding: 24px; }
+    .chat-msg-2 {
+      display: grid; grid-template-columns: 40px 1fr;
+      gap: 14px; padding: 10px 12px;
+      margin: 0 -12px; border-radius: 8px;
+      transition: background 150ms; position: relative;
+    }
+    .chat-msg-2:hover { background: var(--bg-card-hover); }
+    .chat-msg-2:hover .msg-hover-actions { opacity: 1; pointer-events: auto; }
+
+    .msg-hover-actions {
+      position: absolute; top: -14px; right: 16px;
+      display: flex; gap: 2px;
+      background: var(--bg-card);
+      border: 1px solid var(--divider);
+      border-radius: 8px; padding: 4px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      opacity: 0; pointer-events: none;
+      transition: opacity 150ms;
+    }
+    .msg-hover-actions .icon-btn-ghost { width: 28px; height: 28px; }
+    .msg-hover-actions .icon-btn-ghost.danger:hover { color: #C8442B; background: rgba(200,68,43,0.10); }
+
+    .chat-avatar-2 {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--blue-realce);
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-family: 'Playfair Display', serif;
+      font-weight: 600; font-size: 14px; flex-shrink: 0;
+    }
+    .chat-author-2 { font-weight: 600; font-size: 14px; color: var(--text); margin-right: 8px; }
+    .chat-time-2 { font-size: 11px; color: var(--text-faint); }
+    .chat-body-2 { font-size: 14px; color: var(--text); line-height: 1.55; margin-top: 2px; }
+    .msg-reactions { display: flex; gap: 6px; margin-top: 8px; }
+    .reaction-pill {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 2px 8px; border-radius: 10px;
+      background: var(--bg-card-hover);
+      border: 1px solid var(--divider);
+      font-size: 11px; cursor: pointer;
+    }
+    .reaction-pill.active {
+      background: var(--blue-realce-muted);
+      border-color: var(--blue-realce);
+      color: var(--blue-realce); font-weight: 600;
+    }
+    .mentor-badge {
+      font-size: 8px; padding: 1px 5px;
+      background: var(--blue-realce); color: white;
+      border-radius: 4px; letter-spacing: 0.04em;
+      text-transform: uppercase; font-weight: 700;
+    }
+    .role-badge {
+      font-size: 8px; padding: 1px 5px;
+      border-radius: 4px; letter-spacing: 0.04em;
+      text-transform: uppercase; font-weight: 700;
+      background: rgba(77,184,255,0.18); color: var(--blue-realce);
+    }
+
+    .msg-flag {
+      font-size: 10px; color: #C8442B;
+      background: rgba(200,68,43,0.10);
+      padding: 2px 6px; border-radius: 4px;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      font-weight: 700; margin-left: 6px;
+    }
+
+    /* COMPOSER */
+    .chat-composer-2 { padding: 16px 24px 20px; border-top: 1px solid var(--divider); }
+    .composer-row {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--bg-card-hover);
+      border: 1px solid var(--divider);
+      border-radius: 12px; padding: 10px 14px;
+      transition: border 150ms;
+    }
+    .composer-row:focus-within { border-color: var(--blue-realce); }
+    .composer-input {
+      flex: 1; background: transparent; border: none;
+      font-family: inherit; font-size: 14px; color: var(--text); outline: none;
+    }
+    .composer-input::placeholder { color: var(--text-faint); }
+    .composer-mentor-toggle {
+      display: flex; align-items: center; gap: 6px;
+      padding: 4px 10px; border-radius: 8px;
+      background: var(--blue-realce-muted);
+      color: var(--blue-realce); font-size: 11px;
+      font-weight: 700; letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* MEMBERS PANE */
+    .members-pane-2 {
+      background: var(--bg-card-hover);
+      border-left: 1px solid var(--divider);
+      padding: 16px; overflow-y: auto;
+    }
+    .members-cat-2 {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--text-muted);
+      padding: 14px 8px 6px;
+    }
+    .member-row-2 {
+      display: flex; align-items: center; gap: 10px;
+      padding: 6px 8px; border-radius: 6px; cursor: pointer;
+    }
+    .member-row-2:hover { background: var(--bg-card); }
+    .member-row-2-avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--blue-realce);
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 11px; font-weight: 600;
+      font-family: 'Playfair Display', serif; position: relative;
+    }
+    .member-status-dot {
+      position: absolute; bottom: -2px; right: -2px;
+      width: 10px; height: 10px; border-radius: 50%;
+      border: 2px solid var(--bg-card-hover);
+      background: #1A7F4B;
+    }
+    .member-status-dot.offline { background: var(--text-faint); }
+    .member-name-2 { font-size: 13px; color: var(--text); }
+    .member-tag-pill {
+      font-size: 9px; padding: 1px 5px;
+      background: rgba(77,184,255,0.15); color: var(--blue-realce);
+      border-radius: 4px; letter-spacing: 0.04em;
+      text-transform: uppercase; font-weight: 700;
+      margin-left: auto;
+    }
+
+    /* ====================== CANAIS (TAB ADMIN) ====================== */
+    .admin-section { display: none; }
+    .admin-section.active { display: block; }
+
+    .admin-card {
+      background: var(--bg-card);
+      border: 1px solid var(--divider);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .admin-card-head {
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--divider);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .admin-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px; font-weight: 500;
+    }
+    .admin-card-sub {
+      font-size: 12px; color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .channel-cat-block {
+      padding: 16px 22px;
+      border-bottom: 1px solid var(--divider);
+    }
+    .channel-cat-block:last-child { border-bottom: none; }
+    .channel-cat-header {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 12px;
+    }
+    .channel-cat-title {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--text);
+    }
+    .channel-cat-meta {
+      font-size: 11px; color: var(--text-muted);
+    }
+    .channel-cat-actions { margin-left: auto; display: flex; gap: 6px; }
+
+    .channel-admin-row {
+      display: grid;
+      grid-template-columns: 1fr 100px 120px 100px auto;
+      gap: 12px; align-items: center;
+      padding: 10px 12px; border-radius: 8px;
+      transition: background 150ms;
+    }
+    .channel-admin-row:hover { background: var(--bg-card-hover); }
+    .channel-admin-name {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 14px; color: var(--text); font-weight: 500;
+    }
+    .channel-admin-drag {
+      color: var(--text-faint); cursor: grab;
+    }
+    .channel-admin-stat {
+      font-size: 11px; color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+    }
+    .channel-admin-actions { display: flex; gap: 4px; }
+
+    .channel-pill {
+      font-size: 9px; padding: 2px 8px;
+      border-radius: 10px; letter-spacing: 0.06em;
+      text-transform: uppercase; font-weight: 700;
+    }
+    .channel-pill.public { background: rgba(77,184,255,0.12); color: var(--blue-realce); }
+    .channel-pill.locked { background: rgba(77,184,255,0.15); color: var(--blue-realce); }
+    .channel-pill.archived { background: var(--bg-card-hover); color: var(--text-muted); }
+
+    /* ====================== PAPÉIS ====================== */
+    .role-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+      padding: 22px;
+    }
+    .role-card {
+      background: var(--bg-card-hover);
+      border: 1px solid var(--divider);
+      border-radius: 10px; padding: 18px;
+    }
+    .role-card-head {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 12px;
+    }
+    .role-color {
+      width: 8px; height: 38px; border-radius: 4px;
+    }
+    .role-name { font-size: 16px; font-weight: 600; }
+    .role-count { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+    .role-perms {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      margin-top: 10px;
+    }
+    .role-perm {
+      font-size: 11px; padding: 3px 8px;
+      background: var(--bg-card);
+      border: 1px solid var(--divider);
+      border-radius: 6px;
+      color: var(--text-muted);
+    }
+    .role-perm.granted { color: var(--blue-realce); background: var(--blue-realce-muted); border-color: var(--blue-realce-divider); }
+
+    /* ====================== MEMBROS ====================== */
+    .members-table {
+      width: 100%; border-collapse: collapse;
+    }
+    .members-table th {
+      text-align: left; padding: 12px 22px;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--divider);
+    }
+    .members-table td {
+      padding: 12px 22px;
+      border-bottom: 1px solid var(--divider);
+      font-size: 13px;
+    }
+    .members-table tr:hover td { background: var(--bg-card-hover); }
+    .member-cell {
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    /* ====================== MODERAÇÃO ====================== */
+    .report-row {
+      padding: 16px 22px;
+      border-bottom: 1px solid var(--divider);
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 14px; align-items: center;
+    }
+    .report-reason {
+      font-size: 9px; padding: 2px 8px;
+      background: rgba(200,68,43,0.10); color: #C8442B;
+      border-radius: 10px; letter-spacing: 0.08em;
+      text-transform: uppercase; font-weight: 700;
+      display: inline-block; margin-bottom: 6px;
+    }
+    .report-msg {
+      background: var(--bg-card-hover); padding: 10px 14px;
+      border-radius: 8px; font-size: 13px;
+      border-left: 2px solid #C8442B;
+      margin-top: 8px;
+    }
+    .report-actions { display: flex; gap: 6px; flex-direction: column; }
+
+    /* ====================== ANALYTICS ====================== */
+    .metric-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 16px; margin-bottom: 24px;
+    }
+    .metric-card {
+      background: var(--bg-card);
+      border: 1px solid var(--divider);
+      border-radius: 12px; padding: 22px;
+    }
+    .metric-eyebrow {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .metric-display {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px; font-weight: 500;
+      margin-top: 8px; letter-spacing: -0.02em;
+    }
+    .metric-delta {
+      font-size: 11px; color: var(--text-muted);
+      margin-top: 6px;
+    }
+    .metric-delta.up { color: #1A7F4B; }
+
+    .top-contributors {
+      background: var(--bg-card);
+      border: 1px solid var(--divider);
+      border-radius: 12px; padding: 22px;
+    }
+    .contributor-row {
+      display: grid; grid-template-columns: 32px 1fr 80px 80px;
+      gap: 14px; align-items: center;
+      padding: 10px 0; border-bottom: 1px dashed var(--divider);
+    }
+    .contributor-row:last-child { border-bottom: none; }
+    .contributor-rank {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px; color: var(--text-muted); font-weight: 500;
+      text-align: center;
+    }
+    .contributor-bar {
+      display: block; height: 4px; background: var(--bg-card-hover);
+      border-radius: 2px; margin-top: 6px;
+    }
+    .contributor-bar-fill {
+      display: block; height: 100%;
+      background: linear-gradient(90deg, var(--blue-realce), var(--blue-highlight));
+      border-radius: 2px;
+    }
+
+    /* ====================== CONFIGURAÇÕES ====================== */
+    .settings-grid {
+      display: grid; grid-template-columns: 280px 1fr;
+      gap: 24px;
+    }
+    .settings-nav {
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .settings-nav-item {
+      padding: 10px 14px; border-radius: 8px;
+      font-size: 13px; color: var(--text-muted);
+      cursor: pointer; transition: all 150ms;
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+    .settings-nav-item:hover { background: var(--bg-card-hover); color: var(--text); }
+    .settings-nav-item.active {
+      background: var(--blue-realce-muted);
+      color: var(--blue-realce); font-weight: 600;
+    }
+
+    .settings-form { display: flex; flex-direction: column; gap: 22px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-label {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .form-hint {
+      font-size: 12px; color: var(--text-muted);
+      margin-top: 4px;
+    }
+    .form-input, .form-textarea {
+      background: var(--bg-card-hover);
+      border: 1px solid var(--divider);
+      border-radius: 8px;
+      padding: 11px 14px;
+      font-family: inherit; font-size: 14px;
+      color: var(--text); outline: none;
+      transition: border 150ms;
+    }
+    .form-input:focus, .form-textarea:focus { border-color: var(--blue-realce); }
+    .form-textarea { resize: vertical; min-height: 90px; }
+
+    .banner-preview {
+      height: 120px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--blue-deep), var(--blue-realce));
+      position: relative; overflow: hidden;
+      display: flex; align-items: flex-end; padding: 14px;
+    }
+    .banner-replace {
+      position: absolute; top: 10px; right: 10px;
+      background: rgba(0,0,0,0.55); color: white;
+      padding: 6px 10px; border-radius: 8px;
+      font-size: 11px; cursor: pointer; border: none;
+      display: flex; align-items: center; gap: 5px;
+    }
+
+    .toggle-row {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      padding: 14px 0; border-top: 1px solid var(--divider);
+    }
+    .toggle-row:first-child { border-top: none; padding-top: 0; }
+    .toggle-row-text { flex: 1; padding-right: 16px; }
+    .toggle-row-title { font-size: 14px; font-weight: 500; }
+    .toggle-row-desc { font-size: 12px; color: var(--text-muted); margin-top: 3px; line-height: 1.5; }
+    .toggle {
+      width: 38px; height: 22px; background: var(--text-faint);
+      border-radius: 12px; position: relative; cursor: pointer;
+      transition: background 150ms; flex-shrink: 0; margin-top: 2px;
+    }
+    .toggle::after {
+      content: ''; position: absolute;
+      top: 2px; left: 2px; width: 18px; height: 18px;
+      background: white; border-radius: 50%;
+      transition: transform 150ms;
+    }
+    .toggle.on { background: var(--blue-realce); }
+    .toggle.on::after { transform: translateX(16px); }
+
+    .btn-sm {
+      padding: 6px 12px; font-size: 12px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body data-persona-aware="mode-page" data-mode-context="studio" data-required-mode="studio">
+
+<button class="mobile-fab" data-sidebar-mobile-toggle aria-label="Menu"><i data-icon="menu" class="icon"></i></button>
+<div class="drawer-backdrop" data-sidebar-mobile-toggle></div>
+
+<div class="app">
+  <aside class="sidebar">
+    <a href="../hub.html" class="sidebar-brand">
+      <img src="../hmc-logo.png" alt="" class="brand-mark-img">
+      <div>
+        <div class="brand-text">High Mentor Club</div>
+        <div class="brand-sub">Curated by Paulo Vieira · MMXXVI</div>
+      </div>
+    </a>
+
+    <div class="mode-switch">
+      <a href="../hub.html" class="mode-switch-item" data-short="H"><i data-icon="home" class="icon"></i><span>Hub</span></a>
+      <a href="../10-clube/01-dashboard.html" class="mode-switch-item" data-short="C"><i data-icon="landmark" class="icon"></i><span>Clube</span></a>
+      <a href="../20-mentor/studio-home.html" class="mode-switch-item active" data-short="S"><i data-icon="briefcase" class="icon"></i><span>Studio</span></a>
+      <a href="../30-mentorado/biblioteca.html" class="mode-switch-item" data-short="E"><i data-icon="book-open" class="icon"></i><span>Estudos</span></a>
+    </div>
+
+    <div class="sidebar-nav-scroll">
+      <div class="nav-section">
+        <a href="../notifications.html" class="nav-item has-badge" data-tooltip="Avisos"><i data-icon="bell" class="icon icon-sm"></i>Avisos <span class="badge-count">12</span></a>
+        <a href="../agenda.html" class="nav-item" data-tooltip="Agenda"><i data-icon="calendar" class="icon icon-sm"></i>Agenda</a>
+        <a href="../buscar.html" class="nav-item" data-tooltip="Buscar"><i data-icon="search" class="icon icon-sm"></i>Buscar</a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-label">— Studio</div>
+        <a href="studio-home.html" class="nav-item" data-tooltip="Visão geral"><i data-icon="briefcase" class="icon icon-sm"></i>Visão geral</a>
+        <a href="mentorias.html" class="nav-item" data-tooltip="Mentorias"><i data-icon="video" class="icon icon-sm"></i>Mentorias</a>
+        <a href="aulas-biblioteca.html" class="nav-item" data-tooltip="Aulas"><i data-icon="film" class="icon icon-sm"></i>Aulas</a>
+        <a href="mentorados.html" class="nav-item" data-tooltip="Mentorados"><i data-icon="users" class="icon icon-sm"></i>Mentorados</a>
+        <a href="sessoes-1-1.html" class="nav-item" data-tooltip="Sessões 1:1"><i data-icon="calendar" class="icon icon-sm"></i>Sessões 1:1</a>
+        <a href="comunidade.html" class="nav-item active" data-tooltip="Comunidade"><i data-icon="message-circle" class="icon icon-sm"></i>Comunidade<span class="nav-dot"></span></a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-label">— Negócio</div>
+        <a href="receitas.html" class="nav-item" data-tooltip="Receitas"><i data-icon="dollar" class="icon icon-sm"></i>Receitas</a>
+        <a href="checkout-builder.html" class="nav-item" data-tooltip="Checkout"><i data-icon="credit-card" class="icon icon-sm"></i>Checkout</a>
+        <a href="cupons.html" class="nav-item" data-tooltip="Cupons"><i data-icon="tag" class="icon icon-sm"></i>Cupons</a>
+        <a href="pagina-publica.html" class="nav-item" data-tooltip="Página pública"><i data-icon="globe" class="icon icon-sm"></i>Página pública</a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-label">— Conta</div>
+        <a href="configuracoes.html" class="nav-item" data-tooltip="Configurações"><i data-icon="settings" class="icon icon-sm"></i>Configurações</a>
+        <a href="integracoes.html" class="nav-item" data-tooltip="Integrações"><i data-icon="external" class="icon icon-sm"></i>Integrações</a>
+      </div>
+    </div>
+
+    <div class="sidebar-footer-v3">
+      <a href="../account.html" class="user-pill-v3">
+        <div class="avatar-sm">LV</div>
+        <div>
+          <div class="user-pill-v3-name">Lucas Vieira</div>
+          <div class="user-pill-v3-role">Seat 12</div>
+        </div>
+      </a>
+      <button class="sidebar-toggle-btn" data-sidebar-toggle>
+        <i data-icon="chevron-left" class="icon"></i>
+        <span>Recolher menu</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <!-- HEADER ADMIN -->
+    <div class="com-admin-head">
+      <div class="com-admin-top">
+        <div class="com-server-icon">LV</div>
+        <div>
+          <div class="com-server-name">Vieira de Liderança</div>
+          <div class="com-server-meta">
+            <span>42 membros</span><span class="dot">·</span>
+            <span>12 online</span><span class="dot">·</span>
+            <span>8 canais</span><span class="dot">·</span>
+            <span>Criada em jan/2026</span>
+          </div>
+        </div>
+        <div class="com-server-actions">
+          <button class="btn btn-outline btn-sm"><i data-icon="external" class="icon icon-sm"></i>Ver como mentorado</button>
+          <button class="btn btn-chrome btn-sm"><i data-icon="send" class="icon icon-sm"></i>Anúncio para todos</button>
+        </div>
+      </div>
+
+      <!-- TABS -->
+      <div class="admin-tabs">
+        <a href="#chat" class="admin-tab active" data-tab="chat"><i data-icon="message-circle" class="icon icon-sm"></i>Conversa</a>
+        <a href="#canais" class="admin-tab" data-tab="canais"><i data-icon="hash" class="icon icon-sm"></i>Canais <span class="tab-count">8</span></a>
+        <a href="#papeis" class="admin-tab" data-tab="papeis"><i data-icon="shield" class="icon icon-sm"></i>Papéis</a>
+        <a href="#membros" class="admin-tab" data-tab="membros"><i data-icon="users" class="icon icon-sm"></i>Membros <span class="tab-count">42</span></a>
+        <a href="#moderacao" class="admin-tab" data-tab="moderacao"><i data-icon="flag" class="icon icon-sm"></i>Moderação <span class="tab-count" style="background: rgba(200,68,43,0.15); color: #C8442B;">3</span></a>
+        <a href="#analytics" class="admin-tab" data-tab="analytics"><i data-icon="bar-chart" class="icon icon-sm"></i>Engajamento</a>
+        <a href="#config" class="admin-tab" data-tab="config"><i data-icon="settings" class="icon icon-sm"></i>Configurações</a>
+      </div>
+    </div>
+
+    <!-- ===================== CHAT (default) ===================== -->
+    <section class="admin-section active" data-section="chat">
+      <div style="padding: 0;">
+        <div class="com-shell" style="margin: 0; border-radius: 0; border: none; border-top: none;">
+
+          <!-- CANAIS -->
+          <div class="channels-pane">
+            <div class="channels-header">
+              <div class="channels-header-title">Canais</div>
+              <button class="ch-cat-add" style="margin-left: auto;" title="Criar canal"><i data-icon="plus" class="icon icon-sm"></i></button>
+            </div>
+
+            <div class="channels-list-2">
+              <div class="ch-cat">Boas-vindas <button class="ch-cat-add" title="Adicionar canal"><i data-icon="plus" class="icon icon-sm"></i></button></div>
+              <a href="../30-mentorado/comunidade-canal.html" class="ch-item"><i data-icon="hash" class="icon icon-sm ch-icon"></i>regras<div class="ch-actions"><button class="ch-action-btn"><i data-icon="settings" class="icon icon-sm"></i></button></div></a>
+              <a href="../30-mentorado/comunidade-canal.html" class="ch-item"><i data-icon="hash" class="icon icon-sm ch-icon"></i>apresentações<div class="ch-actions"><button class="ch-action-btn"><i data-icon="settings" class="icon icon-sm"></i></button></div></a>
+
+              <div class="ch-cat">Conteúdo &amp; Dúvidas <button class="ch-cat-add"><i data-icon="plus" class="icon icon-sm"></i></button></div>
+              <a href="../30-mentorado/comunidade-canal.html" class="ch-item active">
+                <i data-icon="hash" class="icon icon-sm ch-icon"></i>
+                <span style="flex: 1;">dúvidas-módulo-3</span>
+                <div class="ch-actions"><button class="ch-action-btn"><i data-icon="settings" class="icon icon-sm"></i></button></div>
+              </a>
+              <a href="../30-mentorado/comunidade-canal.html" class="ch-item"><i data-icon="hash" class="icon icon-sm ch-icon"></i>dúvidas-módulo-2<div class="ch-actions"><button class="ch-action-btn"><i data-icon="settings" class="icon icon-sm"></i></button></div></a>
+              <a href="../30-mentorado/comunidade-canal.html" class="ch-item"><i data-icon="hash" class="icon icon-sm ch-icon"></i>dúvidas-módulo-1<div class="ch-actions"><button class="ch-action-btn"><i data-icon="settings" class="icon icon-sm"></i></button></div></a>
+              <a href="../30-mentorado/comunidade-canal.html" class="ch-item">
+                <i data-icon="lock" class="icon icon-sm ch-icon"></i>
+                <span style="flex: 1;">avisos-Lucas</span>
+                <div class="ch-actions"><button class="ch-action-btn"><i data-icon="settings" class="icon icon-sm"></i></button></div>
+              </a>
+
+              <div class="ch-cat">Networking <button class="ch-cat-add"><i data-icon="plus" class="icon icon-sm"></i></button></div>
+              <a href="../30-mentorado/comunidade-canal.html" class="ch-item"><i data-icon="hash" class="icon icon-sm ch-icon"></i>vagas-c-level<div class="ch-actions"><button class="ch-action-btn"><i data-icon="settings" class="icon icon-sm"></i></button></div></a>
+              <a href="../30-mentorado/comunidade-canal.html" class="ch-item"><i data-icon="hash" class="icon icon-sm ch-icon"></i>parcerias<div class="ch-actions"><button class="ch-action-btn"><i data-icon="settings" class="icon icon-sm"></i></button></div></a>
+              <a href="../30-mentorado/comunidade-canal.html" class="ch-item"><i data-icon="hash" class="icon icon-sm ch-icon"></i>offtopic<div class="ch-actions"><button class="ch-action-btn"><i data-icon="settings" class="icon icon-sm"></i></button></div></a>
+
+              <div class="ch-cat">Voz <button class="ch-cat-add"><i data-icon="plus" class="icon icon-sm"></i></button></div>
+              <a href="../30-mentorado/comunidade-canal.html" class="ch-item"><i data-icon="volume" class="icon icon-sm ch-icon"></i>happy-hour-sexta</a>
+              <a href="../30-mentorado/comunidade-canal.html" class="ch-item"><i data-icon="volume" class="icon icon-sm ch-icon"></i>sala-de-estudos</a>
+            </div>
+          </div>
+
+          <!-- CHAT -->
+          <div class="chat-pane">
+            <div class="chat-header-2">
+              <i data-icon="hash" class="icon icon-lg" style="color: var(--text-muted);"></i>
+              <div>
+                <div class="chat-title-2">dúvidas-módulo-3</div>
+                <div class="chat-meta">Mentalidade de P&amp;L · 12 membros online · slow mode 30s</div>
+              </div>
+              <div class="chat-header-actions">
+                <button class="icon-btn-ghost" title="Editar canal"><i data-icon="pencil" class="icon icon-sm"></i></button>
+                <button class="icon-btn-ghost" title="Notificações"><i data-icon="bell" class="icon icon-sm"></i></button>
+                <button class="icon-btn-ghost" title="Pinos"><i data-icon="pin" class="icon icon-sm"></i></button>
+                <button class="icon-btn-ghost" title="Mais"><i data-icon="more-horizontal" class="icon icon-sm"></i></button>
+              </div>
+            </div>
+
+            <div class="pinned-banner">
+              <i data-icon="pin" class="icon icon-sm" style="color: var(--blue-realce);"></i>
+              <span><strong style="color: var(--text);">Você</strong> fixou: "Antes de postar dúvida, faça o exercício do final da aula 02..."</span>
+              <a href="../30-mentorado/comunidade-canal.html" style="margin-left: auto; color: var(--blue-realce); font-weight: 600; font-size: 12px;">Gerenciar pinos (12)</a>
+            </div>
+
+            <div class="chat-feed-2">
+              <div style="display: flex; align-items: center; gap: 16px; margin: 16px 0;">
+                <div style="flex: 1; height: 1px; background: var(--divider);"></div>
+                <div style="font-size: 11px; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600;">Hoje</div>
+                <div style="flex: 1; height: 1px; background: var(--divider);"></div>
+              </div>
+
+              <div class="chat-msg-2">
+                <div class="msg-hover-actions">
+                  <button class="icon-btn-ghost" title="Reagir"><i data-icon="sparkles" class="icon icon-sm"></i></button>
+                  <button class="icon-btn-ghost" title="Responder"><i data-icon="message" class="icon icon-sm"></i></button>
+                  <button class="icon-btn-ghost" title="Fixar"><i data-icon="pin" class="icon icon-sm"></i></button>
+                  <button class="icon-btn-ghost" title="Marcar resposta oficial"><i data-icon="check" class="icon icon-sm"></i></button>
+                  <button class="icon-btn-ghost danger" title="Apagar"><i data-icon="trash" class="icon icon-sm"></i></button>
+                </div>
+                <div class="chat-avatar-2">PA</div>
+                <div>
+                  <div><span class="chat-author-2">Pedro Almeida</span><span class="chat-time-2">14:22</span></div>
+                  <div class="chat-body-2">Galera, alguém já fez o exercício de decompor o P&amp;L da própria área? Tô patinando na linha de margem de contribuição.</div>
+                  <div class="msg-reactions">
+                    <span class="reaction-pill">👍 3</span>
+                    <span class="reaction-pill active">🤝 5</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="chat-msg-2">
+                <div class="msg-hover-actions">
+                  <button class="icon-btn-ghost"><i data-icon="sparkles" class="icon icon-sm"></i></button>
+                  <button class="icon-btn-ghost"><i data-icon="pin" class="icon icon-sm"></i></button>
+                </div>
+                <div class="chat-avatar-2" style="background: linear-gradient(135deg, var(--blue-realce), var(--blue-chrome));">LV</div>
+                <div>
+                  <div>
+                    <span class="chat-author-2">Lucas Vieira</span>
+                    <span class="mentor-badge">Mentor</span>
+                    <span class="chat-time-2" style="margin-left: 8px;">14:35</span>
+                  </div>
+                  <div class="chat-body-2">@Pedro Almeida clássico erro. Custo direto VARIA com cada unidade vendida; despesa variável varia com a operação mas não com o produto.<br><br>Quer trazer um caso real do seu P&amp;L pra sessão 1:1?</div>
+                </div>
+              </div>
+
+              <div class="chat-msg-2">
+                <div class="msg-hover-actions">
+                  <button class="icon-btn-ghost"><i data-icon="sparkles" class="icon icon-sm"></i></button>
+                  <button class="icon-btn-ghost danger" title="Apagar"><i data-icon="trash" class="icon icon-sm"></i></button>
+                  <button class="icon-btn-ghost danger" title="Silenciar autor"><i data-icon="volume-off" class="icon icon-sm"></i></button>
+                </div>
+                <div class="chat-avatar-2" style="background: #C8442B;">RM</div>
+                <div>
+                  <div>
+                    <span class="chat-author-2">Renato Mello</span>
+                    <span class="msg-flag">denunciado · 2</span>
+                    <span class="chat-time-2" style="margin-left: 8px;">15:02</span>
+                  </div>
+                  <div class="chat-body-2" style="color: var(--text-muted); font-style: italic;">[mensagem aguardando revisão — clique para ver conteúdo]</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="chat-composer-2">
+              <div class="composer-row">
+                <button class="icon-btn-ghost" title="Anexar"><i data-icon="plus" class="icon icon-sm"></i></button>
+                <input type="text" class="composer-input" placeholder="Mensagem em #dúvidas-módulo-3 (como Mentor)">
+                <span class="composer-mentor-toggle"><i data-icon="award" class="icon icon-sm"></i> Mentor</span>
+                <button class="icon-btn-ghost" title="Anúncio"><i data-icon="megaphone" class="icon icon-sm"></i></button>
+                <button class="icon-btn-ghost" title="Enviar"><i data-icon="send" class="icon icon-sm" style="color: var(--blue-realce);"></i></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- MEMBROS -->
+          <div class="members-pane-2">
+            <div class="members-cat-2">— Você</div>
+            <div class="member-row-2">
+              <div class="member-row-2-avatar" style="background: linear-gradient(135deg, var(--blue-realce), var(--blue-chrome));">LV<div class="member-status-dot"></div></div>
+              <div>
+                <div class="member-name-2" style="font-weight: 600;">Lucas Vieira</div>
+                <div style="font-size: 10px; color: var(--text-muted);">Mentor · dono</div>
+              </div>
+            </div>
+
+            <div class="members-cat-2">— Moderadores · 2</div>
+            <div class="member-row-2"><div class="member-row-2-avatar" style="background: var(--blue-realce);">JS<div class="member-status-dot"></div></div><div class="member-name-2">Juliana Silva</div><span class="member-tag-pill">Mod</span></div>
+            <div class="member-row-2"><div class="member-row-2-avatar" style="background: var(--blue-realce);">FC<div class="member-status-dot offline"></div></div><div class="member-name-2">Felipe Costa</div><span class="member-tag-pill">Mod</span></div>
+
+            <div class="members-cat-2">— Online · 12</div>
+            <div class="member-row-2"><div class="member-row-2-avatar">PA<div class="member-status-dot"></div></div><div class="member-name-2">Pedro Almeida</div></div>
+            <div class="member-row-2"><div class="member-row-2-avatar">MR<div class="member-status-dot"></div></div><div class="member-name-2">Mariana Rocha</div></div>
+            <div class="member-row-2"><div class="member-row-2-avatar">MS<div class="member-status-dot"></div></div><div class="member-name-2">Mariana Souza</div></div>
+            <div class="member-row-2"><div class="member-row-2-avatar">DC<div class="member-status-dot"></div></div><div class="member-name-2">Daniel Coutinho</div></div>
+            <div class="member-row-2"><div class="member-row-2-avatar">PS<div class="member-status-dot"></div></div><div class="member-name-2">Patrícia Soares</div></div>
+
+            <div class="members-cat-2">— Offline · 28</div>
+            <div class="member-row-2" style="opacity: 0.55;"><div class="member-row-2-avatar" style="background: var(--text-muted);">RM<div class="member-status-dot offline"></div></div><div class="member-name-2">Renato Mello</div></div>
+            <div class="member-row-2" style="opacity: 0.55;"><div class="member-row-2-avatar" style="background: var(--text-muted);">FA<div class="member-status-dot offline"></div></div><div class="member-name-2">Fernando Aragão</div></div>
+            <div class="member-row-2" style="opacity: 0.55;"><div class="member-row-2-avatar" style="background: var(--text-muted);">TC<div class="member-status-dot offline"></div></div><div class="member-name-2">Thiago Castro</div></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CANAIS ===================== -->
+    <section class="admin-section" data-section="canais">
+      <div class="com-body">
+        <div class="admin-card">
+          <div class="admin-card-head">
+            <div>
+              <div class="admin-card-title">Estrutura de canais</div>
+              <div class="admin-card-sub">Organize por categorias. Arraste para reordenar. Trave canais para inscritos específicos.</div>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-outline btn-sm"><i data-icon="folder-plus" class="icon icon-sm"></i> Nova categoria</button>
+              <button class="btn btn-chrome btn-sm"><i data-icon="plus" class="icon icon-sm"></i> Criar canal</button>
+            </div>
+          </div>
+
+          <div class="channel-cat-block">
+            <div class="channel-cat-header">
+              <i data-icon="chevron-down" class="icon icon-sm" style="color: var(--text-muted);"></i>
+              <div class="channel-cat-title">Boas-vindas</div>
+              <div class="channel-cat-meta">2 canais</div>
+              <div class="channel-cat-actions">
+                <button class="icon-btn-ghost" title="Editar categoria"><i data-icon="pencil" class="icon icon-sm"></i></button>
+                <button class="icon-btn-ghost" title="Adicionar canal"><i data-icon="plus" class="icon icon-sm"></i></button>
+              </div>
+            </div>
+
+            <div class="channel-admin-row">
+              <div class="channel-admin-name">
+                <i data-icon="drag" class="icon icon-sm channel-admin-drag"></i>
+                <i data-icon="hash" class="icon icon-sm" style="color: var(--text-muted);"></i>
+                regras
+                <span class="channel-pill public">público</span>
+              </div>
+              <div class="channel-admin-stat">42 membros</div>
+              <div class="channel-admin-stat">12 mensagens</div>
+              <div class="channel-admin-stat">Há 3 dias</div>
+              <div class="channel-admin-actions">
+                <button class="icon-btn-ghost"><i data-icon="settings" class="icon icon-sm"></i></button>
+                <button class="icon-btn-ghost"><i data-icon="more-horizontal" class="icon icon-sm"></i></button>
+              </div>
+            </div>
+
+            <div class="channel-admin-row">
+              <div class="channel-admin-name">
+                <i data-icon="drag" class="icon icon-sm channel-admin-drag"></i>
+                <i data-icon="hash" class="icon icon-sm" style="color: var(--text-muted);"></i>
+                apresentações
+                <span class="channel-pill public">público</span>
+              </div>
+              <div class="channel-admin-stat">42 membros</div>
+              <div class="channel-admin-stat">128 mensagens</div>
+              <div class="channel-admin-stat">Há 2 horas</div>
+              <div class="channel-admin-actions">
+                <button class="icon-btn-ghost"><i data-icon="settings" class="icon icon-sm"></i></button>
+                <button class="icon-btn-ghost"><i data-icon="more-horizontal" class="icon icon-sm"></i></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="channel-cat-block">
+            <div class="channel-cat-header">
+              <i data-icon="chevron-down" class="icon icon-sm" style="color: var(--text-muted);"></i>
+              <div class="channel-cat-title">Conteúdo &amp; Dúvidas</div>
+              <div class="channel-cat-meta">4 canais</div>
+              <div class="channel-cat-actions">
+                <button class="icon-btn-ghost"><i data-icon="pencil" class="icon icon-sm"></i></button>
+                <button class="icon-btn-ghost"><i data-icon="plus" class="icon icon-sm"></i></button>
+              </div>
+            </div>
+
+            <div class="channel-admin-row">
+              <div class="channel-admin-name">
+                <i data-icon="drag" class="icon icon-sm channel-admin-drag"></i>
+                <i data-icon="hash" class="icon icon-sm" style="color: var(--text-muted);"></i>
+                dúvidas-módulo-3
+                <span class="channel-pill public">público</span>
+              </div>
+              <div class="channel-admin-stat">38 membros</div>
+              <div class="channel-admin-stat">312 mensagens</div>
+              <div class="channel-admin-stat">Há 8 min</div>
+              <div class="channel-admin-actions">
+                <button class="icon-btn-ghost"><i data-icon="settings" class="icon icon-sm"></i></button>
+                <button class="icon-btn-ghost"><i data-icon="more-horizontal" class="icon icon-sm"></i></button>
+              </div>
+            </div>
+
+            <div class="channel-admin-row">
+              <div class="channel-admin-name">
+                <i data-icon="drag" class="icon icon-sm channel-admin-drag"></i>
+                <i data-icon="hash" class="icon icon-sm" style="color: var(--text-muted);"></i>
+                dúvidas-módulo-2
+                <span class="channel-pill public">público</span>
+              </div>
+              <div class="channel-admin-stat">42 membros</div>
+              <div class="channel-admin-stat">198 mensagens</div>
+              <div class="channel-admin-stat">Ontem</div>
+              <div class="channel-admin-actions">
+                <button class="icon-btn-ghost"><i data-icon="settings" class="icon icon-sm"></i></button>
+                <button class="icon-btn-ghost"><i data-icon="more-horizontal" class="icon icon-sm"></i></button>
+              </div>
+            </div>
+
+            <div class="channel-admin-row">
+              <div class="channel-admin-name">
+                <i data-icon="drag" class="icon icon-sm channel-admin-drag"></i>
+                <i data-icon="hash" class="icon icon-sm" style="color: var(--text-muted);"></i>
+                dúvidas-módulo-1
+                <span class="channel-pill archived">arquivado</span>
+              </div>
+              <div class="channel-admin-stat">42 membros</div>
+              <div class="channel-admin-stat">240 mensagens</div>
+              <div class="channel-admin-stat">Há 18 dias</div>
+              <div class="channel-admin-actions">
+                <button class="icon-btn-ghost"><i data-icon="settings" class="icon icon-sm"></i></button>
+                <button class="icon-btn-ghost"><i data-icon="more-horizontal" class="icon icon-sm"></i></button>
+              </div>
+            </div>
+
+            <div class="channel-admin-row">
+              <div class="channel-admin-name">
+                <i data-icon="drag" class="icon icon-sm channel-admin-drag"></i>
+                <i data-icon="lock" class="icon icon-sm" style="color: var(--blue-realce);"></i>
+                avisos-Lucas
+                <span class="channel-pill locked">só leitura</span>
+              </div>
+              <div class="channel-admin-stat">42 membros</div>
+              <div class="channel-admin-stat">28 anúncios</div>
+              <div class="channel-admin-stat">Há 3 dias</div>
+              <div class="channel-admin-actions">
+                <button class="icon-btn-ghost"><i data-icon="settings" class="icon icon-sm"></i></button>
+                <button class="icon-btn-ghost"><i data-icon="more-horizontal" class="icon icon-sm"></i></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="channel-cat-block">
+            <div class="channel-cat-header">
+              <i data-icon="chevron-down" class="icon icon-sm" style="color: var(--text-muted);"></i>
+              <div class="channel-cat-title">Networking</div>
+              <div class="channel-cat-meta">3 canais</div>
+              <div class="channel-cat-actions">
+                <button class="icon-btn-ghost"><i data-icon="pencil" class="icon icon-sm"></i></button>
+                <button class="icon-btn-ghost"><i data-icon="plus" class="icon icon-sm"></i></button>
+              </div>
+            </div>
+
+            <div class="channel-admin-row">
+              <div class="channel-admin-name">
+                <i data-icon="drag" class="icon icon-sm channel-admin-drag"></i>
+                <i data-icon="hash" class="icon icon-sm" style="color: var(--text-muted);"></i>
+                vagas-c-level
+                <span class="channel-pill public">público</span>
+              </div>
+              <div class="channel-admin-stat">38 membros</div>
+              <div class="channel-admin-stat">42 mensagens</div>
+              <div class="channel-admin-stat">Ontem</div>
+              <div class="channel-admin-actions">
+                <button class="icon-btn-ghost"><i data-icon="settings" class="icon icon-sm"></i></button>
+                <button class="icon-btn-ghost"><i data-icon="more-horizontal" class="icon icon-sm"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PAPÉIS ===================== -->
+    <section class="admin-section" data-section="papeis">
+      <div class="com-body">
+        <div class="admin-card">
+          <div class="admin-card-head">
+            <div>
+              <div class="admin-card-title">Papéis &amp; permissões</div>
+              <div class="admin-card-sub">Defina quem pode falar, moderar, ver canais privados ou postar anúncios.</div>
+            </div>
+            <button class="btn btn-chrome btn-sm"><i data-icon="plus" class="icon icon-sm"></i> Criar papel</button>
+          </div>
+
+          <div class="role-grid">
+            <div class="role-card">
+              <div class="role-card-head">
+                <div class="role-color" style="background: linear-gradient(180deg, var(--blue-realce), var(--blue-chrome));"></div>
+                <div>
+                  <div class="role-name">Mentor</div>
+                  <div class="role-count">1 membro · você</div>
+                </div>
+                <button class="icon-btn-ghost" style="margin-left: auto;"><i data-icon="settings" class="icon icon-sm"></i></button>
+              </div>
+              <div class="role-perms">
+                <span class="role-perm granted">Tudo</span>
+              </div>
+            </div>
+
+            <div class="role-card">
+              <div class="role-card-head">
+                <div class="role-color" style="background: var(--blue-realce);"></div>
+                <div>
+                  <div class="role-name">Moderador</div>
+                  <div class="role-count">2 membros · Juliana, Felipe</div>
+                </div>
+                <button class="icon-btn-ghost" style="margin-left: auto;"><i data-icon="settings" class="icon icon-sm"></i></button>
+              </div>
+              <div class="role-perms">
+                <span class="role-perm granted">Apagar mensagens</span>
+                <span class="role-perm granted">Silenciar</span>
+                <span class="role-perm granted">Fixar</span>
+                <span class="role-perm granted">Gerenciar canal</span>
+                <span class="role-perm">Banir</span>
+                <span class="role-perm">Editar papéis</span>
+              </div>
+            </div>
+
+            <div class="role-card">
+              <div class="role-card-head">
+                <div class="role-color" style="background: var(--blue-realce);"></div>
+                <div>
+                  <div class="role-name">Aluno Premium</div>
+                  <div class="role-count">12 membros · turma cohort-3</div>
+                </div>
+                <button class="icon-btn-ghost" style="margin-left: auto;"><i data-icon="settings" class="icon icon-sm"></i></button>
+              </div>
+              <div class="role-perms">
+                <span class="role-perm granted">Ver canais privados</span>
+                <span class="role-perm granted">Postar</span>
+                <span class="role-perm granted">Reagir</span>
+                <span class="role-perm granted">Voz</span>
+                <span class="role-perm">Fixar</span>
+              </div>
+            </div>
+
+            <div class="role-card">
+              <div class="role-card-head">
+                <div class="role-color" style="background: var(--text-muted);"></div>
+                <div>
+                  <div class="role-name">Membro</div>
+                  <div class="role-count">27 membros · padrão</div>
+                </div>
+                <button class="icon-btn-ghost" style="margin-left: auto;"><i data-icon="settings" class="icon icon-sm"></i></button>
+              </div>
+              <div class="role-perms">
+                <span class="role-perm granted">Ler</span>
+                <span class="role-perm granted">Postar</span>
+                <span class="role-perm granted">Reagir</span>
+                <span class="role-perm">Voz</span>
+                <span class="role-perm">Fixar</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== MEMBROS ===================== -->
+    <section class="admin-section" data-section="membros">
+      <div class="com-body">
+        <div class="admin-card">
+          <div class="admin-card-head">
+            <div>
+              <div class="admin-card-title">Membros · 42</div>
+              <div class="admin-card-sub">Mentorados sincronizados das suas mentorias ativas. Atribua papéis e tags.</div>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-outline btn-sm"><i data-icon="filter" class="icon icon-sm"></i> Filtrar</button>
+              <button class="btn btn-outline btn-sm"><i data-icon="download" class="icon icon-sm"></i> Exportar</button>
+              <button class="btn btn-chrome btn-sm"><i data-icon="user-plus" class="icon icon-sm"></i> Convidar</button>
+            </div>
+          </div>
+
+          <table class="members-table">
+            <thead>
+              <tr>
+                <th>Membro</th>
+                <th>Mentoria de origem</th>
+                <th>Papel</th>
+                <th>Última atividade</th>
+                <th>Engajamento</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="member-cell"><div class="member-row-2-avatar" style="background: var(--blue-realce);">JS<div class="member-status-dot"></div></div><div><div style="font-weight: 600;">Juliana Silva</div><div style="font-size: 11px; color: var(--text-muted);">juliana@empresa.com</div></div></div></td>
+                <td>Vieira de Liderança · cohort-2</td>
+                <td><span class="role-badge">Moderador</span></td>
+                <td>Agora</td>
+                <td><strong>312</strong> msgs</td>
+                <td><button class="icon-btn-ghost"><i data-icon="more-horizontal" class="icon icon-sm"></i></button></td>
+              </tr>
+              <tr>
+                <td><div class="member-cell"><div class="member-row-2-avatar">PA<div class="member-status-dot"></div></div><div><div style="font-weight: 600;">Pedro Almeida</div><div style="font-size: 11px; color: var(--text-muted);">pedro@empresa.com</div></div></div></td>
+                <td>Vieira de Liderança · cohort-3</td>
+                <td><span class="channel-pill public" style="background: var(--blue-realce-muted); color: var(--blue-realce);">Aluno Premium</span></td>
+                <td>Há 12 min</td>
+                <td><strong>148</strong> msgs</td>
+                <td><button class="icon-btn-ghost"><i data-icon="more-horizontal" class="icon icon-sm"></i></button></td>
+              </tr>
+              <tr>
+                <td><div class="member-cell"><div class="member-row-2-avatar">MR<div class="member-status-dot"></div></div><div><div style="font-weight: 600;">Mariana Rocha</div><div style="font-size: 11px; color: var(--text-muted);">mariana@empresa.com</div></div></div></td>
+                <td>Vieira de Liderança · cohort-3</td>
+                <td><span class="channel-pill public" style="background: var(--blue-realce-muted); color: var(--blue-realce);">Aluno Premium</span></td>
+                <td>Há 1 hora</td>
+                <td><strong>96</strong> msgs</td>
+                <td><button class="icon-btn-ghost"><i data-icon="more-horizontal" class="icon icon-sm"></i></button></td>
+              </tr>
+              <tr>
+                <td><div class="member-cell"><div class="member-row-2-avatar">MS<div class="member-status-dot"></div></div><div><div style="font-weight: 600;">Mariana Souza</div><div style="font-size: 11px; color: var(--text-muted);">mariana.souza@gmail.com</div></div></div></td>
+                <td>Vieira de Liderança · cohort-3</td>
+                <td><span class="channel-pill public" style="background: var(--blue-realce-muted); color: var(--blue-realce);">Aluno Premium</span></td>
+                <td>Há 2 horas</td>
+                <td><strong>72</strong> msgs</td>
+                <td><button class="icon-btn-ghost"><i data-icon="more-horizontal" class="icon icon-sm"></i></button></td>
+              </tr>
+              <tr>
+                <td><div class="member-cell"><div class="member-row-2-avatar" style="background: #C8442B;">RM<div class="member-status-dot offline"></div></div><div><div style="font-weight: 600;">Renato Mello</div><div style="font-size: 11px; color: var(--text-muted);">renato@empresa.com · 2 advertências</div></div></div></td>
+                <td>Vieira de Liderança · cohort-2</td>
+                <td>Membro</td>
+                <td>Há 4 horas</td>
+                <td><strong>22</strong> msgs</td>
+                <td><button class="icon-btn-ghost"><i data-icon="more-horizontal" class="icon icon-sm"></i></button></td>
+              </tr>
+              <tr>
+                <td><div class="member-cell"><div class="member-row-2-avatar" style="background: var(--text-muted);">FA<div class="member-status-dot offline"></div></div><div><div style="font-weight: 600;">Fernando Aragão</div><div style="font-size: 11px; color: var(--text-muted);">fernando@empresa.com</div></div></div></td>
+                <td>Vieira de Liderança · cohort-1</td>
+                <td>Membro</td>
+                <td>Há 2 dias</td>
+                <td><strong>8</strong> msgs</td>
+                <td><button class="icon-btn-ghost"><i data-icon="more-horizontal" class="icon icon-sm"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== MODERAÇÃO ===================== -->
+    <section class="admin-section" data-section="moderacao">
+      <div class="com-body">
+        <div class="admin-card">
+          <div class="admin-card-head">
+            <div>
+              <div class="admin-card-title">Denúncias pendentes</div>
+              <div class="admin-card-sub">3 mensagens aguardando sua revisão. Auto-flag identificou possível tópico fora de regra.</div>
+            </div>
+            <button class="btn btn-outline btn-sm"><i data-icon="settings" class="icon icon-sm"></i> Regras de auto-mod</button>
+          </div>
+
+          <div class="report-row">
+            <div>
+              <span class="report-reason">spam · 2 denúncias</span>
+              <div style="font-size: 13px;"><strong>Renato Mello</strong> em <strong>#dúvidas-módulo-3</strong> · há 1 hora</div>
+              <div class="report-msg">"Pessoal, comprei esse curso paralelo que ensina P&amp;L em 7 dias por R$ 97. Link na bio."</div>
+              <div style="font-size: 11px; color: var(--text-muted); margin-top: 6px;">Denunciado por: Pedro Almeida, Mariana Rocha</div>
+            </div>
+            <div class="report-actions">
+              <button class="btn btn-outline btn-sm">Manter</button>
+              <button class="btn btn-outline btn-sm" style="color: #C8442B; border-color: #C8442B;">Remover</button>
+              <button class="btn btn-outline btn-sm" style="color: #C8442B; border-color: #C8442B;">Silenciar 7d</button>
+            </div>
+          </div>
+
+          <div class="report-row">
+            <div>
+              <span class="report-reason">fora-do-tópico · 1 denúncia</span>
+              <div style="font-size: 13px;"><strong>Carlos Fontes</strong> em <strong>#dúvidas-módulo-3</strong> · há 3 horas</div>
+              <div class="report-msg">"Galera, alguém viu o jogo ontem? Que zica do time..."</div>
+              <div style="font-size: 11px; color: var(--text-muted); margin-top: 6px;">Sugestão: mover para #offtopic</div>
+            </div>
+            <div class="report-actions">
+              <button class="btn btn-outline btn-sm">Manter</button>
+              <button class="btn btn-outline btn-sm">Mover</button>
+              <button class="btn btn-outline btn-sm" style="color: #C8442B; border-color: #C8442B;">Remover</button>
+            </div>
+          </div>
+
+          <div class="report-row">
+            <div>
+              <span class="report-reason">auto-flag · vínculo externo</span>
+              <div style="font-size: 13px;"><strong>Beatriz Reis</strong> em <strong>#networking</strong> · há 6 horas</div>
+              <div class="report-msg">"Compartilhando esse artigo que achei massa: medium.com/turma-empreender/p&amp;l-para-iniciantes"</div>
+              <div style="font-size: 11px; color: var(--text-muted); margin-top: 6px;">Auto-flag: link externo. Provavelmente OK — confirme.</div>
+            </div>
+            <div class="report-actions">
+              <button class="btn btn-outline btn-sm">Aprovar</button>
+              <button class="btn btn-outline btn-sm" style="color: #C8442B; border-color: #C8442B;">Remover</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="admin-card" style="margin-top: 18px;">
+          <div class="admin-card-head">
+            <div>
+              <div class="admin-card-title">Banidos &amp; silenciados</div>
+              <div class="admin-card-sub">2 membros silenciados, 0 banidos. Silenciamento expira automaticamente.</div>
+            </div>
+          </div>
+
+          <table class="members-table">
+            <thead>
+              <tr>
+                <th>Membro</th>
+                <th>Motivo</th>
+                <th>Sanção</th>
+                <th>Expira</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="member-cell"><div class="member-row-2-avatar" style="background: #C8442B;">RM</div><div style="font-weight: 600;">Renato Mello</div></div></td>
+                <td>Spam — link externo de produto</td>
+                <td>Silenciado</td>
+                <td>Em 6 dias</td>
+                <td><button class="btn btn-outline btn-sm">Reverter</button></td>
+              </tr>
+              <tr>
+                <td><div class="member-cell"><div class="member-row-2-avatar" style="background: #C8442B;">TC</div><div style="font-weight: 600;">Thiago Castro</div></div></td>
+                <td>Tom desrespeitoso com colega</td>
+                <td>Silenciado</td>
+                <td>Em 2 dias</td>
+                <td><button class="btn btn-outline btn-sm">Reverter</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ANALYTICS ===================== -->
+    <section class="admin-section" data-section="analytics">
+      <div class="com-body">
+        <div class="metric-grid">
+          <div class="metric-card">
+            <div class="metric-eyebrow">— Membros ativos 7d</div>
+            <div class="metric-display">34</div>
+            <div class="metric-delta up">↗ 81% da base · +4 vs sem. ant.</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-eyebrow">— Mensagens 30d</div>
+            <div class="metric-display">1.847</div>
+            <div class="metric-delta up">↗ +22% vs mês ant.</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-eyebrow">— Tempo médio de resposta</div>
+            <div class="metric-display">2h 18min</div>
+            <div class="metric-delta">↘ -34min vs mês ant.</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-eyebrow">— Threads abertas</div>
+            <div class="metric-display">62</div>
+            <div class="metric-delta up">↗ 18 ativas agora</div>
+          </div>
+        </div>
+
+        <div class="top-contributors">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 18px;">
+            <div>
+              <div class="admin-card-title">Top contribuidores · 30 dias</div>
+              <div class="admin-card-sub">Membros mais engajados em mensagens, reactions e respostas em threads.</div>
+            </div>
+            <button class="btn btn-outline btn-sm" style="margin-left: auto;">Ver relatório completo</button>
+          </div>
+
+          <div class="contributor-row">
+            <div class="contributor-rank">1</div>
+            <div>
+              <div style="font-weight: 600; font-size: 14px;">Pedro Almeida</div>
+              <span class="contributor-bar"><span class="contributor-bar-fill" style="width: 100%; display: block;"></span></span>
+            </div>
+            <div class="channel-admin-stat" style="text-align: right;"><strong>148</strong> msgs</div>
+            <div class="channel-admin-stat" style="text-align: right;"><strong>92</strong> reações</div>
+          </div>
+
+          <div class="contributor-row">
+            <div class="contributor-rank">2</div>
+            <div>
+              <div style="font-weight: 600; font-size: 14px;">Mariana Rocha</div>
+              <span class="contributor-bar"><span class="contributor-bar-fill" style="width: 65%; display: block;"></span></span>
+            </div>
+            <div class="channel-admin-stat" style="text-align: right;"><strong>96</strong> msgs</div>
+            <div class="channel-admin-stat" style="text-align: right;"><strong>71</strong> reações</div>
+          </div>
+
+          <div class="contributor-row">
+            <div class="contributor-rank">3</div>
+            <div>
+              <div style="font-weight: 600; font-size: 14px;">Mariana Souza</div>
+              <span class="contributor-bar"><span class="contributor-bar-fill" style="width: 48%; display: block;"></span></span>
+            </div>
+            <div class="channel-admin-stat" style="text-align: right;"><strong>72</strong> msgs</div>
+            <div class="channel-admin-stat" style="text-align: right;"><strong>54</strong> reações</div>
+          </div>
+
+          <div class="contributor-row">
+            <div class="contributor-rank">4</div>
+            <div>
+              <div style="font-weight: 600; font-size: 14px;">Daniel Coutinho</div>
+              <span class="contributor-bar"><span class="contributor-bar-fill" style="width: 32%; display: block;"></span></span>
+            </div>
+            <div class="channel-admin-stat" style="text-align: right;"><strong>48</strong> msgs</div>
+            <div class="channel-admin-stat" style="text-align: right;"><strong>38</strong> reações</div>
+          </div>
+
+          <div class="contributor-row">
+            <div class="contributor-rank">5</div>
+            <div>
+              <div style="font-weight: 600; font-size: 14px;">Patrícia Soares</div>
+              <span class="contributor-bar"><span class="contributor-bar-fill" style="width: 28%; display: block;"></span></span>
+            </div>
+            <div class="channel-admin-stat" style="text-align: right;"><strong>42</strong> msgs</div>
+            <div class="channel-admin-stat" style="text-align: right;"><strong>31</strong> reações</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CONFIGURAÇÕES ===================== -->
+    <section class="admin-section" data-section="config">
+      <div class="com-body">
+        <div class="settings-grid">
+
+          <aside class="settings-nav">
+            <a href="../30-mentorado/comunidade-canal.html" class="settings-nav-item active"><i data-icon="info" class="icon icon-sm"></i>Identidade</a>
+            <a href="../30-mentorado/comunidade-canal.html" class="settings-nav-item"><i data-icon="user-plus" class="icon icon-sm"></i>Boas-vindas</a>
+            <a href="../30-mentorado/comunidade-canal.html" class="settings-nav-item"><i data-icon="bell" class="icon icon-sm"></i>Notificações</a>
+            <a href="../30-mentorado/comunidade-canal.html" class="settings-nav-item"><i data-icon="shield" class="icon icon-sm"></i>Auto-moderação</a>
+            <a href="../30-mentorado/comunidade-canal.html" class="settings-nav-item"><i data-icon="external" class="icon icon-sm"></i>Integrações</a>
+            <a href="../30-mentorado/comunidade-canal.html" class="settings-nav-item"><i data-icon="dollar" class="icon icon-sm"></i>Monetização</a>
+            <a href="../30-mentorado/comunidade-canal.html" class="settings-nav-item" style="color: #C8442B;"><i data-icon="trash" class="icon icon-sm"></i>Arquivar</a>
+          </aside>
+
+          <div class="admin-card">
+            <div class="admin-card-head">
+              <div>
+                <div class="admin-card-title">Identidade da comunidade</div>
+                <div class="admin-card-sub">Como mentorados veem você ao entrar.</div>
+              </div>
+              <button class="btn btn-chrome btn-sm">Salvar alterações</button>
+            </div>
+
+            <div style="padding: 22px;">
+              <div class="settings-form">
+
+                <div class="form-group">
+                  <div class="form-label">Banner</div>
+                  <div class="banner-preview">
+                    <button class="banner-replace"><i data-icon="image" class="icon icon-sm"></i> Trocar</button>
+                    <div style="color: white; font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500;">Vieira de Liderança</div>
+                  </div>
+                  <div class="form-hint">Recomendado 1.500 × 400px. PNG ou JPG até 2MB.</div>
+                </div>
+
+                <div class="form-group">
+                  <div class="form-label">Nome</div>
+                  <input type="text" class="form-input" value="Vieira de Liderança">
+                </div>
+
+                <div class="form-group">
+                  <div class="form-label">Descrição curta</div>
+                  <textarea class="form-textarea">Comunidade exclusiva dos mentorados da mentoria Vieira de Liderança. Aqui a gente discute P&amp;L real, casos da carreira e os exercícios de cada módulo.</textarea>
+                  <div class="form-hint">Aparece na página pública e no painel "sobre" da comunidade.</div>
+                </div>
+
+                <div class="form-group">
+                  <div class="form-label">Ícone</div>
+                  <div style="display: flex; align-items: center; gap: 14px;">
+                    <div class="com-server-icon">LV</div>
+                    <button class="btn btn-outline btn-sm">Trocar imagem</button>
+                    <button class="btn btn-outline btn-sm">Restaurar padrão</button>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="form-label">Cor de acento</div>
+                  <div style="display: flex; gap: 10px;">
+                    <div style="width: 36px; height: 36px; border-radius: 8px; background: var(--blue-realce); border: 2px solid var(--text); cursor: pointer;"></div>
+                    <div style="width: 36px; height: 36px; border-radius: 8px; background: var(--blue-chrome); cursor: pointer;"></div>
+                    <div style="width: 36px; height: 36px; border-radius: 8px; background: var(--blue-realce); cursor: pointer;"></div>
+                    <div style="width: 36px; height: 36px; border-radius: 8px; background: #1A7F4B; cursor: pointer;"></div>
+                    <div style="width: 36px; height: 36px; border-radius: 8px; background: #C8442B; cursor: pointer;"></div>
+                    <div style="width: 36px; height: 36px; border-radius: 8px; background: linear-gradient(135deg, var(--blue-realce), var(--blue-realce)); cursor: pointer;"></div>
+                  </div>
+                  <div class="form-hint">Define cor de canais ativos, badges e botões dentro da sua comunidade.</div>
+                </div>
+
+                <div class="form-group">
+                  <div class="form-label">Visibilidade</div>
+                  <div class="toggle-row" style="border: 1px solid var(--divider); border-radius: 10px; padding: 14px;">
+                    <div class="toggle-row-text">
+                      <div class="toggle-row-title">Página pública na vitrine HMC</div>
+                      <div class="toggle-row-desc">Visitantes podem ver descrição e número de membros (não vê conteúdo).</div>
+                    </div>
+                    <div class="toggle on"></div>
+                  </div>
+                  <div class="toggle-row" style="border: 1px solid var(--divider); border-radius: 10px; padding: 14px; margin-top: 10px;">
+                    <div class="toggle-row-text">
+                      <div class="toggle-row-title">Entrada automática ao comprar mentoria</div>
+                      <div class="toggle-row-desc">Mentorado é adicionado quando finaliza checkout via CISPay.</div>
+                    </div>
+                    <div class="toggle on"></div>
+                  </div>
+                  <div class="toggle-row" style="border: 1px solid var(--divider); border-radius: 10px; padding: 14px; margin-top: 10px;">
+                    <div class="toggle-row-text">
+                      <div class="toggle-row-title">Remover acesso ao expirar mentoria</div>
+                      <div class="toggle-row-desc">Após o término do contrato, mentorado perde acesso à comunidade.</div>
+                    </div>
+                    <div class="toggle"></div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+</div>
+
+<div class="wf-note">Studio · Comunidade (mentor admin)</div>
+
+<script>
+  document.querySelectorAll('.admin-tab').forEach(tab => {
+    tab.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = tab.dataset.tab;
+      document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+      document.querySelector(`[data-section="${target}"]`).classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minha Biblioteca · HMC Estudos</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_shared.css?v=16"><script src="../_icons.js?v=16" defer></script>
+<script src="../_persona.js?v=16" defer></script>
+<script src="../_modals.js?v=16" defer></script>
+<style>
+.curso-card {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr) 200px;
+  background: var(--bg-card);
+  border: 1px solid var(--divider);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 200ms;
+  text-decoration: none;
+  color: inherit;
+}
+.curso-card:hover { border-color: var(--blue-realce); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(11,11,15,0.06); }
+.curso-cover {
+  background: linear-gradient(135deg, var(--blue-deep), var(--blue-realce));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue-highlight);
+  font-family: 'Playfair Display', serif;
+  font-size: 56px;
+  font-weight: 500;
+  position: relative;
+  min-height: 220px;
+}
+.curso-cover-tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 4px 10px;
+  background: rgba(0,0,0,0.55);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-radius: 4px;
+}
+.curso-body {
+  padding: 28px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.curso-mentor { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 8px; }
+.curso-title { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
+.curso-sub { font-size: 13px; color: var(--text-muted); line-height: 1.55; margin-bottom: 18px; }
+.curso-meta { display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 14px; }
+.curso-meta-item { font-size: 11px; }
+.curso-meta-label { color: var(--text-muted); letter-spacing: 0.10em; text-transform: uppercase; font-weight: 600; font-size: 9px; margin-bottom: 4px; }
+.curso-meta-value { font-weight: 600; font-size: 13px; color: var(--text); }
+.curso-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  gap: 10px;
+  padding: 28px;
+  border-left: 1px solid var(--divider);
+  background: var(--bg-card-hover);
+}
+.curso-actions .btn { width: 100%; }
+.curso-progress { height: 4px; background: var(--bg-card-hover); border-radius: 2px; overflow: hidden; }
+.curso-progress > div { height: 100%; background: var(--blue-realce); border-radius: 2px; }
+@media (max-width: 900px) {
+  .curso-card { grid-template-columns: 1fr; }
+  .curso-cover { min-height: 180px; }
+  .curso-actions { border-left: none; border-top: 1px solid var(--divider); flex-direction: row; padding: 18px 24px; }
+}
+</style>
+</head>
+<body data-persona-aware="mode-page" data-mode-context="estudos" data-required-mode="estudos">
+<button class="mobile-fab" data-sidebar-mobile-toggle aria-label="Menu"><i data-icon="menu" class="icon"></i></button>
+<div class="drawer-backdrop" data-sidebar-mobile-toggle></div>
+<div class="app">
+<aside class="sidebar">
+  <a href="../hub.html" class="sidebar-brand"><img src="../hmc-logo.png" alt="" class="brand-mark-img"><div><div class="brand-text">High Mentor Club</div><div class="brand-sub">Curated by Paulo Vieira · MMXXVI</div></div></a>
+  <div class="mode-switch">
+    <a href="../hub-mentorado.html" class="mode-switch-item" data-short="H"><i data-icon="home" class="icon"></i><span>Hub</span></a>
+    <a href="../30-mentorado/biblioteca.html" class="mode-switch-item active" data-short="E"><i data-icon="book-open" class="icon"></i><span>Estudos</span></a>
+  </div>
+  <div class="sidebar-nav-scroll">
+    <div class="nav-section">
+      <a href="../notifications.html" class="nav-item has-badge"><i data-icon="bell" class="icon icon-sm"></i>Avisos <span class="badge-count">12</span></a>
+      <a href="../agenda.html" class="nav-item"><i data-icon="calendar" class="icon icon-sm"></i>Agenda</a>
+      <a href="../buscar.html" class="nav-item"><i data-icon="search" class="icon icon-sm"></i>Buscar</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">— Estudos</div>
+      <a href="biblioteca.html" class="nav-item active"><i data-icon="book-open" class="icon icon-sm"></i>Biblioteca<span class="nav-dot"></span></a>
+      <a href="player.html" class="nav-item"><i data-icon="play-circle" class="icon icon-sm"></i>Continuando</a>
+      <a href="comunidade.html" class="nav-item has-badge"><i data-icon="message-circle" class="icon icon-sm"></i>Comunidades <span class="badge-count">8</span></a>
+      <a href="sessoes-1-1.html" class="nav-item"><i data-icon="calendar" class="icon icon-sm"></i>Sessões 1:1</a>
+      <a href="notas.html" class="nav-item"><i data-icon="file-text" class="icon icon-sm"></i>Minhas notas</a>
+      <a href="progresso.html" class="nav-item"><i data-icon="trending-up" class="icon icon-sm"></i>Progresso</a>
+      <a href="certificados.html" class="nav-item"><i data-icon="award" class="icon icon-sm"></i>Certificados</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">— Conta</div>
+      <a href="../account.html" class="nav-item"><i data-icon="user" class="icon icon-sm"></i>Meu perfil</a>
+      <a href="pagamentos.html" class="nav-item"><i data-icon="credit-card" class="icon icon-sm"></i>Pagamentos</a>
+      <a href="suporte.html" class="nav-item"><i data-icon="help" class="icon icon-sm"></i>Suporte</a>
+    </div>
+  </div>
+  <div class="sidebar-footer-v3">
+    <a href="../account.html" class="user-pill-v3"><div class="avatar-sm">LV</div><div><div class="user-pill-v3-name">Lucas Vieira</div><div class="user-pill-v3-role">Seat 12</div></div></a>
+    <button class="sidebar-toggle-btn" data-sidebar-toggle><i data-icon="chevron-left" class="icon"></i><span>Recolher menu</span></button>
+  </div>
+</aside>
+
+<main class="main">
+  <div class="page-head">
+    <div class="page-head-text">
+      <div class="page-eyebrow"><span class="gold-rule"></span><span class="page-eyebrow-text">Estudos · Sua biblioteca</span></div>
+      <h1 class="page-title">Suas <span class="page-title-serif-italic">mentorias</span> em curso.</h1>
+      <p class="page-sub">Você é mentorado de 3 high mentors do HMC simultaneamente. Continue de onde parou ou explore novas mentorias na vitrine.</p>
+    </div>
+    <a href="../00-public/catalog.html" class="btn btn-chrome btn-sm"><i data-icon="external" class="icon icon-sm"></i> Explorar catálogo</a>
+  </div>
+
+  <div class="grid grid-3 mb-12" style="gap: 24px;">
+    <div class="stat-block"><div class="stat-eyebrow">— Em curso</div><div class="stat-display">3</div><div class="stat-delta">Renata · Bruno · Paula</div></div>
+    <div class="stat-block"><div class="stat-eyebrow">— Aulas concluídas</div><div class="stat-display">68 / 142</div><div class="stat-delta">48% do total</div></div>
+    <div class="stat-block"><div class="stat-eyebrow">— Próxima sessão 1:1</div><div class="stat-display" style="font-size: 26px;">Qui · 14h</div><div class="stat-delta">com Renata Mendes</div></div>
+  </div>
+
+  <div class="flex-col gap-4 mb-12">
+
+    <a href="curso-detail.html" class="curso-card">
+      <div class="curso-cover">
+        <div class="curso-cover-tag">Continuando</div>
+        RM
+      </div>
+      <div class="curso-body">
+        <div class="curso-mentor">— Renata Mendes · Tier II</div>
+        <div class="curso-title">Negociação de Alto Valor</div>
+        <div class="curso-sub">Mentoria de 12 meses · 8 módulos · 64 aulas + 8 sessões 1:1 inclusas. Foco em negociações executivas e gestão de stakeholders críticos.</div>
+        <div class="curso-meta">
+          <div class="curso-meta-item"><div class="curso-meta-label">— Progresso</div><div class="curso-meta-value">26%</div></div>
+          <div class="curso-meta-item"><div class="curso-meta-label">— Módulo atual</div><div class="curso-meta-value">03 de 8</div></div>
+          <div class="curso-meta-item"><div class="curso-meta-label">— Última aula</div><div class="curso-meta-value">há 1 hora</div></div>
+          <div class="curso-meta-item"><div class="curso-meta-label">— Sessões 1:1</div><div class="curso-meta-value">6 disponíveis</div></div>
+        </div>
+        <div class="curso-progress"><div style="width: 26%;"></div></div>
+      </div>
+      <div class="curso-actions">
+        <span class="btn btn-chrome btn-sm"><i data-icon="play" class="icon icon-sm"></i> Continuar</span>
+        <span class="btn btn-outline btn-sm">Ver módulos</span>
+      </div>
+    </a>
+
+    <a href="curso-detail.html" class="curso-card">
+      <div class="curso-cover" style="background: linear-gradient(135deg, var(--blue-chrome), var(--blue-realce));">
+        <div class="curso-cover-tag">Em andamento</div>
+        BV
+      </div>
+      <div class="curso-body">
+        <div class="curso-mentor">— Bruno Vaz · Tier II</div>
+        <div class="curso-title">Funil B2B Premium</div>
+        <div class="curso-sub">18 aulas + 6 encontros ao vivo trimestrais. Construção de funil de aquisição para vendas consultivas de alto ticket.</div>
+        <div class="curso-meta">
+          <div class="curso-meta-item"><div class="curso-meta-label">— Progresso</div><div class="curso-meta-value">66%</div></div>
+          <div class="curso-meta-item"><div class="curso-meta-label">— Aulas vistas</div><div class="curso-meta-value">12 de 18</div></div>
+          <div class="curso-meta-item"><div class="curso-meta-label">— Próx encontro</div><div class="curso-meta-value">Sex · 20h</div></div>
+        </div>
+        <div class="curso-progress"><div style="width: 66%;"></div></div>
+      </div>
+      <div class="curso-actions">
+        <span class="btn btn-chrome btn-sm"><i data-icon="play" class="icon icon-sm"></i> Continuar</span>
+        <span class="btn btn-outline btn-sm">Ver módulos</span>
+      </div>
+    </a>
+
+    <a href="curso-detail.html" class="curso-card">
+      <div class="curso-cover" style="background: linear-gradient(135deg, var(--blue-deep), var(--blue-chrome));">
+        <div class="curso-cover-tag">Pré-trabalho</div>
+        PL
+      </div>
+      <div class="curso-body">
+        <div class="curso-mentor">— Paula Lourenço · Tier I</div>
+        <div class="curso-title">YouTube Poderoso</div>
+        <div class="curso-sub">Imersão de 3 dias em São Paulo + 12 aulas de pré-trabalho. Estratégia de canal, gravação e branding pessoal pra mentores.</div>
+        <div class="curso-meta">
+          <div class="curso-meta-item"><div class="curso-meta-label">— Progresso</div><div class="curso-meta-value">30%</div></div>
+          <div class="curso-meta-item"><div class="curso-meta-label">— Pré-trabalho</div><div class="curso-meta-value">4 de 12 aulas</div></div>
+          <div class="curso-meta-item"><div class="curso-meta-label">— Imersão</div><div class="curso-meta-value">22 nov · SP</div></div>
+        </div>
+        <div class="curso-progress"><div style="width: 30%;"></div></div>
+      </div>
+      <div class="curso-actions">
+        <span class="btn btn-chrome btn-sm"><i data-icon="play" class="icon icon-sm"></i> Continuar</span>
+        <span class="btn btn-outline btn-sm">Ver módulos</span>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="surface" style="padding: 36px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center;">
+    <div>
+      <div class="eyebrow-chrome mb-3">— Explore o catálogo HMC</div>
+      <div style="font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 8px;">68 mentores ativos · 142 mentorias à venda</div>
+      <p class="muted" style="font-size: 13px; line-height: 1.55; max-width: 580px;">Cross-promo entre mentores HMC. Compre via CISPay como qualquer mentorado externo · 90% vai pro mentor, 10% pra plataforma. Indique mentorias que você fez pros seus próprios mentorados (programa Yield).</p>
+    </div>
+    <a href="../00-public/catalog.html" class="btn btn-chrome">Abrir catálogo</a>
+  </div>
+</main>
+</div>
+<div class="wf-note">Estudos · Biblioteca (todas as mentorias do user)</div>
+</body>
+</html>

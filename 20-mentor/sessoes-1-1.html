@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sessões 1:1 · HMC Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../_shared.css?v=16">
+  <script src="../_icons.js?v=16" defer></script>
+<script src="../_persona.js?v=16" defer></script>
+<script src="../_modals.js?v=16" defer></script>
+  <style>
+    .session-card { padding: 20px 22px; border: 1px solid var(--divider); border-radius: 12px; background: var(--bg-card); display: grid; grid-template-columns: 70px 1fr auto; gap: 18px; align-items: center; transition: all 150ms; }
+    .session-card:hover { border-color: var(--blue-realce); }
+    .session-time { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; }
+    .session-day { font-size: 18px; font-family: 'Playfair Display', serif; font-weight: 500; }
+    .day-badge { width: 56px; height: 56px; border-radius: 12px; background: var(--blue-realce-muted); color: var(--blue-realce); display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; }
+    .day-badge-num { font-size: 22px; font-weight: 500; line-height: 1; }
+    .day-badge-month { font-size: 9px; letter-spacing: 0.10em; text-transform: uppercase; margin-top: 2px; font-weight: 700; }
+  </style>
+</head>
+<body data-persona-aware="mode-page" data-mode-context="studio" data-required-mode="studio">
+
+<button class="mobile-fab" data-sidebar-mobile-toggle aria-label="Menu"><i data-icon="menu" class="icon"></i></button>
+<div class="drawer-backdrop" data-sidebar-mobile-toggle></div>
+
+<div class="app">
+  <aside class="sidebar">
+    <a href="../hub.html" class="sidebar-brand">
+      <img src="../hmc-logo.png" alt="" class="brand-mark-img">
+      <div>
+        <div class="brand-text">High Mentor Club</div>
+        <div class="brand-sub">Curated by Paulo Vieira · MMXXVI</div>
+      </div>
+    </a>
+
+    <div class="mode-switch">
+      <a href="../hub.html" class="mode-switch-item" data-short="H"><i data-icon="home" class="icon"></i><span>Hub</span></a>
+      <a href="../10-clube/01-dashboard.html" class="mode-switch-item" data-short="C"><i data-icon="landmark" class="icon"></i><span>Clube</span></a>
+      <a href="../20-mentor/studio-home.html" class="mode-switch-item active" data-short="S"><i data-icon="briefcase" class="icon"></i><span>Studio</span></a>
+      <a href="../30-mentorado/biblioteca.html" class="mode-switch-item" data-short="E"><i data-icon="book-open" class="icon"></i><span>Estudos</span></a>
+    </div>
+
+    <div class="sidebar-nav-scroll">
+      <div class="nav-section">
+        <a href="../notifications.html" class="nav-item has-badge" data-tooltip="Avisos"><i data-icon="bell" class="icon icon-sm"></i>Avisos <span class="badge-count">12</span></a>
+        <a href="../agenda.html" class="nav-item" data-tooltip="Agenda"><i data-icon="calendar" class="icon icon-sm"></i>Agenda</a>
+        <a href="../buscar.html" class="nav-item" data-tooltip="Buscar"><i data-icon="search" class="icon icon-sm"></i>Buscar</a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-label">— Studio</div>
+        <a href="studio-home.html" class="nav-item" data-tooltip="Visão geral"><i data-icon="briefcase" class="icon icon-sm"></i>Visão geral</a>
+        <a href="mentorias.html" class="nav-item" data-tooltip="Mentorias"><i data-icon="video" class="icon icon-sm"></i>Mentorias</a>
+        <a href="aulas-biblioteca.html" class="nav-item" data-tooltip="Aulas"><i data-icon="film" class="icon icon-sm"></i>Aulas</a>
+        <a href="mentorados.html" class="nav-item" data-tooltip="Mentorados"><i data-icon="users" class="icon icon-sm"></i>Mentorados</a>
+        <a href="sessoes-1-1.html" class="nav-item active" data-tooltip="Sessões 1:1"><i data-icon="calendar" class="icon icon-sm"></i>Sessões 1:1<span class="nav-dot"></span></a>
+        <a href="comunidade.html" class="nav-item" data-tooltip="Comunidade"><i data-icon="message-circle" class="icon icon-sm"></i>Comunidade</a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-label">— Negócio</div>
+        <a href="receitas.html" class="nav-item" data-tooltip="Receitas"><i data-icon="dollar" class="icon icon-sm"></i>Receitas</a>
+        <a href="checkout-builder.html" class="nav-item" data-tooltip="Checkout"><i data-icon="credit-card" class="icon icon-sm"></i>Checkout</a>
+        <a href="cupons.html" class="nav-item" data-tooltip="Cupons"><i data-icon="tag" class="icon icon-sm"></i>Cupons</a>
+        <a href="pagina-publica.html" class="nav-item" data-tooltip="Página pública"><i data-icon="globe" class="icon icon-sm"></i>Página pública</a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-label">— Conta</div>
+        <a href="configuracoes.html" class="nav-item" data-tooltip="Configurações"><i data-icon="settings" class="icon icon-sm"></i>Configurações</a>
+        <a href="integracoes.html" class="nav-item" data-tooltip="Integrações"><i data-icon="external" class="icon icon-sm"></i>Integrações</a>
+      </div>
+    </div>
+
+    <div class="sidebar-footer-v3">
+      <a href="../account.html" class="user-pill-v3">
+        <div class="avatar-sm">LV</div>
+        <div>
+          <div class="user-pill-v3-name">Lucas Vieira</div>
+          <div class="user-pill-v3-role">Seat 12</div>
+        </div>
+      </a>
+      <button class="sidebar-toggle-btn" data-sidebar-toggle>
+        <i data-icon="chevron-left" class="icon"></i>
+        <span>Recolher menu</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div class="page-head">
+      <div class="page-head-text">
+        <div class="page-eyebrow"><span class="gold-rule"></span><span class="page-eyebrow-text">Studio · Sessões 1:1</span></div>
+        <h1 class="page-title">Suas <span class="page-title-serif-italic">sessões</span> da semana.</h1>
+        <p class="page-sub">7 sessões agendadas nos próximos 7 dias. Integração Cal.com + Google Meet ativa. Notas e gravações via Mux automáticas.</p>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <button class="btn btn-outline btn-sm"><i data-icon="settings" class="icon icon-sm"></i> Disponibilidade</button>
+        <button class="btn btn-chrome btn-sm"><i data-icon="plus" class="icon icon-sm"></i> Nova sessão</button>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="grid grid-4 mb-12" style="gap: 32px;">
+      <div class="stat-block">
+        <div class="stat-eyebrow">— Esta semana</div>
+        <div class="stat-display">7</div>
+        <div class="stat-delta">3 confirmadas · 4 a confirmar</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-eyebrow">— No mês</div>
+        <div class="stat-display">28</div>
+        <div class="stat-delta">↗ +18% vs mês ant.</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-eyebrow">— Show rate</div>
+        <div class="stat-display">96%</div>
+        <div class="stat-delta">Top 5% da plataforma</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-eyebrow">— Slots livres</div>
+        <div class="stat-display">12</div>
+        <div class="stat-delta">Próximas 4 semanas</div>
+      </div>
+    </div>
+
+    <!-- HOJE -->
+    <div class="mb-12">
+      <div class="section-head"><div><div class="section-title">Hoje</div><div class="section-sub">3 jun · Quarta-feira</div></div></div>
+      <div class="flex-col gap-3">
+        <div class="session-card">
+          <div class="day-badge"><div class="day-badge-num">14</div><div class="day-badge-month">:00</div></div>
+          <div>
+            <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 6px;"><span class="badge badge-accent">Confirmada</span><span class="muted" style="font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600;">Vieira Liderança · 45min</span></div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 500;">Daniel Coutinho · revisão de meta Q4</div>
+            <div class="muted" style="font-size: 12px; margin-top: 4px;">Pauta enviada · meet.google.com/abc-xyz-123 · gravação automática</div>
+          </div>
+          <div style="display: flex; gap: 6px;">
+            <button class="btn btn-secondary btn-sm">Notas</button>
+            <button class="btn btn-chrome btn-sm">Abrir Meet</button>
+          </div>
+        </div>
+        <div class="session-card">
+          <div class="day-badge"><div class="day-badge-num">16</div><div class="day-badge-month">:30</div></div>
+          <div>
+            <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 6px;"><span class="badge badge-accent">Confirmada</span><span class="muted" style="font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600;">P&amp;L Gerentes · 30min</span></div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 500;">Patrícia Soares · estrutura de P&amp;L</div>
+            <div class="muted" style="font-size: 12px; margin-top: 4px;">Aguardando pauta · meet.google.com/def-uvw-456</div>
+          </div>
+          <div style="display: flex; gap: 6px;">
+            <button class="btn btn-secondary btn-sm">Pedir pauta</button>
+            <button class="btn btn-chrome btn-sm">Abrir Meet</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AMANHÃ -->
+    <div class="mb-12">
+      <div class="section-head"><div><div class="section-title">Amanhã</div><div class="section-sub">4 jun · Quinta-feira</div></div></div>
+      <div class="flex-col gap-3">
+        <div class="session-card">
+          <div class="day-badge" style="background: var(--bg-card-hover); color: var(--text-muted);"><div class="day-badge-num">10</div><div class="day-badge-month">:00</div></div>
+          <div>
+            <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 6px;"><span class="badge badge-warn">Aguardando confirmação</span><span class="muted" style="font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600;">Vieira Liderança · 60min</span></div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 500;">Pedro Almeida · sessão estratégica trimestral</div>
+            <div class="muted" style="font-size: 12px; margin-top: 4px;">Convite enviado há 18h · vence em 6h</div>
+          </div>
+          <div style="display: flex; gap: 6px;">
+            <button class="btn btn-secondary btn-sm">Reenviar</button>
+            <button class="btn btn-outline btn-sm">Reagendar</button>
+          </div>
+        </div>
+        <div class="session-card">
+          <div class="day-badge" style="background: var(--bg-card-hover); color: var(--text-muted);"><div class="day-badge-num">15</div><div class="day-badge-month">:00</div></div>
+          <div>
+            <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 6px;"><span class="badge badge-accent">Confirmada</span><span class="muted" style="font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600;">Vieira Liderança · 45min</span></div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 500;">Mariana Souza · onboarding · primeira sessão</div>
+            <div class="muted" style="font-size: 12px; margin-top: 4px;">Comprou há 12 min · pauta automática "boas-vindas" gerada</div>
+          </div>
+          <div style="display: flex; gap: 6px;">
+            <button class="btn btn-secondary btn-sm">Revisar pauta</button>
+            <button class="btn btn-outline btn-sm">Reagendar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DISPONIBILIDADE -->
+    <div class="surface" style="padding: 32px;">
+      <div class="section-head"><div><div class="section-title">Sua disponibilidade</div><div class="section-sub">Sincronizada com Google Calendar via Cal.com</div></div><a href="sessoes-1-1.html" class="section-link">Editar →</a></div>
+      <div class="grid grid-4" style="gap: 16px;">
+        <div><div class="muted" style="font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">— Janelas semanais</div><div style="font-size: 14px; font-weight: 500;">Ter, Qua, Qui · 10h–18h</div></div>
+        <div><div class="muted" style="font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">— Duração padrão</div><div style="font-size: 14px; font-weight: 500;">45 min + 15 buffer</div></div>
+        <div><div class="muted" style="font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">— Antecedência mínima</div><div style="font-size: 14px; font-weight: 500;">24h</div></div>
+        <div><div class="muted" style="font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">— Próx slots livres</div><div style="font-size: 14px; font-weight: 500; color: var(--blue-realce);">12 (até 30 jun)</div></div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<div class="wf-note">Studio · Sessões 1:1</div>
+
+</body>
+</html>

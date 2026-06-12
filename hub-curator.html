@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hub · Curator · HMC</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_shared.css?v=16">
+<script src="_icons.js?v=16" defer></script>
+<script src="_modals.js?v=16" defer></script>
+<script src="_persona.js?v=16" defer></script>
+<style>
+.cur-hero { background: linear-gradient(135deg, #050A15 0%, #0A1530 60%, #0D285C 100%); border-radius: 20px; padding: 48px 52px; margin-bottom: 36px; color: white; position: relative; overflow: hidden; }
+.cur-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 80% 0%, rgba(168,230,255,0.18) 0%, transparent 60%); pointer-events: none; }
+.queue-card { background: var(--bg-card); border: 1px solid var(--divider); border-radius: 14px; padding: 24px; margin-bottom: 14px; display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; gap: 16px; align-items: center; text-decoration: none; color: inherit; transition: all 200ms; }
+.queue-card:hover { border-color: var(--blue-realce); transform: translateY(-1px); }
+.queue-card.urgent { border-left: 3px solid #FF8888; }
+.queue-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--blue-realce-muted); color: var(--blue-realce); display: flex; align-items: center; justify-content: center; }
+.queue-card.urgent .queue-icon { background: rgba(229,83,83,0.15); color: #FF8888; }
+.queue-eyebrow { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 4px; }
+.queue-title { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 500; letter-spacing: -0.01em; margin-bottom: 4px; line-height: 1.3; }
+.queue-sub { font-size: 12px; color: var(--text-muted); }
+.tools-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-bottom: 32px; }
+.tool-card { background: var(--bg-card); border: 1px solid var(--divider); border-radius: 12px; padding: 20px; text-decoration: none; color: inherit; transition: all 200ms; }
+.tool-card:hover { border-color: var(--blue-realce); transform: translateY(-2px); }
+.tool-icon { width: 36px; height: 36px; border-radius: 10px; background: var(--blue-realce-muted); color: var(--blue-realce); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+.tool-title { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+.tool-sub { font-size: 11px; color: var(--text-muted); }
+@media (max-width: 900px) { .tools-row { grid-template-columns: repeat(2, 1fr); } }
+</style>
+</head>
+<body data-persona-aware="cross-context" data-active-mode="hub-curator">
+<button class="mobile-fab" data-sidebar-mobile-toggle aria-label="Menu"><i data-icon="menu" class="icon"></i></button>
+<div class="drawer-backdrop" data-sidebar-mobile-toggle></div>
+<div class="app">
+<aside class="sidebar">
+  <a href="hub-curator.html" class="sidebar-brand"><img src="hmc-logo.png" alt="" class="brand-mark-img"><div><div class="brand-text">High Mentor Club</div><div class="brand-sub">Curated by Paulo Vieira · MMXXVI</div></div></a>
+  <div class="mode-switch">
+    <a href="hub-curator.html" class="mode-switch-item active" data-short="H"><i data-icon="home" class="icon"></i><span>Hub</span></a>
+    <a href="40-curator/aprovacoes.html" class="mode-switch-item" data-short="X"><i data-icon="shield-check" class="icon"></i><span>Curator</span></a>
+  </div>
+  <div class="sidebar-nav-scroll">
+    <div class="nav-section">
+      <a href="notifications.html" class="nav-item has-badge"><i data-icon="bell" class="icon icon-sm"></i>Avisos <span class="badge-count">7</span></a>
+      <a href="agenda.html" class="nav-item"><i data-icon="calendar" class="icon icon-sm"></i>Agenda</a>
+      <a href="buscar.html" class="nav-item"><i data-icon="search" class="icon icon-sm"></i>Buscar</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">— Atalhos curadoria</div>
+      <a href="40-curator/aprovacoes.html" class="nav-item has-badge"><i data-icon="shield-check" class="icon icon-sm"></i>Aprovações <span class="badge-count">3</span></a>
+      <a href="40-curator/tier-promotion.html" class="nav-item has-badge"><i data-icon="trending-up" class="icon icon-sm"></i>Promoções <span class="badge-count">5</span></a>
+      <a href="40-curator/moderacao.html" class="nav-item"><i data-icon="message" class="icon icon-sm"></i>Moderação</a>
+      <a href="40-curator/financeiro-consolidado.html" class="nav-item"><i data-icon="dollar" class="icon icon-sm"></i>Financeiro</a>
+    </div>
+  </div>
+  <div class="sidebar-footer-v3">
+    <a href="account.html" class="user-pill-v3"><div class="avatar-sm">MC</div><div><div class="user-pill-v3-name">Michelle</div><div class="user-pill-v3-role">Time Curadoria</div></div></a>
+    <button class="sidebar-toggle-btn" data-sidebar-toggle><i data-icon="chevron-left" class="icon"></i><span>Recolher menu</span></button>
+  </div>
+</aside>
+
+<main class="main">
+
+  <section class="cur-hero">
+    <div style="position: relative; z-index: 1; max-width: 720px;">
+      <div style="font-size: 11px; color: var(--blue-highlight); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; margin-bottom: 14px;">— Curator Workspace · Quarta, 03 jun · 2026</div>
+      <h1 style="font-family: 'Playfair Display', serif; font-size: 44px; font-weight: 500; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 14px;">Bom dia, <span class="serif-italic" style="background: linear-gradient(135deg, #A8E6FF, #4DB8FF); -webkit-background-clip: text; background-clip: text; color: transparent;">Michelle</span>.</h1>
+      <p style="font-size: 15px; line-height: 1.6; color: rgba(255,255,255,0.72); margin-bottom: 24px;">Hoje: <strong style="color: white;">3 candidatos aguardando seu pré-screening</strong>, <strong style="color: white;">2 disputas Cross-Floor</strong> abertas, payouts CISPay do mês fecham dia 05. Council mensal em 7 dias.</p>
+      <div style="display: flex; gap: 28px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.12);">
+        <div><div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(168,230,255,0.65); font-weight: 700; margin-bottom: 4px;">— GMV YTD</div><div style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500;">R$ 38,4M</div></div>
+        <div><div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(168,230,255,0.65); font-weight: 700; margin-bottom: 4px;">— Membros ativos</div><div style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500;">68</div></div>
+        <div><div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(168,230,255,0.65); font-weight: 700; margin-bottom: 4px;">— Fee HMC YTD</div><div style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500;">R$ 3,84M</div></div>
+        <div><div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(168,230,255,0.65); font-weight: 700; margin-bottom: 4px;">— NPS Cohort Q1</div><div style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500;">73</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="mb-12">
+    <div class="section-head">
+      <div><div class="section-title">Fila do dia</div><div class="section-sub">Ordenado por urgência</div></div>
+      <a href="40-curator/aprovacoes.html" class="section-link">Ver tudo (12) →</a>
+    </div>
+
+    <a href="40-curator/disputas-cross-floor.html" class="queue-card urgent">
+      <div class="queue-icon"><i data-icon="alert" class="icon"></i></div>
+      <div>
+        <div class="queue-eyebrow">— Disputa Cross-Floor · há 4h</div>
+        <div class="queue-title">Lucas vs Bruno · comissão de R$ 16k disputada</div>
+        <div class="queue-sub">Lead atribuído inicialmente ao Cross-Floor do Lucas, mas Bruno alega contato prévio externo. SLA expira em 20h.</div>
+      </div>
+      <span class="btn btn-chrome btn-sm">Analisar</span>
+    </a>
+
+    <a href="40-curator/aprovacoes.html" class="queue-card">
+      <div class="queue-icon"><i data-icon="shield-check" class="icon"></i></div>
+      <div>
+        <div class="queue-eyebrow">— Aprovações · 3 pendentes</div>
+        <div class="queue-title">Marcelo Otto pronto para Council</div>
+        <div class="queue-sub">Tier I → II · 4/4 critérios objetivos · 3 endorsos · entra na pauta de 10 jul. Júlia + Pedro ainda coletando endorsos.</div>
+      </div>
+      <span class="btn btn-secondary btn-sm">Revisar</span>
+    </a>
+
+    <a href="40-curator/moderacao.html" class="queue-card">
+      <div class="queue-icon"><i data-icon="message" class="icon"></i></div>
+      <div>
+        <div class="queue-eyebrow">— Moderação · 2 reports</div>
+        <div class="queue-title">Comunidade Bruno · post sinalizado</div>
+        <div class="queue-sub">Conteúdo possivelmente fora de tópico em #curso-aulas-comentarios. Auto-flag de IA, revisão humana necessária.</div>
+      </div>
+      <span class="btn btn-secondary btn-sm">Revisar</span>
+    </a>
+
+    <a href="40-curator/financeiro-consolidado.html" class="queue-card">
+      <div class="queue-icon"><i data-icon="dollar" class="icon"></i></div>
+      <div>
+        <div class="queue-eyebrow">— Financeiro · payout 05/jul</div>
+        <div class="queue-title">42 mentores aguardam payout · R$ 1,84M total</div>
+        <div class="queue-sub">CISPay → Studio split aplicado. Conferência fiscal 04/jul · 1 caso suspeito (Carlos R. · DRE inconsistente).</div>
+      </div>
+      <span class="btn btn-secondary btn-sm">Conferir</span>
+    </a>
+
+  </div>
+
+  <div class="mb-12">
+    <div class="section-head">
+      <div><div class="section-title">Áreas curatoriais</div><div class="section-sub">Acesso rápido às 14 telas admin</div></div>
+    </div>
+
+    <div class="tools-row">
+      <a href="40-curator/aprovacoes.html" class="tool-card">
+        <div class="tool-icon"><i data-icon="shield-check" class="icon"></i></div>
+        <div class="tool-title">Aprovações</div>
+        <div class="tool-sub">3 pendentes</div>
+      </a>
+      <a href="40-curator/tier-promotion.html" class="tool-card">
+        <div class="tool-icon"><i data-icon="trending-up" class="icon"></i></div>
+        <div class="tool-title">Promoções de Tier</div>
+        <div class="tool-sub">5 em pipeline</div>
+      </a>
+      <a href="40-curator/membros-ativos.html" class="tool-card">
+        <div class="tool-icon"><i data-icon="users" class="icon"></i></div>
+        <div class="tool-title">Membros</div>
+        <div class="tool-sub">68 ativos · 4 dormentes</div>
+      </a>
+      <a href="40-curator/disputas-cross-floor.html" class="tool-card">
+        <div class="tool-icon"><i data-icon="alert" class="icon"></i></div>
+        <div class="tool-title">Disputas Cross-Floor</div>
+        <div class="tool-sub">2 abertas</div>
+      </a>
+      <a href="40-curator/financeiro-consolidado.html" class="tool-card">
+        <div class="tool-icon"><i data-icon="dollar" class="icon"></i></div>
+        <div class="tool-title">Financeiro</div>
+        <div class="tool-sub">Payout 05/jul</div>
+      </a>
+      <a href="40-curator/yield-cis.html" class="tool-card">
+        <div class="tool-icon"><i data-icon="trending-up" class="icon"></i></div>
+        <div class="tool-title">Yield CIS</div>
+        <div class="tool-sub">28 leads convertidos</div>
+      </a>
+      <a href="40-curator/analytics-clube.html" class="tool-card">
+        <div class="tool-icon"><i data-icon="bar-chart" class="icon"></i></div>
+        <div class="tool-title">Analytics</div>
+        <div class="tool-sub">NPS 73 · LTV +12%</div>
+      </a>
+      <a href="40-curator/moderacao.html" class="tool-card">
+        <div class="tool-icon"><i data-icon="message" class="icon"></i></div>
+        <div class="tool-title">Moderação</div>
+        <div class="tool-sub">2 reports pendentes</div>
+      </a>
+      <a href="40-curator/council-admin.html" class="tool-card">
+        <div class="tool-icon"><i data-icon="landmark" class="icon"></i></div>
+        <div class="tool-title">Council</div>
+        <div class="tool-sub">Próximo 10 jul</div>
+      </a>
+      <a href="40-curator/pilgrimages-admin.html" class="tool-card">
+        <div class="tool-icon"><i data-icon="compass" class="icon"></i></div>
+        <div class="tool-title">Pilgrimages</div>
+        <div class="tool-sub">Florença · 8/12 vagas</div>
+      </a>
+      <a href="40-curator/codex-publishing.html" class="tool-card">
+        <div class="tool-icon"><i data-icon="book" class="icon"></i></div>
+        <div class="tool-title">Codex</div>
+        <div class="tool-sub">PV publicou em 3 jun</div>
+      </a>
+      <a href="40-curator/antechamber-admin.html" class="tool-card">
+        <div class="tool-icon"><i data-icon="mic" class="icon"></i></div>
+        <div class="tool-title">Antechamber</div>
+        <div class="tool-sub">6 conversas Tier III</div>
+      </a>
+      <a href="40-curator/logs.html" class="tool-card">
+        <div class="tool-icon"><i data-icon="file-text" class="icon"></i></div>
+        <div class="tool-title">Logs</div>
+        <div class="tool-sub">1.847 eventos 24h</div>
+      </a>
+      <a href="40-curator/suporte-admin.html" class="tool-card">
+        <div class="tool-icon"><i data-icon="help" class="icon"></i></div>
+        <div class="tool-title">Suporte</div>
+        <div class="tool-sub">4 tickets abertos</div>
+      </a>
+      <a href="40-curator/config-admin.html" class="tool-card">
+        <div class="tool-icon"><i data-icon="settings" class="icon"></i></div>
+        <div class="tool-title">Configurações</div>
+        <div class="tool-sub">Fee HMC 10%</div>
+      </a>
+      <a href="dev-login.html" class="tool-card" style="background: rgba(229,83,83,0.04); border-color: rgba(229,83,83,0.20);">
+        <div class="tool-icon" style="background: rgba(229,83,83,0.10); color: #FF8888;"><i data-icon="alert" class="icon"></i></div>
+        <div class="tool-title" style="color: var(--text);">Dev tools</div>
+        <div class="tool-sub">Persona switch</div>
+      </a>
+    </div>
+  </div>
+
+</main>
+</div>
+<div class="wf-note">Hub · Curator (Michelle)</div>
+</body>
+</html>

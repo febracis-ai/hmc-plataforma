@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>#dúvidas-módulo-3 · Comunidade Renata · HMC</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_shared.css?v=16">
+<script src="../_icons.js?v=16" defer></script>
+<script src="../_persona.js?v=16" defer></script>
+<script src="../_modals.js?v=16" defer></script>
+<style>
+.main { padding: 0; max-width: none; }
+.canal-shell { display: grid; grid-template-columns: minmax(0, 1fr) 280px; min-height: 100vh; }
+.canal-main { display: flex; flex-direction: column; background: var(--bg-card); border-right: 1px solid var(--divider); }
+.canal-head { padding: 18px 28px; border-bottom: 1px solid var(--divider); }
+.canal-breadcrumb { display: flex; gap: 8px; font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
+.canal-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; letter-spacing: -0.015em; display: flex; align-items: center; gap: 10px; }
+.canal-desc { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+.canal-pin { padding: 14px 28px; background: rgba(77,184,255,0.05); border-bottom: 1px solid var(--divider); display: flex; align-items: flex-start; gap: 12px; }
+.pin-icon { width: 28px; height: 28px; border-radius: 8px; background: var(--blue-realce-muted); color: var(--blue-realce); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.pin-title { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-realce); font-weight: 700; margin-bottom: 4px; }
+.pin-body { font-size: 13px; line-height: 1.55; color: var(--text); }
+.canal-feed { flex: 1; padding: 24px 28px; overflow-y: auto; }
+.date-sep { text-align: center; margin: 24px 0; position: relative; }
+.date-sep::before { content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: var(--divider); z-index: 0; }
+.date-sep span { background: var(--bg-card); padding: 0 14px; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600; color: var(--text-muted); position: relative; z-index: 1; }
+.msg { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 12px; padding: 8px 12px; margin: 0 -12px; border-radius: 8px; transition: background 150ms; }
+.msg:hover { background: var(--bg-card-hover); }
+.msg-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--blue-realce); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 13px; }
+.msg-avatar.gold { background: linear-gradient(135deg, var(--blue-deep), var(--blue-realce)); color: var(--blue-highlight); }
+.msg-author { font-weight: 600; font-size: 14px; }
+.msg-author-tag { font-size: 9px; padding: 2px 7px; background: var(--blue-deep); color: var(--blue-highlight); border-radius: 4px; font-weight: 700; letter-spacing: 0.10em; margin-left: 6px; }
+.msg-time { font-size: 11px; color: var(--text-faint); margin-left: 6px; }
+.msg-body { font-size: 14px; line-height: 1.6; margin-top: 2px; }
+.msg-body code { padding: 2px 6px; background: var(--bg-card-hover); border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+.msg-reactions { display: flex; gap: 6px; margin-top: 8px; }
+.reaction { padding: 3px 9px; background: var(--bg-card-hover); border: 1px solid var(--divider); border-radius: 10px; font-size: 11px; cursor: pointer; }
+.reaction:hover { border-color: var(--blue-realce); }
+.reaction.active { background: var(--blue-realce-muted); color: var(--blue-realce); border-color: var(--blue-realce); font-weight: 600; }
+.thread-toggle { margin-top: 8px; padding: 6px 12px; background: rgba(77,184,255,0.05); border: 1px solid rgba(77,184,255,0.20); border-radius: 8px; font-size: 12px; color: var(--blue-realce); font-weight: 600; cursor: pointer; display: inline-flex; gap: 6px; align-items: center; text-decoration: none; }
+.thread-toggle:hover { background: var(--blue-realce-muted); }
+.composer { padding: 16px 28px 28px; border-top: 1px solid var(--divider); }
+.composer-box { display: flex; gap: 10px; align-items: center; padding: 10px 14px; background: var(--bg); border: 1px solid var(--divider); border-radius: 12px; }
+.composer-box input { flex: 1; border: none; background: transparent; font-family: inherit; font-size: 14px; outline: none; padding: 6px 4px; color: var(--text); }
+.composer-actions { display: flex; gap: 4px; }
+.canal-side { background: var(--bg-card-hover); padding: 20px 22px; }
+.side-section { margin-bottom: 24px; }
+.side-h { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 12px; }
+.member-row { display: flex; gap: 10px; align-items: center; padding: 6px 0; }
+.member-avatar { width: 28px; height: 28px; border-radius: 50%; background: var(--blue-realce-muted); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.member-avatar.gold { background: rgba(168,230,255,0.18); color: var(--blue-highlight); }
+.member-name { font-size: 13px; font-weight: 500; }
+.member-role { font-size: 11px; color: var(--text-muted); }
+.online-dot { width: 8px; height: 8px; border-radius: 50%; background: #2ecc71; margin-left: auto; }
+@media (max-width: 900px) { .canal-shell { grid-template-columns: 1fr; } .canal-side { display: none; } }
+</style>
+</head>
+<body data-persona-aware="mode-page" data-mode-context="estudos" data-required-mode="estudos">
+<button class="mobile-fab" data-sidebar-mobile-toggle aria-label="Menu"><i data-icon="menu" class="icon"></i></button>
+<div class="drawer-backdrop" data-sidebar-mobile-toggle></div>
+<div class="app">
+<aside class="sidebar">
+  <a href="../hub.html" class="sidebar-brand"><img src="../hmc-logo.png" alt="" class="brand-mark-img"><div><div class="brand-text">High Mentor Club</div><div class="brand-sub">Curated by Paulo Vieira · MMXXVI</div></div></a>
+  <div class="mode-switch">
+    <a href="../hub-mentorado.html" class="mode-switch-item" data-short="H"><i data-icon="home" class="icon"></i><span>Hub</span></a>
+    <a href="../30-mentorado/biblioteca.html" class="mode-switch-item active" data-short="E"><i data-icon="book-open" class="icon"></i><span>Estudos</span></a>
+  </div>
+  <div class="sidebar-nav-scroll">
+    <div class="nav-section">
+      <a href="../notifications.html" class="nav-item has-badge"><i data-icon="bell" class="icon icon-sm"></i>Avisos <span class="badge-count">12</span></a>
+      <a href="../agenda.html" class="nav-item"><i data-icon="calendar" class="icon icon-sm"></i>Agenda</a>
+      <a href="../buscar.html" class="nav-item"><i data-icon="search" class="icon icon-sm"></i>Buscar</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">— Estudos</div>
+      <a href="biblioteca.html" class="nav-item"><i data-icon="book-open" class="icon icon-sm"></i>Biblioteca</a>
+      <a href="player.html" class="nav-item"><i data-icon="play-circle" class="icon icon-sm"></i>Continuando</a>
+      <a href="comunidade.html" class="nav-item active has-badge"><i data-icon="message-circle" class="icon icon-sm"></i>Comunidades <span class="badge-count">8</span><span class="nav-dot"></span></a>
+      <a href="sessoes-1-1.html" class="nav-item"><i data-icon="calendar" class="icon icon-sm"></i>Sessões 1:1</a>
+      <a href="notas.html" class="nav-item"><i data-icon="file-text" class="icon icon-sm"></i>Minhas notas</a>
+      <a href="progresso.html" class="nav-item"><i data-icon="trending-up" class="icon icon-sm"></i>Progresso</a>
+      <a href="certificados.html" class="nav-item"><i data-icon="award" class="icon icon-sm"></i>Certificados</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">— Conta</div>
+      <a href="../account.html" class="nav-item"><i data-icon="user" class="icon icon-sm"></i>Meu perfil</a>
+      <a href="pagamentos.html" class="nav-item"><i data-icon="credit-card" class="icon icon-sm"></i>Pagamentos</a>
+      <a href="suporte.html" class="nav-item"><i data-icon="help" class="icon icon-sm"></i>Suporte</a>
+    </div>
+  </div>
+  <div class="sidebar-footer-v3">
+    <a href="../account.html" class="user-pill-v3"><div class="avatar-sm">MS</div><div><div class="user-pill-v3-name">Mariana Souza</div><div class="user-pill-v3-role">Mentorada · 3 cursos</div></div></a>
+    <button class="sidebar-toggle-btn" data-sidebar-toggle><i data-icon="chevron-left" class="icon"></i><span>Recolher menu</span></button>
+  </div>
+</aside>
+
+<main class="main">
+
+  <div class="canal-shell">
+
+    <div class="canal-main">
+
+      <div class="canal-head">
+        <div class="canal-breadcrumb">
+          <a href="comunidade.html" class="muted">Comunidades</a>
+          <span class="faint">/</span>
+          <a href="comunidade.html" class="muted">Renata Mendes</a>
+          <span class="faint">/</span>
+          <span style="color: var(--text);">#dúvidas-módulo-3</span>
+        </div>
+        <div class="canal-title">
+          <i data-icon="hash" class="icon"></i>
+          dúvidas-módulo-3
+        </div>
+        <div class="canal-desc">Dúvidas específicas do Módulo 03 · Mentalidade de P&amp;L · respondidas pela Renata + comunidade · 28 membros · 142 mensagens</div>
+      </div>
+
+      <div class="canal-pin">
+        <div class="pin-icon"><i data-icon="bookmark" class="icon icon-sm"></i></div>
+        <div style="flex: 1;">
+          <div class="pin-title">— Fixado pela Renata · 12 mai 14:20</div>
+          <div class="pin-body">"P&amp;L não é matemática, é narrativa. Antes de me perguntarem números, perguntem o que a empresa está tentando contar. Aí o número faz sentido."</div>
+        </div>
+      </div>
+
+      <div class="canal-feed">
+
+        <div class="date-sep"><span>Hoje · 03 jun</span></div>
+
+        <div class="msg">
+          <div class="msg-avatar">PA</div>
+          <div>
+            <div><span class="msg-author">Pedro Almeida</span><span class="msg-time">14:32</span></div>
+            <div class="msg-body">Galera, alguém já fez o exercício de decompor o P&amp;L da própria área? Tô patinando — meu time não tem rateio claro de overhead e tô gastando 3h pra produzir 1 número defensável.</div>
+            <div class="msg-reactions">
+              <span class="reaction active">🤔 4</span>
+              <span class="reaction">👀 2</span>
+            </div>
+            <a href="comunidade-canal.html" class="thread-toggle"><i data-icon="message" class="icon icon-sm"></i> 7 respostas · Mariana e mais 4 →</a>
+          </div>
+        </div>
+
+        <div class="msg">
+          <div class="msg-avatar">MS</div>
+          <div>
+            <div><span class="msg-author">Mariana Souza</span><span class="msg-author-tag">Tu</span><span class="msg-time">14:38</span></div>
+            <div class="msg-body">Pedro, faz parte. Eu tive esse mesmo bloqueio na semana 2. <strong>Solução prática:</strong> em vez de buscar rateio perfeito, divide overhead pelo nº de heads na sua área proporcional ao orçamento total. <code>(overhead total × seu orçamento / orçamento total)</code>. É 70% do mundo real, 30% gambiarra contábil, mas você consegue mostrar pro CFO em 15 min.</div>
+            <div class="msg-reactions">
+              <span class="reaction active">🔥 6</span>
+              <span class="reaction">💡 3</span>
+              <span class="reaction">+ Adicionar</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="msg">
+          <div class="msg-avatar gold">RM</div>
+          <div>
+            <div><span class="msg-author">Renata Mendes</span><span class="msg-author-tag" style="background: rgba(168,230,255,0.18); color: var(--blue-highlight);">Mentor</span><span class="msg-time">14:51</span></div>
+            <div class="msg-body">@Mariana mata a charada. Pedro, ainda complementando: leva esse cálculo numa <strong>3ª linha</strong> e marca explicitamente como "estimativa de operação". CFO sabe que perfeição não existe, e <em>respeita quem mostra a hipótese em vez de fingir certeza</em>. Pode trazer pra próxima 1:1 que abrimos o caso.</div>
+            <div class="msg-reactions">
+              <span class="reaction active">🎯 12</span>
+              <span class="reaction active">🙏 8</span>
+              <span class="reaction">💎 4</span>
+            </div>
+            <a href="comunidade-canal.html" class="thread-toggle"><i data-icon="message" class="icon icon-sm"></i> 3 respostas →</a>
+          </div>
+        </div>
+
+        <div class="msg">
+          <div class="msg-avatar">DC</div>
+          <div>
+            <div><span class="msg-author">Daniel Coutinho</span><span class="msg-time">15:14</span></div>
+            <div class="msg-body">Achei essa thread oro. Salvei nas minhas notas e vou aplicar no meu Q4 review semana que vem. Obrigado @Mariana e @Renata 🙏</div>
+            <div class="msg-reactions">
+              <span class="reaction">✨ 3</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="msg">
+          <div class="msg-avatar">JF</div>
+          <div>
+            <div><span class="msg-author">Júlia Fontes</span><span class="msg-time">15:42</span></div>
+            <div class="msg-body">Reabrindo um lado — alguém aqui já teve que apresentar P&amp;L pra board com investidor que pede DCF junto? Tô preparando uma e queria saber se vocês incluem cenário base/upside/downside na mesma slide ou separados.</div>
+            <div class="msg-reactions">
+              <span class="reaction">👀 2</span>
+            </div>
+            <a href="comunidade-canal.html" class="thread-toggle"><i data-icon="message" class="icon icon-sm"></i> 0 respostas · Seja o primeiro →</a>
+          </div>
+        </div>
+
+        <div class="date-sep"><span>Ontem · 02 jun</span></div>
+
+        <div class="msg">
+          <div class="msg-avatar">LV</div>
+          <div>
+            <div><span class="msg-author">Lucas Vieira</span><span class="msg-author-tag" style="background: rgba(212,165,84,0.18); color: #d4a554;">Tier II</span><span class="msg-time">19:42</span></div>
+            <div class="msg-body">Galera do M03 — eu apliquei essa semana o framework das 3 perguntas (margem? receita? CAC?) numa conversa com meu fundador. Resultado: <strong>conversa de R$ 800k em decisão de pricing em 25 min</strong>. Vale citar pra próxima geração que entrar nesse módulo.</div>
+            <div class="msg-reactions">
+              <span class="reaction active">🚀 18</span>
+              <span class="reaction active">🔥 11</span>
+              <span class="reaction">💼 7</span>
+            </div>
+            <a href="comunidade-canal.html" class="thread-toggle"><i data-icon="message" class="icon icon-sm"></i> 12 respostas · Renata e mais 8 →</a>
+          </div>
+        </div>
+
+        <div class="msg">
+          <div class="msg-avatar">MS</div>
+          <div>
+            <div><span class="msg-author">Mariana Souza</span><span class="msg-author-tag">Tu</span><span class="msg-time">22:18</span></div>
+            <div class="msg-body">@Lucas isso é exatamente o que eu queria saber — você consegue compartilhar o slide que usou? Vou ter conversa parecida em duas semanas.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="composer">
+        <div class="composer-box">
+          <input type="text" placeholder="Mensagem em #dúvidas-módulo-3...">
+          <div class="composer-actions">
+            <button class="icon-btn-ghost" style="width: 32px; height: 32px; border: none; background: transparent; cursor: pointer; color: var(--text-muted);"><i data-icon="paperclip" class="icon icon-sm"></i></button>
+            <button class="icon-btn-ghost" style="width: 32px; height: 32px; border: none; background: transparent; cursor: pointer; color: var(--text-muted);"><i data-icon="smile" class="icon icon-sm"></i></button>
+            <button class="btn btn-chrome btn-sm">Enviar</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <aside class="canal-side">
+
+      <div class="side-section">
+        <div class="side-h">— Sobre o canal</div>
+        <p style="font-size: 12px; line-height: 1.6; color: var(--text-muted); margin-bottom: 10px;">Dúvidas técnicas do Módulo 03 · Mentalidade de P&amp;L. Renata responde 2× por semana (qua + dom). Aproveite a comunidade entre as 1:1.</p>
+        <button class="btn btn-outline btn-sm w-full"><i data-icon="bell" class="icon icon-sm"></i> Inscrito</button>
+      </div>
+
+      <div class="side-section">
+        <div class="side-h">— Membros · 28</div>
+        <div class="member-row">
+          <div class="member-avatar gold">RM</div>
+          <div><div class="member-name">Renata Mendes</div><div class="member-role">Mentor</div></div>
+          <div class="online-dot"></div>
+        </div>
+        <div class="member-row">
+          <div class="member-avatar">MS</div>
+          <div><div class="member-name">Mariana S.</div><div class="member-role">Tu</div></div>
+          <div class="online-dot"></div>
+        </div>
+        <div class="member-row">
+          <div class="member-avatar">LV</div>
+          <div><div class="member-name">Lucas Vieira</div><div class="member-role">Online</div></div>
+          <div class="online-dot"></div>
+        </div>
+        <div class="member-row">
+          <div class="member-avatar">PA</div>
+          <div><div class="member-name">Pedro A.</div><div class="member-role">Ativo agora</div></div>
+          <div class="online-dot"></div>
+        </div>
+        <div class="member-row">
+          <div class="member-avatar">DC</div>
+          <div><div class="member-name">Daniel C.</div><div class="member-role">Ausente</div></div>
+        </div>
+        <div class="member-row">
+          <div class="member-avatar">JF</div>
+          <div><div class="member-name">Júlia F.</div><div class="member-role">Online</div></div>
+          <div class="online-dot"></div>
+        </div>
+        <a href="comunidade-canal.html" class="muted" style="display: block; font-size: 12px; margin-top: 12px;">Ver todos os 28 →</a>
+      </div>
+
+      <div class="side-section">
+        <div class="side-h">— Links úteis</div>
+        <a href="player.html" class="muted" style="display: block; font-size: 12px; padding: 6px 0;">↳ Aula 02 do Módulo 03</a>
+        <a href="notas.html" class="muted" style="display: block; font-size: 12px; padding: 6px 0;">↳ Suas notas deste módulo</a>
+        <a href="sessoes-1-1.html" class="muted" style="display: block; font-size: 12px; padding: 6px 0;">↳ Próxima 1:1 com Renata</a>
+      </div>
+
+    </aside>
+
+  </div>
+
+</main>
+</div>
+<div class="wf-note">Estudos · Canal · #dúvidas-módulo-3</div>
+</body>
+</html>

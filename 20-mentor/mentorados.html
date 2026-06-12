@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mentorados · HMC Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../_shared.css?v=16">
+  <script src="../_icons.js?v=16" defer></script>
+<script src="../_persona.js?v=16" defer></script>
+<script src="../_modals.js?v=16" defer></script>
+  <style>
+    .mentee-row {
+      display: grid;
+      grid-template-columns: 48px 1fr 140px 100px 110px 120px auto;
+      gap: 18px; align-items: center;
+      padding: 16px 22px;
+      border-bottom: 1px solid var(--divider);
+      transition: background 150ms;
+    }
+    .mentee-row:hover { background: var(--bg-card-hover); }
+    .mentee-row:last-child { border-bottom: none; }
+    .avatar-md { width: 40px; height: 40px; border-radius: 50%; background: var(--blue-realce); color: white; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 600; font-size: 13px; }
+    .heat-bar { display: flex; gap: 2px; }
+    .heat-cell { width: 6px; height: 16px; border-radius: 1px; background: var(--bg-card-hover); }
+    .heat-cell.on { background: var(--blue-realce); }
+    .heat-cell.dim { background: var(--blue-realce-divider); }
+    .filter-pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: var(--bg-card); border: 1px solid var(--divider); font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-muted); cursor: pointer; }
+    .filter-pill.active { background: var(--blue-realce); color: white; border-color: var(--blue-realce); }
+  </style>
+</head>
+<body data-persona-aware="mode-page" data-mode-context="studio" data-required-mode="studio">
+
+<button class="mobile-fab" data-sidebar-mobile-toggle aria-label="Menu"><i data-icon="menu" class="icon"></i></button>
+<div class="drawer-backdrop" data-sidebar-mobile-toggle></div>
+
+<div class="app">
+  <aside class="sidebar">
+    <a href="../hub.html" class="sidebar-brand">
+      <img src="../hmc-logo.png" alt="" class="brand-mark-img">
+      <div>
+        <div class="brand-text">High Mentor Club</div>
+        <div class="brand-sub">Curated by Paulo Vieira · MMXXVI</div>
+      </div>
+    </a>
+
+    <div class="mode-switch">
+      <a href="../hub.html" class="mode-switch-item" data-short="H"><i data-icon="home" class="icon"></i><span>Hub</span></a>
+      <a href="../10-clube/01-dashboard.html" class="mode-switch-item" data-short="C"><i data-icon="landmark" class="icon"></i><span>Clube</span></a>
+      <a href="../20-mentor/studio-home.html" class="mode-switch-item active" data-short="S"><i data-icon="briefcase" class="icon"></i><span>Studio</span></a>
+      <a href="../30-mentorado/biblioteca.html" class="mode-switch-item" data-short="E"><i data-icon="book-open" class="icon"></i><span>Estudos</span></a>
+    </div>
+
+    <div class="sidebar-nav-scroll">
+      <div class="nav-section">
+        <a href="../notifications.html" class="nav-item has-badge" data-tooltip="Avisos"><i data-icon="bell" class="icon icon-sm"></i>Avisos <span class="badge-count">12</span></a>
+        <a href="../agenda.html" class="nav-item" data-tooltip="Agenda"><i data-icon="calendar" class="icon icon-sm"></i>Agenda</a>
+        <a href="../buscar.html" class="nav-item" data-tooltip="Buscar"><i data-icon="search" class="icon icon-sm"></i>Buscar</a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-label">— Studio</div>
+        <a href="studio-home.html" class="nav-item" data-tooltip="Visão geral"><i data-icon="briefcase" class="icon icon-sm"></i>Visão geral</a>
+        <a href="mentorias.html" class="nav-item" data-tooltip="Mentorias"><i data-icon="video" class="icon icon-sm"></i>Mentorias</a>
+        <a href="aulas-biblioteca.html" class="nav-item" data-tooltip="Aulas"><i data-icon="film" class="icon icon-sm"></i>Aulas</a>
+        <a href="mentorados.html" class="nav-item active" data-tooltip="Mentorados"><i data-icon="users" class="icon icon-sm"></i>Mentorados<span class="nav-dot"></span></a>
+        <a href="sessoes-1-1.html" class="nav-item" data-tooltip="Sessões 1:1"><i data-icon="calendar" class="icon icon-sm"></i>Sessões 1:1</a>
+        <a href="comunidade.html" class="nav-item" data-tooltip="Comunidade"><i data-icon="message-circle" class="icon icon-sm"></i>Comunidade</a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-label">— Negócio</div>
+        <a href="receitas.html" class="nav-item" data-tooltip="Receitas"><i data-icon="dollar" class="icon icon-sm"></i>Receitas</a>
+        <a href="checkout-builder.html" class="nav-item" data-tooltip="Checkout"><i data-icon="credit-card" class="icon icon-sm"></i>Checkout</a>
+        <a href="cupons.html" class="nav-item" data-tooltip="Cupons"><i data-icon="tag" class="icon icon-sm"></i>Cupons</a>
+        <a href="pagina-publica.html" class="nav-item" data-tooltip="Página pública"><i data-icon="globe" class="icon icon-sm"></i>Página pública</a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-label">— Conta</div>
+        <a href="configuracoes.html" class="nav-item" data-tooltip="Configurações"><i data-icon="settings" class="icon icon-sm"></i>Configurações</a>
+        <a href="integracoes.html" class="nav-item" data-tooltip="Integrações"><i data-icon="external" class="icon icon-sm"></i>Integrações</a>
+      </div>
+    </div>
+
+    <div class="sidebar-footer-v3">
+      <a href="../account.html" class="user-pill-v3">
+        <div class="avatar-sm">LV</div>
+        <div>
+          <div class="user-pill-v3-name">Lucas Vieira</div>
+          <div class="user-pill-v3-role">Seat 12</div>
+        </div>
+      </a>
+      <button class="sidebar-toggle-btn" data-sidebar-toggle>
+        <i data-icon="chevron-left" class="icon"></i>
+        <span>Recolher menu</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div class="page-head">
+      <div class="page-head-text">
+        <div class="page-eyebrow"><span class="gold-rule"></span><span class="page-eyebrow-text">Studio · CRM</span></div>
+        <h1 class="page-title">Seus <span class="page-title-serif-italic">mentorados</span>.</h1>
+        <p class="page-sub">42 mentorados ativos em 2 mentorias. Veja engajamento, próxima sessão e ações pendentes por pessoa.</p>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <button class="btn btn-outline btn-sm"><i data-icon="download" class="icon icon-sm"></i> Exportar</button>
+        <button class="btn btn-chrome btn-sm"><i data-icon="user-plus" class="icon icon-sm"></i> Convidar mentorado</button>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="grid grid-4 mb-12" style="gap: 32px;">
+      <div class="stat-block">
+        <div class="stat-eyebrow">— Total ativos</div>
+        <div class="stat-display">42</div>
+        <div class="stat-delta">↗ +3 esta semana</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-eyebrow">— Engajamento médio</div>
+        <div class="stat-display">76%</div>
+        <div class="stat-delta">↗ +4 p.p. vs mês ant.</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-eyebrow">— Dormentes (14d+)</div>
+        <div class="stat-display">6</div>
+        <div class="stat-delta">→ ações de reativação sugeridas</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-eyebrow">— NPS médio</div>
+        <div class="stat-display">9,2</div>
+        <div class="stat-delta">Top 5% da plataforma</div>
+      </div>
+    </div>
+
+    <!-- FILTROS + BUSCA -->
+    <div style="display: flex; gap: 10px; margin-bottom: 24px; align-items: center; flex-wrap: wrap;">
+      <span class="filter-pill active">Todos · 42</span>
+      <span class="filter-pill">Vieira Liderança · 28</span>
+      <span class="filter-pill">P&amp;L Gerentes · 14</span>
+      <span class="filter-pill">Engajados · 36</span>
+      <span class="filter-pill">Dormentes · 6</span>
+      <input type="search" class="search" placeholder="Buscar mentorado..." style="margin-left: auto; max-width: 280px;">
+    </div>
+
+    <!-- LISTA -->
+    <div class="surface" style="padding: 0;">
+      <div style="display: grid; grid-template-columns: 48px 1fr 140px 100px 110px 120px auto; gap: 18px; padding: 14px 22px; border-bottom: 1px solid var(--divider); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">
+        <div></div>
+        <div>Mentorado</div>
+        <div>Mentoria</div>
+        <div>Engajamento</div>
+        <div>Próxima sessão</div>
+        <div>Última ativ.</div>
+        <div style="text-align: right;">Ação</div>
+      </div>
+
+      <div class="mentee-row">
+        <div class="avatar-md">MS</div>
+        <div>
+          <div style="font-weight: 600; font-size: 14px;">Mariana Souza</div>
+          <div style="font-size: 11px; color: var(--text-muted);">mariana.souza@gmail.com · há 12 min</div>
+        </div>
+        <div><span class="badge badge-tier-3" style="font-size: 9px;">Premium</span></div>
+        <div><div class="heat-bar"><span class="heat-cell on"></span><span class="heat-cell on"></span><span class="heat-cell on"></span><span class="heat-cell on"></span><span class="heat-cell on"></span><span class="heat-cell on"></span><span class="heat-cell dim"></span></div></div>
+        <div style="font-size: 12px; color: var(--text);">Qui · 14h</div>
+        <div style="font-size: 12px; color: var(--text-muted);">Agora</div>
+        <a href="mentorado-detail.html" class="btn btn-secondary btn-sm">Abrir CRM</a>
+      </div>
+
+      <div class="mentee-row">
+        <div class="avatar-md">PA</div>
+        <div>
+          <div style="font-weight: 600; font-size: 14px;">Pedro Almeida</div>
+          <div style="font-size: 11px; color: var(--text-muted);">pedro@empresa.com · top contribuidor</div>
+        </div>
+        <div><span class="badge badge-accent" style="font-size: 9px;">Vieira Lid.</span></div>
+        <div><div class="heat-bar"><span class="heat-cell on"></span><span class="heat-cell on"></span><span class="heat-cell on"></span><span class="heat-cell on"></span><span class="heat-cell on"></span><span class="heat-cell on"></span><span class="heat-cell on"></span></div></div>
+        <div style="font-size: 12px; color: var(--text);">Sex · 10h</div>
+        <div style="font-size: 12px; color: var(--text-muted);">há 2h</div>
+        <a href="mentorado-detail.html" class="btn btn-secondary btn-sm">Abrir CRM</a>
+      </div>
+
+      <div class="mentee-row">
+        <div class="avatar-md">DC</div>
+        <div>
+          <div style="font-weight: 600; font-size: 14px;">Daniel Coutinho</div>
+          <div style="font-size: 11px; color: var(--text-muted);">daniel@empresa.com · sessão amanhã</div>
+        </div>
+        <div><span class="badge badge-accent" style="font-size: 9px;">Vieira Lid.</span></div>
+        <div><div class="heat-bar"><span class="heat-cell on"></span><span class="heat-cell on"></span><span class="heat-cell on"></span><span class="heat-cell on"></span><span class="heat-cell on"></span><span class="heat-cell dim"></span><span class="heat-cell dim"></span></div></div>
+        <div style="font-size: 12px; color: var(--text);">Amanhã · 14h</div>
+        <div style="font-size: 12px; color: var(--text-muted);">há 4h</div>
+        <a href="mentorado-detail.html" class="btn btn-secondary btn-sm">Abrir CRM</a>
+      </div>
+
+      <div class="mentee-row">
+        <div class="avatar-md">MR</div>
+        <div>
+          <div style="font-weight: 600; font-size: 14px;">Mariana Rocha</div>
+          <div style="font-size: 11px; color: var(--text-muted);">mariana.r@empresa.com</div>
+        </div>
+        <div><span class="badge badge-accent" style="font-size: 9px;">Vieira Lid.</span></div>
+        <div><div class="heat-bar"><span class="heat-cell on"></span><span class="heat-cell on"></span><span class="heat-cell on"></span><span class="heat-cell on"></span><span class="heat-cell on"></span><span class="heat-cell on"></span><span class="heat-cell dim"></span></div></div>
+        <div style="font-size: 12px; color: var(--text);">Próx semana</div>
+        <div style="font-size: 12px; color: var(--text-muted);">há 1d</div>
+        <a href="mentorado-detail.html" class="btn btn-secondary btn-sm">Abrir CRM</a>
+      </div>
+
+      <div class="mentee-row">
+        <div class="avatar-md" style="background: var(--text-faint);">RM</div>
+        <div>
+          <div style="font-weight: 600; font-size: 14px;">Renato Mello</div>
+          <div style="font-size: 11px; color: var(--text-muted);">renato@empresa.com · 2 advertências</div>
+        </div>
+        <div><span class="badge" style="font-size: 9px;">P&amp;L Ger.</span></div>
+        <div><div class="heat-bar"><span class="heat-cell on"></span><span class="heat-cell dim"></span><span class="heat-cell dim"></span><span class="heat-cell dim"></span><span class="heat-cell dim"></span><span class="heat-cell dim"></span><span class="heat-cell dim"></span></div></div>
+        <div style="font-size: 12px; color: var(--text-muted);">—</div>
+        <div style="font-size: 12px; color: #C8442B;">há 18d</div>
+        <a href="mentorado-detail.html" class="btn btn-secondary btn-sm">Reativar</a>
+      </div>
+
+      <div class="mentee-row">
+        <div class="avatar-md" style="background: var(--text-faint);">FA</div>
+        <div>
+          <div style="font-weight: 600; font-size: 14px;">Fernando Aragão</div>
+          <div style="font-size: 11px; color: var(--text-muted);">fernando@empresa.com</div>
+        </div>
+        <div><span class="badge" style="font-size: 9px;">P&amp;L Ger.</span></div>
+        <div><div class="heat-bar"><span class="heat-cell on"></span><span class="heat-cell on"></span><span class="heat-cell dim"></span><span class="heat-cell dim"></span><span class="heat-cell dim"></span><span class="heat-cell dim"></span><span class="heat-cell dim"></span></div></div>
+        <div style="font-size: 12px; color: var(--text-muted);">Agendar</div>
+        <div style="font-size: 12px; color: var(--text-muted);">há 9d</div>
+        <a href="mentorado-detail.html" class="btn btn-secondary btn-sm">Reativar</a>
+      </div>
+
+    </div>
+
+    <div style="margin-top: 16px; padding: 18px 22px; background: var(--bg-card); border: 1px dashed var(--divider); border-radius: 12px; display: flex; align-items: center; gap: 14px;">
+      <i data-icon="info" class="icon icon-md" style="color: var(--blue-realce);"></i>
+      <div style="flex: 1; font-size: 13px;"><strong>6 mentorados sugeridos para reativação.</strong> O HMC pode enviar um nudge automático em seu nome — só com mensagem que você revisar antes.</div>
+      <button class="btn btn-outline btn-sm">Configurar nudges</button>
+    </div>
+
+  </main>
+</div>
+
+<div class="wf-note">Studio · Mentorados (CRM)</div>
+
+</body>
+</html>

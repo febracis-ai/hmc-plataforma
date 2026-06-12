@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Integrações · HMC Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../_shared.css?v=16">
+  <script src="../_icons.js?v=16" defer></script>
+<script src="../_persona.js?v=16" defer></script>
+<script src="../_modals.js?v=16" defer></script>
+</head>
+<body data-persona-aware="mode-page" data-mode-context="studio" data-required-mode="studio">
+<button class="mobile-fab" data-sidebar-mobile-toggle aria-label="Menu"><i data-icon="menu" class="icon"></i></button>
+<div class="drawer-backdrop" data-sidebar-mobile-toggle></div>
+<div class="app">
+  <aside class="sidebar">
+    <a href="../hub.html" class="sidebar-brand"><img src="../hmc-logo.png" alt="" class="brand-mark-img"><div><div class="brand-text">High Mentor Club</div><div class="brand-sub">Curated by Paulo Vieira · MMXXVI</div></div></a>
+    <div class="mode-switch">
+      <a href="../hub.html" class="mode-switch-item" data-short="H"><i data-icon="home" class="icon"></i><span>Hub</span></a>
+      <a href="../10-clube/01-dashboard.html" class="mode-switch-item" data-short="C"><i data-icon="landmark" class="icon"></i><span>Clube</span></a>
+      <a href="../20-mentor/studio-home.html" class="mode-switch-item active" data-short="S"><i data-icon="briefcase" class="icon"></i><span>Studio</span></a>
+      <a href="../30-mentorado/biblioteca.html" class="mode-switch-item" data-short="E"><i data-icon="book-open" class="icon"></i><span>Estudos</span></a>
+    </div>
+    <div class="sidebar-nav-scroll">
+      <div class="nav-section">
+        <a href="../notifications.html" class="nav-item has-badge"><i data-icon="bell" class="icon icon-sm"></i>Avisos <span class="badge-count">12</span></a>
+        <a href="../agenda.html" class="nav-item"><i data-icon="calendar" class="icon icon-sm"></i>Agenda</a>
+        <a href="../buscar.html" class="nav-item"><i data-icon="search" class="icon icon-sm"></i>Buscar</a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">— Studio</div>
+        <a href="studio-home.html" class="nav-item"><i data-icon="briefcase" class="icon icon-sm"></i>Visão geral</a>
+        <a href="mentorias.html" class="nav-item"><i data-icon="video" class="icon icon-sm"></i>Mentorias</a>
+        <a href="aulas-biblioteca.html" class="nav-item"><i data-icon="film" class="icon icon-sm"></i>Aulas</a>
+        <a href="mentorados.html" class="nav-item"><i data-icon="users" class="icon icon-sm"></i>Mentorados</a>
+        <a href="sessoes-1-1.html" class="nav-item"><i data-icon="calendar" class="icon icon-sm"></i>Sessões 1:1</a>
+        <a href="comunidade.html" class="nav-item"><i data-icon="message-circle" class="icon icon-sm"></i>Comunidade</a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">— Negócio</div>
+        <a href="receitas.html" class="nav-item"><i data-icon="dollar" class="icon icon-sm"></i>Receitas</a>
+        <a href="checkout-builder.html" class="nav-item"><i data-icon="credit-card" class="icon icon-sm"></i>Checkout</a>
+        <a href="cupons.html" class="nav-item"><i data-icon="tag" class="icon icon-sm"></i>Cupons</a>
+        <a href="pagina-publica.html" class="nav-item"><i data-icon="globe" class="icon icon-sm"></i>Página pública</a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">— Conta</div>
+        <a href="configuracoes.html" class="nav-item"><i data-icon="settings" class="icon icon-sm"></i>Configurações</a>
+        <a href="integracoes.html" class="nav-item active"><i data-icon="external" class="icon icon-sm"></i>Integrações<span class="nav-dot"></span></a>
+      </div>
+    </div>
+    <div class="sidebar-footer-v3">
+      <a href="../account.html" class="user-pill-v3"><div class="avatar-sm">LV</div><div><div class="user-pill-v3-name">Lucas Vieira</div><div class="user-pill-v3-role">Seat 12</div></div></a>
+      <button class="sidebar-toggle-btn" data-sidebar-toggle><i data-icon="chevron-left" class="icon"></i><span>Recolher menu</span></button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="page-head">
+      <div class="page-head-text">
+        <div class="page-eyebrow"><span class="gold-rule"></span><span class="page-eyebrow-text">Studio · Integrações</span></div>
+        <h1 class="page-title">Suas <span class="page-title-serif-italic">integrações</span>.</h1>
+        <p class="page-sub">6 integrações nativas. CISPay e Mux são obrigatórias da plataforma. Cal.com, Google, WhatsApp e Zapier opcionais.</p>
+      </div>
+    </div>
+
+    <div class="grid grid-3" style="gap: 18px;">
+      <div class="surface" style="padding: 28px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 18px;"><div style="width: 48px; height: 48px; border-radius: 12px; background: var(--blue-realce-muted); display: flex; align-items: center; justify-content: center; color: var(--blue-realce);"><i data-icon="credit-card" class="icon icon-lg"></i></div><span class="badge badge-success">Ativo · obrigatório</span></div>
+        <div style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500; margin-bottom: 6px;">CISPay</div>
+        <p class="muted" style="font-size: 12px; line-height: 1.5; margin-bottom: 16px;">Gateway de pagamento interno Febracis. Cartão · Pix · boleto · split automático · NF-e.</p>
+        <button class="btn btn-outline btn-sm" style="width: 100%;">Ver configuração</button>
+      </div>
+
+      <div class="surface" style="padding: 28px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 18px;"><div style="width: 48px; height: 48px; border-radius: 12px; background: var(--blue-realce-muted); display: flex; align-items: center; justify-content: center; color: var(--blue-realce);"><i data-icon="video" class="icon icon-lg"></i></div><span class="badge badge-success">Ativo · obrigatório</span></div>
+        <div style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500; margin-bottom: 6px;">Mux Video</div>
+        <p class="muted" style="font-size: 12px; line-height: 1.5; margin-bottom: 16px;">Upload, encode, DRM e player de todas as suas aulas. URLs assinadas com TTL 4h.</p>
+        <button class="btn btn-outline btn-sm" style="width: 100%;">Ver uso</button>
+      </div>
+
+      <div class="surface" style="padding: 28px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 18px;"><div style="width: 48px; height: 48px; border-radius: 12px; background: var(--blue-realce-muted); display: flex; align-items: center; justify-content: center; color: var(--blue-realce);"><i data-icon="calendar" class="icon icon-lg"></i></div><span class="badge badge-success">Ativo</span></div>
+        <div style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500; margin-bottom: 6px;">Cal.com</div>
+        <p class="muted" style="font-size: 12px; line-height: 1.5; margin-bottom: 16px;">Agendamento de sessões 1:1. Sincroniza com Google Calendar. Buffer e limites configuráveis.</p>
+        <button class="btn btn-outline btn-sm" style="width: 100%;">Editar disponibilidade</button>
+      </div>
+
+      <div class="surface" style="padding: 28px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 18px;"><div style="width: 48px; height: 48px; border-radius: 12px; background: var(--blue-realce-muted); display: flex; align-items: center; justify-content: center; color: var(--blue-realce);"><i data-icon="calendar" class="icon icon-lg"></i></div><span class="badge badge-success">Ativo</span></div>
+        <div style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500; margin-bottom: 6px;">Google Calendar</div>
+        <p class="muted" style="font-size: 12px; line-height: 1.5; margin-bottom: 16px;">Sua agenda do Studio sincroniza bidirecionalmente. Conflitos detectados automaticamente.</p>
+        <button class="btn btn-outline btn-sm" style="width: 100%;">Reconectar</button>
+      </div>
+
+      <div class="surface" style="padding: 28px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 18px;"><div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(37,211,102,0.10); display: flex; align-items: center; justify-content: center; color: #25D366;"><i data-icon="message-circle" class="icon icon-lg"></i></div><span class="badge badge-success">Ativo</span></div>
+        <div style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500; margin-bottom: 6px;">WhatsApp Business</div>
+        <p class="muted" style="font-size: 12px; line-height: 1.5; margin-bottom: 16px;">Via Evolution API. Lembretes de sessão, boas-vindas, nudges automáticos.</p>
+        <button class="btn btn-outline btn-sm" style="width: 100%;">Ver templates</button>
+      </div>
+
+      <div class="surface" style="padding: 28px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 18px;"><div style="width: 48px; height: 48px; border-radius: 12px; background: var(--bg-card-hover); display: flex; align-items: center; justify-content: center; color: var(--text-muted);"><i data-icon="zap" class="icon icon-lg"></i></div><span class="badge" style="font-size: 9px;">Disponível</span></div>
+        <div style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500; margin-bottom: 6px;">Zapier / n8n</div>
+        <p class="muted" style="font-size: 12px; line-height: 1.5; margin-bottom: 16px;">Conecte com CRM, planilhas, automações. Webhooks de venda, sessão e comunidade.</p>
+        <button class="btn btn-chrome btn-sm" style="width: 100%;">Conectar</button>
+      </div>
+
+      <div class="surface" style="padding: 28px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 18px;"><div style="width: 48px; height: 48px; border-radius: 12px; background: var(--bg-card-hover); display: flex; align-items: center; justify-content: center; color: var(--text-muted);"><i data-icon="mail" class="icon icon-lg"></i></div><span class="badge" style="font-size: 9px;">Disponível</span></div>
+        <div style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500; margin-bottom: 6px;">Email marketing</div>
+        <p class="muted" style="font-size: 12px; line-height: 1.5; margin-bottom: 16px;">Mailchimp · ConvertKit · ActiveCampaign. Sincroniza lista de mentorados ativos.</p>
+        <button class="btn btn-chrome btn-sm" style="width: 100%;">Escolher provedor</button>
+      </div>
+
+      <div class="surface" style="padding: 28px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 18px;"><div style="width: 48px; height: 48px; border-radius: 12px; background: var(--bg-card-hover); display: flex; align-items: center; justify-content: center; color: var(--text-muted);"><i data-icon="bar-chart" class="icon icon-lg"></i></div><span class="badge" style="font-size: 9px;">Disponível</span></div>
+        <div style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500; margin-bottom: 6px;">Salesforce CIS</div>
+        <p class="muted" style="font-size: 12px; line-height: 1.5; margin-bottom: 16px;">Para mentores do ecossistema Febracis · sincroniza Yield CIS e Cross-Floor automaticamente.</p>
+        <button class="btn btn-outline btn-sm" style="width: 100%;">Solicitar acesso</button>
+      </div>
+
+      <div class="surface" style="padding: 28px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 18px;"><div style="width: 48px; height: 48px; border-radius: 12px; background: var(--bg-card-hover); display: flex; align-items: center; justify-content: center; color: var(--text-muted);"><i data-icon="external" class="icon icon-lg"></i></div><span class="badge" style="font-size: 9px;">Beta</span></div>
+        <div style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500; margin-bottom: 6px;">API HMC</div>
+        <p class="muted" style="font-size: 12px; line-height: 1.5; margin-bottom: 16px;">Endpoints REST + webhooks. Para integrações customizadas. Documentação completa.</p>
+        <button class="btn btn-chrome btn-sm" style="width: 100%;">Gerar API key</button>
+      </div>
+    </div>
+  </main>
+</div>
+<div class="wf-note">Studio · Integrações</div>
+</body>
+</html>

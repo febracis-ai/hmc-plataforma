@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual do produto · HMC</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_shared.css?v=16">
+<script src="_icons.js?v=16" defer></script>
+<style>
+html, body { overflow-x: clip; max-width: 100%; }
+body { background: var(--bg); color: var(--text); min-height: 100vh; font-family: 'Inter', sans-serif; }
+
+/* ─── LAYOUT ─── */
+.man-shell { display: grid; grid-template-columns: 280px minmax(0, 1fr); min-height: 100vh; }
+@media (max-width: 900px) { .man-shell { grid-template-columns: 1fr; } .man-toc { position: static !important; max-height: none !important; border-right: none !important; border-bottom: 1px solid var(--divider); } }
+
+/* ─── TOC (sidebar) ─── */
+.man-toc { background: var(--bg-card); border-right: 1px solid var(--divider); padding: 28px 22px; position: sticky; top: 0; max-height: 100vh; overflow-y: auto; }
+.man-toc-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 22px; padding-bottom: 18px; border-bottom: 1px solid var(--divider); text-decoration: none; color: inherit; }
+.man-toc-brand img { width: 30px; height: 30px; }
+.man-toc-brand-text { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 500; line-height: 1.2; }
+.man-toc-brand-sub { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600; color: var(--text-muted); margin-top: 2px; }
+
+.man-toc-search { width: 100%; padding: 9px 14px 9px 34px; background: var(--bg); border: 1px solid var(--divider); border-radius: 8px; font-family: inherit; font-size: 13px; color: var(--text); outline: none; margin-bottom: 18px; background-image: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235A6478' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.3-4.3'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: 11px center; }
+.man-toc-search:focus { border-color: var(--blue-realce); }
+
+.man-toc-section { margin-bottom: 14px; }
+.man-toc-h { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 8px; padding: 0 6px; }
+.man-toc a { display: block; padding: 6px 10px; font-size: 12.5px; color: var(--text); text-decoration: none; border-radius: 6px; line-height: 1.35; margin-bottom: 2px; }
+.man-toc a:hover { background: var(--bg-card-hover); }
+.man-toc a.active { background: var(--blue-realce-muted); color: var(--blue-realce); font-weight: 600; }
+
+.man-toc-back { display: block; padding: 8px 10px; margin-top: 18px; font-size: 11px; color: var(--text-muted); text-decoration: none; border-top: 1px solid var(--divider); padding-top: 14px; }
+.man-toc-back:hover { color: var(--blue-realce); }
+
+/* ─── CONTEÚDO ─── */
+.man-main { padding: 56px clamp(28px, 5vw, 80px) 96px; max-width: 920px; }
+.man-hero { padding-bottom: 36px; margin-bottom: 48px; border-bottom: 1px solid var(--divider); }
+.man-hero-eyebrow { font-size: 11px; color: var(--blue-realce); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+.man-hero-eyebrow .pill { padding: 3px 9px; background: rgba(46,204,113,0.10); color: #2ecc71; border-radius: 99px; font-size: 9px; }
+h1.man-h1 { font-family: 'Playfair Display', serif; font-size: clamp(36px, 5vw, 52px); font-weight: 500; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 18px; }
+.man-hero-lead { font-size: 17px; line-height: 1.65; color: var(--text-muted); max-width: 680px; }
+
+section.man-sec { scroll-margin-top: 24px; margin-bottom: 56px; }
+.man-sec-head { padding-bottom: 14px; margin-bottom: 22px; border-bottom: 1px solid var(--divider); }
+.man-sec-eyebrow { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 8px; }
+h2.man-h2 { font-family: 'Playfair Display', serif; font-size: clamp(26px, 3vw, 34px); font-weight: 500; letter-spacing: -0.025em; line-height: 1.15; }
+h3.man-h3 { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500; letter-spacing: -0.015em; margin: 28px 0 12px; }
+h4.man-h4 { font-size: 14px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text); margin: 22px 0 10px; }
+
+.man-main p { font-size: 14.5px; line-height: 1.75; margin-bottom: 14px; color: var(--text); }
+.man-main p strong { color: var(--text); font-weight: 600; }
+.man-main em { font-style: italic; color: var(--text); }
+.man-main code { padding: 2px 7px; background: var(--bg-card); border: 1px solid var(--divider); border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--blue-realce); }
+
+.man-main ul, .man-main ol { padding-left: 22px; margin-bottom: 16px; font-size: 14.5px; line-height: 1.75; }
+.man-main li { margin-bottom: 6px; }
+.man-main ul li::marker { color: var(--blue-realce); }
+
+/* Callout / note boxes */
+.man-note { padding: 16px 20px; background: var(--bg-card); border-left: 3px solid var(--blue-realce); border-radius: 0 10px 10px 0; margin: 18px 0; font-size: 13.5px; line-height: 1.7; }
+.man-note.gold { border-left-color: #d2a344; background: rgba(210,163,68,0.04); }
+.man-note.warn { border-left-color: #f39c12; background: rgba(243,156,18,0.04); }
+.man-note.danger { border-left-color: #C8442B; background: rgba(200,68,43,0.04); }
+.man-note.ok { border-left-color: #2ecc71; background: rgba(46,204,113,0.05); }
+.man-note.ok strong::before { content: '✓ '; color: #2ecc71; }
+.man-note strong { display: block; margin-bottom: 4px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text); }
+
+/* Glossário */
+.gloss-grid { display: grid; gap: 14px; }
+.gloss-card { padding: 18px 22px; background: var(--bg-card); border: 1px solid var(--divider); border-radius: 12px; scroll-margin-top: 24px; }
+.gloss-card[id]:target { border-color: var(--blue-realce); box-shadow: 0 0 0 3px var(--blue-realce-muted); }
+.gloss-head { display: flex; gap: 10px; align-items: baseline; margin-bottom: 6px; flex-wrap: wrap; }
+.gloss-term { font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 500; letter-spacing: -0.015em; color: var(--text); }
+.gloss-alt { font-size: 11px; color: var(--text-muted); font-style: italic; }
+.gloss-cat { font-size: 9px; padding: 3px 8px; border-radius: 4px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; }
+.gloss-cat.clube { background: rgba(210,163,68,0.12); color: #b8862e; }
+.gloss-cat.estrutura { background: var(--blue-realce-muted); color: var(--blue-realce); }
+.gloss-cat.ritual { background: rgba(46,204,113,0.10); color: #2ecc71; }
+.gloss-cat.sistema { background: rgba(168,230,255,0.18); color: var(--blue-realce); }
+.gloss-cat.papel { background: rgba(243,156,18,0.10); color: #f39c12; }
+.gloss-cat.tech { background: var(--bg-card-hover); color: var(--text-muted); }
+.gloss-cat.externo { background: rgba(168,230,255,0.10); color: var(--text-muted); }
+.gloss-def { font-size: 14px; line-height: 1.65; color: var(--text); margin-bottom: 10px; }
+.gloss-detail { font-size: 12.5px; line-height: 1.65; color: var(--text-muted); }
+.gloss-detail strong { color: var(--text); font-weight: 600; }
+.gloss-link { display: inline-flex; gap: 6px; align-items: center; font-size: 11px; color: var(--blue-realce); text-decoration: none; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-top: 8px; }
+.gloss-link:hover { color: var(--blue-chrome); }
+
+/* Personas cards */
+.persona-grid-man { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 16px 0; }
+.persona-tile { padding: 22px; background: var(--bg-card); border: 1px solid var(--divider); border-radius: 14px; border-left: 3px solid var(--blue-realce); }
+.persona-tile.lucas { border-left-color: var(--blue-realce); }
+.persona-tile.mariana { border-left-color: #A8E6FF; }
+.persona-tile.bruno { border-left-color: var(--blue-chrome); }
+.persona-tile.carlos { border-left-color: #d2a344; }
+.persona-tile.michelle { border-left-color: #A1721E; }
+.persona-tile.pv { border-left-color: #d2a344; background: linear-gradient(135deg, rgba(210,163,68,0.04), var(--bg-card)); }
+.persona-tile.suporte { border-left-color: #2ecc71; }
+.persona-tile-head { display: flex; gap: 12px; align-items: center; margin-bottom: 14px; }
+.persona-tile-avatar { width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 600; font-size: 15px; color: white; flex-shrink: 0; }
+.persona-tile-name { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 500; }
+.persona-tile-role { font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-top: 2px; }
+.persona-tile-section { margin-top: 12px; }
+.persona-tile-h { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 6px; }
+.persona-tile p { font-size: 13px; line-height: 1.6; margin-bottom: 0; }
+.persona-tile ul { padding-left: 16px; margin: 0; font-size: 12.5px; line-height: 1.7; }
+.persona-tile ul li::marker { color: var(--blue-realce); }
+
+/* Tier cards */
+.tier-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 16px 0; }
+@media (max-width: 720px) { .tier-grid { grid-template-columns: 1fr; } }
+.tier-card { padding: 22px; background: var(--bg-card); border: 1px solid var(--divider); border-radius: 14px; position: relative; }
+.tier-card.t2 { border-color: rgba(77,184,255,0.30); }
+.tier-card.t3 { border-color: rgba(210,163,68,0.30); background: linear-gradient(135deg, rgba(210,163,68,0.04), var(--bg-card)); }
+.tier-roman { font-family: 'Playfair Display', serif; font-size: 56px; font-weight: 500; letter-spacing: -0.03em; line-height: 1; margin-bottom: 6px; }
+.tier-card-seal { position: absolute; top: 18px; right: 18px; width: 64px; height: 64px; pointer-events: none; }
+.tier-card-seal img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 6px 14px rgba(0,0,0,0.18)); display: block; }
+.tier-card { padding-right: 92px; }
+@media (max-width: 720px) { .tier-card { padding-right: 22px; } .tier-card-seal { position: static; width: 72px; height: 72px; margin-bottom: 10px; } }
+.tier-name { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 500; margin-bottom: 12px; }
+.tier-alt { font-size: 11px; color: var(--text-muted); font-style: italic; display: block; margin-top: 2px; }
+.tier-list { list-style: none; padding: 0; margin-top: 12px; font-size: 12.5px; line-height: 1.85; }
+.tier-list li::before { content: '↳ '; color: var(--blue-realce); }
+.tier-list li { padding-left: 0; }
+.tier-card.t3 .tier-list li::before { color: #d2a344; }
+
+/* Process flow */
+.flow-steps { display: grid; gap: 8px; counter-reset: step; margin: 16px 0; }
+.flow-step { padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--divider); border-radius: 10px; display: grid; grid-template-columns: 32px 1fr; gap: 14px; }
+.flow-step::before { counter-increment: step; content: counter(step); width: 30px; height: 30px; border-radius: 50%; background: var(--blue-realce); color: white; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px; }
+.flow-step-title { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+.flow-step-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+/* Alphabet index */
+.abc-index { display: flex; gap: 4px; flex-wrap: wrap; padding: 12px 0; margin-bottom: 18px; position: sticky; top: 0; background: var(--bg); border-bottom: 1px solid var(--divider); z-index: 5; }
+.abc-index a { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 6px; font-size: 12px; font-weight: 700; color: var(--text-muted); text-decoration: none; font-family: 'JetBrains Mono', monospace; }
+.abc-index a:hover { background: var(--blue-realce-muted); color: var(--blue-realce); }
+.abc-index a.disabled { opacity: 0.25; pointer-events: none; }
+
+/* Decision box */
+.decision-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
+@media (max-width: 720px) { .decision-row { grid-template-columns: 1fr; } }
+.decision-card { padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--divider); border-radius: 10px; }
+.decision-card-h { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; margin-bottom: 6px; }
+.decision-card.opt-a { border-left: 3px solid var(--blue-realce); }
+.decision-card.opt-a .decision-card-h { color: var(--blue-realce); }
+.decision-card.opt-b { border-left: 3px solid #d2a344; }
+.decision-card.opt-b .decision-card-h { color: #d2a344; }
+</style>
+</head>
+<body>
+
+<div class="man-shell">
+
+  <!-- TOC LATERAL -->
+  <aside class="man-toc">
+    <a href="dev-login.html" class="man-toc-brand">
+      <img src="hmc-logo.png" alt="">
+      <div>
+        <div class="man-toc-brand-text">Manual do produto</div>
+        <div class="man-toc-brand-sub">HMC · Bíblia interna</div>
+      </div>
+    </a>
+
+    <input type="search" class="man-toc-search" placeholder="Buscar termo..." id="manSearch">
+
+    <div class="man-toc-section">
+      <div class="man-toc-h">— Visão geral</div>
+      <a href="#sumario">1 · Sumário executivo</a>
+      <a href="#cascata">2 · Cascata MELID → HMC</a>
+    </div>
+
+    <div class="man-toc-section">
+      <div class="man-toc-h">— Pessoas</div>
+      <a href="#personas">3 · Personas (7 tipos)</a>
+      <a href="#rbac">4 · Matriz de acesso (RBAC)</a>
+    </div>
+
+    <div class="man-toc-section">
+      <div class="man-toc-h">— Estrutura</div>
+      <a href="#tiers">5 · Os 3 Tiers</a>
+      <a href="#rituais">6 · Rituais do clube</a>
+      <a href="#sistemas">7 · Sistemas internos</a>
+    </div>
+
+    <div class="man-toc-section">
+      <div class="man-toc-h">— Vocabulário</div>
+      <a href="#glossario">8 · Glossário A-Z</a>
+    </div>
+
+    <div class="man-toc-section">
+      <div class="man-toc-h">— Processos</div>
+      <a href="#proc-entrada">9 · Como entra no clube</a>
+      <a href="#proc-tier">10 · Como sobe de tier</a>
+      <a href="#proc-saida">11 · Suspensão / saída</a>
+      <a href="#proc-venda">12 · Como vende (Studio + CISPay)</a>
+    </div>
+
+    <div class="man-toc-section">
+      <div class="man-toc-h">— Jornadas</div>
+      <a href="#jornadas">13 · Fluxos passo-a-passo</a>
+    </div>
+
+    <div class="man-toc-section">
+      <div class="man-toc-h">— Plataforma</div>
+      <a href="#stack">14 · Stack técnica</a>
+      <a href="#decisoes">15 · Decisões em aberto</a>
+    </div>
+
+    <a href="dev-login.html" class="man-toc-back">← Voltar pro dev-login</a>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="man-main">
+
+    <!-- HERO -->
+    <div class="man-hero">
+      <div class="man-hero-eyebrow">— Manual oficial do produto <span class="pill">Vivo · sempre atualizado</span></div>
+      <h1 class="man-h1">A bíblia do <span class="serif-italic">HMC</span>.</h1>
+      <p class="man-hero-lead">Tudo que existe no produto · nomes próprios, papéis, rituais, processos, sistemas internos. Pra você apresentar sem hesitar. Atualizado por regra a cada mudança estrutural.</p>
+    </div>
+
+    <!-- 1. SUMÁRIO EXECUTIVO -->
+    <section class="man-sec" id="sumario">
+      <div class="man-sec-head">
+        <div class="man-sec-eyebrow">— 01 · Visão geral</div>
+        <h2 class="man-h2">Sumário executivo · o que é o HMC.</h2>
+      </div>
+
+      <p><strong>HMC (High Mentor Club)</strong> é um clube fechado de mentores high-ticket comandado pela curadoria pessoal de <strong>Paulo Vieira</strong>. <strong>Não é academia. Não é curso. Não é marketplace aberto.</strong> É onde mentores que já operam com ticket validado (≥ R$ 25k recorrente) se sentam à mesma mesa pra:</p>
+
+      <ul>
+        <li><strong>Operar</strong> dentro do clube · Studio próprio + checkout CISPay (90% líquido pro mentor)</li>
+        <li><strong>Conviver ritualisticamente</strong> · Council mensal, Pilgrimages (eventos premium), Antechamber (Tier III), Curator's Address</li>
+        <li><strong>Co-curar negócios</strong> · Cross-Floor (marketplace fechado de vagas com 20% das vagas circulando entre membros)</li>
+        <li><strong>Acessar a rede de franquias do ecossistema PV</strong> (Tier III) via The Bridge</li>
+      </ul>
+
+      <div class="man-note">
+        <strong>Princípio fundador</strong>
+        Quem entra não sai. Quem sai por escolha não volta. Tier rebaixado é violação grave — caminho de uma só direção.
+      </div>
+
+      <h3 class="man-h3">Ecossistema Paulo Vieira / Febracis</h3>
+      <p>HMC faz parte de um ecossistema maior. <strong>Sua marca-irmã é o MELID</strong> (Mentor de Líderes) — programa que <em>forma</em> mentor high-ticket em 12 meses. Cascata oficial:</p>
+
+      <p><code>MELID</code> <strong>forma</strong> mentor → <code>HMC</code> <strong>abraça</strong> mentor</p>
+
+      <p>Dos 12 mentores atualmente no HMC, 5 vieram da formação MELID. Não é "consolação" — é a rota mapeada pra quem chega antes do ticket validado.</p>
+    </section>
+
+    <!-- 2. CASCATA -->
+    <section class="man-sec" id="cascata">
+      <div class="man-sec-head">
+        <div class="man-sec-eyebrow">— 02 · Cascata do ecossistema</div>
+        <h2 class="man-h2">MELID → HMC. Mesma família, papéis diferentes.</h2>
+      </div>
+
+      <div class="decision-row">
+        <div class="decision-card opt-b">
+          <div class="decision-card-h">— Forma · MELID</div>
+          <p style="font-size: 13px; margin: 0;">Programa de formação. 12 meses, 4 pilares (Mentor High Ticket, Palestrante Poderoso, Influenciador Digital, Escritor Best-Seller). Cohort fechado. Mentoria coletiva PV + time. Tem início, meio e graduation. ~R$ 150k. URL: <code>lp.febracis.com/l/lp-mentor-de-lideres</code>.</p>
+        </div>
+        <div class="decision-card opt-a">
+          <div class="decision-card-h">— Abraça · HMC</div>
+          <p style="font-size: 13px; margin: 0;">Clube permanente. Sem prazo. Admissão por crivo curatorial. Mentor opera dentro do clube com Studio próprio, Council mensal, Cross-Floor, Yield CIS. Quem entra não sai. Fee HMC 10% sobre GMV (sem mensalidade).</p>
+        </div>
+      </div>
+
+      <p>Os dois são produtos do <strong>ecossistema Paulo Vieira / Febracis</strong>. Não competem — operam em momentos diferentes da jornada do mentor. PV é o mesmo Curador nos dois.</p>
+    </section>
+
+    <!-- 3. PERSONAS -->
+    <section class="man-sec" id="personas">
+      <div class="man-sec-head">
+        <div class="man-sec-eyebrow">— 03 · Pessoas</div>
+        <h2 class="man-h2">As 7 personas oficiais do produto.</h2>
+      </div>
+
+      <p>Cada uma com hub próprio, sidebar específica, e modes de acesso travados via JS (<code>_persona.js?v=16</code>) + em produção via RLS Supabase.</p>
+
+      <div class="persona-grid-man">
+
+        <div class="persona-tile lucas">
+          <div class="persona-tile-head">
+            <div class="persona-tile-avatar" style="background: linear-gradient(135deg, var(--blue-realce), var(--blue-chrome));">LV</div>
+            <div><div class="persona-tile-name">Lucas Vieira</div><div class="persona-tile-role">Multi-role · Seat 12 · Tier II</div></div>
+          </div>
+          <p><strong>Persona principal de demonstração.</strong> Opera como mentor (Studio) + é membro do clube + estuda como mentorado de outro mentor (Renata Mendes). Acumula 3 papéis numa mesma conta.</p>
+          <div class="persona-tile-section">
+            <div class="persona-tile-h">— Acessa</div>
+            <ul><li>Hub (4 mundos)</li><li>Clube Tier II</li><li>Studio (42 mentorados)</li><li>Estudos (1 curso em andamento)</li></ul>
+          </div>
+        </div>
+
+        <div class="persona-tile mariana">
+          <div class="persona-tile-head">
+            <div class="persona-tile-avatar" style="background: var(--blue-realce);">MS</div>
+            <div><div class="persona-tile-name">Mariana Souza</div><div class="persona-tile-role">Mentorada pura</div></div>
+          </div>
+          <p>Comprou mentoria do Lucas. <strong>Não é membro do clube, não opera Studio.</strong> Só consome conteúdo, participa de comunidade, faz sessões 1:1.</p>
+          <div class="persona-tile-section">
+            <div class="persona-tile-h">— Acessa</div>
+            <ul><li>Hub-mentorado</li><li>Estudos (3 cursos)</li><li>Comunidades dos mentores dela</li><li>Sessões 1:1 + certificados</li></ul>
+          </div>
+        </div>
+
+        <div class="persona-tile bruno">
+          <div class="persona-tile-head">
+            <div class="persona-tile-avatar" style="background: var(--blue-chrome);">BV</div>
+            <div><div class="persona-tile-name">Bruno Vaz</div><div class="persona-tile-role">Mentor puro · Tier II</div></div>
+          </div>
+          <p>Opera Studio próprio + é membro do clube. <strong>Não estuda com outros mentores</strong> — não usa Estudos. Vê 3 mundos no hub.</p>
+          <div class="persona-tile-section">
+            <div class="persona-tile-h">— Acessa</div>
+            <ul><li>Hub (3 mundos)</li><li>Clube Tier II</li><li>Studio próprio</li></ul>
+          </div>
+        </div>
+
+        <div class="persona-tile carlos">
+          <div class="persona-tile-head">
+            <div class="persona-tile-avatar" style="background: linear-gradient(135deg, var(--blue-deep), var(--blue-realce)); color: var(--blue-highlight);">CR</div>
+            <div><div class="persona-tile-name">Carlos Ribeiro</div><div class="persona-tile-role">Sovereign Mentor · Tier III</div></div>
+          </div>
+          <p>Mentor Tier III · franqueado do ecossistema PV SP. <strong>Acesso a áreas restritas do clube</strong>: Antechamber (chat 1:1 PV), Curator's Address (cartas mensais), The Bridge (franquias do ecossistema PV), Os Quatro Motores.</p>
+          <div class="persona-tile-section">
+            <div class="persona-tile-h">— Áreas exclusivas Tier III</div>
+            <ul><li>Antechamber (com PV)</li><li>Curator's Address</li><li>The Bridge</li></ul>
+          </div>
+        </div>
+
+        <div class="persona-tile michelle">
+          <div class="persona-tile-head">
+            <div class="persona-tile-avatar" style="background: #A1721E;">MC</div>
+            <div><div class="persona-tile-name">Michelle</div><div class="persona-tile-role">Time Curator · Operação</div></div>
+          </div>
+          <p>Curadoria operacional do clube. <strong>Não é mentor, não estuda, não é membro</strong>. Acessa workspace administrativo: aprovações, promoções de tier, disputas, financeiro consolidado, moderação.</p>
+          <div class="persona-tile-section">
+            <div class="persona-tile-h">— 16 áreas admin</div>
+            <ul><li>Aprovações + Tier promotion</li><li>Membros ativos + Moderação</li><li>Financeiro + Yield + Analytics</li><li>Council + Pilgrimages + Codex</li></ul>
+          </div>
+        </div>
+
+        <div class="persona-tile suporte">
+          <div class="persona-tile-head">
+            <div class="persona-tile-avatar" style="background: #2ecc71;">BL</div>
+            <div><div class="persona-tile-name">Beatriz Lima</div><div class="persona-tile-role">Suporte · Atendente</div></div>
+          </div>
+          <p>Atende tickets de mentorados (CISPay, Mux, acesso, etc) e modera comunidades quando IA flagga conteúdo. <strong>Subset do Curator</strong>: NÃO vê Financeiro, Yield, Promoções, Codex, Council.</p>
+          <div class="persona-tile-section">
+            <div class="persona-tile-h">— Acessa</div>
+            <ul><li>Hub-suporte (fila SLA)</li><li>Tickets · suporte-admin</li><li>Moderação (auto-flag IA)</li><li>Escalonamento → Michelle</li></ul>
+          </div>
+        </div>
+
+        <div class="persona-tile pv">
+          <div class="persona-tile-head">
+            <div class="persona-tile-avatar" style="background: linear-gradient(135deg, var(--blue-deep), var(--blue-realce)); color: var(--blue-highlight);">PV</div>
+            <div><div class="persona-tile-name">Paulo Vieira</div><div class="persona-tile-role">The Curator · Founder</div></div>
+          </div>
+          <p><strong>Único founder.</strong> Não é sócio das mentorias — é Curador. Escreve as cartas Tier III (Curator's Address), responde Antechamber, publica Codex. Decisão final em qualquer aprovação. Vista exclusiva com KPIs estratégicos.</p>
+          <div class="persona-tile-section">
+            <div class="persona-tile-h">— Áreas só-PV</div>
+            <ul><li>Hub-PV (founder dashboard)</li><li>Curator's Address editor</li><li>Antechamber lado-PV</li><li>Codex publishing</li></ul>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="man-note warn">
+        <strong>Personas auxiliares (públicas)</strong>
+        Além das 7 acima existem 2 estados públicos: <strong>Visitante</strong> (não logado, vê landing/catalog/checkout) e <strong>Candidato em análise</strong> (aplicou como mentor, acompanha status). Não estão no <code>_persona.js?v=16</code> porque não têm sessão autenticada.
+      </div>
+    </section>
+
+    <!-- 4. RBAC -->
+    <section class="man-sec" id="rbac">
+      <div class="man-sec-head">
+        <div class="man-sec-eyebrow">— 04 · RBAC</div>
+        <h2 class="man-h2">Matriz oficial de acesso.</h2>
+      </div>
+
+      <p>Cada persona acessa apenas os modes da sua coluna. Em produção, RLS Supabase + JWT no NestJS garantem isso server-side. Em wireframe, <code>_persona.js?v=16</code> aplica via JS.</p>
+
+      <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin: 14px 0;">
+          <thead>
+            <tr style="background: var(--bg-card);">
+              <th style="padding: 12px 14px; text-align: left; border: 1px solid var(--divider); font-weight: 600;">Persona</th>
+              <th style="padding: 12px 14px; text-align: center; border: 1px solid var(--divider); font-weight: 600;">Hub</th>
+              <th style="padding: 12px 14px; text-align: center; border: 1px solid var(--divider); font-weight: 600;">Clube</th>
+              <th style="padding: 12px 14px; text-align: center; border: 1px solid var(--divider); font-weight: 600;">Studio</th>
+              <th style="padding: 12px 14px; text-align: center; border: 1px solid var(--divider); font-weight: 600;">Estudos</th>
+              <th style="padding: 12px 14px; text-align: center; border: 1px solid var(--divider); font-weight: 600;">Curator</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style="padding: 10px 14px; border: 1px solid var(--divider);">Mariana · mentorada pura</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider);">hub-mentorado</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider); color: var(--text-faint);">—</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider); color: var(--text-faint);">—</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider); color: #2ecc71;">✓</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider); color: var(--text-faint);">—</td></tr>
+            <tr><td style="padding: 10px 14px; border: 1px solid var(--divider);">Lucas · multi-role</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider);">hub (dinâmico)</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider); color: #2ecc71;">✓ Tier II</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider); color: #2ecc71;">✓</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider); color: #2ecc71;">✓</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider); color: var(--text-faint);">—</td></tr>
+            <tr><td style="padding: 10px 14px; border: 1px solid var(--divider);">Bruno · mentor puro</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider);">hub (dinâmico)</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider); color: #2ecc71;">✓ Tier II</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider); color: #2ecc71;">✓</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider); color: var(--text-faint);">—</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider); color: var(--text-faint);">—</td></tr>
+            <tr><td style="padding: 10px 14px; border: 1px solid var(--divider);">Carlos · Tier III</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider);">hub (dinâmico)</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider); color: #2ecc71;">✓ +Antechamber +Bridge</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider); color: #2ecc71;">✓</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider); color: var(--text-faint);">—</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider); color: var(--text-faint);">—</td></tr>
+            <tr><td style="padding: 10px 14px; border: 1px solid var(--divider);">Michelle · Curator</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider);">hub-curator</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider); color: var(--text-faint);">—</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider); color: var(--text-faint);">—</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider); color: var(--text-faint);">—</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider); color: #2ecc71;">✓ Full</td></tr>
+            <tr><td style="padding: 10px 14px; border: 1px solid var(--divider);">Beatriz · Suporte</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider);">hub-suporte</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider); color: var(--text-faint);">—</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider); color: var(--text-faint);">—</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider); color: var(--text-faint);">—</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider); color: #2ecc71;">✓ Tickets+Mod</td></tr>
+            <tr style="background: rgba(210,163,68,0.03);"><td style="padding: 10px 14px; border: 1px solid var(--divider);"><strong>PV · Founder</strong></td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider);">hub-pv</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider); color: #2ecc71;">✓ The Curator</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider); color: var(--text-faint);">—</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider); color: var(--text-faint);">—</td><td style="padding: 10px; text-align: center; border: 1px solid var(--divider); color: #2ecc71;">✓ Super</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 5. TIERS -->
+    <section class="man-sec" id="tiers">
+      <div class="man-sec-head">
+        <div class="man-sec-eyebrow">— 05 · Estrutura</div>
+        <h2 class="man-h2">Os 3 Tiers do clube.</h2>
+      </div>
+
+      <p>Quem entra começa como Tier I. Sobe via critérios objetivos + endorsos + decisão curatorial. <strong>Não desce</strong> — tier rebaixado é sanção por violação grave. Quem sai não volta.</p>
+
+      <div class="tier-grid">
+
+        <div class="tier-card">
+          <div class="tier-card-seal"><img src="tier-seals/tier-1.png?v=16" alt="Selo Tier I — Mentor of HMC"></div>
+          <div class="tier-roman">I</div>
+          <div class="tier-name">Mentor of HMC<span class="tier-alt">tier de entrada · selo bronze</span></div>
+          <p style="font-size: 13px; color: var(--text-muted);">Entrada do clube. Ticket entre <strong>R$ 25k e R$ 55k</strong>. Membro tem cadeira, voz no Council, acesso completo aos rituais comuns. Em prova de operação.</p>
+          <ul class="tier-list">
+            <li>Council mensal (voto)</li>
+            <li>Codex (leitura)</li>
+            <li>Cross-Floor (só applies)</li>
+            <li>Pilgrimages elegíveis</li>
+            <li>Seal Kit bronze</li>
+            <li>Studio com fee HMC 10%</li>
+          </ul>
+        </div>
+
+        <div class="tier-card t2">
+          <div class="tier-card-seal"><img src="tier-seals/tier-2.png?v=16" alt="Selo Tier II — High Mentor"></div>
+          <div class="tier-roman">II</div>
+          <div class="tier-name">High Mentor<span class="tier-alt">tier de operação consolidada · selo prata</span></div>
+          <p style="font-size: 13px; color: var(--text-muted);">Operação comprovada. Ticket <strong>R$ 56k a R$ 85k</strong>. Cross-Floor liberado pra publicar (cap 20%). Yield CIS ativo. Voz prioritária no Council. Pode endossar candidatos.</p>
+          <ul class="tier-list">
+            <li>Tudo do Tier I, mais:</li>
+            <li>Cross-Floor publicar</li>
+            <li>HMC Yield (16% CIS)</li>
+            <li>Pilgrimages premium</li>
+            <li>Seal Kit prata</li>
+            <li>Curator's Note no Codex</li>
+            <li>Endossar candidatos</li>
+          </ul>
+        </div>
+
+        <div class="tier-card t3">
+          <div class="tier-card-seal"><img src="tier-seals/tier-3.png?v=16" alt="Selo Tier III — Sovereign Mentor"></div>
+          <div class="tier-roman">III</div>
+          <div class="tier-name">Sovereign Mentor<span class="tier-alt">topo curatorial · selo dourado · membro do Inner Council</span></div>
+          <p style="font-size: 13px; color: var(--text-muted);">Sovereign Mentor. Ticket <strong>R$ 86k+</strong>. Convite curatorial direto de PV. Áreas restritas. Voto qualificado em governança. ≤ 6 vagas/ano.</p>
+          <ul class="tier-list">
+            <li>Tudo dos Tiers I e II, mais:</li>
+            <li>Antechamber (com PV)</li>
+            <li>The Bridge</li>
+            <li>Curator's Address</li>
+            <li>Voto qualificado governança</li>
+            <li>Co-curadoria Codex</li>
+            <li>Seal Kit dourado</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="man-note ok">
+        <strong>Vocabulário oficial travado (2026-06-11)</strong>
+        Tier I = <em>Mentor of HMC</em> · Tier II = <em>High Mentor</em> · Tier III = <em>Sovereign Mentor</em>. Vocabulário do brand book consolidado em todo o produto, alinhado com a inscrição dos selos físicos. <strong>Inner Council</strong> permanece como nome do COLETIVO dos Tier III (sala/grupo), não como nome de tier individual.
+      </div>
+    </section>
+
+    <!-- 6. RITUAIS -->
+    <section class="man-sec" id="rituais">
+      <div class="man-sec-head">
+        <div class="man-sec-eyebrow">— 06 · Vida do clube</div>
+        <h2 class="man-h2">Rituais e eventos.</h2>
+      </div>
+
+      <p>O HMC não é entrega de conteúdo — é <strong>convivência ritualizada</strong>. Os 5 rituais oficiais:</p>
+
+      <h3 class="man-h3">HMC Council</h3>
+      <p>Sessão mensal · todos os membros do clube juntos. Hotseats (2-3 membros apresentam casos reais e levam feedback do grupo), curadoria de PV na 2ª metade, anúncios e votações de promoção de tier. <strong>Presença é obrigação:</strong> ausência sem motivo afeta perfil de promoção.</p>
+
+      <h3 class="man-h3">The Pilgrimages</h3>
+      <p>Eventos premium presenciais. Cada peregrinação tem propósito próprio — não é variação da mesma coisa, é categoria distinta:</p>
+      <ul style="margin: 12px 0 0 18px; padding: 0; font-size: 14px; line-height: 1.6; color: var(--text);">
+        <li><strong>The House</strong> · peregrinação americana em julho. Hospitalidade direta do Curador no formato mais íntimo do calendário. Pré-requisito: ter passado pelo <em>Revolution</em> (programa externo PV). É a peregrinação que aproxima o membro do Curador como pessoa — não como autoridade.</li>
+        <li><strong>Inter Business</strong> · peregrinação corporativa de final de ano. Formato e local anunciados anualmente. É o encontro institucional do clube: onde decisões coletivas do ano são fechadas e o ano seguinte é desenhado.</li>
+        <li><strong>HMC Summit</strong> · encontro anual internacional, ápice do calendário ritual. Edição inaugural em Florença Q4/2026 (futuras: Patagônia, Tóquio, Davos). Restrito Tier II+, 12 cadeiras totais por edição. É a peregrinação que projeta o clube no mundo.</li>
+      </ul>
+      <p style="margin-top: 14px;">Investimento separado da fee HMC em todas. Vagas limitadas.</p>
+
+      <h3 class="man-h3">Antechamber <span style="font-size: 13px; color: var(--text-muted); font-weight: 400; font-style: italic;">(Tier III only)</span></h3>
+      <p>Chat 1:1 direto com Paulo Vieira. Cada Tier III tem sua linha. PV responde em ~14h média. <strong>Privado e cego aos outros membros.</strong> Regra tácita: não usa pra cumprimento coletivo nem dúvida de mentorado — pra decisão estratégica.</p>
+
+      <h3 class="man-h3">Curator's Address <span style="font-size: 13px; color: var(--text-muted); font-weight: 400; font-style: italic;">(Tier III only)</span></h3>
+      <p>Carta mensal de PV endereçada ao Inner Council. Publicada toda 1ª semana do mês. Disponível em texto + áudio narrado pelo próprio PV. Restrita aos 6 membros Tier III. Não-compartilhável.</p>
+
+      <h3 class="man-h3">Os Quatro Motores <span style="font-size: 13px; color: var(--text-muted); font-weight: 400; font-style: italic;">(Tier II+)</span></h3>
+      <p>Programa anual de renovação. 4 frentes que mantêm relevância do membro: clareza estratégica, presença pública, network ativo, operação contínua. Não é evento — é check-in trimestral com a curadoria.</p>
+    </section>
+
+    <!-- 7. SISTEMAS -->
+    <section class="man-sec" id="sistemas">
+      <div class="man-sec-head">
+        <div class="man-sec-eyebrow">— 07 · Plataforma</div>
+        <h2 class="man-h2">Sistemas internos.</h2>
+      </div>
+
+      <h3 class="man-h3">Studio <span style="font-size: 13px; color: var(--text-muted); font-style: italic; font-weight: 400;">(Mentor)</span></h3>
+      <p>Workspace de venda e operação de mentoria. Inclui: criar/editar programas (Mentorias), upload Mux (Aulas), CRM dos mentorados, agenda Cal.com pra Sessões 1:1, comunidade Discord-like, receitas e payouts CISPay, checkout builder, cupons, vitrine pública (<code>hmc.club/m/:slug</code>), integrações.</p>
+
+      <h3 class="man-h3">Estudos <span style="font-size: 13px; color: var(--text-muted); font-style: italic; font-weight: 400;">(Mentorado)</span></h3>
+      <p>Workspace de consumo. Biblioteca dos cursos comprados, player Mux com notas + transcrição, comunidade Discord-like, sessões 1:1, notas pessoais, progresso (gamification leve), certificados verificáveis online.</p>
+
+      <h3 class="man-h3">Cross-Floor</h3>
+      <p>Marketplace fechado de vagas entre mentores do clube. <strong>20% das vagas dos negócios dos membros circulam ali</strong> com comissão 8-12% pra quem indica. Tier I só faz <em>applies</em> · Tier II+ pode publicar. Disputas vão pra curadoria (<code>40-curator/disputas-cross-floor.html</code>).</p>
+
+      <h3 class="man-h3">HMC Yield</h3>
+      <p>Comissão CIS (Conexão · Indicação · Sinergia) sobre leads gerados pra outros mentores do clube. Taxa padrão <strong>16% CIS</strong>. Tracking via Salesforce + atribuição. Payout junto com receita Studio (dia 5 de cada mês).</p>
+
+      <div style="margin: 14px 0 22px; padding: 18px 22px; border-left: 3px solid var(--blue-realce); background: var(--blue-realce-muted); border-radius: 0 8px 8px 0;">
+        <div style="font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--blue-realce); font-weight: 700; margin-bottom: 10px;">— Origem do conceito</div>
+        <p style="font-size: 14px; line-height: 1.6; margin: 0 0 10px; color: var(--text);">A mecânica saiu da boca do próprio <strong>Paulo Vieira</strong> em material original do projeto MELID (Transcrição 2):</p>
+        <p style="font-size: 14px; line-height: 1.55; margin: 0 0 12px; padding: 12px 16px; background: var(--bg-card); border-radius: 6px; font-style: italic; color: var(--text-muted);">"...as pessoas acham que eu tô no Método CIS. Todas as vezes… vende duas ou três pessoas perguntando aonde que eu tô fazendo o Método CIS, que eles querem ir. Então, você faça, seja bem-vindo. <strong style="color: var(--text); font-style: normal;">Manda o link e ganha comissão.</strong>" — Paulo Vieira</p>
+        <p style="font-size: 13px; line-height: 1.6; margin: 0; color: var(--text-muted);">O batismo como <strong>HMC Yield</strong> e a taxa exata de 16% foram fechados no <code>07 - HMC Brand Book.pdf</code> (tabela de vocabulário do clube) e a engenharia do Módulo 5 (link único + dashboard + integração Salesforce) está descrita no <code>05 - Plataforma.pdf</code>.</p>
+      </div>
+
+      <h3 class="man-h3">The High Mentor Codex</h3>
+      <p>Anuário oficial do clube. Cada membro tem perfil (Codex Entry) com bio, mentorias, áreas, depoimentos. PV escreve decretos institucionais (gestão Codex Publishing). Volume I = Founding Edition (2026). Volume II = anuário automatizado (Codex Vol II via Inngest cron · Q1/2027).</p>
+
+      <h3 class="man-h3">HMC Seal / Kit</h3>
+      <p>Chancela visual do clube. Cada membro recebe selo personalizado com número da cadeira (Seat). Vetorizado, autenticável. Aplicação em site, capa de proposta, assinatura, fundo de Zoom. Tier I=bronze, II=prata, III=dourado.</p>
+
+      <h3 class="man-h3">The Bridge <span style="font-size: 13px; color: var(--text-muted); font-style: italic; font-weight: 400;">(Tier III only)</span></h3>
+      <p>Ponte oficial entre o HMC e o ecossistema <strong>franquias do ecossistema PV</strong> (franquias). Tier III pode indicar mentorados pra franquias ativas (SP, RJ, BH, PE, DF, etc) com comissão 8-12% estruturada pelo HMC. Pagamento direto via a franquia, cai na wallet HMC junto com Yield.</p>
+    </section>
+
+    <!-- 8. GLOSSÁRIO -->
+    <section class="man-sec" id="glossario">
+      <div class="man-sec-head">
+        <div class="man-sec-eyebrow">— 08 · Vocabulário</div>
+        <h2 class="man-h2">Glossário A-Z.</h2>
+      </div>
+
+      <div class="abc-index" id="abcIndex">
+        <a href="#g-a">A</a><a href="#g-b">B</a><a href="#g-c">C</a><a href="#g-d">D</a><a href="#g-e">E</a>
+        <a href="#g-f">F</a><a href="#g-g" class="disabled">G</a><a href="#g-h">H</a><a href="#g-i">I</a>
+        <a href="#g-j" class="disabled">J</a><a href="#g-k" class="disabled">K</a><a href="#g-l" class="disabled">L</a>
+        <a href="#g-m">M</a><a href="#g-n" class="disabled">N</a><a href="#g-o">O</a><a href="#g-p">P</a>
+        <a href="#g-q">Q</a><a href="#g-r" class="disabled">R</a><a href="#g-s">S</a><a href="#g-t">T</a>
+        <a href="#g-u" class="disabled">U</a><a href="#g-v" class="disabled">V</a><a href="#g-w" class="disabled">W</a>
+        <a href="#g-x" class="disabled">X</a><a href="#g-y">Y</a><a href="#g-z" class="disabled">Z</a>
+      </div>
+
+      <div class="gloss-grid" id="glossGrid">
+
+        <!-- A -->
+        <div class="gloss-card" id="g-a"><div class="gloss-head"><h4 class="gloss-term">Antechamber</h4><span class="gloss-cat ritual">Ritual</span><span class="gloss-cat clube">Tier III</span></div>
+          <div class="gloss-def">Linha direta 1:1 entre cada Tier III e Paulo Vieira. Chat privado com resposta média de 14h.</div>
+          <div class="gloss-detail"><strong>Etimologia:</strong> antessala — o ambiente antes da sala principal. Sugere proximidade institucional sem cerimônia. <strong>Uso correto:</strong> decisão estratégica de membro Tier III. <strong>Não usar pra:</strong> cumprimento coletivo, dúvida de mentorado.</div>
+          <a href="10-clube/antechamber.html" class="gloss-link">Abrir tela do membro →</a>
+        </div>
+
+        <!-- B -->
+        <div class="gloss-card" id="g-b"><div class="gloss-head"><h4 class="gloss-term">Bridge (The Bridge)</h4><span class="gloss-cat sistema">Sistema</span><span class="gloss-cat clube">Tier III</span></div>
+          <div class="gloss-def">Marketplace fechado das <strong>franquias do ecossistema PV</strong>. Tier III pode indicar mentorados pra franquias ativas com comissão estruturada (8-12%).</div>
+          <div class="gloss-detail">"Bridge" = ponte entre HMC e rede de franquias do ecossistema PV. Pagamento direto via a franquia, agregado ao Yield. Franquias ativas em SP-Jardins, RJ-Leblon, BH-Savassi, PE-Boa Viagem, DF-Lago Sul, CE-Sede (Fortaleza).</div>
+          <a href="10-clube/bridge.html" class="gloss-link">Abrir Bridge →</a>
+        </div>
+
+        <!-- C -->
+        <div class="gloss-card" id="g-c"><div class="gloss-head"><h4 class="gloss-term">Cadeira (Seat)</h4><span class="gloss-cat estrutura">Estrutura</span></div>
+          <div class="gloss-def">A vaga de cada membro no clube. <strong>"Cadeira"</strong> é o termo curatorial; <strong>"Seat"</strong> é o número técnico que vira identificador (Seat 12, Seat 24...).</div>
+          <div class="gloss-detail">Cadeira inaugural = Founding Member. Seats foram numerados na ordem de admissão. Membro perde cadeira só por violação grave (não por inatividade temporária).</div>
+        </div>
+
+        <div class="gloss-card"><div class="gloss-head"><h4 class="gloss-term">CIS</h4><span class="gloss-cat sistema">Sistema</span></div>
+          <div class="gloss-def">Sigla institucional Febracis: <strong>Conexão · Indicação · Sinergia</strong>. Quando alguém do clube gera lead pra outro membro e ele converte, paga-se uma comissão de <strong>16%</strong> sobre o ticket.</div>
+          <div class="gloss-detail">Tracking via Salesforce. Atribuição automática. Visível na tela <code>10-clube/05-yield.html</code> pra cada membro e consolidada em <code>40-curator/yield-cis.html</code>.</div>
+          <a href="10-clube/05-yield.html" class="gloss-link">Ver Yield CIS →</a>
+        </div>
+
+        <div class="gloss-card"><div class="gloss-head"><h4 class="gloss-term">CISPay</h4><span class="gloss-cat externo">Externo</span><span class="gloss-cat sistema">Sistema</span></div>
+          <div class="gloss-def">Gateway de pagamento oficial do ecossistema Febracis. Processa cartão, Pix, boleto. <strong>NÃO usa Stripe, Hotmart, Eduzz, Kiwify, Asaas</strong>.</div>
+          <div class="gloss-detail">Split automático: 90% pro mentor, 10% fee HMC. Payout mensal dia 05 com janela fiscal de 30 dias. Mentor responde por NF própria.</div>
+        </div>
+
+        <div class="gloss-card"><div class="gloss-head"><h4 class="gloss-term">Codex (The High Mentor Codex)</h4><span class="gloss-cat sistema">Sistema</span></div>
+          <div class="gloss-def">Anuário oficial do clube. Cada membro tem perfil (<em>Codex Entry</em>) com bio, mentorias ativas, depoimentos, decretos.</div>
+          <div class="gloss-detail">Volume I = Founding Edition 2026 (manual). Volume II em diante = automatizado via Inngest cron + geração PDF Typst. PV publica decretos institucionais (gestão em <code>40-curator/codex-publishing.html</code>).</div>
+          <a href="10-clube/03-codex.html" class="gloss-link">Abrir Codex →</a>
+        </div>
+
+        <div class="gloss-card"><div class="gloss-head"><h4 class="gloss-term">Council (HMC Council)</h4><span class="gloss-cat ritual">Ritual</span></div>
+          <div class="gloss-def">Sessão mensal do clube. Todos os membros juntos. Inclui hotseats (2-3 casos reais apresentados), curadoria PV, votos de promoção de tier, anúncios oficiais.</div>
+          <div class="gloss-detail"><strong>Não é meetup.</strong> Presença é parte da expectativa contratual — ausência sem motivo afeta perfil de promoção. Realizado online (com plano de versão híbrida no futuro).</div>
+          <a href="10-clube/02-calendar.html" class="gloss-link">Agenda Council →</a>
+        </div>
+
+        <div class="gloss-card"><div class="gloss-head"><h4 class="gloss-term">Cross-Floor</h4><span class="gloss-cat sistema">Sistema</span></div>
+          <div class="gloss-def">Marketplace fechado de vagas/leads entre os mentores do clube. <strong>20% das vagas dos negócios circulam ali.</strong> Quem indica recebe 8-12% sobre conversão.</div>
+          <div class="gloss-detail">Tier I só faz <em>applies</em>. Tier II+ pode publicar. Disputas (atribuição contestada) sobem pra curadoria. Esse é o sistema que torna o clube uma rede operante, não só social.</div>
+          <a href="10-clube/04-cross-floor.html" class="gloss-link">Abrir Cross-Floor →</a>
+        </div>
+
+        <div class="gloss-card"><div class="gloss-head"><h4 class="gloss-term">Curated by Paulo Vieira</h4><span class="gloss-cat clube">Identidade</span></div>
+          <div class="gloss-def">Assinatura institucional do produto. Aparece em todo material oficial. Significa que <strong>PV é o Curador</strong> (não sócio das mentorias).</div>
+          <div class="gloss-detail">Curadoria = critério de quem entra e em que tier. Não-curadoria = operação das mentorias dos membros (que é livre, dentro das regras do clube).</div>
+        </div>
+
+        <div class="gloss-card"><div class="gloss-head"><h4 class="gloss-term">Curator (The Curator)</h4><span class="gloss-cat papel">Papel</span></div>
+          <div class="gloss-def">Único título de Paulo Vieira no HMC. Não é "fundador", não é "dono", não é "presidente". É <strong>Curador</strong>.</div>
+          <div class="gloss-detail">Decisão curatorial = critério de quem senta à mesa. Decisão final em qualquer crivo. Curadoria delegada operacionalmente (Michelle), mas vinculante só com aval de PV. <strong>Não confundir com:</strong> "Curator team" (que é o time Michelle).</div>
+        </div>
+
+        <div class="gloss-card"><div class="gloss-head"><h4 class="gloss-term">Curator's Address</h4><span class="gloss-cat ritual">Ritual</span><span class="gloss-cat clube">Tier III</span></div>
+          <div class="gloss-def">Carta mensal de PV endereçada ao Inner Council (Tier III). Publicada toda 1ª semana do mês. Texto + áudio narrado pelo próprio PV.</div>
+          <div class="gloss-detail">Restrita aos 6 Tier III. Não-compartilhável. Editor exclusivo de PV em <code>curator-address-editor.html</code> (auto-save, archive lateral). Arquivo histórico em <code>10-clube/curator-address.html</code>.</div>
+        </div>
+
+        <!-- D -->
+        <div class="gloss-card" id="g-d"><div class="gloss-head"><h4 class="gloss-term">Disputas Cross-Floor</h4><span class="gloss-cat sistema">Sistema</span></div>
+          <div class="gloss-def">Sistema de resolução quando há disputa sobre atribuição de lead entre membros (quem indicou primeiro, quem cuidou do fechamento). Decisão sobe pra curadoria.</div>
+          <div class="gloss-detail">SLA de 24h pra resposta inicial · 72h pra decisão final. Histórico de disputas pesa em perfil de promoção (membros recorrentemente em disputa perdem credibilidade curatorial).</div>
+        </div>
+
+        <!-- E -->
+        <div class="gloss-card" id="g-e"><div class="gloss-head"><h4 class="gloss-term">Endorso</h4><span class="gloss-cat estrutura">Estrutura</span></div>
+          <div class="gloss-def">Aval formal de um membro Tier II+ a um candidato (admissão) ou a uma promoção de tier. <strong>Aposta de nome</strong> do endossante.</div>
+          <div class="gloss-detail">Candidatura nova exige 3 endorsos Tier II+. Promoção Tier I→II exige 3 endorsos Tier II+. Promoção Tier II→III exige 3 endorsos Tier III + decisão curatorial PV. Endorso revogável (com peso negativo no histórico do endossante se reincidente).</div>
+        </div>
+
+        <!-- F -->
+        <div class="gloss-card" id="g-f"><div class="gloss-head"><h4 class="gloss-term">Fee HMC</h4><span class="gloss-cat tech">Comercial</span></div>
+          <div class="gloss-def">Comissão fixa de <strong>10%</strong> sobre GMV do Studio de cada membro. Único custo recorrente do clube (não há mensalidade).</div>
+          <div class="gloss-detail">Aplicado automaticamente via CISPay no split. Revisável apenas via Council com 2/3 dos votos + aprovação PV. YTD 2026: R$ 3,84M arrecadados.</div>
+        </div>
+
+        <div class="gloss-card"><div class="gloss-head"><h4 class="gloss-term">Founding Member</h4><span class="gloss-cat clube">Identidade</span></div>
+          <div class="gloss-def">Membro inaugural do clube. Marca permanente no perfil. Cadeira numerada na ordem de admissão (Seat 1 a Seat ~50 da Founding Edition).</div>
+          <div class="gloss-detail">Founding status NÃO determina tier (Founding Tier I existe). Founding = parte do "primeiro grupo". Privilégio simbólico, não funcional.</div>
+        </div>
+
+        <!-- H -->
+        <div class="gloss-card" id="g-h"><div class="gloss-head"><h4 class="gloss-term">HMC</h4><span class="gloss-cat clube">Produto</span></div>
+          <div class="gloss-def">Sigla oficial. <strong>High Mentor Club</strong>. Padrão Febracis de siglas curtas (CIS, FCIS, IEX).</div>
+          <div class="gloss-detail"><strong>Não confundir com</strong> "Human Mentors Club" (erro recorrente em variantes de brand guide). Sempre singular: <em>High Mentor</em>, não <em>High Mentors</em>.</div>
+        </div>
+
+        <!-- I -->
+        <div class="gloss-card" id="g-i"><div class="gloss-head"><h4 class="gloss-term">Inner Council</h4><span class="gloss-cat clube">Tier III</span></div>
+          <div class="gloss-def">Nome do conjunto dos 6 (até) membros Tier III. Vocabulário oficial da Plataforma-v1. Mesa interna do clube.</div>
+          <div class="gloss-detail">Distinto de "Council" (o ritual mensal aberto a todos). Inner Council = grupo · Council = evento. Inner Council se reúne extra-Council em momentos curatoriais (briefings especiais, decisão de crise).</div>
+        </div>
+
+        <!-- M -->
+        <div class="gloss-card" id="g-m"><div class="gloss-head"><h4 class="gloss-term">MELID</h4><span class="gloss-cat externo">Externo · Marca-irmã</span></div>
+          <div class="gloss-def"><strong>Mentor de Líderes</strong>. Programa de 12 meses que <em>forma</em> mentor high-ticket. Marca-irmã do HMC no ecossistema PV/Febracis.</div>
+          <div class="gloss-detail">4 pilares: Mentor High Ticket, Palestrante Poderoso, Influenciador Digital, Escritor Best-Seller. Cohort fechado, 3ª turma. ~R$ 150k. Mesma curadoria (PV). LP: <code>lp.febracis.com/l/lp-mentor-de-lideres</code>.</div>
+          <a href="melid-bridge.html" class="gloss-link">Ver ponte MELID →</a>
+        </div>
+
+        <div class="gloss-card"><div class="gloss-head"><h4 class="gloss-term">Mentor</h4><span class="gloss-cat papel">Papel</span></div>
+          <div class="gloss-def">Membro do clube. <strong>"Mentor" no HMC sempre se refere a quem opera mentoria high-ticket dentro do Studio.</strong></div>
+          <div class="gloss-detail">Não-Founder. Não-Curator (apesar de PV ser Curator+Founder, ele NÃO é "mentor do HMC" porque não vende mentoria via Studio).</div>
+        </div>
+
+        <div class="gloss-card"><div class="gloss-head"><h4 class="gloss-term">Mentorado</h4><span class="gloss-cat papel">Papel</span></div>
+          <div class="gloss-def">Cliente final de um mentor. <strong>NUNCA chamar de "aluno"</strong> — vocabulário do clube.</div>
+          <div class="gloss-detail">Mentorado tem acesso ao Estudos (biblioteca, player, comunidade, sessões 1:1, certificados). Não vê o clube. Não vê o Studio do mentor por dentro. Em produção: RLS bloqueia.</div>
+        </div>
+
+        <div class="gloss-card"><div class="gloss-head"><h4 class="gloss-term">Mentoria</h4><span class="gloss-cat sistema">Conteúdo</span></div>
+          <div class="gloss-def">Programa estruturado vendido por um mentor. Inclui aulas, módulos, sessões 1:1, comunidade, certificado.</div>
+          <div class="gloss-detail">Cada mentor pode ter 1+ mentorias (ex: Lucas tem "Vieira de Liderança" e "Workshop P&L"). Ticket mínimo R$ 25k pra que o mentor pertença ao HMC.</div>
+        </div>
+
+        <!-- O -->
+        <div class="gloss-card" id="g-o"><div class="gloss-head"><h4 class="gloss-term">Os Quatro Motores</h4><span class="gloss-cat ritual">Ritual</span><span class="gloss-cat clube">Tier II+</span></div>
+          <div class="gloss-def">Programa anual de renovação dos mentores. 4 frentes: clareza estratégica, presença pública, network ativo, operação contínua.</div>
+          <div class="gloss-detail">Check-in trimestral com curadoria. Não é evento — é metodologia de renovação. Documentado em <code>10-clube/quatro-motores.html</code>.</div>
+        </div>
+
+        <!-- F -->
+        <div class="gloss-card" id="g-franquias"><div class="gloss-head"><h4 class="gloss-term">Franquias do ecossistema PV</h4><span class="gloss-cat externo">Externo · nome pendente</span></div>
+          <div class="gloss-def">Rede de franquias do grupo Paulo Vieira. Destino do <em>The Bridge</em> para Tier III indicar mentorados, com comissão estruturada (8-12%).</div>
+          <div class="gloss-detail">PV menciona esse programa em transcrições de áudio do MELID como "<strong>franquias da Terra Brasil</strong>" (Transc. 1) e "<strong>maestrias das unidades</strong>" (Transc. 3). <strong>Nome oficial do programa ainda não travado por PV</strong> — usar linguagem neutra até confirmação. Franquias ativas em SP, RJ, BH, PE, DF, CE (sede). Pagamento agregado ao Yield HMC.</div>
+        </div>
+
+        <div class="gloss-card"><div class="gloss-head"><h4 class="gloss-term">Pilgrimages (The Pilgrimages)</h4><span class="gloss-cat ritual">Ritual</span></div>
+          <div class="gloss-def">Eventos premium presenciais. Inclui <em>House</em> (peregrinação fundadora) e <em>HMC Summit</em> (edição internacional).</div>
+          <div class="gloss-detail">Investimento separado da fee HMC (Florença 2026: R$ 68k). Vagas limitadas. Elegibilidade depende de tier. Próximas: Patagônia, Atenas, Tóquio, Davos (rotação geográfica).</div>
+          <a href="10-clube/06-pilgrimages.html" class="gloss-link">Ver Pilgrimages →</a>
+        </div>
+
+        <!-- Q -->
+        <div class="gloss-card" id="g-q"><div class="gloss-head"><h4 class="gloss-term">Quatro Motores</h4><span class="gloss-cat ritual">Ritual</span></div>
+          <div class="gloss-def">Ver "Os Quatro Motores" (letra O).</div>
+        </div>
+
+        <!-- R -->
+        <div class="gloss-card" id="g-r"><div class="gloss-head"><h4 class="gloss-term">Revolution</h4><span class="gloss-cat externo">Externo</span></div>
+          <div class="gloss-def">Experiência imersiva exclusiva de transformação comportamental e alta performance ministrada por Paulo Vieira.</div>
+          <div class="gloss-detail">Programa externo ao HMC. Aparece como pré-requisito de admissão a uma das peregrinações (<a href="#pilgrimages">The House</a>) — ter passado pelo Revolution é condição pra cadeira nessa peregrinação específica. Detalhes operacionais em material institucional PV separado.</div>
+        </div>
+
+        <!-- S -->
+        <div class="gloss-card"><div class="gloss-head"><h4 class="gloss-term">Sala do Membro</h4><span class="gloss-cat estrutura">Estrutura</span></div>
+          <div class="gloss-def">Dashboard principal do membro dentro do mundo Clube. Porta de entrada que reúne atalhos pro Council mensal, Codex, Cross-Floor, Yield, Pilgrimages, Selo e (se Tier III) áreas restritas.</div>
+          <div class="gloss-detail">É a "home" do mundo Clube — diferente do <em>Studio</em>, que é o workspace do membro como mentor. Acessível em <code>10-clube/01-dashboard.html</code>.</div>
+          <a href="10-clube/01-dashboard.html" class="gloss-link">Abrir Sala →</a>
+        </div>
+
+        <div class="gloss-card" id="g-s"><div class="gloss-head"><h4 class="gloss-term">Seal Kit (HMC Seal)</h4><span class="gloss-cat sistema">Sistema</span></div>
+          <div class="gloss-def">Chancela visual oficial. Selo vetorizado, personalizado com número da cadeira do membro. Aplicação em site, capa de proposta, fundo de Zoom.</div>
+          <div class="gloss-detail">Tier I = bronze · Tier II = prata · Tier III = dourado. Download em SVG, PNG 2048/1024/512, embed HTML. Disponível em <code>10-clube/07-seal.html</code>.</div>
+        </div>
+
+        <div class="gloss-card"><div class="gloss-head"><h4 class="gloss-term">Seat</h4><span class="gloss-cat estrutura">Estrutura</span></div>
+          <div class="gloss-def">Ver "Cadeira" (letra C). Número técnico do membro (Seat 12).</div>
+        </div>
+
+        <div class="gloss-card"><div class="gloss-head"><h4 class="gloss-term">Studio</h4><span class="gloss-cat sistema">Sistema</span></div>
+          <div class="gloss-def">Workspace do mentor. Inclui criar mentorias, upload de aulas (Mux), CRM dos mentorados, agenda Cal.com, receitas CISPay, comunidade.</div>
+          <div class="gloss-detail">Mentor opera Studio com fee HMC 10% sobre GMV. Checkout customizável, vitrine pública em <code>hmc.club/m/:slug</code>. 15 telas no total. Acessível apenas a Tier I+.</div>
+          <a href="20-mentor/studio-home.html" class="gloss-link">Abrir Studio →</a>
+        </div>
+
+        <div class="gloss-card"><div class="gloss-head"><h4 class="gloss-term">Summit (HMC Summit)</h4><span class="gloss-cat ritual">Ritual</span></div>
+          <div class="gloss-def">Edição internacional dos Pilgrimages. Florença Q4/2026 = edição inaugural. Restrita Tier II+. 12 cadeiras totais.</div>
+          <div class="gloss-detail">4 dias. Investimento ~R$ 68k. Curadoria PV. Sessão privada na biblioteca Médici, jantar no Palazzo Vecchio. Próximas edições anuais com rotação geográfica.</div>
+          <a href="10-clube/summit-edicao.html" class="gloss-link">Florença Edição I →</a>
+        </div>
+
+        <!-- T -->
+        <div class="gloss-card" id="g-t"><div class="gloss-head"><h4 class="gloss-term">Tier</h4><span class="gloss-cat estrutura">Estrutura</span></div>
+          <div class="gloss-def">Nível de senioridade do membro no clube. 3 níveis: I (entrada), II (operação comprovada), III (Sovereign Mentor).</div>
+          <div class="gloss-detail">Promoção via critérios objetivos + endorsos + decisão curatorial. <strong>Nunca desce</strong> (exceto sanção). Quem sai não volta. Vocabulário oficial: Mentor of HMC · High Mentor · Sovereign Mentor.</div>
+          <a href="tiers.html" class="gloss-link">Página institucional →</a>
+        </div>
+
+        <!-- Y -->
+        <div class="gloss-card" id="g-y"><div class="gloss-head"><h4 class="gloss-term">Yield (HMC Yield)</h4><span class="gloss-cat sistema">Sistema</span></div>
+          <div class="gloss-def">Comissão CIS de 16% sobre leads convertidos pra outros mentores do clube. Yield = "rendimento" da rede de membros.</div>
+          <div class="gloss-detail">Tracking via Salesforce. Atribuição automática. Payout dia 5 cada mês. Yield YTD acumulado visível no perfil de cada membro. Tier II+ habilitado. <strong>Origem do conceito:</strong> fala literal de Paulo Vieira em material MELID original ("manda o link e ganha comissão"). Batismo como "HMC Yield" + taxa 16% formalizados no <em>07 - HMC Brand Book.pdf</em> e engenharia descrita no <em>05 - Plataforma.pdf</em>. Detalhes na seção §07 Sistemas.</div>
+          <a href="10-clube/05-yield.html" class="gloss-link">Abrir Yield →</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 9. PROCESSO ENTRADA -->
+    <section class="man-sec" id="proc-entrada">
+      <div class="man-sec-head">
+        <div class="man-sec-eyebrow">— 09 · Processos</div>
+        <h2 class="man-h2">Como se entra no clube.</h2>
+      </div>
+
+      <p>Admissão como mentor passa por crivo curatorial. 4 etapas obrigatórias, janela de 14 dias.</p>
+
+      <div class="flow-steps">
+        <div class="flow-step"><div><div class="flow-step-title">Candidatura formal</div><div class="flow-step-desc">Preenche signup-mentor em 4 sub-etapas (dados pessoais · perfil de mentoria · credenciais · revisão). Tela: <code>signup-mentor-1.html → 4.html</code>.</div></div></div>
+
+        <div class="flow-step"><div><div class="flow-step-title">Coleta de endorsos</div><div class="flow-step-desc">Precisa de <strong>3 endorsos formais de membros Tier II+</strong>. Endorso é aposta de nome do endossante. Janela: 14 dias.</div></div></div>
+
+        <div class="flow-step"><div><div class="flow-step-title">Curadoria operacional (Michelle)</div><div class="flow-step-desc">Time de curadoria revisa dossiê: GMV declarado, histórico, depoimentos, alinhamento cultural. Pode escalar pra audiência prévia ou aprovar direto pra próxima etapa.</div></div></div>
+
+        <div class="flow-step"><div><div class="flow-step-title">Decisão final · The Curator</div><div class="flow-step-desc">PV revisa pessoalmente os casos pré-aprovados. <strong>Decisão é vinculante.</strong> Aprovação → acesso-liberado → onboarding → Hub. Recusa → tela <code>candidatura-recusada.html</code> com carta pessoal de PV + rota MELID pra reaplicar em jun/2027.</div></div></div>
+      </div>
+
+      <div class="man-note">
+        <strong>Status timeline</strong>
+        Candidato acompanha tudo em tempo real via <code>candidatura-status.html</code> (endorsos recebidos, em qual etapa está, próxima ação esperada).
+      </div>
+    </section>
+
+    <!-- 10. PROCESSO TIER -->
+    <section class="man-sec" id="proc-tier">
+      <div class="man-sec-head">
+        <div class="man-sec-eyebrow">— 10 · Processos</div>
+        <h2 class="man-h2">Como se sobe de tier.</h2>
+      </div>
+
+      <p>Promoção é progressiva, baseada em critérios objetivos + endorsos + decisão curatorial. Gerenciada em <code>40-curator/tier-promotion.html</code> (Michelle) com decisão final na fila de PV.</p>
+
+      <h3 class="man-h3">Tier I → II · High Mentor</h3>
+      <ul>
+        <li>Studio em operação contínua ≥ 24 meses</li>
+        <li>GMV Studio anual ≥ R$ 2M</li>
+        <li>Cross-Floor publicação ≥ 6 vagas válidas</li>
+        <li>Presença ≥ 8 de 12 Councils anuais</li>
+        <li>3 endorsos de membros Tier II+</li>
+        <li>Pilgrimage Premium ≥ 1 completada</li>
+      </ul>
+
+      <h3 class="man-h3">Tier II → III · Sovereign Mentor</h3>
+      <p><strong>Não é candidatura — é convite.</strong> PV revisa o histórico e estende. Critérios objetivos são pré-requisitos, não garantia.</p>
+      <ul>
+        <li>Todos os critérios do II atendidos consistentemente</li>
+        <li>3 endorsos formais de membros Tier III ativos</li>
+        <li>Decisão final exclusiva de PV</li>
+        <li>≤ 6 vagas Tier III por ano</li>
+      </ul>
+    </section>
+
+    <!-- 11. SUSPENSÃO / SAÍDA -->
+    <section class="man-sec" id="proc-saida">
+      <div class="man-sec-head">
+        <div class="man-sec-eyebrow">— 11 · Processos</div>
+        <h2 class="man-h2">Suspensão, saída, tier rebaixado.</h2>
+      </div>
+
+      <div class="man-note danger">
+        <strong>Caminho de uma só direção</strong>
+        Quem entra não sai. Quem sai por escolha NÃO volta. Tier rebaixado é sanção rara, decidida por Council com 2/3 dos votos.
+      </div>
+
+      <ul>
+        <li><strong>Violação grave</strong> (assédio, fraude, vazamento Council) → exclusão imediata sem reembolso</li>
+        <li><strong>Violação reincidente</strong> → suspensão temporária 7-30 dias decidida por curadoria</li>
+        <li><strong>Tier rebaixado</strong> → ocorre apenas em violações graves; Council vota com 2/3</li>
+        <li><strong>Saída voluntária</strong> → membro pode sair, mas o retorno está bloqueado por desenho</li>
+      </ul>
+    </section>
+
+    <!-- 12. PROCESSO VENDA -->
+    <section class="man-sec" id="proc-venda">
+      <div class="man-sec-head">
+        <div class="man-sec-eyebrow">— 12 · Processos</div>
+        <h2 class="man-h2">Como o mentor vende (Studio + CISPay).</h2>
+      </div>
+
+      <div class="flow-steps">
+        <div class="flow-step"><div><div class="flow-step-title">Vitrine pública configurada</div><div class="flow-step-desc">Mentor configura página pública em <code>hmc.club/m/:slug</code>. Bio, mentorias, FAQ, depoimentos. Editor em <code>20-mentor/pagina-publica.html</code>.</div></div></div>
+
+        <div class="flow-step"><div><div class="flow-step-title">Mentorado chega via catálogo, indicação ou Cross-Floor</div><div class="flow-step-desc">Catálogo público em <code>00-public/catalog.html</code>. Mentorado abre página do mentor e clica "comprar".</div></div></div>
+
+        <div class="flow-step"><div><div class="flow-step-title">Checkout CISPay</div><div class="flow-step-desc">Cartão, Pix ou boleto. Split automático: 90% mentor + 10% fee HMC. Mentor responde por NF própria.</div></div></div>
+
+        <div class="flow-step"><div><div class="flow-step-title">Acesso liberado imediato</div><div class="flow-step-desc">Mentorado vai pra <code>acesso-liberado.html</code> → onboarding → biblioteca. Inicia consumo de aulas, agenda 1:1, entra na comunidade.</div></div></div>
+
+        <div class="flow-step"><div><div class="flow-step-title">Payout mensal dia 05</div><div class="flow-step-desc">Mentor recebe receita acumulada dia 05 do mês seguinte. Visível em <code>20-mentor/receitas.html</code> com detalhamento por mentorado e por parcela.</div></div></div>
+      </div>
+    </section>
+
+    <!-- 13. JORNADAS -->
+    <section class="man-sec" id="jornadas">
+      <div class="man-sec-head">
+        <div class="man-sec-eyebrow">— 13 · Jornadas</div>
+        <h2 class="man-h2">Fluxos passo-a-passo por persona.</h2>
+      </div>
+
+      <p>Doc canônico completo em <code>_DOCS/07-JORNADAS-USUARIO.md</code>. Resumo das jornadas oficiais:</p>
+
+      <h3 class="man-h3">Mariana · mentorada pura</h3>
+      <p><code>login → hub-mentorado → biblioteca → curso-detail → player</code> (consome aulas) → <code>sessoes-1-1</code> (agenda com Renata via Cal.com) → <code>comunidade-canal</code> (dúvidas) → <code>notas</code> + <code>progresso</code> + <code>certificados</code>.</p>
+
+      <h3 class="man-h3">Lucas · multi-role</h3>
+      <p>Acessa 4 mundos pela mesma conta: hub mostra 3 cards (Clube, Studio, Estudos), navega livre entre eles. Mesma sessão.</p>
+
+      <h3 class="man-h3">Bruno · mentor puro</h3>
+      <p><code>login → hub (3 mundos) → studio-home</code> (vende) ou <code>10-clube/01-dashboard</code> (membro). NÃO vê Estudos. Não compra mentoria de outros.</p>
+
+      <h3 class="man-h3">Carlos · Tier III</h3>
+      <p>Acessa tudo do Mentor + áreas restritas: Antechamber (chat PV), Curator's Address (lê), Bridge (indica pra franquias do ecossistema PV).</p>
+
+      <h3 class="man-h3">Michelle · Curator</h3>
+      <p><code>login → hub-curator</code> (fila do dia) → aprovações + tier-promotion + financeiro + moderação. 16 áreas admin.</p>
+
+      <h3 class="man-h3">Beatriz · Suporte</h3>
+      <p><code>login → hub-suporte</code> (fila tickets) → atende, escalona quando necessário pra Michelle. Sem acesso a Financeiro/Yield/Promoções.</p>
+
+      <h3 class="man-h3">PV · Founder</h3>
+      <p><code>login → hub-pv</code> (founder dashboard) → escreve <code>curator-address-editor</code> → responde <code>antechamber-pv</code> → publica Codex → decide aprovações finais.</p>
+    </section>
+
+    <!-- 14. STACK -->
+    <section class="man-sec" id="stack">
+      <div class="man-sec-head">
+        <div class="man-sec-eyebrow">— 14 · Plataforma técnica</div>
+        <h2 class="man-h2">Stack confirmada.</h2>
+      </div>
+
+      <ul>
+        <li><strong>Supabase</strong> (DB Postgres + Auth + Storage + Realtime) · projeto compartilhado <code>febracis-dre</code></li>
+        <li><strong>Inngest</strong> (queues + cron jobs)</li>
+        <li><strong>Meilisearch</strong> (busca Codex/Cross-Floor/biblioteca · self-host Railway)</li>
+        <li><strong>Resend</strong> + React Email (transacional)</li>
+        <li><strong>PostHog</strong> (analytics + feature flags + session replay)</li>
+        <li><strong>Sentry</strong> (erros web + mobile)</li>
+        <li><strong>Cal.com</strong> (sessões 1:1)</li>
+        <li><strong>CISPay</strong> (gateway de pagamento — NÃO Stripe/Asaas)</li>
+        <li><strong>Mux Video</strong> (player + ingestion · signed URLs TTL 4h)</li>
+        <li><strong>Capacitor + PWA</strong> (mobile híbrido — NÃO React Native)</li>
+        <li><strong>Cloudflare R2</strong> (backups Mux source)</li>
+      </ul>
+
+      <h3 class="man-h3">Front-end (wireframe atual)</h3>
+      <ul>
+        <li><code>_shared.css?v=16</code> (~85kb) · paleta mono chrome blue + sidebar dark navy v3</li>
+        <li><code>_icons.js?v=16</code> · ~70 ícones SVG Lucide-style</li>
+        <li><code>_persona.js?v=16</code> · registro RBAC + sidebar dinâmica (cross-context + mode-page) + tier-aware</li>
+        <li><code>_modals.js?v=16</code> · sistema de modais genéricos com auto-wiring de botões</li>
+      </ul>
+
+      <p>Cache busting atual: <code>?v=16</code>.</p>
+    </section>
+
+    <!-- 15. DECISÕES -->
+    <section class="man-sec" id="decisoes">
+      <div class="man-sec-head">
+        <div class="man-sec-eyebrow">— 15 · Pendências</div>
+        <h2 class="man-h2">Decisões em aberto.</h2>
+      </div>
+
+      <div class="man-note ok">
+        <strong>1 · Vocabulário oficial dos tiers — FECHADO</strong>
+        Travado em 2026-06-11 com vocabulário do brand book: <em>Mentor of HMC · High Mentor · Sovereign Mentor</em>. Decisão refletida no produto inteiro (apresentação, manual, plataforma, glossário, selos). "Inner Council" permanece apenas como nome do coletivo dos Tier III.
+      </div>
+
+      <div class="man-note warn">
+        <strong>2 · Versão final do signup</strong>
+        Estão ativas V1 (2 opções), V2 (3 opções com MELID bridge interna) e V3 (V1 + opção MELID externa discreta). Time precisa escolher uma.
+      </div>
+
+      <div class="man-note">
+        <strong>3 · URL real do MELID</strong>
+        Atualmente <code>https://lp.febracis.com/l/lp-mentor-de-lideres/</code>. Confirmar se essa é a URL canônica de produção.
+      </div>
+
+      <div class="man-note">
+        <strong>4 · Founder dashboard KPIs</strong>
+        Hub-PV mostra GMV YTD, Yield, NPS, etc. Validar com PV quais KPIs ele realmente acompanha e com que cadência (semanal? mensal?).
+      </div>
+
+      <p style="margin-top: 24px; font-size: 12px; color: var(--text-muted); text-align: center;">Atualizado em 2026-06-10 · cache v=15 · 104 HTMLs · 7 personas · 8 rodadas de iteração.</p>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  // Highlight TOC item ativo conforme scroll
+  const sections = document.querySelectorAll('.man-sec, #sumario, #cascata');
+  const tocLinks = document.querySelectorAll('.man-toc a[href^="#"]');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  document.querySelectorAll('section.man-sec').forEach(s => observer.observe(s));
+
+  // Search no glossário (filtra cards)
+  const search = document.getElementById('manSearch');
+  const cards = document.querySelectorAll('#glossGrid .gloss-card');
+  search.addEventListener('input', (e) => {
+    const q = e.target.value.toLowerCase().trim();
+    cards.forEach(card => {
+      const text = card.textContent.toLowerCase();
+      card.style.display = !q || text.includes(q) ? '' : 'none';
+    });
+    // Scroll pro glossário se procurou
+    if (q.length > 1) {
+      document.getElementById('glossario').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+</script>
+
+</body>
+</html>

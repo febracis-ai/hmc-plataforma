@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configurações · HMC Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../_shared.css?v=16">
+  <script src="../_icons.js?v=16" defer></script>
+<script src="../_persona.js?v=16" defer></script>
+<script src="../_modals.js?v=16" defer></script>
+</head>
+<body data-persona-aware="mode-page" data-mode-context="studio" data-required-mode="studio">
+<button class="mobile-fab" data-sidebar-mobile-toggle aria-label="Menu"><i data-icon="menu" class="icon"></i></button>
+<div class="drawer-backdrop" data-sidebar-mobile-toggle></div>
+<div class="app">
+  <aside class="sidebar">
+    <a href="../hub.html" class="sidebar-brand"><img src="../hmc-logo.png" alt="" class="brand-mark-img"><div><div class="brand-text">High Mentor Club</div><div class="brand-sub">Curated by Paulo Vieira · MMXXVI</div></div></a>
+    <div class="mode-switch">
+      <a href="../hub.html" class="mode-switch-item" data-short="H"><i data-icon="home" class="icon"></i><span>Hub</span></a>
+      <a href="../10-clube/01-dashboard.html" class="mode-switch-item" data-short="C"><i data-icon="landmark" class="icon"></i><span>Clube</span></a>
+      <a href="../20-mentor/studio-home.html" class="mode-switch-item active" data-short="S"><i data-icon="briefcase" class="icon"></i><span>Studio</span></a>
+      <a href="../30-mentorado/biblioteca.html" class="mode-switch-item" data-short="E"><i data-icon="book-open" class="icon"></i><span>Estudos</span></a>
+    </div>
+    <div class="sidebar-nav-scroll">
+      <div class="nav-section">
+        <a href="../notifications.html" class="nav-item has-badge"><i data-icon="bell" class="icon icon-sm"></i>Avisos <span class="badge-count">12</span></a>
+        <a href="../agenda.html" class="nav-item"><i data-icon="calendar" class="icon icon-sm"></i>Agenda</a>
+        <a href="../buscar.html" class="nav-item"><i data-icon="search" class="icon icon-sm"></i>Buscar</a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">— Studio</div>
+        <a href="studio-home.html" class="nav-item"><i data-icon="briefcase" class="icon icon-sm"></i>Visão geral</a>
+        <a href="mentorias.html" class="nav-item"><i data-icon="video" class="icon icon-sm"></i>Mentorias</a>
+        <a href="aulas-biblioteca.html" class="nav-item"><i data-icon="film" class="icon icon-sm"></i>Aulas</a>
+        <a href="mentorados.html" class="nav-item"><i data-icon="users" class="icon icon-sm"></i>Mentorados</a>
+        <a href="sessoes-1-1.html" class="nav-item"><i data-icon="calendar" class="icon icon-sm"></i>Sessões 1:1</a>
+        <a href="comunidade.html" class="nav-item"><i data-icon="message-circle" class="icon icon-sm"></i>Comunidade</a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">— Negócio</div>
+        <a href="receitas.html" class="nav-item"><i data-icon="dollar" class="icon icon-sm"></i>Receitas</a>
+        <a href="checkout-builder.html" class="nav-item"><i data-icon="credit-card" class="icon icon-sm"></i>Checkout</a>
+        <a href="cupons.html" class="nav-item"><i data-icon="tag" class="icon icon-sm"></i>Cupons</a>
+        <a href="pagina-publica.html" class="nav-item"><i data-icon="globe" class="icon icon-sm"></i>Página pública</a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">— Conta</div>
+        <a href="configuracoes.html" class="nav-item active"><i data-icon="settings" class="icon icon-sm"></i>Configurações<span class="nav-dot"></span></a>
+        <a href="integracoes.html" class="nav-item"><i data-icon="external" class="icon icon-sm"></i>Integrações</a>
+      </div>
+    </div>
+    <div class="sidebar-footer-v3">
+      <a href="../account.html" class="user-pill-v3"><div class="avatar-sm">LV</div><div><div class="user-pill-v3-name">Lucas Vieira</div><div class="user-pill-v3-role">Seat 12</div></div></a>
+      <button class="sidebar-toggle-btn" data-sidebar-toggle><i data-icon="chevron-left" class="icon"></i><span>Recolher menu</span></button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="page-head">
+      <div class="page-head-text">
+        <div class="page-eyebrow"><span class="gold-rule"></span><span class="page-eyebrow-text">Studio · Configurações</span></div>
+        <h1 class="page-title">Sua <span class="page-title-serif-italic">conta</span> de mentor.</h1>
+        <p class="page-sub">Identidade fiscal, métodos de cobrança, comunicação automática, política de cancelamento.</p>
+      </div>
+    </div>
+
+    <div class="grid grid-12-8 gap-loose">
+      <div class="flex-col gap-4">
+        <div class="surface" style="padding: 32px;">
+          <div class="eyebrow-chrome mb-4">— Identidade fiscal</div>
+          <div class="grid grid-2" style="gap: 14px; margin-bottom: 14px;">
+            <div><label class="auth-label">CNPJ</label><input type="text" class="auth-input" value="42.815.706/0001-92"></div>
+            <div><label class="auth-label">Regime tributário</label><select class="auth-input"><option>Simples Nacional</option><option>Lucro Presumido</option><option>Lucro Real</option></select></div>
+          </div>
+          <label class="auth-label">Razão social</label>
+          <input type="text" class="auth-input" value="Lucas Vieira Mentoria Eireli">
+          <label class="auth-label">Cidade · Estado</label>
+          <input type="text" class="auth-input" value="Fortaleza · CE">
+          <p class="muted" style="font-size: 11px; margin-top: 14px;">NF-e emitida automaticamente após cada cobrança CISPay. Em caso de devolução, NF cancelada via SEFAZ.</p>
+        </div>
+
+        <div class="surface" style="padding: 32px;">
+          <div class="eyebrow-chrome mb-4">— Política de cancelamento</div>
+          <div style="display: flex; flex-direction: column; gap: 18px;">
+            <label style="display: flex; align-items: center; gap: 12px; cursor: pointer;"><input type="radio" name="pol" checked> <div><div style="font-size: 14px; font-weight: 500;">7 dias sem perguntas</div><div class="muted" style="font-size: 12px;">Padrão CDC + boa fé. Devolução automática.</div></div></label>
+            <label style="display: flex; align-items: center; gap: 12px; cursor: pointer;"><input type="radio" name="pol"> <div><div style="font-size: 14px; font-weight: 500;">30 dias proporcional</div><div class="muted" style="font-size: 12px;">Devolução do remanescente se cancelamento até dia 30.</div></div></label>
+            <label style="display: flex; align-items: center; gap: 12px; cursor: pointer;"><input type="radio" name="pol"> <div><div style="font-size: 14px; font-weight: 500;">Sem reembolso (alto ticket)</div><div class="muted" style="font-size: 12px;">Recomendado para mentorias acima de R$ 50k. Mentorado deve aceitar explicitamente.</div></div></label>
+          </div>
+        </div>
+
+        <div class="surface" style="padding: 32px;">
+          <div class="eyebrow-chrome mb-4">— Comunicação automática</div>
+          <div style="display: grid; gap: 14px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--divider);"><div><div style="font-size: 14px; font-weight: 500;">Boas-vindas pós-compra</div><div class="muted" style="font-size: 12px; margin-top: 2px;">Email automático enviado 15min após compra</div></div><div style="width: 36px; height: 22px; background: var(--blue-realce); border-radius: 12px; position: relative;"><div style="width: 18px; height: 18px; background: white; border-radius: 50%; position: absolute; top: 2px; right: 2px;"></div></div></div>
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--divider);"><div><div style="font-size: 14px; font-weight: 500;">Lembrete sessão 1:1 (24h antes)</div><div class="muted" style="font-size: 12px; margin-top: 2px;">Email + WhatsApp via Evolution API</div></div><div style="width: 36px; height: 22px; background: var(--blue-realce); border-radius: 12px; position: relative;"><div style="width: 18px; height: 18px; background: white; border-radius: 50%; position: absolute; top: 2px; right: 2px;"></div></div></div>
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0;"><div><div style="font-size: 14px; font-weight: 500;">Nudge de reativação (dormente 14d+)</div><div class="muted" style="font-size: 12px; margin-top: 2px;">Você revisa antes de enviar (não automático)</div></div><div style="width: 36px; height: 22px; background: var(--text-faint); border-radius: 12px; position: relative;"><div style="width: 18px; height: 18px; background: white; border-radius: 50%; position: absolute; top: 2px; left: 2px;"></div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex-col gap-4">
+        <div class="surface" style="padding: 24px;">
+          <div class="eyebrow-chrome mb-3">— Dados bancários</div>
+          <div style="font-size: 13px; line-height: 1.6;"><strong>Itaú</strong> · Ag 0001 · CC 12345-6<div class="muted" style="font-size: 11px; margin-top: 4px;">PJ · CNPJ acima · validado</div></div>
+          <button class="btn btn-outline btn-sm" style="width: 100%; margin-top: 16px;">Alterar conta</button>
+        </div>
+        <div class="surface" style="padding: 24px;">
+          <div class="eyebrow-chrome mb-3">— Notificações</div>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <label style="display: flex; gap: 8px; font-size: 13px; align-items: center;"><input type="checkbox" checked> Nova venda</label>
+            <label style="display: flex; gap: 8px; font-size: 13px; align-items: center;"><input type="checkbox" checked> Sessão amanhã</label>
+            <label style="display: flex; gap: 8px; font-size: 13px; align-items: center;"><input type="checkbox" checked> Mensagem em comunidade</label>
+            <label style="display: flex; gap: 8px; font-size: 13px; align-items: center;"><input type="checkbox"> Resumo semanal</label>
+            <label style="display: flex; gap: 8px; font-size: 13px; align-items: center;"><input type="checkbox" checked> Saque processado</label>
+          </div>
+        </div>
+        <div class="surface" style="padding: 24px; border-color: rgba(200, 68, 43, 0.20);">
+          <div class="eyebrow-chrome" style="color: #C8442B; margin-bottom: 12px;">— Zona perigosa</div>
+          <button class="btn btn-outline btn-sm" style="width: 100%; margin-bottom: 8px; border-color: #C8442B; color: #C8442B;">Pausar Studio</button>
+          <button class="btn btn-outline btn-sm" style="width: 100%; border-color: #C8442B; color: #C8442B;">Solicitar exclusão</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<div class="wf-note">Studio · Configurações</div>
+</body>
+</html>

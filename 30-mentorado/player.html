@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Player · Como pensar P&amp;L sendo gerente</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../_shared.css?v=16">
+  <script src="../_icons.js?v=16" defer></script>
+<script src="../_persona.js?v=16" defer></script>
+<script src="../_modals.js?v=16" defer></script>
+</head>
+<body data-persona-aware="mode-page" data-mode-context="estudos" data-required-mode="estudos">
+
+<button class="mobile-fab" data-sidebar-mobile-toggle aria-label="Menu"><i data-icon="menu" class="icon"></i></button>
+<div class="drawer-backdrop" data-sidebar-mobile-toggle></div>
+
+<div class="app">
+  <aside class="sidebar">
+    <a href="../hub.html" class="sidebar-brand">
+      <img src="../hmc-logo.png" alt="" class="brand-mark-img">
+      <div>
+        <div class="brand-text">High Mentor Club</div>
+        <div class="brand-sub">Curated by Paulo Vieira · MMXXVI</div>
+      </div>
+    </a>
+
+    <div class="mode-switch">
+    <a href="../hub-mentorado.html" class="mode-switch-item" data-short="H"><i data-icon="home" class="icon"></i><span>Hub</span></a>
+    <a href="../30-mentorado/biblioteca.html" class="mode-switch-item active" data-short="E"><i data-icon="book-open" class="icon"></i><span>Estudos</span></a>
+  </div>
+
+    <div class="sidebar-nav-scroll">
+      <div class="nav-section">
+        <a href="../notifications.html" class="nav-item has-badge" data-tooltip="Avisos"><i data-icon="bell" class="icon icon-sm"></i>Avisos <span class="badge-count">12</span></a>
+        <a href="../agenda.html" class="nav-item" data-tooltip="Agenda"><i data-icon="calendar" class="icon icon-sm"></i>Agenda</a>
+        <a href="../buscar.html" class="nav-item" data-tooltip="Buscar"><i data-icon="search" class="icon icon-sm"></i>Buscar</a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-label">— Estudos</div>
+        <a href="biblioteca.html" class="nav-item" data-tooltip="Biblioteca"><i data-icon="book-open" class="icon icon-sm"></i>Biblioteca</a>
+        <a href="player.html" class="nav-item active" data-tooltip="Continuando"><i data-icon="play-circle" class="icon icon-sm"></i>Continuando<span class="nav-dot"></span></a>
+        <a href="comunidade.html" class="nav-item has-badge" data-tooltip="Comunidades"><i data-icon="message-circle" class="icon icon-sm"></i>Comunidades <span class="badge-count">8</span></a>
+        <a href="sessoes-1-1.html" class="nav-item" data-tooltip="Sessões 1:1"><i data-icon="calendar" class="icon icon-sm"></i>Sessões 1:1</a>
+        <a href="notas.html" class="nav-item"><i data-icon="file-text" class="icon icon-sm"></i>Minhas notas</a>
+      <a href="progresso.html" class="nav-item"><i data-icon="trending-up" class="icon icon-sm"></i>Progresso</a>
+      <a href="certificados.html" class="nav-item" data-tooltip="Certificados"><i data-icon="award" class="icon icon-sm"></i>Certificados</a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-label">— Conta</div>
+        <a href="../account.html" class="nav-item" data-tooltip="Meu perfil"><i data-icon="user" class="icon icon-sm"></i>Meu perfil</a>
+        <a href="pagamentos.html" class="nav-item" data-tooltip="Pagamentos"><i data-icon="credit-card" class="icon icon-sm"></i>Pagamentos</a>
+        <a href="suporte.html" class="nav-item" data-tooltip="Suporte"><i data-icon="help" class="icon icon-sm"></i>Suporte</a>
+      </div>
+    </div>
+
+    <div class="sidebar-footer-v3">
+      <a href="../account.html" class="user-pill-v3">
+        <div class="avatar-sm">LV</div>
+        <div>
+          <div class="user-pill-v3-name">Lucas Vieira</div>
+          <div class="user-pill-v3-role">Seat 12</div>
+        </div>
+      </a>
+      <button class="sidebar-toggle-btn" data-sidebar-toggle>
+        <i data-icon="chevron-left" class="icon"></i>
+        <span>Recolher menu</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <!-- BREADCRUMB -->
+    <div style="display: flex; gap: 8px; font-size: 12px; color: var(--text-muted); margin-bottom: 16px;">
+      <a href="biblioteca.html" class="muted">Biblioteca</a>
+      <span class="faint">/</span>
+      <span class="muted">Negociação de Alto Valor</span>
+      <span class="faint">/</span>
+      <span class="muted">Módulo 03 · Mentalidade de P&amp;L</span>
+      <span class="faint">/</span>
+      <span style="color: var(--text);">Aula 02</span>
+    </div>
+
+    <!-- TITLE -->
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px;">
+      <div>
+        <h1 style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 500; letter-spacing: -0.025em; line-height: 1.15;">Como pensar P&amp;L sendo gerente</h1>
+        <div style="display: flex; gap: 16px; margin-top: 10px; color: var(--text-muted); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600;">
+          <span>— 24 min · Renata Mendes</span>
+          <span>Aula 2 de 9</span>
+          <span>Última edição: há 12 dias</span>
+        </div>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <button class="btn btn-outline btn-sm"><i data-icon="star" class="icon icon-sm"></i> Favoritar</button>
+        <button class="btn btn-outline btn-sm"><i data-icon="external" class="icon icon-sm"></i> Compartilhar</button>
+      </div>
+    </div>
+
+    <!-- LAYOUT -->
+    <div style="display: grid; grid-template-columns: 1fr 360px; gap: 32px;">
+
+      <!-- COLUNA PRINCIPAL · PLAYER -->
+      <div>
+        <!-- VIDEO PLAYER -->
+        <div class="video-player" style="margin-bottom: 24px;">
+          <div class="video-player-center-play">
+            <div><i data-icon="play" class="icon icon-xl"></i></div>
+          </div>
+          <div class="video-thumb-duration" style="position: absolute; top: 16px; right: 16px; background: rgba(0,0,0,0.70);">HD · Mux</div>
+          <div class="video-player-controls">
+            <div class="video-player-icon-btn"><i data-icon="play" class="icon icon-sm"></i></div>
+            <div class="video-player-time">12:43</div>
+            <div class="video-player-bar"><div style="width: 53%;"></div></div>
+            <div class="video-player-time">24:11</div>
+            <div class="video-player-icon-btn" title="Legendas">CC</div>
+            <div class="video-player-icon-btn" title="Qualidade"><i data-icon="settings" class="icon icon-sm"></i></div>
+            <div class="video-player-icon-btn" title="Tela cheia"><i data-icon="external" class="icon icon-sm"></i></div>
+          </div>
+        </div>
+
+        <!-- TABS -->
+        <div style="display: flex; gap: 24px; border-bottom: 1px solid var(--divider); margin-bottom: 24px;">
+          <button style="background: none; border: none; padding: 12px 0; font-family: inherit; font-size: 13px; font-weight: 600; color: var(--text); border-bottom: 2px solid var(--blue-realce); margin-bottom: -1px; cursor: pointer;">Descrição</button>
+          <button style="background: none; border: none; padding: 12px 0; font-family: inherit; font-size: 13px; font-weight: 500; color: var(--text-muted); cursor: pointer;">Materiais (3)</button>
+          <button style="background: none; border: none; padding: 12px 0; font-family: inherit; font-size: 13px; font-weight: 500; color: var(--text-muted); cursor: pointer;">Minhas notas</button>
+          <button style="background: none; border: none; padding: 12px 0; font-family: inherit; font-size: 13px; font-weight: 500; color: var(--text-muted); cursor: pointer;">Discussão (14)</button>
+          <button style="background: none; border: none; padding: 12px 0; font-family: inherit; font-size: 13px; font-weight: 500; color: var(--text-muted); cursor: pointer;">Transcrição</button>
+        </div>
+
+        <!-- CONTEÚDO TAB -->
+        <div style="font-size: 15px; line-height: 1.7; color: var(--text); margin-bottom: 32px;">
+          <p style="margin-bottom: 16px;">Esta aula desconstrói o erro mais comum de gerentes que querem subir para diretoria: olhar receita sem entender margem. Vou te mostrar o modelo mental que aprendi na Cogna depois de 3 anos errando — e que mudou completamente como meu chefe olhava pra mim.</p>
+          <p style="margin-bottom: 16px;">Você vai aprender:</p>
+          <ul style="margin-left: 24px; line-height: 1.8;">
+            <li>Como decompor a operação em receita, custo direto, contribuição e despesa</li>
+            <li>Por que "vendi mais" não significa "ganhei mais" (e o número que prova isso)</li>
+            <li>O framework de 3 perguntas que use em toda reunião de board</li>
+            <li>Como apresentar P&amp;L mesmo sem ser do financeiro</li>
+          </ul>
+        </div>
+
+        <!-- COMENTÁRIO MENTOR -->
+        <div class="surface-bordered" style="background: var(--blue-realce-muted); border-color: var(--blue-realce-divider); padding: 24px;">
+          <div style="display: flex; gap: 14px; align-items: flex-start;">
+            <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--blue-realce); display: flex; align-items: center; justify-content: center; color: white; font-family: 'Playfair Display', serif; font-weight: 600; flex-shrink: 0;">LV</div>
+            <div>
+              <div style="display: flex; gap: 8px; align-items: baseline;">
+                <span style="font-weight: 600; font-size: 14px;">Renata Mendes</span>
+                <span class="badge badge-accent" style="font-size: 9px;">Mentor</span>
+                <span class="muted" style="font-size: 11px;">comentou há 4 dias</span>
+              </div>
+              <p style="margin-top: 8px; font-size: 14px; line-height: 1.6; color: var(--text);">
+                Pessoal, percebi que essa é a aula mais comentada do módulo. Se ainda não fez o exercício do final, faça antes da próxima sessão 1:1. Vai mudar o que a gente conversa.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLUNA LATERAL · PLAYLIST DO MÓDULO -->
+      <div>
+        <div class="surface" style="padding: 0; overflow: hidden;">
+          <div style="padding: 20px 24px; border-bottom: 1px solid var(--divider);">
+            <div class="eyebrow-chrome" style="margin-bottom: 6px;">— Módulo 03</div>
+            <div class="section-title-sm">Mentalidade de P&amp;L</div>
+            <div class="muted" style="font-size: 12px; margin-top: 4px;">9 aulas · 3h47min · 22% completo</div>
+          </div>
+
+          <div style="display: flex; flex-direction: column;">
+            <a href="player.html" style="display: flex; gap: 12px; padding: 14px 20px; border-bottom: 1px solid var(--divider); align-items: flex-start;">
+              <div style="width: 24px; height: 24px; border-radius: 50%; background: var(--blue-realce); flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; font-weight: 600;">✓</div>
+              <div style="flex: 1;">
+                <div style="font-size: 13px; font-weight: 500;">P&amp;L 101 para não-financeiros</div>
+                <div class="muted" style="font-size: 11px; margin-top: 2px;">26:11 · concluída</div>
+              </div>
+            </a>
+
+            <a href="player.html" style="display: flex; gap: 12px; padding: 14px 20px; border-bottom: 1px solid var(--divider); align-items: flex-start; background: var(--blue-realce-muted);">
+              <div style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--blue-realce); flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: var(--blue-realce); font-size: 9px;"><i data-icon="play" class="icon icon-sm"></i></div>
+              <div style="flex: 1;">
+                <div style="font-size: 13px; font-weight: 600;">Como pensar P&amp;L sendo gerente</div>
+                <div class="muted" style="font-size: 11px; margin-top: 2px;">24:11 · assistindo (53%)</div>
+              </div>
+            </a>
+
+            <a href="player.html" style="display: flex; gap: 12px; padding: 14px 20px; border-bottom: 1px solid var(--divider); align-items: flex-start;">
+              <div style="width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--divider-strong); flex-shrink: 0;"></div>
+              <div style="flex: 1;">
+                <div style="font-size: 13px;">Caso real: turnaround em 6 meses</div>
+                <div class="muted" style="font-size: 11px; margin-top: 2px;">31:45</div>
+              </div>
+            </a>
+
+            <a href="player.html" style="display: flex; gap: 12px; padding: 14px 20px; border-bottom: 1px solid var(--divider); align-items: flex-start;">
+              <div style="width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--divider-strong); flex-shrink: 0;"></div>
+              <div style="flex: 1;">
+                <div style="font-size: 13px;">Negociar orçamento com o CFO</div>
+                <div class="muted" style="font-size: 11px; margin-top: 2px;">27:50</div>
+              </div>
+            </a>
+
+            <a href="player.html" style="display: flex; gap: 12px; padding: 14px 20px; border-bottom: 1px solid var(--divider); align-items: flex-start;">
+              <div style="width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--divider-strong); flex-shrink: 0;"></div>
+              <div style="flex: 1;">
+                <div style="font-size: 13px;">Como apresentar P&amp;L pro board</div>
+                <div class="muted" style="font-size: 11px; margin-top: 2px;">19:32</div>
+              </div>
+            </a>
+
+            <a href="player.html" style="display: flex; gap: 12px; padding: 14px 20px; align-items: flex-start;">
+              <div style="width: 24px; height: 24px; border-radius: 50%; border: 1px dashed var(--divider-strong); flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: var(--text-faint); font-size: 10px;">🔒</div>
+              <div style="flex: 1; opacity: 0.55;">
+                <div style="font-size: 13px;">Métricas que importam vs ruído</div>
+                <div class="muted" style="font-size: 11px; margin-top: 2px;">libera 14 dez</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+</div>
+
+<div class="wf-note">Estudos · Player</div>
+
+</body>
+</html>

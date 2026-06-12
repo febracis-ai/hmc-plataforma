@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de Privacidade · HMC</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_shared.css?v=16">
+<script src="_icons.js?v=16" defer></script>
+<style>
+  body { background: var(--bg); color: var(--text); min-height: 100vh; }
+  .legal-shell { max-width: 800px; margin: 0 auto; padding: 56px 32px 96px; }
+  .legal-head { padding-bottom: 32px; border-bottom: 1px solid var(--divider); margin-bottom: 40px; }
+  .legal-eyebrow { font-size: 11px; color: var(--blue-realce); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; margin-bottom: 14px; }
+  .legal-title { font-family: 'Playfair Display', serif; font-size: 44px; font-weight: 500; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 18px; }
+  .legal-meta { font-size: 13px; color: var(--text-muted); }
+  .legal-body h2 { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 500; letter-spacing: -0.02em; margin-top: 40px; margin-bottom: 14px; }
+  .legal-body h3 { font-size: 15px; font-weight: 600; margin-top: 24px; margin-bottom: 10px; }
+  .legal-body p, .legal-body li { font-size: 14px; line-height: 1.7; color: var(--text); margin-bottom: 12px; }
+  .legal-body ul { margin: 0 0 16px 22px; padding: 0; }
+  .legal-toc { position: sticky; top: 24px; padding: 20px; background: var(--bg-card); border: 1px solid var(--divider); border-radius: 12px; font-size: 13px; line-height: 2; margin-bottom: 32px; }
+  .legal-toc a { color: var(--text-muted); text-decoration: none; display: block; }
+  .legal-toc a:hover { color: var(--blue-realce); }
+  .legal-callout { padding: 20px 24px; background: var(--bg-card); border-left: 3px solid var(--blue-realce); border-radius: 8px; margin: 20px 0; font-size: 13px; line-height: 1.7; }
+</style>
+</head>
+<body>
+
+<nav style="padding: 18px 32px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--divider);">
+  <a href="landing.html" style="display: flex; align-items: center; gap: 10px; color: var(--text); text-decoration: none;">
+    <img src="hmc-logo.png" alt="" style="width: 28px; height: 28px;">
+    <span style="font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 500;">High Mentor Club</span>
+  </a>
+  <a href="hub.html" class="btn btn-secondary btn-sm">← Voltar</a>
+</nav>
+
+<main class="legal-shell">
+
+  <div class="legal-head">
+    <div class="legal-eyebrow">— Documento legal · LGPD</div>
+    <h1 class="legal-title">Política de Privacidade</h1>
+    <div class="legal-meta">Versão 1.0 · Vigente desde 03/06/2026 · Conforme Lei 13.709/18 (LGPD)</div>
+  </div>
+
+  <div class="legal-toc">
+    <strong style="font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 10px;">— Conteúdo</strong>
+    <a href="#quem-somos">1. Quem somos</a>
+    <a href="#dados-coletados">2. Dados que coletamos</a>
+    <a href="#finalidade">3. Finalidade do tratamento</a>
+    <a href="#base-legal">4. Base legal</a>
+    <a href="#compartilhamento">5. Compartilhamento</a>
+    <a href="#retencao">6. Retenção</a>
+    <a href="#seus-direitos">7. Seus direitos</a>
+    <a href="#seguranca">8. Segurança</a>
+    <a href="#cookies">9. Cookies</a>
+    <a href="#contato">10. Contato DPO</a>
+  </div>
+
+  <div class="legal-body">
+
+    <h2 id="quem-somos">1. Quem somos</h2>
+    <p>O High Mentor Club ("HMC", "nós") é uma plataforma de mentoria de alto desempenho operada por Paulo Vieira e equipe curatorial, sob a razão social a ser definida em breve. Esta política regula como tratamos seus dados pessoais.</p>
+
+    <h2 id="dados-coletados">2. Dados que coletamos</h2>
+    <h3>2.1 Você fornece diretamente</h3>
+    <ul>
+      <li>Identificação: nome completo, CPF, RG, e-mail, telefone</li>
+      <li>Profissional: cargo, empresa, faturamento (se mentor), atuação</li>
+      <li>Evidências de candidatura: documentos, vídeos, certificados</li>
+      <li>Pagamento: dados de cartão e/ou Pix processados via CISPay (não armazenamos cartões)</li>
+      <li>Conteúdo gerado: comentários em comunidade, mensagens, notas pessoais</li>
+    </ul>
+
+    <h3>2.2 Coletamos automaticamente</h3>
+    <ul>
+      <li>Logs de acesso: IP, user-agent, data/hora</li>
+      <li>Telemetria de uso: aulas assistidas, progresso, cliques (via PostHog)</li>
+      <li>Erros de aplicação: stack traces (via Sentry, sanitizados)</li>
+    </ul>
+
+    <h2 id="finalidade">3. Finalidade do tratamento</h2>
+    <ul>
+      <li>Executar contrato de mentoria e Studio</li>
+      <li>Processar pagamentos via CISPay</li>
+      <li>Personalizar experiência e recomendações no Hub</li>
+      <li>Comunicação transacional (Resend) e eventual marketing opt-in</li>
+      <li>Cumprir obrigações legais e fiscais</li>
+    </ul>
+
+    <h2 id="base-legal">4. Base legal (Art. 7º LGPD)</h2>
+    <ul>
+      <li><strong>Consentimento:</strong> marketing, cookies analíticos</li>
+      <li><strong>Execução de contrato:</strong> mentoria, Studio, pagamentos</li>
+      <li><strong>Obrigação legal:</strong> retenção fiscal, anti-fraude</li>
+      <li><strong>Interesse legítimo:</strong> segurança, prevenção a fraude, melhoria do produto</li>
+    </ul>
+
+    <h2 id="compartilhamento">5. Compartilhamento com terceiros</h2>
+    <p>Compartilhamos dados estritamente necessários com:</p>
+    <ul>
+      <li><strong>CISPay</strong> — processamento de pagamentos</li>
+      <li><strong>Supabase</strong> — banco de dados e autenticação (data residency: Brasil)</li>
+      <li><strong>Mux Video</strong> — hospedagem de aulas</li>
+      <li><strong>Cal.com</strong> — agendamento de sessões 1:1</li>
+      <li><strong>Resend</strong> — envio de e-mails transacionais</li>
+      <li><strong>Salesforce</strong> — atribuição de leads CIS (apenas mentores Tier II+)</li>
+      <li><strong>Autoridades</strong> — quando requerido por lei</li>
+    </ul>
+    <p>Não vendemos dados pessoais.</p>
+
+    <h2 id="retencao">6. Retenção</h2>
+    <ul>
+      <li>Conta ativa: enquanto durar o vínculo</li>
+      <li>Conta cancelada: 6 meses (período de retorno) + anonimização</li>
+      <li>Dados fiscais: 5 anos (obrigação legal)</li>
+      <li>Logs de auditoria: 24 meses</li>
+    </ul>
+
+    <h2 id="seus-direitos">7. Seus direitos (Art. 18 LGPD)</h2>
+    <p>Você pode, a qualquer momento:</p>
+    <ul>
+      <li>Confirmar existência de tratamento</li>
+      <li>Acessar seus dados</li>
+      <li>Corrigir dados incompletos ou desatualizados</li>
+      <li>Solicitar anonimização, bloqueio ou eliminação de dados desnecessários</li>
+      <li>Portar dados a outro fornecedor</li>
+      <li>Revogar consentimento</li>
+    </ul>
+    <div class="legal-callout">
+      <strong>Como exercer:</strong> em <a href="account.html" style="color: var(--blue-realce);">Account → Privacidade</a> use os botões "Exportar dados" e "Excluir conta", ou escreva para <strong>dpo@hmc.club</strong>. Respondemos em até 15 dias.
+    </div>
+
+    <h2 id="seguranca">8. Segurança</h2>
+    <ul>
+      <li>Criptografia em trânsito (TLS 1.3) e em repouso (AES-256)</li>
+      <li>Senhas com Argon2id, sem pepper no MVP (roadmap c/ KMS)</li>
+      <li>Row-Level Security (RLS) no Supabase em todas as tabelas</li>
+      <li>Audit log imutável de operações sensíveis</li>
+      <li>Webhooks com HMAC + anti-replay</li>
+    </ul>
+
+    <h2 id="cookies">9. Cookies</h2>
+    <p>Usamos cookies estritamente necessários (sessão, CSRF) sem opt-in obrigatório. Cookies analíticos (PostHog) e de marketing exigem consentimento via banner LGPD.</p>
+
+    <h2 id="contato">10. Contato com o DPO</h2>
+    <p>
+      Encarregado de Proteção de Dados:<br>
+      <strong>dpo@hmc.club</strong><br>
+      Resposta em até 15 dias corridos. Direito de reclamar à ANPD (Autoridade Nacional de Proteção de Dados) em <a href="https://www.gov.br/anpd" style="color: var(--blue-realce);" target="_blank">gov.br/anpd</a>.
+    </p>
+
+  </div>
+
+</main>
+
+<footer style="padding: 32px; border-top: 1px solid var(--divider); text-align: center;">
+  <div style="font-size: 11px; color: var(--text-faint); letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600;">MMXXVI · Excelência · Conexão · Impacto</div>
+  <div style="margin-top: 12px; font-size: 11px;"><a href="privacidade.html" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Privacidade</a> · <a href="termos.html" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Termos</a> · <a href="tiers.html" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Tiers</a></div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hub · HMC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_shared.css?v=16">
+  <script src="_icons.js?v=16" defer></script>
+<script src="_modals.js?v=16" defer></script>
+<script src="_persona.js?v=16" defer></script>
+</head>
+<body data-persona-aware="cross-context" data-active-mode="hub">
+
+<button class="mobile-fab" data-sidebar-mobile-toggle aria-label="Menu"><i data-icon="menu" class="icon"></i></button>
+<div class="drawer-backdrop" data-sidebar-mobile-toggle></div>
+
+<div class="app">
+
+  <aside class="sidebar">
+    <a href="hub.html" class="sidebar-brand">
+      <img src="hmc-logo.png" alt="" class="brand-mark-img">
+      <div>
+        <div class="brand-text">High Mentor Club</div>
+        <div class="brand-sub">Curated by Paulo Vieira · MMXXVI</div>
+      </div>
+    </a>
+
+    <div class="mode-switch">
+      <a href="hub.html" class="mode-switch-item active" data-short="H"><i data-icon="home" class="icon"></i><span>Hub</span></a>
+      <a href="10-clube/01-dashboard.html" class="mode-switch-item" data-short="C"><i data-icon="landmark" class="icon"></i><span>Clube</span></a>
+      <a href="20-mentor/studio-home.html" class="mode-switch-item" data-short="S"><i data-icon="briefcase" class="icon"></i><span>Studio</span></a>
+      <a href="30-mentorado/biblioteca.html" class="mode-switch-item" data-short="E"><i data-icon="book-open" class="icon"></i><span>Estudos</span></a>
+    </div>
+
+    <div class="sidebar-nav-scroll">
+      <div class="nav-section">
+        <a href="notifications.html" class="nav-item has-badge" data-tooltip="Avisos"><i data-icon="bell" class="icon icon-sm"></i>Avisos <span class="badge-count">12</span></a>
+        <a href="agenda.html" class="nav-item" data-tooltip="Agenda"><i data-icon="calendar" class="icon icon-sm"></i>Agenda</a>
+        <a href="buscar.html" class="nav-item" data-tooltip="Buscar"><i data-icon="search" class="icon icon-sm"></i>Buscar</a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-label">— Atalhos</div>
+        <a href="10-clube/01-dashboard.html" class="nav-item" data-tooltip="Sala do Membro"><i data-icon="home" class="icon icon-sm"></i>Sala do Membro</a>
+        <a href="20-mentor/studio-home.html" class="nav-item" data-tooltip="Studio"><i data-icon="briefcase" class="icon icon-sm"></i>Studio</a>
+        <a href="30-mentorado/biblioteca.html" class="nav-item" data-tooltip="Biblioteca"><i data-icon="book-open" class="icon icon-sm"></i>Biblioteca</a>
+        <a href="40-curator/aprovacoes.html" class="nav-item has-badge" data-tooltip="Curator"><i data-icon="shield" class="icon icon-sm"></i>Curator <span class="badge-count">3</span></a>
+      </div>
+    </div>
+
+    <div class="sidebar-footer-v3">
+      <a href="account.html" class="user-pill-v3">
+        <div class="avatar-sm">LV</div>
+        <div>
+          <div class="user-pill-v3-name">Lucas Vieira</div>
+          <div class="user-pill-v3-role">Seat 12</div>
+        </div>
+      </a>
+      <button class="sidebar-toggle-btn" data-sidebar-toggle>
+        <i data-icon="chevron-left" class="icon"></i>
+        <span>Recolher menu</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <!-- HERO DARK NAVY (editorial luxe) -->
+    <section class="hub-hero">
+      <img src="hmc-logo.png" alt="" class="hub-hero-seal">
+      <div class="hub-hero-content">
+        <div class="hub-hero-eyebrow">Hub · Quarta, 03 jun · 2026</div>
+        <h1 class="hub-hero-title">Boa tarde, <span class="hub-hero-italic">Lucas</span>.</h1>
+        <p class="hub-hero-sub">Você tem <strong>1 venda nova</strong> no Studio, <strong>3 candidatos</strong> aguardando seu aval e o Council acontece em <strong>7 dias</strong>. Foque no que move primeiro.</p>
+        <div class="hub-hero-stats">
+          <div>
+            <div class="hub-hero-stat-label">— Receita Studio · 30d</div>
+            <div class="hub-hero-stat-value">R$ 542k</div>
+            <div class="hub-hero-stat-trend up">↗ +18% vs mês anterior</div>
+          </div>
+          <div>
+            <div class="hub-hero-stat-label">— Mentorados ativos</div>
+            <div class="hub-hero-stat-value">42</div>
+            <div class="hub-hero-stat-trend">3 novos esta semana</div>
+          </div>
+          <div>
+            <div class="hub-hero-stat-label">— Próximo Council</div>
+            <div class="hub-hero-stat-value">10 jun · 19h</div>
+            <div class="hub-hero-stat-trend">Em 7 dias · sala privada</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ATIVIDADE QUE PRECISA DE VOCÊ (cards horizontais que linkam direto) -->
+    <div class="mb-12">
+      <div class="section-head">
+        <div>
+          <div class="section-title">Hoje · o que precisa de você</div>
+          <div class="section-sub">Ordenado por urgência · cada item te leva direto pro destino</div>
+        </div>
+        <a href="notifications.html" class="section-link">Ver tudo (12) →</a>
+      </div>
+
+      <div class="flex-col gap-3">
+
+        <a href="20-mentor/studio-home.html" class="hub-activity-card">
+          <div class="hub-activity-icon hub-activity-icon-gold"><i data-icon="dollar" class="icon icon-lg"></i></div>
+          <div>
+            <div class="hub-activity-meta">Studio · há 12 min</div>
+            <div class="hub-activity-title">Mariana Souza acabou de comprar a Mentoria Vieira</div>
+            <div class="hub-activity-sub">R$ 6.800/mês · 12× sem juros · pago via CISPay · 90% líquido pra você (R$ 6.120/mês)</div>
+          </div>
+          <span class="btn btn-secondary btn-sm">Enviar boas-vindas</span>
+        </a>
+
+        <a href="30-mentorado/comunidade.html" class="hub-activity-card">
+          <div class="hub-activity-icon"><i data-icon="message-circle" class="icon icon-lg"></i></div>
+          <div>
+            <div class="hub-activity-meta">Comunidade · #dúvidas-módulo-3 · Estudos</div>
+            <div class="hub-activity-title">Pedro Almeida te marcou em uma dúvida</div>
+            <div class="hub-activity-sub">"Galera, alguém já fez o exercício de decompor o P&amp;L da própria área? Tô patinando..." + 7 outras mensagens não lidas em 3 canais</div>
+          </div>
+          <span class="btn btn-secondary btn-sm">Responder</span>
+        </a>
+
+        <a href="40-curator/aprovacoes.html" class="hub-activity-card">
+          <div class="hub-activity-icon"><i data-icon="shield" class="icon icon-lg"></i></div>
+          <div>
+            <div class="hub-activity-meta">Curator · Cross-Floor</div>
+            <div class="hub-activity-title">3 candidatos aguardam seu endorso</div>
+            <div class="hub-activity-sub">Marcelo Otto (3/3 já), Júlia Fontes (2/3), Rafael Bandeira (sem indicação, recomendação direta de PV)</div>
+          </div>
+          <span class="btn btn-secondary btn-sm">Revisar</span>
+        </a>
+
+        <a href="30-mentorado/player.html" class="hub-activity-card">
+          <div class="hub-activity-icon"><i data-icon="play-circle" class="icon icon-lg"></i></div>
+          <div>
+            <div class="hub-activity-meta">Estudos · Negociação de Alto Valor · Módulo 03</div>
+            <div class="hub-activity-title">"Como pensar P&amp;L sendo gerente" — você parou em 12:43</div>
+            <div class="hub-activity-sub">Faltam 11 min e 28 seg. Próxima sessão 1:1 com Renata é quinta — termine antes pra render mais.</div>
+          </div>
+          <span class="btn btn-secondary btn-sm">Continuar</span>
+        </a>
+
+        <a href="10-clube/02-calendar.html" class="hub-activity-card">
+          <div class="hub-activity-icon"><i data-icon="landmark" class="icon icon-lg"></i></div>
+          <div>
+            <div class="hub-activity-meta">Clube · próximo ritual em 7 dias</div>
+            <div class="hub-activity-title">HMC Council · Sessão mensal · Quinta 13 nov 20h</div>
+            <div class="hub-activity-sub">Hotseats de André Castelo e Patrícia Lemos. Curadoria de PV na segunda metade. Confirme presença.</div>
+          </div>
+          <span class="btn btn-secondary btn-sm">Confirmar</span>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- SEUS N MUNDOS · renderizado dinamicamente por persona -->
+    <div class="mb-12">
+      <div class="section-head">
+        <div>
+          <div class="section-title" id="modesTitle">Seus contextos</div>
+          <div class="section-sub" id="modesSub">Tudo conectado · mesma conta · mesma plataforma</div>
+        </div>
+      </div>
+
+      <div class="grid" id="modesGrid" style="gap: 24px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+        <!-- preenchido por JS -->
+      </div>
+    </div>
+
+    <script>
+      // Renderiza os cards de mundo conforme persona ativa
+      function renderHubModes() {
+        const p = window.HMC_PERSONA ? window.HMC_PERSONA.current() : null;
+        if (!p) return;
+        const grid = document.getElementById('modesGrid');
+        const title = document.getElementById('modesTitle');
+        const sub = document.getElementById('modesSub');
+
+        // Configuração por persona
+        const MODE_CARDS = {
+          clube: {
+            href: '10-clube/01-dashboard.html',
+            eyebrow: '— Você é membro',
+            title: 'Clube HMC',
+            sub: () => `Seat ${p.seatBadge?.includes('Seat') ? p.seatBadge.replace('Seat ','') : (p.tier === 'III' ? '02' : '12')} · Tier ${p.tier || 'II'} · Founding Member`,
+            stats: [
+              { value: '7d', label: 'próximo Council' },
+              { value: p.tier === 'III' ? 'R$ 412k' : 'R$ 184k', label: 'Yield YTD' },
+            ],
+            cta: 'Entrar no clube',
+            ctaClass: 'btn-secondary',
+          },
+          studio: {
+            href: '20-mentor/studio-home.html',
+            eyebrow: '— Você opera como mentor',
+            title: 'Studio',
+            sub: () => p.id === 'bruno' ? '1 mentoria · 26 mentorados · próximo saque dia 05'
+                     : p.id === 'carlos' ? '3 mentorias · 54 mentorados · próximo saque dia 05'
+                     : '2 mentorias ativas · 42 mentorados · próximo saque dia 05',
+            stats: [
+              { value: p.id === 'carlos' ? 'R$ 712k' : 'R$ 542k', label: 'Receita 30d' },
+              { value: p.id === 'carlos' ? '8' : '11', label: 'novos 30d' },
+            ],
+            cta: 'Abrir Studio',
+            ctaClass: 'btn-chrome',
+          },
+          estudos: {
+            href: '30-mentorado/biblioteca.html',
+            eyebrow: '— Você também aprende aqui',
+            title: 'Estudos',
+            sub: () => '1 mentoria em curso (de Renata Mendes) · 26% completo',
+            stats: [
+              { value: '14<span class="muted" style="font-size: 14px;">/64</span>', label: 'aulas vistas' },
+              { value: '8', label: 'não lidas' },
+            ],
+            cta: 'Continuar',
+            ctaClass: 'btn-secondary',
+          },
+        };
+
+        // Mapeia modos da persona pra cards reais
+        const personaModes = (p.modes || []).filter(m => MODE_CARDS[m]);
+        const n = personaModes.length;
+        title.textContent = n === 1 ? 'Seu contexto' : n === 2 ? 'Seus dois contextos' : n === 3 ? 'Seus três contextos' : 'Seus contextos';
+        sub.textContent = `${p.name} · Tier ${p.tier || 'membro'} · ${n} acesso${n>1?'s':''} ativo${n>1?'s':''}`;
+
+        grid.innerHTML = personaModes.map(modeKey => {
+          const c = MODE_CARDS[modeKey];
+          const subText = typeof c.sub === 'function' ? c.sub() : c.sub;
+          // Renderizar selo do tier do membro APENAS no card do Clube
+          let sealHtml = '';
+          if (modeKey === 'clube' && p.tier) {
+            const sealMap = { 'I': 'tier-1', 'II': 'tier-2', 'III': 'tier-3' };
+            const sealFile = sealMap[p.tier];
+            if (sealFile) {
+              sealHtml = `<img src="tier-seals/${sealFile}.png?v=16" alt="Selo Tier ${p.tier}" style="position: absolute; top: 16px; right: 16px; width: 52px; height: 52px; object-fit: contain; filter: drop-shadow(0 6px 12px rgba(0,0,0,0.20));">`;
+            }
+          }
+          return `
+            <a href="${c.href}" class="mode-card" style="position: relative;">
+              ${sealHtml}
+              <div class="mode-card-eyebrow">${c.eyebrow}</div>
+              <div class="mode-card-title">${c.title}</div>
+              <div class="mode-card-sub">${subText}</div>
+              <div class="mode-card-stats">
+                ${c.stats.map(s => `
+                  <div class="mode-card-stat">
+                    <div class="mode-card-stat-value">${s.value}</div>
+                    <div class="mode-card-stat-label">${s.label}</div>
+                  </div>
+                `).join('')}
+              </div>
+              <div style="display: flex; gap: 8px;">
+                <span class="btn ${c.ctaClass} btn-sm" style="flex: 1; text-align: center;">${c.cta}</span>
+              </div>
+            </a>`;
+        }).join('');
+
+        if (window.HMC_ICONS && window.HMC_ICONS.run) window.HMC_ICONS.run();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', renderHubModes);
+      } else {
+        renderHubModes();
+      }
+    </script>
+
+    <!-- AGENDA DA SEMANA -->
+    <div id="agenda-semana" class="grid grid-12-8 gap-loose">
+
+      <div class="surface" style="padding: 32px;">
+        <div class="section-head" style="margin-bottom: 16px;">
+          <div>
+            <div class="section-title-sm">Agenda · próximos 7 dias</div>
+          </div>
+          <a href="agenda.html" class="section-link">Calendário completo →</a>
+        </div>
+
+        <div class="list-item">
+          <div style="flex: 1;">
+            <div style="display: flex; gap: 8px; margin-bottom: 4px; align-items: center;">
+              <span class="badge badge-accent">Studio</span>
+              <span class="muted" style="font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; font-weight: 600;">Amanhã · qui · 14h</span>
+            </div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 500;">Sessão 1:1 com Daniel Coutinho</div>
+            <div class="list-item-meta">Revisão de meta Q4 · Google Meet · notas da sessão anterior disponíveis</div>
+          </div>
+          <button class="btn btn-secondary btn-sm">Ver notas</button>
+        </div>
+
+        <div class="list-item">
+          <div style="flex: 1;">
+            <div style="display: flex; gap: 8px; margin-bottom: 4px; align-items: center;">
+              <span class="badge badge-accent">Estudos</span>
+              <span class="muted" style="font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; font-weight: 600;">Quinta · 19h</span>
+            </div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 500;">Sessão 1:1 com Carla Mendes</div>
+            <div class="list-item-meta">Como mentor que estuda. Tópico: framework de carreira lateral</div>
+          </div>
+          <button class="btn btn-secondary btn-sm">Pauta</button>
+        </div>
+
+        <div class="list-item">
+          <div style="flex: 1;">
+            <div style="display: flex; gap: 8px; margin-bottom: 4px; align-items: center;">
+              <span class="badge badge-accent">Clube</span>
+              <span class="muted" style="font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; font-weight: 600;">Próx qui · 20h</span>
+            </div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 500;">HMC Council · sessão mensal</div>
+            <div class="list-item-meta">Hotseats + curadoria de PV na 2ª metade</div>
+          </div>
+          <button class="btn btn-secondary btn-sm">Confirmar</button>
+        </div>
+
+      </div>
+
+      <div class="flex-col gap-4">
+        <a href="10-clube/05-yield.html" class="surface" style="padding: 28px;">
+          <div class="flex-between mb-4">
+            <div class="eyebrow-chrome">— Yield · clube</div>
+            <span class="muted" style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">Próx 05/12</span>
+          </div>
+          <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 500; letter-spacing: -0.025em;">R$ 18,4k</div>
+          <div class="muted" style="font-size: 12px; margin-top: 6px;">28 leads convertidos · CIS 16%</div>
+        </a>
+
+        <a href="20-mentor/studio-home.html" class="surface" style="padding: 28px;">
+          <div class="flex-between mb-4">
+            <div class="eyebrow-chrome">— Saque · studio</div>
+            <span class="muted" style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">Próx 05/12</span>
+          </div>
+          <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 500; letter-spacing: -0.025em;">R$ 87,2k</div>
+          <div class="muted" style="font-size: 12px; margin-top: 6px;">Receita 30d via CISPay · split aplicado</div>
+        </a>
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+
+<div class="wf-note">Hub</div>
+
+</body>
+</html>

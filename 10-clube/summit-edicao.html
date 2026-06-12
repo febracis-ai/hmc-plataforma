@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HMC Summit · Florença 2026 · Edição I</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_shared.css?v=16"><script src="../_icons.js?v=16" defer></script>
+<script src="../_modals.js?v=16" defer></script>
+<script src="../_persona.js?v=16" defer></script>
+<script>document.addEventListener("DOMContentLoaded",()=>{if(window.HMC_PERSONA&&window.HMC_PERSONA.applyTierAwareSidebar)window.HMC_PERSONA.applyTierAwareSidebar();});</script>
+<style>
+.summit-hero { background: linear-gradient(160deg, #050A15 0%, #0A1530 40%, #0D285C 70%, #102b5e 100%); border-radius: 20px; padding: 64px 56px; margin-bottom: 36px; color: white; position: relative; overflow: hidden; }
+.summit-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 80% 0%, rgba(168,230,255,0.20) 0%, transparent 60%); pointer-events: none; }
+.summit-tag { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.10); border-radius: 100px; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; margin-bottom: 22px; color: white; }
+.summit-eyebrow { font-size: 11px; color: var(--blue-highlight); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 600; margin-bottom: 14px; }
+.summit-h1 { font-family: 'Playfair Display', serif; font-size: 68px; font-weight: 500; letter-spacing: -0.035em; line-height: 1.05; margin-bottom: 24px; }
+.summit-lead { font-size: 17px; line-height: 1.65; color: rgba(255,255,255,0.72); max-width: 620px; margin-bottom: 36px; }
+.summit-meta { display: flex; gap: 36px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.12); }
+.summit-meta-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(168,230,255,0.65); font-weight: 700; margin-bottom: 5px; }
+.summit-meta-val { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; }
+.agenda-day { background: var(--bg-card); border: 1px solid var(--divider); border-radius: 14px; padding: 28px 32px; margin-bottom: 18px; }
+.agenda-day-head { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px solid var(--divider); }
+.agenda-day-title { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 500; letter-spacing: -0.02em; }
+.agenda-day-date { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--text-muted); }
+.agenda-item { display: grid; grid-template-columns: 100px minmax(0, 1fr) auto; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--divider); align-items: center; }
+.agenda-item:last-child { border-bottom: none; }
+.agenda-time { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-muted); font-weight: 500; }
+.agenda-title-it { font-weight: 500; font-size: 14px; margin-bottom: 3px; }
+.agenda-sub { font-size: 11px; color: var(--text-muted); }
+.agenda-tag { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; padding: 3px 10px; border-radius: 10px; background: var(--bg-card-hover); color: var(--text); }
+.agenda-tag.private { background: var(--blue-deep); color: var(--blue-highlight); }
+.agenda-tag.dinner { background: rgba(212, 165, 84, 0.15); color: #d4a554; }
+</style>
+</head>
+<body data-persona-aware="mode-page" data-mode-context="clube" data-required-mode="clube">
+<button class="mobile-fab" data-sidebar-mobile-toggle aria-label="Menu"><i data-icon="menu" class="icon"></i></button>
+<div class="drawer-backdrop" data-sidebar-mobile-toggle></div>
+<div class="app">
+<aside class="sidebar">
+  <a href="../hub.html" class="sidebar-brand"><img src="../hmc-logo.png" alt="" class="brand-mark-img"><div><div class="brand-text">High Mentor Club</div><div class="brand-sub">Curated by Paulo Vieira · MMXXVI</div></div></a>
+  <div class="mode-switch">
+    <a href="../hub.html" class="mode-switch-item" data-short="H"><i data-icon="home" class="icon"></i><span>Hub</span></a>
+    <a href="../10-clube/01-dashboard.html" class="mode-switch-item active" data-short="C"><i data-icon="landmark" class="icon"></i><span>Clube</span></a>
+    <a href="../20-mentor/studio-home.html" class="mode-switch-item" data-short="S"><i data-icon="briefcase" class="icon"></i><span>Studio</span></a>
+    <a href="../30-mentorado/biblioteca.html" class="mode-switch-item" data-short="E"><i data-icon="book-open" class="icon"></i><span>Estudos</span></a>
+  </div>
+  <div class="sidebar-nav-scroll">
+    <div class="nav-section">
+      <a href="../notifications.html" class="nav-item has-badge"><i data-icon="bell" class="icon icon-sm"></i>Avisos <span class="badge-count">12</span></a>
+      <a href="../agenda.html" class="nav-item"><i data-icon="calendar" class="icon icon-sm"></i>Agenda</a>
+      <a href="../buscar.html" class="nav-item"><i data-icon="search" class="icon icon-sm"></i>Buscar</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">— A Plataforma</div>
+      <a href="01-dashboard.html" class="nav-item"><i data-icon="home" class="icon icon-sm"></i>Sala do Membro</a>
+      <a href="02-calendar.html" class="nav-item"><i data-icon="users" class="icon icon-sm"></i>Council</a>
+      <a href="03-codex.html" class="nav-item"><i data-icon="book" class="icon icon-sm"></i>Codex</a>
+      <a href="04-cross-floor.html" class="nav-item"><i data-icon="compass" class="icon icon-sm"></i>Cross-Floor</a>
+      <a href="05-yield.html" class="nav-item"><i data-icon="dollar" class="icon icon-sm"></i>Yield</a>
+      <a href="06-pilgrimages.html" class="nav-item active"><i data-icon="map-pin" class="icon icon-sm"></i>Pilgrimages<span class="nav-dot"></span></a>
+      <a href="07-seal.html" class="nav-item"><i data-icon="award" class="icon icon-sm"></i>Selo</a>
+      <a href="perfil-tier.html" class="nav-item"><i data-icon="shield" class="icon icon-sm"></i>Meu Tier</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">— Tier III · Sovereign Mentor</div>
+      <a href="quatro-motores.html" class="nav-item"><i data-icon="zap" class="icon icon-sm"></i>Os Quatro Motores</a>
+      <a href="antechamber.html" class="nav-item"><i data-icon="lock" class="icon icon-sm"></i>Antechamber</a>
+      <a href="curator-address.html" class="nav-item"><i data-icon="mic" class="icon icon-sm"></i>Curator's Address</a>
+      <a href="bridge.html" class="nav-item"><i data-icon="link" class="icon icon-sm"></i>The Bridge</a>
+    </div>
+  </div>
+  <div class="sidebar-footer-v3">
+    <a href="../account.html" class="user-pill-v3"><div class="avatar-sm">LV</div><div><div class="user-pill-v3-name">Lucas Vieira</div><div class="user-pill-v3-role">Seat 12 · Tier II</div></div></a>
+    <button class="sidebar-toggle-btn" data-sidebar-toggle><i data-icon="chevron-left" class="icon"></i><span>Recolher menu</span></button>
+  </div>
+</aside>
+
+<main class="main">
+
+  <div style="display: flex; gap: 8px; font-size: 12px; color: var(--text-muted); margin-bottom: 16px;"><a href="06-pilgrimages.html" class="muted">Pilgrimages</a><span class="faint">/</span><span style="color: var(--text);">Florença · Edição I</span></div>
+
+  <div class="summit-hero">
+    <div style="position: relative; z-index: 1; max-width: 720px;">
+      <div class="summit-tag"><i data-icon="map-pin" class="icon icon-sm"></i> Florença · IT · Edição inaugural</div>
+      <div class="summit-eyebrow">— HMC Summit · Pilgrimage Premium</div>
+      <h1 class="summit-h1">A <span class="serif-italic" style="background: linear-gradient(135deg, #A8E6FF, #4DB8FF); -webkit-background-clip: text; background-clip: text; color: transparent;">House</span> revisita.</h1>
+      <p class="summit-lead">4 dias · 6 noites em Florença pra primeiro Summit internacional do HMC. Curadoria PV · 12 cadeiras totais · jantar privado no Palazzo Vecchio · sessão fechada na biblioteca dos Médicis. Restrito Tier II+.</p>
+      <div class="summit-meta">
+        <div><div class="summit-meta-label">— Datas</div><div class="summit-meta-val">14-17 nov · 2026</div></div>
+        <div><div class="summit-meta-label">— Cadeiras</div><div class="summit-meta-val">8 de 12</div></div>
+        <div><div class="summit-meta-label">— Investimento</div><div class="summit-meta-val">R$ 68k</div></div>
+        <div><div class="summit-meta-label">— Status</div><div class="summit-meta-val" style="color: #f39c12;">Confirmando</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-12-8 gap-loose">
+
+    <div class="flex-col gap-4">
+
+      <div class="surface" style="padding: 32px;">
+        <div class="eyebrow-chrome" style="margin-bottom: 16px;">— Programa</div>
+
+        <div class="agenda-day">
+          <div class="agenda-day-head">
+            <div class="agenda-day-title">Dia 1 · Sexta</div>
+            <div class="agenda-day-date">14 NOV · CHEGADA</div>
+          </div>
+          <div class="agenda-item">
+            <div class="agenda-time">14:00</div>
+            <div><div class="agenda-title-it">Check-in · Hotel Savoy</div><div class="agenda-sub">Piazza della Repubblica</div></div>
+            <div class="agenda-tag">Logística</div>
+          </div>
+          <div class="agenda-item">
+            <div class="agenda-time">19:30</div>
+            <div><div class="agenda-title-it">Aperitivo de abertura · The Curator</div><div class="agenda-sub">PV abre o Summit · 1ª impressão de Florença · Caffè Gilli</div></div>
+            <div class="agenda-tag">Coletivo</div>
+          </div>
+        </div>
+
+        <div class="agenda-day">
+          <div class="agenda-day-head">
+            <div class="agenda-day-title">Dia 2 · Sábado</div>
+            <div class="agenda-day-date">15 NOV · MERCY</div>
+          </div>
+          <div class="agenda-item">
+            <div class="agenda-time">08:00</div>
+            <div><div class="agenda-title-it">Café · briefing do dia</div><div class="agenda-sub">Hotel</div></div>
+            <div class="agenda-tag">Coletivo</div>
+          </div>
+          <div class="agenda-item">
+            <div class="agenda-time">10:00</div>
+            <div><div class="agenda-title-it">Visita guiada · Galleria degli Uffizi</div><div class="agenda-sub">Curador interno: como os Médicis compraram cultura · 3h</div></div>
+            <div class="agenda-tag">Coletivo</div>
+          </div>
+          <div class="agenda-item">
+            <div class="agenda-time">14:30</div>
+            <div><div class="agenda-title-it">Sessão privada · Biblioteca Medicea Laurenziana</div><div class="agenda-sub">Acesso restrito · PV conduz leitura silenciosa de fragmentos do Príncipe</div></div>
+            <div class="agenda-tag private">Privado</div>
+          </div>
+          <div class="agenda-item">
+            <div class="agenda-time">20:00</div>
+            <div><div class="agenda-title-it">Jantar · Palazzo Vecchio · Sala dei Gigli</div><div class="agenda-sub">Aluguel privado · 12 lugares na mesa Médici · 4 cursos</div></div>
+            <div class="agenda-tag dinner">Premium</div>
+          </div>
+        </div>
+
+        <div class="agenda-day">
+          <div class="agenda-day-head">
+            <div class="agenda-day-title">Dia 3 · Domingo</div>
+            <div class="agenda-day-date">16 NOV · STRATEGY</div>
+          </div>
+          <div class="agenda-item">
+            <div class="agenda-time">09:30</div>
+            <div><div class="agenda-title-it">Sessão estratégica · Cúpula Brunelleschi</div><div class="agenda-sub">Subida + sessão silenciosa de 90 min antes do open público</div></div>
+            <div class="agenda-tag">Coletivo</div>
+          </div>
+          <div class="agenda-item">
+            <div class="agenda-time">12:00</div>
+            <div><div class="agenda-title-it">Almoço · trattoria di campagna · Chianti</div><div class="agenda-sub">Saída de carro pra interior · 1h de viagem · 3h almoço</div></div>
+            <div class="agenda-tag">Coletivo</div>
+          </div>
+          <div class="agenda-item">
+            <div class="agenda-time">19:00</div>
+            <div><div class="agenda-title-it">Council de campo · vinícola Antinori</div><div class="agenda-sub">Mini-council oficial · pauta: o que cada um leva pra casa</div></div>
+            <div class="agenda-tag private">Privado</div>
+          </div>
+        </div>
+
+        <div class="agenda-day">
+          <div class="agenda-day-head">
+            <div class="agenda-day-title">Dia 4 · Segunda</div>
+            <div class="agenda-day-date">17 NOV · CLOSE</div>
+          </div>
+          <div class="agenda-item">
+            <div class="agenda-time">10:00</div>
+            <div><div class="agenda-title-it">Walk silencioso · Ponte Vecchio ao Boboli</div><div class="agenda-sub">2h sem fala · cada um anda o trecho · encontro no Boboli</div></div>
+            <div class="agenda-tag">Coletivo</div>
+          </div>
+          <div class="agenda-item">
+            <div class="agenda-time">13:00</div>
+            <div><div class="agenda-title-it">Almoço de despedida + Curator's letter</div><div class="agenda-sub">PV entrega carta lacrada a cada um · só ler de volta a SP</div></div>
+            <div class="agenda-tag dinner">Premium</div>
+          </div>
+          <div class="agenda-item">
+            <div class="agenda-time">16:00</div>
+            <div><div class="agenda-title-it">Check-out · transfer aeroporto</div><div class="agenda-sub">Voos a partir das 20h</div></div>
+            <div class="agenda-tag">Logística</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="flex-col gap-4">
+
+      <div class="surface" style="padding: 28px;">
+        <div class="eyebrow-chrome" style="margin-bottom: 14px;">— Reservar minha cadeira</div>
+        <div style="font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 500; margin-bottom: 6px;">R$ 68.000</div>
+        <div class="muted" style="font-size: 12px; margin-bottom: 18px;">Investimento total · tudo incluso exceto passagem aérea</div>
+        <a href="../00-public/checkout.html" class="btn btn-chrome w-full" style="padding: 12px; margin-bottom: 8px;">Confirmar presença</a>
+        <a href="../40-curator/suporte-admin.html" class="btn btn-outline w-full" style="padding: 12px;">Falar com curadoria</a>
+        <div class="muted" style="font-size: 11px; margin-top: 14px; line-height: 1.6;">Inclui: hotel 4 noites · transfers · refeições · sessões · ingressos privados. Não inclui: voo internacional, gastos pessoais.</div>
+      </div>
+
+      <div class="surface" style="padding: 28px;">
+        <div class="eyebrow-chrome" style="margin-bottom: 14px;">— Cadeiras confirmadas</div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="display: flex; align-items: center; gap: 12px;"><div class="avatar-sm" style="background: var(--blue-deep); color: var(--blue-highlight);">PV</div><div><div style="font-size: 13px; font-weight: 600;">Paulo Vieira</div><div class="muted" style="font-size: 11px;">The Curator</div></div></div>
+          <div style="display: flex; align-items: center; gap: 12px;"><div class="avatar-sm">CR</div><div><div style="font-size: 13px; font-weight: 600;">Carlos Ribeiro</div><div class="muted" style="font-size: 11px;">Tier III · Seat 02</div></div></div>
+          <div style="display: flex; align-items: center; gap: 12px;"><div class="avatar-sm">MC</div><div><div style="font-size: 13px; font-weight: 600;">Marina Costa</div><div class="muted" style="font-size: 11px;">Tier III · Seat 05</div></div></div>
+          <div style="display: flex; align-items: center; gap: 12px;"><div class="avatar-sm">LV</div><div><div style="font-size: 13px; font-weight: 600;">Lucas Vieira</div><div class="muted" style="font-size: 11px;">Tier II · Seat 12</div></div></div>
+          <div style="display: flex; align-items: center; gap: 12px;"><div class="avatar-sm">RB</div><div><div style="font-size: 13px; font-weight: 600;">Rafael Bandeira</div><div class="muted" style="font-size: 11px;">Tier II · Seat 18</div></div></div>
+          <div class="muted" style="font-size: 12px; text-align: center; padding-top: 8px; border-top: 1px solid var(--divider);">+ 3 confirmados não-públicos</div>
+        </div>
+      </div>
+
+      <div class="surface" style="padding: 28px;">
+        <div class="eyebrow-chrome" style="margin-bottom: 12px;">— Elegibilidade</div>
+        <ul style="list-style: none; padding: 0; font-size: 13px; line-height: 2; color: var(--text);">
+          <li>↳ Tier II+ ativo</li>
+          <li>↳ Passaporte com 18m+ validade</li>
+          <li>↳ Visto Schengen ativo</li>
+          <li>↳ Saúde declarada (caminhadas 4-6km/dia)</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+
+</main>
+</div>
+<div class="wf-note">Clube · Summit Florença I</div>
+</body>
+</html>

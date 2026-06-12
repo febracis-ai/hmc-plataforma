@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HMC · Sala do Membro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../_shared.css?v=16">
+  <script src="../_icons.js?v=16" defer></script>
+<script src="../_modals.js?v=16" defer></script>
+<script src="../_persona.js?v=16" defer></script>
+<script>document.addEventListener("DOMContentLoaded",()=>{if(window.HMC_PERSONA&&window.HMC_PERSONA.applyTierAwareSidebar)window.HMC_PERSONA.applyTierAwareSidebar();});</script>
+</head>
+<body data-persona-aware="mode-page" data-mode-context="clube" data-required-mode="clube">
+
+<button class="mobile-fab" data-sidebar-mobile-toggle aria-label="Menu"><i data-icon="menu" class="icon"></i></button>
+<div class="drawer-backdrop" data-sidebar-mobile-toggle></div>
+
+<div class="app">
+
+  <aside class="sidebar">
+    <a href="../hub.html" class="sidebar-brand">
+      <img src="../hmc-logo.png" alt="" class="brand-mark-img">
+      <div>
+        <div class="brand-text">High Mentor Club</div>
+        <div class="brand-sub">Curated by Paulo Vieira · MMXXVI</div>
+      </div>
+    </a>
+
+    <div class="mode-switch">
+      <a href="../hub.html" class="mode-switch-item" data-short="H"><i data-icon="home" class="icon"></i><span>Hub</span></a>
+      <a href="../10-clube/01-dashboard.html" class="mode-switch-item active" data-short="C"><i data-icon="landmark" class="icon"></i><span>Clube</span></a>
+      <a href="../20-mentor/studio-home.html" class="mode-switch-item" data-short="S"><i data-icon="briefcase" class="icon"></i><span>Studio</span></a>
+      <a href="../30-mentorado/biblioteca.html" class="mode-switch-item" data-short="E"><i data-icon="book-open" class="icon"></i><span>Estudos</span></a>
+    </div>
+
+    <div class="sidebar-nav-scroll">
+      <div class="nav-section">
+        <a href="../notifications.html" class="nav-item has-badge" data-tooltip="Avisos"><i data-icon="bell" class="icon icon-sm"></i>Avisos <span class="badge-count">12</span></a>
+        <a href="../agenda.html" class="nav-item" data-tooltip="Agenda"><i data-icon="calendar" class="icon icon-sm"></i>Agenda</a>
+        <a href="../buscar.html" class="nav-item" data-tooltip="Buscar"><i data-icon="search" class="icon icon-sm"></i>Buscar</a>
+      </div>
+
+
+      <div class="nav-section">
+        <div class="nav-section-label">— A Plataforma</div>
+        <a href="01-dashboard.html" class="nav-item active" data-tooltip="Sala do Membro"><i data-icon="home" class="icon icon-sm"></i>Sala do Membro<span class="nav-dot"></span></a>
+        <a href="02-calendar.html" class="nav-item" data-tooltip="Council"><i data-icon="users" class="icon icon-sm"></i>Council</a>
+        <a href="03-codex.html" class="nav-item" data-tooltip="Codex"><i data-icon="book" class="icon icon-sm"></i>Codex</a>
+        <a href="04-cross-floor.html" class="nav-item" data-tooltip="Cross-Floor"><i data-icon="compass" class="icon icon-sm"></i>Cross-Floor</a>
+        <a href="05-yield.html" class="nav-item" data-tooltip="Yield"><i data-icon="dollar" class="icon icon-sm"></i>Yield</a>
+        <a href="06-pilgrimages.html" class="nav-item" data-tooltip="Pilgrimages"><i data-icon="map-pin" class="icon icon-sm"></i>Pilgrimages</a>
+        <a href="07-seal.html" class="nav-item" data-tooltip="Selo"><i data-icon="award" class="icon icon-sm"></i>Selo</a>
+      <a href="perfil-tier.html" class="nav-item"><i data-icon="shield" class="icon icon-sm"></i>Meu Tier</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">— Tier III · Sovereign Mentor</div>
+      <a href="quatro-motores.html" class="nav-item"><i data-icon="zap" class="icon icon-sm"></i>Os Quatro Motores</a>
+      <a href="antechamber.html" class="nav-item" data-tooltip="Antechamber"><i data-icon="lock" class="icon icon-sm"></i>Antechamber</a>
+      <a href="curator-address.html" class="nav-item"><i data-icon="mic" class="icon icon-sm"></i>Curator's Address</a>
+      <a href="bridge.html" class="nav-item"><i data-icon="link" class="icon icon-sm"></i>The Bridge</a>
+    </div>
+
+    </div>
+
+    <div class="sidebar-footer-v3">
+      <a href="../account.html" class="user-pill-v3">
+        <div class="avatar-sm">LV</div>
+        <div>
+          <div class="user-pill-v3-name">Lucas Vieira</div>
+          <div class="user-pill-v3-role">Seat 12</div>
+        </div>
+      </a>
+      <button class="sidebar-toggle-btn" data-sidebar-toggle>
+        <i data-icon="chevron-left" class="icon"></i>
+        <span>Recolher menu</span>
+      </button>
+    </div>
+
+  </aside>
+
+  <main class="main">
+
+    <!-- PAGE HEAD (light, simples) -->
+    <div class="page-head">
+      <div class="page-head-text">
+        <div class="page-eyebrow">
+          <span class="gold-rule"></span>
+          <span class="page-eyebrow-text">Sala do Membro</span>
+        </div>
+        <h1 class="page-title">Boa noite, <span class="page-title-serif-italic page-title-chrome">Lucas</span>.</h1>
+      </div>
+    </div>
+
+    <!-- HERO DARK BLOCK (spec oficial: gradient #050A15 → #0A1530 → #0D285C + brilho radial) -->
+    <div class="surface-hero-dark mb-12">
+      <div class="grid grid-12-8 items-center" style="gap: 64px;">
+        <div>
+          <div class="eyebrow-gold mb-4">— Founding Member · Seat 12</div>
+          <h2 style="font-family: 'Playfair Display', serif; font-size: 44px; font-weight: 500; letter-spacing: -0.03em; line-height: 1.1; color: var(--text-on-dark); margin-bottom: 20px;">
+            Você ocupa a Seat 12<br>desde <span class="page-title-serif-italic page-title-chrome">setembro</span>.
+          </h2>
+          <p style="font-size: 16px; line-height: 1.65; color: var(--text-on-dark-muted); max-width: 480px; margin-bottom: 32px;">O próximo Council acontece em sete dias. Três candidatos no Cross-Floor aguardam sua curadoria. The Curator deixou uma mensagem na Antechamber há dois dias.</p>
+          <div class="flex gap-3">
+            <button class="btn btn-gold">Abrir Antechamber</button>
+            <button class="btn btn-outline">Ver agenda completa</button>
+          </div>
+        </div>
+        <div style="display: flex; justify-content: center;">
+          <img src="../tier-seals/tier-2.png?v=16" alt="HMC Seal · Tier II · High Mentor · Seat 12" class="hmc-seal-img hmc-seal-img-lg">
+        </div>
+      </div>
+    </div>
+
+    <!-- STATS ROW (light, editorial) -->
+    <div class="grid grid-4 mb-12" style="gap: 56px;">
+      <div class="stat-block">
+        <div class="stat-eyebrow">— Ticket atual</div>
+        <div class="stat-display">R$ 68k</div>
+        <div class="stat-delta">↗ +21% vs Q2</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-eyebrow">— Mentorados</div>
+        <div class="stat-display">42</div>
+        <div class="stat-delta">↗ +8 últimos 90d</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-eyebrow">— HMC Yield · 30d</div>
+        <div class="stat-display">R$ 18,4k</div>
+        <div class="stat-delta">→ R$ 184k YTD</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-eyebrow">— Cross-Floor</div>
+        <div class="stat-display">3</div>
+        <div class="stat-delta">aguardando curadoria</div>
+      </div>
+    </div>
+
+    <!-- PRÓXIMOS RITUAIS + CARDS LATERAIS -->
+    <div class="grid grid-12-8 gap-loose mb-12">
+      <div class="surface" style="padding: 40px;">
+        <div class="section-head">
+          <div>
+            <div class="section-title">Próximos rituais</div>
+            <div class="section-sub">Sua agenda de novembro</div>
+          </div>
+          <a href="02-calendar.html" class="section-link">Ver agenda completa →</a>
+        </div>
+
+        <div class="list-item">
+          <div style="flex: 1;">
+            <div class="flex gap-2 items-center mb-3">
+              <span class="badge badge-accent">Council</span>
+              <span class="muted" style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">Qui · 13 nov · 20h</span>
+            </div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; letter-spacing: -0.015em;">Sessão mensal · Online</div>
+            <div class="list-item-meta">Hotseats de André Castelo e Patrícia Lemos. Curadoria de PV na segunda metade.</div>
+          </div>
+          <button class="btn btn-secondary btn-sm">Confirmar</button>
+        </div>
+
+        <div class="list-item">
+          <div style="flex: 1;">
+            <div class="flex gap-2 items-center mb-3">
+              <span class="badge badge-accent">Curator's Address</span>
+              <span class="muted" style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">Ter · 18 nov · 19h30</span>
+            </div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; letter-spacing: -0.015em;">PGR mensal · aberto aos seus mentorados</div>
+            <div class="list-item-meta">42 mentorados elegíveis. Link compartilhável 24h antes.</div>
+          </div>
+          <button class="btn btn-secondary btn-sm">Compartilhar</button>
+        </div>
+
+        <div class="list-item">
+          <div style="flex: 1;">
+            <div class="flex gap-2 items-center mb-3">
+              <span class="badge badge-tier-3">Pilgrimage</span>
+              <span class="muted" style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">10–12 dez · São Paulo</span>
+            </div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; letter-spacing: -0.015em;">Inter Business</div>
+            <div class="list-item-meta">Peregrinação corporativa de 3 dias. Logística completa após inscrição.</div>
+          </div>
+          <button class="btn btn-gold">Inscrever-se</button>
+        </div>
+      </div>
+
+      <div class="flex-col gap-4">
+        <a href="04-cross-floor.html" class="surface" style="padding: 28px;">
+          <div class="flex-between mb-4">
+            <div class="eyebrow-chrome">— Cross-Floor</div>
+            <span class="badge badge-warn">3 novos</span>
+          </div>
+          <div style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; letter-spacing: -0.015em; line-height: 1.25; margin-bottom: 12px;">Candidatos aguardando<br>sua curadoria</div>
+          <div class="muted" style="font-size: 12px; line-height: 1.5;">Marcelo Otto · Júlia Fontes · Rafael Bandeira</div>
+        </a>
+
+        <a href="05-yield.html" class="surface" style="padding: 28px;">
+          <div class="flex-between mb-4">
+            <div class="eyebrow-chrome">— HMC Yield</div>
+            <span class="muted" style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">Próx 05/12</span>
+          </div>
+          <div class="stat-display" style="font-size: 34px; margin-bottom: 10px;">R$ 18.400</div>
+          <div class="muted" style="font-size: 12px;">28 leads convertidos · 62% conversão</div>
+        </a>
+
+        <a href="07-seal.html" class="surface" style="padding: 24px;">
+          <div class="flex gap-4 items-center">
+            <img src="../hmc-logo.png" alt="" class="hmc-seal-img" style="width: 56px; height: 56px;">
+            <div style="flex: 1;">
+              <div style="font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 500;">Seu Selo</div>
+              <div class="muted" style="font-size: 12px; margin-top: 4px;">Seat 12 · Founding</div>
+            </div>
+            <div class="highlight" style="font-size: 14px;">→</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- PALAVRA DO CURADOR (Premium Card) -->
+    <div class="surface-premium mb-12">
+      <div class="eyebrow-gold mb-6">— Palavra do Curador · Outubro</div>
+      <p class="quote-curator">"Não estou vendendo, estou vivenciando. O maior trunfo deste clube não é conhecimento — é o convívio entre nós."</p>
+      <div class="quote-attribution">— Paulo Vieira</div>
+    </div>
+
+    <!-- OS QUATRO MOTORES -->
+    <div class="surface mb-12" style="padding: 40px;">
+      <div class="section-head">
+        <div>
+          <div class="section-title">Os Quatro Motores</div>
+          <div class="section-sub">Sua renovação 2026 — progresso individual</div>
+        </div>
+        <a href="02-calendar.html" class="section-link">Ver detalhes →</a>
+      </div>
+
+      <div class="grid grid-4" style="gap: 32px;">
+        <div>
+          <div class="flex-between mb-3">
+            <div class="eyebrow-chrome">— Motor 01</div>
+            <span class="muted" style="font-size: 11px; font-variant-numeric: tabular-nums;">66%</span>
+          </div>
+          <div style="font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 500; letter-spacing: -0.01em; margin-bottom: 6px;">Funil Bruno Vaz</div>
+          <div class="muted" style="font-size: 12px; margin-bottom: 14px;">12 de 18 aulas · próx. sexta</div>
+          <div class="progress"><div style="width: 66%;"></div></div>
+        </div>
+        <div>
+          <div class="flex-between mb-3">
+            <div class="eyebrow-chrome">— Motor 02</div>
+            <span class="muted" style="font-size: 11px; font-variant-numeric: tabular-nums;">30%</span>
+          </div>
+          <div style="font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 500; letter-spacing: -0.01em; margin-bottom: 6px;">YouTube Poderoso</div>
+          <div class="muted" style="font-size: 12px; margin-bottom: 14px;">Imersão em 22 nov</div>
+          <div class="progress"><div style="width: 30%;"></div></div>
+        </div>
+        <div>
+          <div class="flex-between mb-3">
+            <div class="eyebrow-chrome">— Motor 03</div>
+            <span class="muted" style="font-size: 11px; font-variant-numeric: tabular-nums;">80%</span>
+          </div>
+          <div style="font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 500; letter-spacing: -0.01em; margin-bottom: 6px;">PMN da Júlia</div>
+          <div class="muted" style="font-size: 12px; margin-bottom: 14px;">Em andamento</div>
+          <div class="progress"><div style="width: 80%;"></div></div>
+        </div>
+        <div>
+          <div class="flex-between mb-3">
+            <div class="eyebrow-chrome">— Motor 04</div>
+            <span class="muted" style="font-size: 11px; font-variant-numeric: tabular-nums;">45%</span>
+          </div>
+          <div style="font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 500; letter-spacing: -0.01em; margin-bottom: 6px;">Método Referido</div>
+          <div class="muted" style="font-size: 12px; margin-bottom: 14px;">Turma 8 · implementação</div>
+          <div class="progress"><div style="width: 45%;"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ANTECHAMBER (light) -->
+    <div class="surface-bordered" style="padding: 40px; display: flex; align-items: center; justify-content: space-between; gap: 32px;">
+      <div style="flex: 1;">
+        <div class="eyebrow-chrome mb-3">— Antechamber</div>
+        <div style="font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 8px;">Canal direto com <span class="serif-italic" style="background: var(--gradient-chrome-blue); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">The Curator</span></div>
+        <p class="muted" style="font-size: 14px; max-width: 540px; line-height: 1.6;">Para o que importa. Regras tácitas: nunca cumprimento coletivo, nunca pergunta de mentorado, resposta em até 24h. Última mensagem de Paulo há 2 dias.</p>
+      </div>
+      <button class="btn btn-primary btn-lg">Abrir Antechamber →</button>
+    </div>
+
+  </main>
+
+</div>
+
+<!-- ─── BOTTOM NAV (mobile) ─── -->
+<div class="wf-note">Clube · Sala do Membro</div>
+
+</body>
+</html>

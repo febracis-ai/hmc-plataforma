@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conta · HMC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_shared.css?v=16">
+  <script src="_icons.js?v=16" defer></script>
+<script src="_modals.js?v=16" defer></script>
+<script src="_persona.js?v=16" defer></script>
+</head>
+<body data-persona-aware="cross-context" data-active-mode="hub">
+
+<button class="mobile-fab" data-sidebar-mobile-toggle aria-label="Menu"><i data-icon="menu" class="icon"></i></button>
+<div class="drawer-backdrop" data-sidebar-mobile-toggle></div>
+
+<div class="app">
+
+  <aside class="sidebar">
+    <a href="hub.html" class="sidebar-brand">
+      <img src="hmc-logo.png" alt="" class="brand-mark-img">
+      <div>
+        <div class="brand-text">High Mentor Club</div>
+        <div class="brand-sub">Curated by Paulo Vieira · MMXXVI</div>
+      </div>
+    </a>
+
+    <div class="mode-switch">
+      <a href="hub.html" class="mode-switch-item" data-short="H"><i data-icon="home" class="icon"></i><span>Hub</span></a>
+      <a href="10-clube/01-dashboard.html" class="mode-switch-item" data-short="C"><i data-icon="landmark" class="icon"></i><span>Clube</span></a>
+      <a href="20-mentor/studio-home.html" class="mode-switch-item" data-short="S"><i data-icon="briefcase" class="icon"></i><span>Studio</span></a>
+      <a href="30-mentorado/biblioteca.html" class="mode-switch-item" data-short="E"><i data-icon="book-open" class="icon"></i><span>Estudos</span></a>
+    </div>
+
+    <div class="sidebar-nav-scroll">
+      <div class="nav-section">
+        <a href="notifications.html" class="nav-item has-badge" data-tooltip="Avisos"><i data-icon="bell" class="icon icon-sm"></i>Avisos <span class="badge-count">12</span></a>
+        <a href="agenda.html" class="nav-item" data-tooltip="Agenda"><i data-icon="calendar" class="icon icon-sm"></i>Agenda</a>
+        <a href="buscar.html" class="nav-item" data-tooltip="Buscar"><i data-icon="search" class="icon icon-sm"></i>Buscar</a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-label">— Atalhos</div>
+        <a href="10-clube/01-dashboard.html" class="nav-item" data-tooltip="Sala do Membro"><i data-icon="home" class="icon icon-sm"></i>Sala do Membro</a>
+        <a href="20-mentor/studio-home.html" class="nav-item" data-tooltip="Studio"><i data-icon="briefcase" class="icon icon-sm"></i>Studio</a>
+        <a href="30-mentorado/biblioteca.html" class="nav-item" data-tooltip="Biblioteca"><i data-icon="book-open" class="icon icon-sm"></i>Biblioteca</a>
+        <a href="40-curator/aprovacoes.html" class="nav-item has-badge" data-tooltip="Curator"><i data-icon="shield" class="icon icon-sm"></i>Curator <span class="badge-count">3</span></a>
+      </div>
+    </div>
+
+    <div class="sidebar-footer-v3">
+      <a href="account.html" class="user-pill-v3">
+        <div class="avatar-sm">LV</div>
+        <div>
+          <div class="user-pill-v3-name">Lucas Vieira</div>
+          <div class="user-pill-v3-role">Seat 12</div>
+        </div>
+      </a>
+      <button class="sidebar-toggle-btn" data-sidebar-toggle>
+        <i data-icon="chevron-left" class="icon"></i>
+        <span>Recolher menu</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div class="page-head">
+      <div class="page-head-text">
+        <div class="page-eyebrow">
+          <span class="gold-rule"></span>
+          <span class="page-eyebrow-text">Conta</span>
+        </div>
+        <h1 class="page-title">Sua <span class="page-title-serif-italic">configuração</span>.</h1>
+        <p class="page-sub">Dados, segurança, formas de pagamento e papéis ativos na plataforma. Tudo no mesmo lugar.</p>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <a href="dev-login.html" class="btn btn-outline btn-sm" title="Trocar de persona (dev)"><i data-icon="users" class="icon icon-sm"></i><span style="margin-left:6px">Persona</span></a>
+        <a href="logout.html" class="btn btn-outline btn-sm" style="color: #C8442B; border-color: rgba(200,68,43,0.30);"><i data-icon="external" class="icon icon-sm"></i><span style="margin-left:6px">Sair</span></a>
+      </div>
+    </div>
+
+    <!-- TABS -->
+    <style>
+      .acc-tabs { display: flex; gap: 24px; border-bottom: 1px solid var(--divider); margin-bottom: 32px; overflow-x: auto; padding-bottom: 0; }
+      .acc-tabs::-webkit-scrollbar { height: 0; }
+      .acc-tab { background: none; border: none; padding: 12px 0; font-family: inherit; font-size: 13px; font-weight: 500; color: var(--text-muted); cursor: pointer; white-space: nowrap; flex-shrink: 0; }
+      .acc-tab.active { color: var(--text); font-weight: 600; border-bottom: 2px solid var(--blue-realce); margin-bottom: -1px; }
+    </style>
+    <div class="acc-tabs">
+      <button class="acc-tab active">Perfil</button>
+      <button class="acc-tab">Segurança &amp; LGPD</button>
+      <button class="acc-tab">Pagamentos</button>
+      <button class="acc-tab">Notificações</button>
+      <button class="acc-tab">Integrações</button>
+      <button class="acc-tab">Faturamento</button>
+    </div>
+
+    <div class="grid grid-12-8 gap-loose">
+
+      <div class="flex-col gap-4">
+
+        <!-- IDENTIDADE -->
+        <div class="surface" style="padding: 32px;">
+          <div class="eyebrow-chrome mb-4">— Identidade</div>
+          <div style="display: flex; gap: 24px; align-items: center; margin-bottom: 24px;">
+            <div style="width: 96px; height: 96px; border-radius: 50%; background: var(--blue-realce); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 36px; color: white; font-weight: 500;">LV</div>
+            <div>
+              <button class="btn btn-outline btn-sm">Trocar foto</button>
+              <div class="muted" style="font-size: 11px; margin-top: 8px;">JPG ou PNG · máx 4MB · ideal 400×400</div>
+            </div>
+          </div>
+
+          <div class="grid grid-2" style="gap: 16px;">
+            <div>
+              <label class="auth-label">Nome</label>
+              <input type="text" class="auth-input" value="Lucas">
+            </div>
+            <div>
+              <label class="auth-label">Sobrenome</label>
+              <input type="text" class="auth-input" value="Vieira">
+            </div>
+          </div>
+          <label class="auth-label">E-mail</label>
+          <input type="email" class="auth-input" value="lucas@vieiraleadership.com">
+
+          <label class="auth-label">Bio pública (aparece na sua página de mentor)</label>
+          <textarea class="auth-input" rows="4" style="resize: vertical;">Mentoria Vieira de Liderança. Especialista em transformar gerentes técnicos em executivos sênior. 42 mentorados ativos, 11 anos de carreira corporativa antes da mentoria.</textarea>
+        </div>
+
+        <!-- PÁGINA PÚBLICA -->
+        <div class="surface" style="padding: 32px;">
+          <div class="flex-between" style="margin-bottom: 16px;">
+            <div class="eyebrow-chrome">— Sua URL pública</div>
+            <a href="00-public/mentor-public.html" class="section-link">Ver página →</a>
+          </div>
+          <div style="display: flex; gap: 8px; align-items: center; padding: 14px 16px; background: var(--bg-card-hover); border: 1px solid var(--divider); border-radius: 10px; font-family: 'JetBrains Mono', monospace; font-size: 13px;">
+            <span class="muted">hmc.club/</span>
+            <span style="color: var(--text); font-weight: 600;">lucas-vieira</span>
+            <button class="btn btn-ghost btn-sm" style="margin-left: auto;">Copiar</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="flex-col gap-4">
+
+        <!-- PAPÉIS ATIVOS -->
+        <div class="surface" style="padding: 28px;">
+          <div class="eyebrow-chrome mb-4">— Papéis ativos</div>
+
+          <div style="padding: 16px 0; border-bottom: 1px solid var(--divider); display: flex; align-items: center; gap: 14px;">
+            <div class="hub-activity-icon" style="width: 36px; height: 36px;"><i data-icon="landmark" class="icon icon-md"></i></div>
+            <div style="flex: 1;">
+              <div style="font-weight: 600; font-size: 13px;">Membro do Clube</div>
+              <div class="muted" style="font-size: 11px;">Seat 12 · Tier II · Founding</div>
+            </div>
+            <span class="badge badge-success" style="font-size: 9px;">Ativo</span>
+          </div>
+
+          <div style="padding: 16px 0; border-bottom: 1px solid var(--divider); display: flex; align-items: center; gap: 14px;">
+            <div class="hub-activity-icon" style="width: 36px; height: 36px;"><i data-icon="mic" class="icon icon-md"></i></div>
+            <div style="flex: 1;">
+              <div style="font-weight: 600; font-size: 13px;">Mentor (Studio)</div>
+              <div class="muted" style="font-size: 11px;">2 mentorias · 42 mentorados ativos</div>
+            </div>
+            <span class="badge badge-success" style="font-size: 9px;">Ativo</span>
+          </div>
+
+          <div style="padding: 16px 0; display: flex; align-items: center; gap: 14px;">
+            <div class="hub-activity-icon" style="width: 36px; height: 36px;"><i data-icon="book-open" class="icon icon-md"></i></div>
+            <div style="flex: 1;">
+              <div style="font-weight: 600; font-size: 13px;">Mentorado (de Carla M.)</div>
+              <div class="muted" style="font-size: 11px;">Workshop concluído · em Estudos</div>
+            </div>
+            <span class="badge badge-success" style="font-size: 9px;">Ativo</span>
+          </div>
+        </div>
+
+        <!-- PRÓXIMOS PASSOS -->
+        <div class="surface-premium" style="padding: 32px;">
+          <div class="eyebrow-gold mb-3" style="color: var(--blue-highlight-soft); -webkit-text-fill-color: var(--blue-highlight-soft);">— Pendente</div>
+          <div style="font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 500; color: white; margin-bottom: 12px;">Verifique sua conta CISPay</div>
+          <p style="color: var(--text-on-dark-muted); font-size: 13px; line-height: 1.6; margin-bottom: 20px;">Pra receber os splits automaticamente, complete a verificação de identidade no painel CISPay.</p>
+          <button class="btn btn-outline">Abrir CISPay →</button>
+        </div>
+
+        <!-- SEGURANÇA -->
+        <div class="surface" style="padding: 28px;">
+          <div class="eyebrow-chrome mb-4">— Segurança</div>
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--divider);">
+            <div><div style="font-size: 13px; font-weight: 600;">2FA</div><div class="muted" style="font-size: 11px;">App Authenticator · ativo</div></div>
+            <span class="badge badge-success" style="font-size: 9px;">Ativo</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--divider);">
+            <div><div style="font-size: 13px; font-weight: 600;">Sessões ativas</div><div class="muted" style="font-size: 11px;">3 dispositivos · MacBook, iPhone, iPad</div></div>
+            <button class="btn btn-ghost btn-sm" style="font-size: 11px; color: #C8442B;">Encerrar todas</button>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0;">
+            <div><div style="font-size: 13px; font-weight: 600;">Última troca de senha</div><div class="muted" style="font-size: 11px;">há 4 meses · trocar?</div></div>
+            <a href="reset-password.html" class="btn btn-ghost btn-sm" style="font-size: 11px;">Trocar</a>
+          </div>
+        </div>
+
+        <!-- LGPD -->
+        <div class="surface" style="padding: 28px; border-left: 3px solid var(--text-muted);">
+          <div class="eyebrow-chrome mb-3" style="color: var(--text-muted);">— Privacidade · LGPD</div>
+          <p style="font-size: 12px; line-height: 1.6; color: var(--text-muted); margin-bottom: 16px;">Você tem direito a exportar tudo, anonimizar ou excluir sua conta. Sem fricção, sem retenção indevida.</p>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="privacidade.html" class="btn btn-outline btn-sm w-full" style="text-align: center;"><i data-icon="file-text" class="icon icon-sm"></i><span style="margin-left:6px">Política de privacidade</span></a>
+            <button class="btn btn-outline btn-sm w-full"><i data-icon="download" class="icon icon-sm"></i><span style="margin-left:6px">Exportar meus dados</span></button>
+            <button class="btn btn-outline btn-sm w-full" style="color: #C8442B; border-color: rgba(200,68,43,0.30);"><i data-icon="alert" class="icon icon-sm"></i><span style="margin-left:6px">Excluir minha conta</span></button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+
+<div class="wf-note">Conta</div>
+
+</body>
+</html>

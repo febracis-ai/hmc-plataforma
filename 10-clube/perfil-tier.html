@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meu Tier · HMC Clube</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_shared.css?v=16"><script src="../_icons.js?v=16" defer></script>
+<script src="../_modals.js?v=16" defer></script>
+<script src="../_persona.js?v=16" defer></script>
+<script>document.addEventListener("DOMContentLoaded",()=>{if(window.HMC_PERSONA&&window.HMC_PERSONA.applyTierAwareSidebar)window.HMC_PERSONA.applyTierAwareSidebar();});</script>
+<style>
+.tier-hero { background: linear-gradient(160deg, #050A15, #0A1530 50%, #0D285C); border-radius: 20px; padding: 56px; margin-bottom: 36px; color: white; display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 40px; align-items: center; position: relative; overflow: hidden; }
+.tier-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 80% 0%, rgba(168,230,255,0.18) 0%, transparent 60%); pointer-events: none; }
+.tier-medal { width: 200px; height: 200px; border-radius: 50%; background: linear-gradient(135deg, var(--blue-realce), var(--blue-chrome)); display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--blue-highlight); box-shadow: 0 24px 60px rgba(10,21,48,0.40); position: relative; z-index: 1; margin: 0 auto; }
+.tier-medal-roman { font-family: 'Playfair Display', serif; font-size: 100px; font-weight: 500; line-height: 1; letter-spacing: -0.03em; }
+.tier-medal-label { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; margin-top: 6px; }
+.progress-bar { height: 8px; background: rgba(255,255,255,0.08); border-radius: 6px; overflow: hidden; position: relative; }
+.progress-bar > div { height: 100%; background: linear-gradient(90deg, var(--blue-realce), var(--blue-chrome)); border-radius: 6px; }
+.req-list { display: flex; flex-direction: column; gap: 12px; }
+.req-item { display: grid; grid-template-columns: 28px minmax(0, 1fr) 100px; gap: 14px; padding: 14px 18px; background: var(--bg-card); border: 1px solid var(--divider); border-radius: 10px; align-items: center; }
+.req-check { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+.req-check.done { background: #2ecc71; color: white; }
+.req-check.partial { background: #f39c12; color: white; }
+.req-check.pending { background: var(--divider); color: var(--text-faint); }
+.req-title-it { font-weight: 500; font-size: 14px; margin-bottom: 3px; }
+.req-sub { font-size: 12px; color: var(--text-muted); }
+.req-status { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; text-align: right; }
+.endorse-row { display: flex; gap: 10px; margin-bottom: 12px; align-items: center; }
+.endorse-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px; background: var(--blue-realce-muted); color: var(--text); flex-shrink: 0; }
+</style>
+</head>
+<body data-persona-aware="mode-page" data-mode-context="clube" data-required-mode="clube">
+<button class="mobile-fab" data-sidebar-mobile-toggle aria-label="Menu"><i data-icon="menu" class="icon"></i></button>
+<div class="drawer-backdrop" data-sidebar-mobile-toggle></div>
+<div class="app">
+<aside class="sidebar">
+  <a href="../hub.html" class="sidebar-brand"><img src="../hmc-logo.png" alt="" class="brand-mark-img"><div><div class="brand-text">High Mentor Club</div><div class="brand-sub">Curated by Paulo Vieira · MMXXVI</div></div></a>
+  <div class="mode-switch">
+    <a href="../hub.html" class="mode-switch-item" data-short="H"><i data-icon="home" class="icon"></i><span>Hub</span></a>
+    <a href="../10-clube/01-dashboard.html" class="mode-switch-item active" data-short="C"><i data-icon="landmark" class="icon"></i><span>Clube</span></a>
+    <a href="../20-mentor/studio-home.html" class="mode-switch-item" data-short="S"><i data-icon="briefcase" class="icon"></i><span>Studio</span></a>
+    <a href="../30-mentorado/biblioteca.html" class="mode-switch-item" data-short="E"><i data-icon="book-open" class="icon"></i><span>Estudos</span></a>
+  </div>
+  <div class="sidebar-nav-scroll">
+    <div class="nav-section">
+      <a href="../notifications.html" class="nav-item has-badge"><i data-icon="bell" class="icon icon-sm"></i>Avisos <span class="badge-count">12</span></a>
+      <a href="../agenda.html" class="nav-item"><i data-icon="calendar" class="icon icon-sm"></i>Agenda</a>
+      <a href="../buscar.html" class="nav-item"><i data-icon="search" class="icon icon-sm"></i>Buscar</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">— A Plataforma</div>
+      <a href="01-dashboard.html" class="nav-item"><i data-icon="home" class="icon icon-sm"></i>Sala do Membro</a>
+      <a href="02-calendar.html" class="nav-item"><i data-icon="users" class="icon icon-sm"></i>Council</a>
+      <a href="03-codex.html" class="nav-item"><i data-icon="book" class="icon icon-sm"></i>Codex</a>
+      <a href="04-cross-floor.html" class="nav-item"><i data-icon="compass" class="icon icon-sm"></i>Cross-Floor</a>
+      <a href="05-yield.html" class="nav-item"><i data-icon="dollar" class="icon icon-sm"></i>Yield</a>
+      <a href="06-pilgrimages.html" class="nav-item"><i data-icon="map-pin" class="icon icon-sm"></i>Pilgrimages</a>
+      <a href="07-seal.html" class="nav-item"><i data-icon="award" class="icon icon-sm"></i>Selo</a>
+      <a href="perfil-tier.html" class="nav-item active"><i data-icon="shield" class="icon icon-sm"></i>Meu Tier<span class="nav-dot"></span></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">— Tier III · Sovereign Mentor</div>
+      <a href="quatro-motores.html" class="nav-item"><i data-icon="zap" class="icon icon-sm"></i>Os Quatro Motores</a>
+      <a href="antechamber.html" class="nav-item"><i data-icon="lock" class="icon icon-sm"></i>Antechamber</a>
+      <a href="curator-address.html" class="nav-item"><i data-icon="mic" class="icon icon-sm"></i>Curator's Address</a>
+      <a href="bridge.html" class="nav-item"><i data-icon="link" class="icon icon-sm"></i>The Bridge</a>
+    </div>
+  </div>
+  <div class="sidebar-footer-v3">
+    <a href="../account.html" class="user-pill-v3"><div class="avatar-sm">LV</div><div><div class="user-pill-v3-name">Lucas Vieira</div><div class="user-pill-v3-role">Seat 12 · Tier II</div></div></a>
+    <button class="sidebar-toggle-btn" data-sidebar-toggle><i data-icon="chevron-left" class="icon"></i><span>Recolher menu</span></button>
+  </div>
+</aside>
+
+<main class="main">
+
+  <div class="tier-hero">
+    <div style="position: relative; z-index: 1;">
+      <div style="font-size: 11px; color: var(--blue-highlight); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; margin-bottom: 14px;">— Seu tier atual</div>
+      <h1 style="font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 500; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 14px;">High <span class="serif-italic">Mentor</span>.</h1>
+      <p style="font-size: 15px; line-height: 1.6; color: rgba(255,255,255,0.72); max-width: 480px; margin-bottom: 28px;">Lucas Vieira · Seat 12 · membro desde set/2026. Operação ativa, Studio rodando, comunidade engajada. Próximo passo: convite Tier III curatorial.</p>
+      <div style="display: flex; gap: 32px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.12);">
+        <div><div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(168,230,255,0.65); font-weight: 700; margin-bottom: 4px;">— Promovido em</div><div style="font-family: 'Playfair Display', serif; font-size: 20px;">jan 2026</div></div>
+        <div><div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(168,230,255,0.65); font-weight: 700; margin-bottom: 4px;">— Próx revisão</div><div style="font-family: 'Playfair Display', serif; font-size: 20px;">jul 2026</div></div>
+        <div><div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(168,230,255,0.65); font-weight: 700; margin-bottom: 4px;">— Endorsos Tier III</div><div style="font-family: 'Playfair Display', serif; font-size: 20px;">2 de 3</div></div>
+      </div>
+    </div>
+    <div class="tier-medal" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0; background: transparent; border: none;">
+      <img src="../tier-seals/tier-2.png?v=16" alt="Selo Tier II — High Mentor" style="width: 200px; height: 200px; object-fit: contain; display: block; margin-bottom: 14px; filter: drop-shadow(0 18px 36px rgba(0,0,0,0.45));">
+      <div style="font-family: 'Playfair Display', serif; font-size: 18px; color: rgba(255,255,255,0.85); letter-spacing: 0.02em;">Tier II · High Mentor</div>
+      <div style="font-size: 10px; color: rgba(168,230,255,0.55); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; margin-top: 4px;">— Selo prata</div>
+    </div>
+  </div>
+
+  <div class="grid grid-12-8 gap-loose">
+
+    <div class="flex-col gap-4">
+
+      <div class="surface" style="padding: 32px;">
+        <div class="eyebrow-chrome" style="margin-bottom: 16px;">— Critérios pra Tier III</div>
+        <p class="muted" style="font-size: 13px; line-height: 1.7; margin-bottom: 24px;">Tier III é convite curatorial direto de PV, condicionado a 6 critérios objetivos + leitura subjetiva da curadoria. Você está em 4/6.</p>
+
+        <div style="margin-bottom: 28px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <div style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; color: var(--text-muted);">— Progresso objetivo</div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500;">4 de 6</div>
+          </div>
+          <div class="progress-bar"><div style="width: 66%;"></div></div>
+        </div>
+
+        <div class="req-list">
+
+          <div class="req-item">
+            <div class="req-check done"><i data-icon="check" class="icon icon-sm"></i></div>
+            <div>
+              <div class="req-title-it">Studio em operação contínua há ≥ 24 meses</div>
+              <div class="req-sub">Operando desde set/2024 · 22 meses na plataforma + legado</div>
+            </div>
+            <div class="req-status" style="color: #2ecc71;">Concluído</div>
+          </div>
+
+          <div class="req-item">
+            <div class="req-check done"><i data-icon="check" class="icon icon-sm"></i></div>
+            <div>
+              <div class="req-title-it">GMV Studio anual ≥ R$ 2M</div>
+              <div class="req-sub">YTD 2026: R$ 6,1M · 3× o critério</div>
+            </div>
+            <div class="req-status" style="color: #2ecc71;">Concluído</div>
+          </div>
+
+          <div class="req-item">
+            <div class="req-check done"><i data-icon="check" class="icon icon-sm"></i></div>
+            <div>
+              <div class="req-title-it">Cross-Floor publicação ≥ 6 vagas válidas</div>
+              <div class="req-sub">11 vagas publicadas · 8 com conversão</div>
+            </div>
+            <div class="req-status" style="color: #2ecc71;">Concluído</div>
+          </div>
+
+          <div class="req-item">
+            <div class="req-check done"><i data-icon="check" class="icon icon-sm"></i></div>
+            <div>
+              <div class="req-title-it">Presença em ≥ 8 de 12 Councils anuais</div>
+              <div class="req-sub">10 presenças · faltou apenas mar e ago/2025</div>
+            </div>
+            <div class="req-status" style="color: #2ecc71;">Concluído</div>
+          </div>
+
+          <div class="req-item">
+            <div class="req-check partial"><i data-icon="clock" class="icon icon-sm"></i></div>
+            <div>
+              <div class="req-title-it">Endosso de 3 Tier III ativos</div>
+              <div class="req-sub">2 confirmados · 1 pendente (Carlos R. revisando)</div>
+            </div>
+            <div class="req-status" style="color: #f39c12;">Em curso</div>
+          </div>
+
+          <div class="req-item">
+            <div class="req-check pending"><i data-icon="clock" class="icon icon-sm"></i></div>
+            <div>
+              <div class="req-title-it">Pilgrimage Premium ≥ 1 completada</div>
+              <div class="req-sub">Florença (nov/2026) registrada · aguarda execução</div>
+            </div>
+            <div class="req-status">Pendente</div>
+          </div>
+
+        </div>
+
+        <div style="margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--divider); padding-bottom: 0;">
+          <div style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; color: var(--text-muted); margin-bottom: 12px;">— Avaliação curatorial (subjetiva)</div>
+          <p style="font-size: 13px; line-height: 1.7; color: var(--text-muted);">Decisão final do convite Tier III é prerrogativa exclusiva de PV após reunião do Inner Council, mesmo com 100% dos critérios objetivos cumpridos. Não é automático.</p>
+        </div>
+
+      </div>
+
+      <div class="surface" style="padding: 32px;">
+        <div class="eyebrow-chrome" style="margin-bottom: 16px;">— Histórico de tier</div>
+        <div style="display: flex; flex-direction: column; gap: 18px;">
+          <div style="display: grid; grid-template-columns: 100px minmax(0, 1fr) auto; gap: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--divider);">
+            <div><div class="muted" style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;">jan 2026</div></div>
+            <div>
+              <div style="font-weight: 600;">Promoção a Tier II · High Mentor</div>
+              <div class="muted" style="font-size: 12px;">Council nº 18 · 32 votos a favor · 2 contra</div>
+            </div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 18px;">II</div>
+          </div>
+          <div style="display: grid; grid-template-columns: 100px minmax(0, 1fr) auto; gap: 16px;">
+            <div><div class="muted" style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;">set 2024</div></div>
+            <div>
+              <div style="font-weight: 600;">Admissão Tier I · Mentor of HMC</div>
+              <div class="muted" style="font-size: 12px;">Founding Member · entrada inaugural</div>
+            </div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 18px;">I</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="flex-col gap-4">
+
+      <div class="surface" style="padding: 28px;">
+        <div class="eyebrow-chrome" style="margin-bottom: 16px;">— Seus endorsos pendentes</div>
+        <p class="muted" style="font-size: 12px; line-height: 1.55; margin-bottom: 20px;">Tier III ativos que precisam endossar formalmente:</p>
+
+        <div class="endorse-row">
+          <div class="endorse-avatar">CR</div>
+          <div style="flex: 1;">
+            <div style="font-weight: 600; font-size: 13px;">Carlos Ribeiro</div>
+            <div class="muted" style="font-size: 11px;">Tier III · revisando há 9 dias</div>
+          </div>
+          <span style="font-size: 10px; color: #f39c12; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;">Pendente</span>
+        </div>
+
+        <div class="endorse-row">
+          <div class="endorse-avatar" style="background: rgba(46,204,113,0.15);">MC</div>
+          <div style="flex: 1;">
+            <div style="font-weight: 600; font-size: 13px;">Marina Costa</div>
+            <div class="muted" style="font-size: 11px;">Tier III · confirmou 12 mar</div>
+          </div>
+          <span style="font-size: 10px; color: #2ecc71; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;">Endossou</span>
+        </div>
+
+        <div class="endorse-row">
+          <div class="endorse-avatar" style="background: rgba(46,204,113,0.15);">PV</div>
+          <div style="flex: 1;">
+            <div style="font-weight: 600; font-size: 13px;">Paulo Vieira</div>
+            <div class="muted" style="font-size: 11px;">The Curator · confirmou 28 abr</div>
+          </div>
+          <span style="font-size: 10px; color: #2ecc71; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;">Endossou</span>
+        </div>
+
+      </div>
+
+      <div class="surface" style="padding: 28px;">
+        <div class="eyebrow-chrome" style="margin-bottom: 14px;">— Próximo Council</div>
+        <div style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; margin-bottom: 4px;">10 jul · 20h</div>
+        <div class="muted" style="font-size: 12px; line-height: 1.6; margin-bottom: 16px;">Pauta inclui revisão de seu perfil Tier III conforme calendário curatorial.</div>
+        <a href="02-calendar.html" class="btn btn-outline btn-sm w-full">Ver Council</a>
+      </div>
+
+      <div class="surface" style="padding: 28px;">
+        <a href="07-seal.html" style="text-decoration: none; color: inherit; display: block;">
+          <div class="eyebrow-chrome" style="margin-bottom: 14px;">— Seu Seal Kit atual</div>
+          <div style="display: flex; gap: 14px; align-items: center;">
+            <img src="../tier-seals/tier-2.png?v=16" alt="Selo Tier II prata" style="width: 56px; height: 56px; object-fit: contain; flex-shrink: 0;">
+            <div>
+              <div style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500; margin-bottom: 4px;">Tier II · Prata</div>
+              <div class="muted" style="font-size: 12px; line-height: 1.5;">Selo prateado da High Mentor. Uso em site, materiais e LinkedIn. Promoção a Tier III troca pelo selo dourado.</div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="surface" style="padding: 28px;">
+        <a href="../tiers.html" style="text-decoration: none; color: inherit; display: block;">
+          <div class="eyebrow-chrome" style="margin-bottom: 14px;">— Sobre os Tiers</div>
+          <p class="muted" style="font-size: 13px; line-height: 1.6;">Arquitetura completa de Tier I → II → III · página institucional pública.</p>
+          <div style="font-size: 13px; color: var(--blue-realce); font-weight: 600; margin-top: 12px;">Ler →</div>
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+
+</main>
+</div>
+<div class="wf-note">Clube · Perfil Tier</div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>403 · Acesso restrito · HMC</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_shared.css?v=16">
+<script src="_icons.js?v=16" defer></script>
+<style>
+body { background: var(--blue-deep); color: white; min-height: 100vh; display: flex; flex-direction: column; }
+.fb-shell { flex: 1; display: flex; align-items: center; justify-content: center; padding: 56px 32px; position: relative; overflow: hidden; }
+.fb-shell::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at center, rgba(229,83,83,0.08) 0%, transparent 60%); pointer-events: none; }
+.fb-inner { max-width: 680px; text-align: center; position: relative; z-index: 1; }
+.fb-seal { width: 100px; height: 100px; border-radius: 26px; background: rgba(229,83,83,0.10); border: 1px solid rgba(229,83,83,0.30); color: #FF8888; display: flex; align-items: center; justify-content: center; margin: 0 auto 32px; }
+.fb-code { font-family: 'Playfair Display', serif; font-size: 180px; font-weight: 500; line-height: 1; letter-spacing: -0.04em; background: linear-gradient(180deg, #FFBABA, #FF8888); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 18px; }
+.fb-rule { width: 56px; height: 1px; background: #FF8888; margin: 0 auto 18px; }
+.fb-eyebrow { font-size: 11px; color: #FFBABA; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; margin-bottom: 18px; }
+.fb-title { font-family: 'Playfair Display', serif; font-size: 40px; font-weight: 500; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 16px; }
+.fb-sub { font-size: 16px; line-height: 1.7; color: rgba(255,255,255,0.65); max-width: 520px; margin: 0 auto 36px; }
+.fb-meta { padding: 22px 28px; background: rgba(255,255,255,0.04); border-left: 3px solid #FF8888; border-radius: 10px; font-size: 13px; line-height: 1.7; color: rgba(255,255,255,0.78); text-align: left; max-width: 520px; margin: 0 auto 32px; }
+.fb-meta code { color: #FFBABA; padding: 2px 6px; background: rgba(0,0,0,0.3); border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+.fb-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+@media (max-width: 700px) { .fb-code { font-size: 120px; } .fb-title { font-size: 28px; } }
+</style>
+</head>
+<body>
+
+<div class="fb-shell">
+  <div class="fb-inner">
+    <div class="fb-seal"><i data-icon="lock" class="icon icon-lg"></i></div>
+    <div class="fb-code">403</div>
+    <div class="fb-rule"></div>
+    <div class="fb-eyebrow">— Acesso restrito</div>
+    <h1 class="fb-title">Essa porta não é <span class="serif-italic">sua</span>.</h1>
+    <p class="fb-sub">Você está autenticado, mas essa página exige permissão que sua conta não tem. Pode ser um conteúdo Tier III, área Curator, ou recurso restrito a outro papel.</p>
+
+    <div class="fb-meta" id="fbMeta">
+      <strong style="color: white; display: block; margin-bottom: 8px;">Detalhes técnicos</strong>
+      <span id="fbAccount">Sua conta: <code>—</code> · papel: <code>—</code></span><br>
+      Rota tentada: <code id="fbRoute">—</code> · exige papel <code id="fbRequired">—</code><br>
+      Decisão: <code>RLS deny</code> · log id: <code id="fbLog">aud_—</code>
+    </div>
+
+    <div class="fb-cta">
+      <a href="hub.html" class="btn btn-chrome btn-lg" id="fbHubBtn">Voltar pro Hub</a>
+      <a href="account.html" class="btn btn-outline btn-lg" style="color: white; border-color: rgba(255,255,255,0.30);">Meus papéis</a>
+      <a href="dev-login.html" class="btn btn-outline btn-lg" style="color: white; border-color: rgba(255,255,255,0.30);">Trocar persona</a>
+    </div>
+
+    <script src="_persona.js?v=16"></script>
+    <script>
+      // 403 dinâmico baseado em persona ativa
+      document.addEventListener('DOMContentLoaded', function() {
+        const p = (window.HMC_PERSONA && window.HMC_PERSONA.current()) || null;
+        if (!p) return;
+
+        const slugMap = { lucas:'lucas@vieiraleadership.com', mariana:'mariana@souza.com.br',
+          bruno:'bruno@vaz.com.br', carlos:'carlos@ribeiro.com.br',
+          michelle:'michelle@hmc.club', pv:'paulo@vieiraleadership.com',
+          suporte:'beatriz@hmc.club' };
+        const email = slugMap[p.id] || `${p.id}@hmc.club`;
+        const tipoRota = {
+          lucas: { rota: '/_dev/feature-flags', exige: 'dev' },
+          mariana: { rota: '/clube/antechamber', exige: 'tier_iii' },
+          bruno: { rota: '/estudos/biblioteca', exige: 'mentorado' },
+          carlos: { rota: '/curator/aprovacoes', exige: 'curator' },
+          michelle: { rota: '/clube/curator-address', exige: 'tier_iii_member' },
+          pv: { rota: '/_dev/audit', exige: 'dev' },
+          suporte: { rota: '/curator/financeiro-consolidado', exige: 'curator_full' },
+        }[p.id] || { rota: '/admin', exige: 'admin' };
+
+        document.getElementById('fbAccount').innerHTML = `Sua conta: <code>${email}</code> · papel: <code>${p.id}</code> · tier: <code>${p.tier || '—'}</code>`;
+        document.getElementById('fbRoute').textContent = tipoRota.rota;
+        document.getElementById('fbRequired').textContent = tipoRota.exige;
+        document.getElementById('fbLog').textContent = 'aud_' + Math.random().toString(16).slice(2, 9);
+        document.getElementById('fbHubBtn').href = p.hubUrl || 'hub.html';
+      });
+    </script>
+  </div>
+</div>
+
+<footer style="padding: 28px 32px; border-top: 1px solid var(--divider-on-dark); text-align: center;">
+  <div style="font-size: 10px; color: rgba(255,255,255,0.40); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 600;">MMXXVI · Excelência · Conexão · Impacto</div>
+</footer>
+
+</body>
+</html>

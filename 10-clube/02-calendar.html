@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HMC · Calendário</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../_shared.css?v=16">
+  <script src="../_icons.js?v=16" defer></script>
+<script src="../_modals.js?v=16" defer></script>
+<script src="../_persona.js?v=16" defer></script>
+<script>document.addEventListener("DOMContentLoaded",()=>{if(window.HMC_PERSONA&&window.HMC_PERSONA.applyTierAwareSidebar)window.HMC_PERSONA.applyTierAwareSidebar();});</script>
+</head>
+<body data-persona-aware="mode-page" data-mode-context="clube" data-required-mode="clube">
+
+<button class="mobile-fab" data-sidebar-mobile-toggle aria-label="Menu"><i data-icon="menu" class="icon"></i></button>
+<div class="drawer-backdrop" data-sidebar-mobile-toggle></div>
+
+<div class="app">
+  <aside class="sidebar">
+    <a href="../hub.html" class="sidebar-brand">
+      <img src="../hmc-logo.png" alt="" class="brand-mark-img">
+      <div>
+        <div class="brand-text">High Mentor Club</div>
+        <div class="brand-sub">Curated by Paulo Vieira · MMXXVI</div>
+      </div>
+    </a>
+
+    <div class="mode-switch">
+      <a href="../hub.html" class="mode-switch-item" data-short="H"><i data-icon="home" class="icon"></i><span>Hub</span></a>
+      <a href="../10-clube/01-dashboard.html" class="mode-switch-item active" data-short="C"><i data-icon="landmark" class="icon"></i><span>Clube</span></a>
+      <a href="../20-mentor/studio-home.html" class="mode-switch-item" data-short="S"><i data-icon="briefcase" class="icon"></i><span>Studio</span></a>
+      <a href="../30-mentorado/biblioteca.html" class="mode-switch-item" data-short="E"><i data-icon="book-open" class="icon"></i><span>Estudos</span></a>
+    </div>
+
+    <div class="sidebar-nav-scroll">
+      <div class="nav-section">
+        <a href="../notifications.html" class="nav-item has-badge" data-tooltip="Avisos"><i data-icon="bell" class="icon icon-sm"></i>Avisos <span class="badge-count">12</span></a>
+        <a href="../agenda.html" class="nav-item" data-tooltip="Agenda"><i data-icon="calendar" class="icon icon-sm"></i>Agenda</a>
+        <a href="../buscar.html" class="nav-item" data-tooltip="Buscar"><i data-icon="search" class="icon icon-sm"></i>Buscar</a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-label">— A Plataforma</div>
+        <a href="01-dashboard.html" class="nav-item" data-tooltip="Sala do Membro"><i data-icon="home" class="icon icon-sm"></i>Sala do Membro</a>
+        <a href="02-calendar.html" class="nav-item active" data-tooltip="Council"><i data-icon="users" class="icon icon-sm"></i>Council<span class="nav-dot"></span></a>
+        <a href="03-codex.html" class="nav-item" data-tooltip="Codex"><i data-icon="book" class="icon icon-sm"></i>Codex</a>
+        <a href="04-cross-floor.html" class="nav-item" data-tooltip="Cross-Floor"><i data-icon="compass" class="icon icon-sm"></i>Cross-Floor</a>
+        <a href="05-yield.html" class="nav-item" data-tooltip="Yield"><i data-icon="dollar" class="icon icon-sm"></i>Yield</a>
+        <a href="06-pilgrimages.html" class="nav-item" data-tooltip="Pilgrimages"><i data-icon="map-pin" class="icon icon-sm"></i>Pilgrimages</a>
+        <a href="07-seal.html" class="nav-item" data-tooltip="Selo"><i data-icon="award" class="icon icon-sm"></i>Selo</a>
+      <a href="perfil-tier.html" class="nav-item"><i data-icon="shield" class="icon icon-sm"></i>Meu Tier</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">— Tier III · Sovereign Mentor</div>
+      <a href="quatro-motores.html" class="nav-item"><i data-icon="zap" class="icon icon-sm"></i>Os Quatro Motores</a>
+      <a href="antechamber.html" class="nav-item" data-tooltip="Antechamber"><i data-icon="lock" class="icon icon-sm"></i>Antechamber</a>
+      <a href="curator-address.html" class="nav-item"><i data-icon="mic" class="icon icon-sm"></i>Curator's Address</a>
+      <a href="bridge.html" class="nav-item"><i data-icon="link" class="icon icon-sm"></i>The Bridge</a>
+    </div>
+    </div>
+
+    <div class="sidebar-footer-v3">
+      <a href="../account.html" class="user-pill-v3">
+        <div class="avatar-sm">LV</div>
+        <div>
+          <div class="user-pill-v3-name">Lucas Vieira</div>
+          <div class="user-pill-v3-role">Seat 12</div>
+        </div>
+      </a>
+      <button class="sidebar-toggle-btn" data-sidebar-toggle>
+        <i data-icon="chevron-left" class="icon"></i>
+        <span>Recolher menu</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div class="page-head">
+      <div class="page-head-text">
+        <div class="page-eyebrow">
+          <span class="gold-rule"></span>
+          <span class="page-eyebrow-text">Calendário · HMC Council</span>
+        </div>
+        <h1 class="page-title">A agenda <span class="page-title-serif-italic page-title-gold">do clube</span>.</h1>
+        <p class="page-sub">Rituais mensais, Curator's Address, peregrinações e momentos privados de The Curator. O ritmo é deliberado — densidade sem ruído.</p>
+      </div>
+      <div class="flex gap-3">
+        <button class="btn btn-outline">Filtrar</button>
+        <button class="btn btn-primary">Hoje</button>
+      </div>
+    </div>
+
+    <!-- NOVEMBRO -->
+    <div class="mb-12">
+      <div class="gold-rule-block"></div>
+      <div class="timeline-month">Novembro <span class="muted serif-italic" style="font-size: 22px;">/ 2026</span></div>
+      <div class="timeline-month-sub">Três rituais · uma peregrinação opcional</div>
+
+      <div class="surface" style="padding: 0 40px;">
+        <div class="timeline-event">
+          <div>
+            <div class="timeline-date">13</div>
+            <div class="timeline-date-sub">Qui · 20h</div>
+          </div>
+          <div>
+            <div class="flex gap-2 mb-3">
+              <span class="badge badge-accent">Council</span>
+              <span class="badge">Online</span>
+            </div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 500; letter-spacing: -0.015em; margin-bottom: 8px;">Sessão mensal · novembro</div>
+            <p class="muted" style="font-size: 14px; line-height: 1.55; max-width: 540px;">Hotseats de André Castelo (escala de mentoria 7→9 dígitos) e Patrícia Lemos (lançamento de programa B2B). Curadoria de PV na segunda metade.</p>
+          </div>
+          <div style="display: flex; align-items: center;">
+            <button class="btn btn-outline">Confirmar presença</button>
+          </div>
+        </div>
+
+        <div class="timeline-event">
+          <div>
+            <div class="timeline-date">18</div>
+            <div class="timeline-date-sub">Ter · 19h30</div>
+          </div>
+          <div>
+            <div class="flex gap-2 mb-3">
+              <span class="badge badge-accent">Curator's Address</span>
+              <span class="badge">Mentorados</span>
+            </div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 500; letter-spacing: -0.015em; margin-bottom: 8px;">PGR mensal · aberto aos seus mentorados</div>
+            <p class="muted" style="font-size: 14px; line-height: 1.55; max-width: 540px;">Link compartilhável liberado 24h antes. 42 dos seus mentorados estão elegíveis (Tier inscrição + ativos ≥ 60d).</p>
+          </div>
+          <div style="display: flex; align-items: center;">
+            <button class="btn btn-outline">Gerar link</button>
+          </div>
+        </div>
+
+        <div class="timeline-event">
+          <div>
+            <div class="timeline-date">26</div>
+            <div class="timeline-date-sub">Qua · 14h</div>
+          </div>
+          <div>
+            <div class="flex gap-2 mb-3">
+              <span class="badge">Antechamber Live</span>
+              <span class="badge badge-warn">Vagas: 8/12</span>
+            </div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 500; letter-spacing: -0.015em; margin-bottom: 8px;">Mesa redonda · The Antechamber</div>
+            <p class="muted" style="font-size: 14px; line-height: 1.55; max-width: 540px;">Conversa íntima de 12 mentores com PV. Tema da rodada: "Quando o lucro vira identidade — e o que se perde no caminho."</p>
+          </div>
+          <div style="display: flex; align-items: center;">
+            <button class="btn btn-primary">Reservar lugar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEZEMBRO -->
+    <div>
+      <div class="gold-rule-block"></div>
+      <div class="timeline-month">Dezembro <span class="muted serif-italic" style="font-size: 22px;">/ 2026</span></div>
+      <div class="timeline-month-sub">Encerramento do ano · uma peregrinação</div>
+
+      <div class="surface" style="padding: 0 40px;">
+        <div class="timeline-event">
+          <div>
+            <div class="timeline-date">10<span class="muted" style="font-size: 18px;">–12</span></div>
+            <div class="timeline-date-sub">Qua–Sex · 3d</div>
+          </div>
+          <div>
+            <div class="flex gap-2 mb-3">
+              <span class="badge badge-tier-3">Pilgrimage</span>
+              <span class="badge">Tier 2+</span>
+            </div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 500; letter-spacing: -0.015em; margin-bottom: 8px;">Inter Business · São Paulo</div>
+            <p class="muted" style="font-size: 14px; line-height: 1.55; max-width: 540px;">Peregrinação corporativa de 3 dias. Tour privado pela operação, jantar de gala com C-level + acesso aos quadros decisórios do banco. Logística completa após inscrição.</p>
+          </div>
+          <div style="display: flex; align-items: center;">
+            <button class="btn btn-gold">Inscrever-se</button>
+          </div>
+        </div>
+
+        <div class="timeline-event">
+          <div>
+            <div class="timeline-date">18</div>
+            <div class="timeline-date-sub">Qui · 20h</div>
+          </div>
+          <div>
+            <div class="flex gap-2 mb-3">
+              <span class="badge badge-accent">Council</span>
+              <span class="badge">Online</span>
+            </div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 500; letter-spacing: -0.015em; margin-bottom: 8px;">Encerramento de ano · retrospectiva</div>
+            <p class="muted" style="font-size: 14px; line-height: 1.55; max-width: 540px;">PV revisita os 12 meses do clube. Cada High Mentor compartilha um insight de 90 segundos. Encerra com brinde virtual.</p>
+          </div>
+          <div style="display: flex; align-items: center;">
+            <button class="btn btn-outline">Confirmar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+</div>
+
+<div class="wf-note">Clube · Council</div>
+
+</body>
+</html>

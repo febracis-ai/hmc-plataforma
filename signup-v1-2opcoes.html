@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar candidatura · HMC · v1 (2 opções)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_shared.css?v=16">
+  <script src="_icons.js?v=16" defer></script>
+  <style>
+    .role-card {
+      padding: 32px;
+      background: var(--bg-card);
+      border: 1px solid var(--divider);
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 220ms;
+    }
+    .role-card:hover { border-color: var(--blue-realce); transform: translateY(-2px); }
+    .role-card.active {
+      border-color: var(--blue-realce);
+      box-shadow: 0 0 0 4px var(--blue-realce-muted);
+      background: var(--blue-realce-muted);
+    }
+    .steps-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+    .step-pill {
+      flex: 1;
+      height: 4px;
+      background: var(--divider);
+      border-radius: 2px;
+    }
+    .step-pill.active { background: var(--blue-realce); }
+
+    /* Banner discreto de versão (só visível na variante A/B) */
+    .version-badge {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      padding: 6px 12px;
+      background: rgba(11,11,15,0.85);
+      border: 1px solid var(--divider);
+      border-radius: 999px;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--blue-highlight);
+      z-index: 100;
+      backdrop-filter: blur(8px);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .version-badge a { color: var(--text-muted); text-decoration: none; font-size: 9px; letter-spacing: 0.14em; }
+    .version-badge a:hover { color: var(--blue-realce); }
+  </style>
+</head>
+<body>
+
+<div class="version-badge">
+  V1 · 2 opções
+  <a href="signup.html">V2</a>
+  <a href="signup-v3-construir.html">V3</a>
+  <a href="dev-login.html">↺ dev</a>
+</div>
+
+<div class="auth-shell">
+
+  <div class="auth-side">
+    <a href="landing.html" style="display: flex; align-items: center; gap: 12px; color: white; text-decoration: none;">
+      <img src="hmc-logo.png" alt="" style="width: 36px; height: 36px;">
+      <span style="font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 500;">High Mentor Club</span>
+    </a>
+
+    <div>
+      <div style="width: 48px; height: 1px; background: var(--blue-realce); margin-bottom: 20px;"></div>
+      <div style="font-size: 10px; color: var(--blue-highlight); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 600; margin-bottom: 16px;">— Sua candidatura</div>
+      <h1 style="font-family: 'Playfair Display', serif; font-size: 56px; font-weight: 500; letter-spacing: -0.035em; line-height: 1.05; color: white; margin-bottom: 24px;">
+        Antes da cadeira, <span class="serif-italic">o filtro</span>.
+      </h1>
+      <p style="font-size: 15px; line-height: 1.6; color: var(--text-on-dark-muted); max-width: 380px;">
+        A entrada na plataforma como mentor passa pelo crivo do clube. Como mentorado, basta acompanhar um mentor já curado.
+      </p>
+    </div>
+
+    <div style="font-size: 10px; color: var(--text-on-dark-faint); letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600;">Curated by Paulo Vieira · MMXXVI</div>
+  </div>
+
+  <div class="auth-content">
+    <div class="auth-card" style="max-width: 520px;">
+
+      <div class="steps-bar">
+        <div class="step-pill active"></div>
+        <div class="step-pill"></div>
+        <div class="step-pill"></div>
+      </div>
+
+      <div style="margin-bottom: 32px;">
+        <div class="eyebrow-chrome" style="margin-bottom: 8px;">— Etapa 01 · Quem é você</div>
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 500; letter-spacing: -0.025em;">Escolha seu papel</h2>
+        <p class="muted" style="font-size: 14px; margin-top: 6px; line-height: 1.55;">Você pode mudar depois. Algumas pessoas operam como mentor E mentorado ao mesmo tempo.</p>
+      </div>
+
+      <div class="flex-col gap-4" style="margin-bottom: 32px;">
+
+        <a href="signup-mentor-1.html" class="role-card" style="text-decoration: none; color: inherit; display: block;">
+          <div style="display: flex; gap: 16px;">
+            <div style="width: 48px; height: 48px; border-radius: 12px; background: var(--blue-realce); color: white; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><i data-icon="mic" class="icon icon-lg"></i></div>
+            <div style="flex: 1;">
+              <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 4px;">
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500;">Quero ser <span class="serif-italic">mentor</span></h3>
+                <span class="badge badge-accent" style="font-size: 9px;">Por crivo · 4 etapas</span>
+              </div>
+              <p style="font-size: 13px; color: var(--text-muted); line-height: 1.55; margin-bottom: 14px;">Você já opera uma mentoria com ticket acima de R$25k e quer vender dentro do clube com checkout próprio (CISPay), Studio completo, e acesso ao Council.</p>
+              <div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--blue-realce); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;">
+                Iniciar candidatura →
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a href="signup-mentorado.html" class="role-card" style="text-decoration: none; color: inherit; display: block;">
+          <div style="display: flex; gap: 16px;">
+            <div style="width: 48px; height: 48px; border-radius: 12px; background: var(--bg-card-hover); color: var(--text-muted); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><i data-icon="book-open" class="icon icon-lg"></i></div>
+            <div style="flex: 1;">
+              <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 4px;">
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500;">Quero ser <span class="serif-italic">mentorado</span></h3>
+                <span class="badge" style="font-size: 9px;">Acesso imediato</span>
+              </div>
+              <p style="font-size: 13px; color: var(--text-muted); line-height: 1.55; margin-bottom: 14px;">Você quer aprender com um dos mentores curados pelo HMC. Acesso direto: cria conta, escolhe mentor, paga via CISPay e começa.</p>
+              <div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--blue-realce); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;">
+                Criar conta agora →
+              </div>
+            </div>
+          </div>
+        </a>
+
+      </div>
+
+      <div style="display: flex; gap: 12px;">
+        <a href="landing.html" class="btn btn-outline w-full">← Voltar pra landing</a>
+      </div>
+
+      <div style="margin-top: 24px; text-align: center; font-size: 13px;" class="muted">
+        Já tem conta? <a href="login.html" style="color: var(--blue-realce); font-weight: 600;">Entrar</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hub · Suporte · HMC</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_shared.css?v=16">
+<script src="_icons.js?v=16" defer></script>
+<script src="_modals.js?v=16" defer></script>
+<script src="_persona.js?v=16" defer></script>
+<style>
+.sp-hero { background: linear-gradient(135deg, #050A15 0%, #0A1530 60%, #0D285C 100%); border-radius: 20px; padding: 40px 44px; margin-bottom: 32px; color: white; position: relative; overflow: hidden; }
+.sp-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 80% 0%, rgba(168,230,255,0.18) 0%, transparent 60%); pointer-events: none; }
+.queue-card { background: var(--bg-card); border: 1px solid var(--divider); border-radius: 14px; padding: 20px 22px; margin-bottom: 12px; display: grid; grid-template-columns: 40px minmax(0, 1fr) auto auto; gap: 14px; align-items: center; text-decoration: none; color: inherit; transition: all 200ms; }
+.queue-card:hover { border-color: var(--blue-realce); transform: translateY(-1px); }
+.queue-card.urgent { border-left: 3px solid #FF8888; }
+.queue-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--blue-realce-muted); color: var(--blue-realce); display: flex; align-items: center; justify-content: center; }
+.queue-card.urgent .queue-icon { background: rgba(229,83,83,0.15); color: #FF8888; }
+.queue-eyebrow { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 4px; }
+.queue-title { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 500; letter-spacing: -0.01em; margin-bottom: 3px; line-height: 1.3; }
+.queue-sub { font-size: 12px; color: var(--text-muted); }
+.queue-sla { font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 4px 8px; border-radius: 4px; background: rgba(243,156,18,0.10); color: #f39c12; font-weight: 700; }
+.queue-sla.danger { background: rgba(229,83,83,0.10); color: #FF8888; }
+.queue-sla.ok { background: rgba(46,204,113,0.10); color: #2ecc71; }
+.stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-bottom: 32px; }
+.stat-card { padding: 20px; background: var(--bg-card); border: 1px solid var(--divider); border-radius: 12px; }
+.stat-eyebrow { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 8px; }
+.stat-val { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 500; letter-spacing: -0.02em; }
+.stat-trend { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+</style>
+</head>
+<body data-persona-aware="cross-context" data-active-mode="hub-suporte">
+
+<button class="mobile-fab" data-sidebar-mobile-toggle aria-label="Menu"><i data-icon="menu" class="icon"></i></button>
+<div class="drawer-backdrop" data-sidebar-mobile-toggle></div>
+
+<div class="app">
+  <aside class="sidebar">
+    <a href="hub-suporte.html" class="sidebar-brand"><img src="hmc-logo.png" alt="" class="brand-mark-img"><div><div class="brand-text">High Mentor Club</div><div class="brand-sub">Curated by Paulo Vieira · MMXXVI</div></div></a>
+    <div class="mode-switch">
+      <a href="hub-suporte.html" class="mode-switch-item active" data-short="H"><i data-icon="home" class="icon"></i><span>Hub</span></a>
+      <a href="40-curator/suporte-admin.html" class="mode-switch-item" data-short="S"><i data-icon="help" class="icon"></i><span>Tickets</span></a>
+    </div>
+    <div class="sidebar-nav-scroll">
+      <div class="nav-section">
+        <a href="notifications.html" class="nav-item has-badge"><i data-icon="bell" class="icon icon-sm"></i>Avisos <span class="badge-count">5</span></a>
+        <a href="agenda.html" class="nav-item"><i data-icon="calendar" class="icon icon-sm"></i>Agenda</a>
+        <a href="buscar.html" class="nav-item"><i data-icon="search" class="icon icon-sm"></i>Buscar</a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">— Operação suporte</div>
+        <a href="40-curator/suporte-admin.html" class="nav-item has-badge"><i data-icon="help" class="icon icon-sm"></i>Tickets abertos <span class="badge-count">4</span></a>
+        <a href="40-curator/moderacao.html" class="nav-item has-badge"><i data-icon="message" class="icon icon-sm"></i>Moderação <span class="badge-count">2</span></a>
+      </div>
+    </div>
+    <div class="sidebar-footer-v3">
+      <a href="account.html" class="user-pill-v3"><div class="avatar-sm">BL</div><div><div class="user-pill-v3-name">Beatriz Lima</div><div class="user-pill-v3-role">Time Suporte</div></div></a>
+      <button class="sidebar-toggle-btn" data-sidebar-toggle><i data-icon="chevron-left" class="icon"></i><span>Recolher menu</span></button>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <section class="sp-hero">
+      <div style="position: relative; z-index: 1; max-width: 720px;">
+        <div style="font-size: 11px; color: var(--blue-highlight); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; margin-bottom: 14px;">— Suporte · Atendimento</div>
+        <h1 style="font-family: 'Playfair Display', serif; font-size: clamp(28px, 4vw, 42px); font-weight: 500; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 12px;">Bom dia, <span class="serif-italic" style="background: linear-gradient(135deg, #A8E6FF, #4DB8FF); -webkit-background-clip: text; background-clip: text; color: transparent;">Beatriz</span>.</h1>
+        <p style="font-size: 15px; line-height: 1.6; color: rgba(255,255,255,0.72); margin-bottom: 20px;">
+          <strong style="color: white;">4 tickets abertos</strong> · 1 SLA expirando em 2h · 2 posts pendentes de moderação. Sua janela de atendimento começa em 30 min.
+        </p>
+        <div style="display: flex; gap: 28px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.12); font-size: 13px;">
+          <div><div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(168,230,255,0.65); font-weight: 700; margin-bottom: 4px;">— Resolvidos hoje</div><div style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500;">3</div></div>
+          <div><div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(168,230,255,0.65); font-weight: 700; margin-bottom: 4px;">— CSAT semana</div><div style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500;">4.7/5</div></div>
+          <div><div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(168,230,255,0.65); font-weight: 700; margin-bottom: 4px;">— Tempo médio</div><div style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500;">28 min</div></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="stat-row">
+      <div class="stat-card"><div class="stat-eyebrow">— Tickets abertos</div><div class="stat-val">4</div><div class="stat-trend">↓ 2 vs ontem</div></div>
+      <div class="stat-card"><div class="stat-eyebrow">— SLA expirando &lt; 2h</div><div class="stat-val" style="color: #FF8888;">1</div><div class="stat-trend">Mariana Souza · CISPay</div></div>
+      <div class="stat-card"><div class="stat-eyebrow">— Moderação fila</div><div class="stat-val">2</div><div class="stat-trend">Auto-flag de IA</div></div>
+      <div class="stat-card"><div class="stat-eyebrow">— Escaladas Curator</div><div class="stat-val">1</div><div class="stat-trend">Aguarda Michelle</div></div>
+    </div>
+
+    <div class="section-head">
+      <div><div class="section-title">Fila do dia</div><div class="section-sub">Ordenado por SLA</div></div>
+      <a href="40-curator/suporte-admin.html" class="section-link">Ver todos (4) →</a>
+    </div>
+
+    <a href="40-curator/suporte-admin.html" class="queue-card urgent">
+      <div class="queue-icon"><i data-icon="alert" class="icon"></i></div>
+      <div>
+        <div class="queue-eyebrow">— Ticket #1284 · há 22h</div>
+        <div class="queue-title">Mariana Souza · cobrança duplicada CISPay</div>
+        <div class="queue-sub">Reportou parcela 03/12 cobrada 2× em 06/jun · valor R$ 6.800 · investigação técnica em andamento</div>
+      </div>
+      <span class="queue-sla danger">⏱ 1h54</span>
+      <span class="btn btn-chrome btn-sm">Atender</span>
+    </a>
+
+    <a href="40-curator/suporte-admin.html" class="queue-card">
+      <div class="queue-icon"><i data-icon="video" class="icon"></i></div>
+      <div>
+        <div class="queue-eyebrow">— Ticket #1283 · há 6h</div>
+        <div class="queue-title">Pedro Almeida · aula Mux não carrega no app</div>
+        <div class="queue-sub">Módulo 03 aula 02 · iOS 17 · Safari · cache limpo testado · escalado a Mux support</div>
+      </div>
+      <span class="queue-sla">⏱ 6h</span>
+      <span class="btn btn-secondary btn-sm">Responder</span>
+    </a>
+
+    <a href="40-curator/suporte-admin.html" class="queue-card">
+      <div class="queue-icon"><i data-icon="user" class="icon"></i></div>
+      <div>
+        <div class="queue-eyebrow">— Ticket #1282 · há 11h</div>
+        <div class="queue-title">Daniel Coutinho · solicita troca de mentor</div>
+        <div class="queue-sub">Quer migrar de Bruno Vaz pra Lucas Vieira · razão: incompatibilidade de cohort. Precisa escalonar pra Curator</div>
+      </div>
+      <span class="queue-sla">⏱ 13h</span>
+      <span class="btn btn-secondary btn-sm">Escalar</span>
+    </a>
+
+    <a href="40-curator/suporte-admin.html" class="queue-card">
+      <div class="queue-icon"><i data-icon="credit-card" class="icon"></i></div>
+      <div>
+        <div class="queue-eyebrow">— Ticket #1281 · há 18h</div>
+        <div class="queue-title">Camila Reis · trocar cartão recorrência</div>
+        <div class="queue-sub">Cartão expira em jul/2026 · solicita link de atualização CISPay. Self-service possível</div>
+      </div>
+      <span class="queue-sla ok">⏱ 30h</span>
+      <span class="btn btn-secondary btn-sm">Enviar link</span>
+    </a>
+
+    <div class="section-head" style="margin-top: 36px;">
+      <div><div class="section-title">Moderação · auto-flags</div><div class="section-sub">Revisão humana necessária</div></div>
+      <a href="40-curator/moderacao.html" class="section-link">Ver todos (2) →</a>
+    </div>
+
+    <a href="40-curator/moderacao.html" class="queue-card">
+      <div class="queue-icon"><i data-icon="message" class="icon"></i></div>
+      <div>
+        <div class="queue-eyebrow">— Auto-flag IA · 89% confiança</div>
+        <div class="queue-title">Post em #carreira-cohort-Q3 · Bruno Vaz</div>
+        <div class="queue-sub">Conteúdo possivelmente fora de tópico · mencionou produto externo · revisão humana</div>
+      </div>
+      <span class="queue-sla">há 2h</span>
+      <span class="btn btn-secondary btn-sm">Revisar</span>
+    </a>
+
+    <a href="40-curator/moderacao.html" class="queue-card">
+      <div class="queue-icon"><i data-icon="user" class="icon"></i></div>
+      <div>
+        <div class="queue-eyebrow">— Report de membro · Tier I</div>
+        <div class="queue-title">Comentário em #dúvidas-módulo-3</div>
+        <div class="queue-sub">Membro relatou tom agressivo de outro mentorado · histórico limpo · não-recorrente</div>
+      </div>
+      <span class="queue-sla">há 5h</span>
+      <span class="btn btn-secondary btn-sm">Revisar</span>
+    </a>
+
+    <div style="margin-top: 36px; padding: 22px 26px; background: var(--bg-card); border-radius: 14px; border-left: 3px solid var(--blue-realce);">
+      <div class="eyebrow-chrome" style="margin-bottom: 10px;">— Lembrete operacional</div>
+      <div style="font-size: 14px; line-height: 1.6; color: var(--text);">Você não tem acesso a <strong>Aprovações</strong>, <strong>Promoções de Tier</strong>, <strong>Financeiro</strong>, <strong>Yield</strong>, <strong>Codex</strong> ou <strong>Council</strong>. Casos que precisam de decisão curatorial → escalonar com Michelle via botão "Escalar" no ticket.</div>
+    </div>
+
+  </main>
+</div>
+<div class="wf-note">Hub · Suporte (Beatriz)</div>
+</body>
+</html>

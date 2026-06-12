@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dev Login · Persona Switcher · HMC</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_shared.css?v=16">
+<script src="_icons.js?v=16" defer></script>
+<script src="_persona.js?v=16" defer></script>
+<style>
+  body { background: var(--blue-deep); min-height: 100vh; color: white; padding: 0; }
+  .dev-wrap { max-width: 1440px; margin: 0 auto; padding: clamp(32px, 4vw, 64px); }
+  .dev-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 48px; flex-wrap: wrap; gap: 16px; }
+  .dev-brand { display: flex; align-items: center; gap: 14px; color: white; text-decoration: none; }
+  .dev-brand img { width: 40px; height: 40px; }
+  .dev-brand-text { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 500; letter-spacing: -0.01em; }
+  .dev-badge { padding: 8px 16px; background: rgba(229, 83, 83, 0.15); border: 1px solid rgba(229, 83, 83, 0.40); color: #FF8888; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; border-radius: 999px; display: inline-flex; align-items: center; gap: 8px; }
+  .dev-hero { text-align: center; margin-bottom: 56px; }
+  .dev-hero-eyebrow { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(168,230,255,0.55); font-weight: 700; margin-bottom: 14px; }
+  .dev-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(36px, 5vw, 52px); font-weight: 500; letter-spacing: -0.03em; line-height: 1.05; color: white; margin-bottom: 16px; }
+  .dev-hero p { font-size: 16px; line-height: 1.6; color: rgba(255,255,255,0.65); max-width: 640px; margin: 0 auto; }
+  .persona-section { margin-bottom: 48px; }
+  .persona-section-head { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .persona-section-title { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500; color: white; }
+  .persona-section-sub { color: rgba(168,230,255,0.50); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; }
+  .persona-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  .persona-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 22px; transition: all 200ms; text-decoration: none; color: white; display: block; }
+  .persona-card:hover { background: rgba(77,184,255,0.06); border-color: rgba(77,184,255,0.30); transform: translateY(-2px); }
+  .persona-card-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .persona-avatar { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 600; font-size: 14px; color: white; flex-shrink: 0; }
+  .persona-avatar.lv { background: linear-gradient(135deg, var(--blue-realce), var(--blue-chrome)); }
+  .persona-avatar.ms { background: var(--blue-realce); }
+  .persona-avatar.mc { background: #A1721E; }
+  .persona-avatar.pv { background: linear-gradient(135deg, var(--blue-deep), var(--blue-realce)); color: var(--blue-highlight); }
+  .persona-avatar.guest { background: var(--text-faint); }
+  .persona-avatar.dev { background: rgba(229,83,83,0.25); color: #FF8888; }
+  .persona-name { font-size: 14px; font-weight: 600; color: white; }
+  .persona-role { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(168,230,255,0.55); font-weight: 700; margin-top: 3px; }
+  .persona-desc { font-size: 12px; line-height: 1.55; color: rgba(255,255,255,0.55); margin-bottom: 14px; min-height: 36px; }
+  .persona-cta { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; color: var(--blue-highlight); }
+  .persona-cta .icon { width: 12px; height: 12px; }
+  .dev-warn { margin-top: 64px; padding: 22px 28px; background: rgba(229,83,83,0.08); border: 1px solid rgba(229,83,83,0.25); border-radius: 12px; display: flex; gap: 16px; align-items: center; font-size: 13px; color: rgba(255,255,255,0.80); line-height: 1.6; }
+  .dev-warn .icon { color: #FF8888; flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<div class="dev-wrap">
+
+  <div class="dev-header">
+    <a href="hub.html" class="dev-brand">
+      <img src="hmc-logo.png" alt="">
+      <span class="dev-brand-text">High Mentor Club · Dev</span>
+    </a>
+    <nav style="display: flex; gap: 14px;">
+      <a href="dev-login.html" style="font-size: 13px; color: white; background: rgba(77,184,255,0.10); font-weight: 600; padding: 6px 14px; border-radius: 6px; text-decoration: none;">Persona switch</a>
+      <a href="_dev/feature-flags.html" style="font-size: 13px; color: rgba(255,255,255,0.55); padding: 6px 14px; border-radius: 6px; text-decoration: none;">Feature flags</a>
+      <a href="_dev/seed-data.html" style="font-size: 13px; color: rgba(255,255,255,0.55); padding: 6px 14px; border-radius: 6px; text-decoration: none;">Seed data</a>
+      <a href="_dev/audit-viewer.html" style="font-size: 13px; color: rgba(255,255,255,0.55); padding: 6px 14px; border-radius: 6px; text-decoration: none;">Audit log</a>
+    </nav>
+    <div class="dev-badge"><i data-icon="alert" class="icon" style="width: 12px; height: 12px;"></i>Dev only · não disponível em produção</div>
+  </div>
+
+  <div class="dev-hero">
+    <div class="dev-hero-eyebrow">— Switcher de personas · ambiente staging</div>
+    <h1>Entre como qualquer <span style="font-style: italic; background: linear-gradient(135deg, #A8E6FF, #4DB8FF, #1554B3); -webkit-background-clip: text; background-clip: text; color: transparent;">persona</span>.</h1>
+    <p>Plataforma HMC tem múltiplos níveis de acesso e jornadas. Aqui você testa rapidamente cada uma sem precisar criar contas reais. Em produção, login passa por 2FA + Supabase Auth + IP allowlist + RLS tier-based.</p>
+
+    <!-- PAR · APRESENTAÇÃO FUNDADORA + MANUAL DO PRODUTO -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 24px;">
+
+      <a href="apresentacao.html" style="display: flex; gap: 14px; padding: 18px 22px; background: linear-gradient(135deg, rgba(77,184,255,0.16), rgba(13,40,92,0.30)); border: 1px solid rgba(77,184,255,0.45); border-radius: 12px; text-decoration: none; color: white; transition: all 200ms; align-items: flex-start;">
+        <div style="width: 44px; height: 44px; border-radius: 12px; background: linear-gradient(135deg, #4DB8FF, #1554B3); display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 8px 20px rgba(77,184,255,0.20);">
+          <i data-icon="play" class="icon icon-md"></i>
+        </div>
+        <div style="text-align: left; min-width: 0; flex: 1;">
+          <div style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #4DB8FF; font-weight: 700; margin-bottom: 3px;">— Comece por aqui</div>
+          <div style="font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 500;">Apresentação do produto</div>
+          <div style="font-size: 12px; color: rgba(255,255,255,0.65); margin-top: 3px; line-height: 1.5;">10 cenas que apresentam o HMC: o que é, defesa da ideia, lugar no ecossistema, como funciona, defesa do nome e do visual. <strong style="color: #4DB8FF; font-weight: 600;">Use antes de mostrar a plataforma.</strong></div>
+        </div>
+        <span style="color: #4DB8FF; font-size: 20px; flex-shrink: 0; align-self: center;">→</span>
+      </a>
+
+      <a href="manual.html" style="display: flex; gap: 14px; padding: 18px 22px; background: linear-gradient(135deg, rgba(168,230,255,0.06), rgba(255,255,255,0.02)); border: 1px solid rgba(168,230,255,0.22); border-radius: 12px; text-decoration: none; color: white; transition: all 200ms; align-items: flex-start;">
+        <div style="width: 44px; height: 44px; border-radius: 12px; background: linear-gradient(135deg, rgba(168,230,255,0.20), rgba(21,84,179,0.30)); display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 1px solid rgba(168,230,255,0.30);">
+          <i data-icon="book" class="icon icon-md"></i>
+        </div>
+        <div style="text-align: left; min-width: 0; flex: 1;">
+          <div style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #A8E6FF; font-weight: 700; margin-bottom: 3px;">— Bíblia técnica</div>
+          <div style="font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 500;">Manual do produto</div>
+          <div style="font-size: 12px; color: rgba(255,255,255,0.65); margin-top: 3px; line-height: 1.5;">Referência consultiva: vocabulário, RBAC matrix, glossário A-Z, jornadas, processos, decisões em aberto.</div>
+        </div>
+        <span style="color: #A8E6FF; font-size: 20px; flex-shrink: 0; align-self: center;">→</span>
+      </a>
+
+    </div>
+  </div>
+
+  <style>
+    @media (max-width: 720px) {
+      .dev-hero > div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+    }
+  </style>
+
+  <!-- ─── MATRIZ RBAC ─── -->
+  <div class="persona-section">
+    <div class="persona-section-head">
+      <div class="persona-section-title">Matriz de acesso · quem vê o quê</div>
+      <div class="persona-section-sub">— RBAC oficial · enforcement via Supabase RLS</div>
+    </div>
+    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; overflow: hidden;">
+      <div style="display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(5, minmax(0, 1fr)); gap: 0; font-size: 12px;">
+        <div style="padding: 14px 18px; background: rgba(255,255,255,0.04); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; color: rgba(168,230,255,0.55);">Persona</div>
+        <div style="padding: 14px 12px; background: rgba(255,255,255,0.04); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; color: rgba(168,230,255,0.55); text-align: center;">Hub</div>
+        <div style="padding: 14px 12px; background: rgba(255,255,255,0.04); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; color: rgba(168,230,255,0.55); text-align: center;">Clube</div>
+        <div style="padding: 14px 12px; background: rgba(255,255,255,0.04); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; color: rgba(168,230,255,0.55); text-align: center;">Studio</div>
+        <div style="padding: 14px 12px; background: rgba(255,255,255,0.04); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; color: rgba(168,230,255,0.55); text-align: center;">Estudos</div>
+        <div style="padding: 14px 12px; background: rgba(255,255,255,0.04); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; color: rgba(168,230,255,0.55); text-align: center;">Curator</div>
+
+        <div style="padding: 14px 18px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; gap: 10px;"><span style="width: 24px; height: 24px; border-radius: 50%; background: var(--text-faint); display: inline-flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700;">VS</span> Visitante (não logado)</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: var(--text-faint);">—</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: var(--text-faint);">—</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: var(--text-faint);">—</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: var(--text-faint);">—</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: var(--text-faint);">—</div>
+
+        <div style="padding: 14px 18px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; gap: 10px;"><span style="width: 24px; height: 24px; border-radius: 50%; background: var(--blue-realce); display: inline-flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: white;">MS</span> Mariana · mentorada pura</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: #2ecc71;">✓</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: var(--text-faint);">—</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: var(--text-faint);">—</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: #2ecc71;">✓</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: var(--text-faint);">—</div>
+
+        <div style="padding: 14px 18px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; gap: 10px;"><span style="width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg, var(--blue-realce), var(--blue-chrome)); display: inline-flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700;">LV</span> Lucas · multi-role (mentor + member + mentorado)</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: #2ecc71;">✓</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: #2ecc71;">✓ Tier II</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: #2ecc71;">✓</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: #2ecc71;">✓</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: var(--text-faint);">—</div>
+
+        <div style="padding: 14px 18px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; gap: 10px;"><span style="width: 24px; height: 24px; border-radius: 50%; background: var(--blue-realce); display: inline-flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: white;">BV</span> Bruno · mentor (sem ser mentorado)</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: #2ecc71;">✓</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: #2ecc71;">✓ Tier II</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: #2ecc71;">✓</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: var(--text-faint);">—</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: var(--text-faint);">—</div>
+
+        <div style="padding: 14px 18px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; gap: 10px;"><span style="width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg, var(--blue-deep), var(--blue-realce)); color: var(--blue-highlight); display: inline-flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700;">CR</span> Carlos · Tier III · Sovereign Mentor</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: #2ecc71;">✓</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: #2ecc71;">✓ Tier III +Antechamber +Bridge</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: #2ecc71;">✓</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: var(--text-faint);">—</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: var(--text-faint);">—</div>
+
+        <div style="padding: 14px 18px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; gap: 10px;"><span style="width: 24px; height: 24px; border-radius: 50%; background: #A1721E; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: white;">MC</span> Michelle · Time Curator</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: #2ecc71;">✓</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: var(--text-faint);">—</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: var(--text-faint);">—</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: var(--text-faint);">—</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: #2ecc71;">✓ Full</div>
+
+        <div style="padding: 14px 18px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; gap: 10px;"><span style="width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg, var(--blue-deep), var(--blue-realce)); color: var(--blue-highlight); display: inline-flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700;">PV</span> Paulo Vieira · The Curator (founder)</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: #2ecc71;">✓ PV-only</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: #2ecc71;">✓ The Curator</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: var(--text-faint);">—</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: var(--text-faint);">—</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: #2ecc71;">✓ Super</div>
+
+        <div style="padding: 14px 18px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; gap: 10px;"><span style="width: 24px; height: 24px; border-radius: 50%; background: #A1721E; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: white;">BL</span> Beatriz · Time Suporte</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: #2ecc71;">✓ Suporte</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: var(--text-faint);">—</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: var(--text-faint);">—</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: var(--text-faint);">—</div>
+        <div style="padding: 14px 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: #2ecc71; font-size: 11px;">✓ Tickets+Mod</div>
+
+      </div>
+      <div style="padding: 16px 22px; border-top: 1px solid rgba(255,255,255,0.06); font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.6;">
+        <strong style="color: white;">Legenda:</strong> ✓ = acesso garantido · — = sem acesso (HTTP 403 / mode-switch oculto). Acesso "cruzado" não cobrado — Lucas mentor de outros + estudante de outros é nativo via schema, mesma conta acumula roles.
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── VISITOR / PUBLIC ─── -->
+  <div class="persona-section">
+    <div class="persona-section-head">
+      <div class="persona-section-title">Público (não autenticado)</div>
+      <div class="persona-section-sub">— Antes do funil</div>
+    </div>
+    <div class="persona-grid">
+      <a href="landing.html" class="persona-card">
+        <div class="persona-card-head">
+          <div class="persona-avatar guest"><i data-icon="globe" class="icon icon-md"></i></div>
+          <div><div class="persona-name">Visitante · landing</div><div class="persona-role">Discovery</div></div>
+        </div>
+        <div class="persona-desc">Página inicial pública do HMC. Hero, manifesto, mentores ativos, fluxo de entrada.</div>
+        <div class="persona-cta">Abrir landing <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+      <a href="00-public/catalog.html" class="persona-card">
+        <div class="persona-card-head">
+          <div class="persona-avatar guest"><i data-icon="users" class="icon icon-md"></i></div>
+          <div><div class="persona-name">Catálogo de mentores</div><div class="persona-role">Pré-compra</div></div>
+        </div>
+        <div class="persona-desc">Vitrine pública com todos os 68 mentores HMC. Filtros por tier, especialidade.</div>
+        <div class="persona-cta">Ver catálogo <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+      <a href="00-public/mentor-public.html" class="persona-card">
+        <div class="persona-card-head">
+          <div class="persona-avatar guest"><i data-icon="user" class="icon icon-md"></i></div>
+          <div><div class="persona-name">Página de mentor</div><div class="persona-role">Vendas individuais</div></div>
+        </div>
+        <div class="persona-desc">Página pública do Lucas Vieira. Hero, depoimentos, mentorias à venda, FAQ.</div>
+        <div class="persona-cta">Ver página <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+      <a href="login.html" class="persona-card">
+        <div class="persona-card-head">
+          <div class="persona-avatar guest"><i data-icon="lock" class="icon icon-md"></i></div>
+          <div><div class="persona-name">Login / Signup</div><div class="persona-role">Entrada</div></div>
+        </div>
+        <div class="persona-desc">Telas de autenticação. Login, signup mentorado, signup mentor (4 passos), recuperação.</div>
+        <div class="persona-cta">Ver auth <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ─── APPLICANT ─── -->
+  <div class="persona-section">
+    <div class="persona-section-head">
+      <div class="persona-section-title">Candidato (em análise)</div>
+      <div class="persona-section-sub">— Aguardando Cross-Floor</div>
+    </div>
+    <div class="persona-grid">
+      <a href="candidatura-status.html" class="persona-card">
+        <div class="persona-card-head">
+          <div class="persona-avatar guest"><i data-icon="hourglass" class="icon icon-md"></i></div>
+          <div><div class="persona-name">Status da candidatura</div><div class="persona-role">Aguardando endorsos</div></div>
+        </div>
+        <div class="persona-desc">Acompanha endorsos recebidos, falta para fechar Cross-Floor, próximos passos.</div>
+        <div class="persona-cta">Ver status <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+      <a href="acesso-liberado.html" class="persona-card">
+        <div class="persona-card-head">
+          <div class="persona-avatar guest"><i data-icon="check-circle" class="icon icon-md"></i></div>
+          <div><div class="persona-name">Acesso liberado</div><div class="persona-role">Bem-vindo</div></div>
+        </div>
+        <div class="persona-desc">Welcome screen após aprovação. Primeiros passos, Antechamber introdutório, agenda.</div>
+        <div class="persona-cta">Ver welcome <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+      <a href="candidatura-recusada.html" class="persona-card">
+        <div class="persona-card-head">
+          <div class="persona-avatar guest"><i data-icon="x-circle" class="icon icon-md"></i></div>
+          <div><div class="persona-name">Candidatura recusada</div><div class="persona-role">Carta pessoal de PV + rota MELID</div></div>
+        </div>
+        <div class="persona-desc">Quando a curadoria diz "agora não". Decisão respeitosa, sugestão pra reaplicar em 12m, ponte pra MELID.</div>
+        <div class="persona-cta">Ver carta <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+      <a href="onboarding.html" class="persona-card">
+        <div class="persona-card-head">
+          <div class="persona-avatar guest"><i data-icon="compass" class="icon icon-md"></i></div>
+          <div><div class="persona-name">Onboarding</div><div class="persona-role">Primeiros passos</div></div>
+        </div>
+        <div class="persona-desc">Tour guiado dos 3 mundos do HMC. Perfil, integrações, Cal.com, primeiro Council.</div>
+        <div class="persona-cta">Iniciar tour <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ─── LUCAS · MULTI-ROLE ─── -->
+  <div class="persona-section">
+    <div class="persona-section-head">
+      <div class="persona-section-title">Lucas Vieira · multi-role (Mentor + Member + Mentorado)</div>
+      <div class="persona-section-sub">— Persona principal</div>
+    </div>
+
+    <div class="persona-grid">
+      <a href="hub.html" onclick="HMC_PERSONA.set('lucas',true);return false;" class="persona-card">
+        <div class="persona-card-head"><div class="persona-avatar lv">LV</div><div><div class="persona-name">Hub cross-context</div><div class="persona-role">Home pós-login</div></div></div>
+        <div class="persona-desc">Painel inicial · resumo dos 3 mundos, atividade que precisa de você, métricas chave.</div>
+        <div class="persona-cta">Abrir Hub <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+
+      <a href="10-clube/01-dashboard.html" onclick="HMC_PERSONA.set('lucas');" class="persona-card">
+        <div class="persona-card-head"><div class="persona-avatar lv">LV</div><div><div class="persona-name">Clube · Sala do Membro</div><div class="persona-role">Tier II · Seat 12</div></div></div>
+        <div class="persona-desc">Mundo do Clube · 7 telas (Sala, Council, Codex, Cross-Floor, Yield, Pilgrimages, Selo).</div>
+        <div class="persona-cta">Entrar Clube <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+
+      <a href="20-mentor/studio-home.html" onclick="HMC_PERSONA.set('lucas');" class="persona-card">
+        <div class="persona-card-head"><div class="persona-avatar lv">LV</div><div><div class="persona-name">Studio · Mentor</div><div class="persona-role">42 mentorados</div></div></div>
+        <div class="persona-desc">Mundo do Studio · 12 telas (Visão geral, Mentorias, Aulas, CRM, Sessões, Receitas, Checkout, Cupons, Página pública, Config, Integrações, Comunidade).</div>
+        <div class="persona-cta">Entrar Studio <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+
+      <a href="30-mentorado/biblioteca.html" onclick="HMC_PERSONA.set('lucas');" class="persona-card">
+        <div class="persona-card-head"><div class="persona-avatar lv">LV</div><div><div class="persona-name">Estudos · com Renata Mendes</div><div class="persona-role">Mentorado de outra mentora</div></div></div>
+        <div class="persona-desc">Mundo dos Estudos · Lucas estudando "Negociação de Alto Valor" com Renata. 7 telas (Biblioteca, Player, Comunidades, Sessões, Certificados, Pagamentos, Suporte).</div>
+        <div class="persona-cta">Entrar Estudos <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ─── MARIANA · MENTORADA PURA ─── -->
+  <div class="persona-section">
+    <div class="persona-section-head">
+      <div class="persona-section-title">Mariana Souza · mentorada (single role)</div>
+      <div class="persona-section-sub">— Mentorada do Lucas</div>
+    </div>
+    <div class="persona-grid">
+      <a href="signup-mentorado.html" class="persona-card">
+        <div class="persona-card-head"><div class="persona-avatar ms">MS</div><div><div class="persona-name">Signup Mentorada</div><div class="persona-role">Pré-compra</div></div></div>
+        <div class="persona-desc">Cadastro inicial. Após comprar via CISPay, vai pra biblioteca + onboarding.</div>
+        <div class="persona-cta">Ver signup <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+      <a href="hub-mentorado.html" onclick="HMC_PERSONA.set('mariana',true);return false;" class="persona-card">
+        <div class="persona-card-head"><div class="persona-avatar ms">MS</div><div><div class="persona-name">Hub Mariana · entry</div><div class="persona-role">Mentorada pura · ponto de entrada</div></div></div>
+        <div class="persona-desc">Hub simplificado · só "Continue de onde parou" + 3 cursos em curso + agenda + comunidades. Mode-switch só com Hub + Estudos. <strong>Sem acesso a Clube ou Studio.</strong></div>
+        <div class="persona-cta">Entrar como Mariana <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+      <a href="30-mentorado/biblioteca.html" onclick="HMC_PERSONA.set('mariana');" class="persona-card">
+        <div class="persona-card-head"><div class="persona-avatar ms">MS</div><div><div class="persona-name">Biblioteca direta</div><div class="persona-role">3 cursos ativos</div></div></div>
+        <div class="persona-desc">Pula o Hub e abre direto a biblioteca. 3 cursos: Renata (Negociação), Bruno (Funil B2B), Paula (YouTube).</div>
+        <div class="persona-cta">Abrir biblioteca <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ─── BRUNO · MENTOR PURO ─── -->
+  <div class="persona-section">
+    <div class="persona-section-head">
+      <div class="persona-section-title">Bruno Vaz · mentor puro (sem ser mentorado)</div>
+      <div class="persona-section-sub">— Hub + Clube + Studio · NÃO tem Estudos</div>
+    </div>
+    <div class="persona-grid">
+      <a href="hub.html" onclick="HMC_PERSONA.set('bruno',true);return false;" class="persona-card">
+        <div class="persona-card-head"><div class="persona-avatar lv" style="background: var(--blue-realce);">BV</div><div><div class="persona-name">Hub Bruno</div><div class="persona-role">Tier II · sem estudos</div></div></div>
+        <div class="persona-desc">Bruno é mentor de Funil B2B Premium. Não compra mentoria de outros. Hub mostra 2 mundos (Clube + Studio). Em produção, o card de Estudos some.</div>
+        <div class="persona-cta">Entrar como Bruno <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+      <a href="20-mentor/studio-home.html" onclick="HMC_PERSONA.set('bruno');" class="persona-card">
+        <div class="persona-card-head"><div class="persona-avatar lv" style="background: var(--blue-realce);">BV</div><div><div class="persona-name">Studio direto</div><div class="persona-role">26 mentorados ativos</div></div></div>
+        <div class="persona-desc">Studio dele — vendas, payouts CISPay, comunidade dos mentorados, sessões 1:1.</div>
+        <div class="persona-cta">Abrir Studio <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ─── CARLOS · TIER III ─── -->
+  <div class="persona-section">
+    <div class="persona-section-head">
+      <div class="persona-section-title">Carlos Ribeiro · Tier III · Sovereign Mentor</div>
+      <div class="persona-section-sub">— Todos modos + Antechamber + Curator's Address + Bridge</div>
+    </div>
+    <div class="persona-grid">
+      <a href="10-clube/antechamber.html" onclick="HMC_PERSONA.set('carlos');" class="persona-card">
+        <div class="persona-card-head"><div class="persona-avatar pv">CR</div><div><div class="persona-name">Antechamber · Tier III only</div><div class="persona-role">Linha direta com PV</div></div></div>
+        <div class="persona-desc">Chat 1:1 PV ↔ Carlos. Acesso restrito por RLS · membros não-Tier-III recebem 403.</div>
+        <div class="persona-cta">Ver chat PV <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+      <a href="10-clube/curator-address.html" onclick="HMC_PERSONA.set('carlos');" class="persona-card">
+        <div class="persona-card-head"><div class="persona-avatar pv">CR</div><div><div class="persona-name">Curator's Address</div><div class="persona-role">Cartas mensais PV</div></div></div>
+        <div class="persona-desc">Arquivo das cartas que PV escreve mensalmente endereçadas ao Inner Council.</div>
+        <div class="persona-cta">Ver Address <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+      <a href="10-clube/bridge.html" onclick="HMC_PERSONA.set('carlos');" class="persona-card">
+        <div class="persona-card-head"><div class="persona-avatar pv">CR</div><div><div class="persona-name">The Bridge</div><div class="persona-role">Franquias do ecossistema PV</div></div></div>
+        <div class="persona-desc">Carlos é franqueado do ecossistema PV SP-Jardins. Bridge mostra todas franquias ativas + comissionamento.</div>
+        <div class="persona-cta">Ver Bridge <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ─── CURATOR · MICHELLE ─── -->
+  <div class="persona-section">
+    <div class="persona-section-head">
+      <div class="persona-section-title">Time Curator · Michelle (operação)</div>
+      <div class="persona-section-sub">— Hub + Curator · NÃO tem Clube/Studio/Estudos</div>
+    </div>
+    <div class="persona-grid">
+      <a href="hub-curator.html" onclick="HMC_PERSONA.set('michelle',true);return false;" class="persona-card">
+        <div class="persona-card-head"><div class="persona-avatar mc">MC</div><div><div class="persona-name">Hub Curator · entry</div><div class="persona-role">Fila do dia + 16 áreas admin</div></div></div>
+        <div class="persona-desc">Hub específico do Curator com fila de aprovações, disputas urgentes, payouts agendados, KPIs do dia. Mode-switch só Hub + Curator.</div>
+        <div class="persona-cta">Entrar como Michelle <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+      <a href="40-curator/aprovacoes.html" onclick="HMC_PERSONA.set('michelle');" class="persona-card">
+        <div class="persona-card-head"><div class="persona-avatar mc">MC</div><div><div class="persona-name">Workspace direto</div><div class="persona-role">16 telas admin</div></div></div>
+        <div class="persona-desc">Curadoria (Aprovações, Membros, Promoções, Disputas, Moderação), Negócio HMC (Financeiro, Yield CIS, Analytics), Operação (Council, Pilgrimages, Codex, Antechamber, Logs, Suporte, Config).</div>
+        <div class="persona-cta">Abrir aprovações <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ─── SUPORTE · BEATRIZ — NOVO ─── -->
+  <div class="persona-section">
+    <div class="persona-section-head">
+      <div class="persona-section-title">Time Suporte · Beatriz (atendente)</div>
+      <div class="persona-section-sub">— Subset do Curator · só Tickets + Moderação</div>
+    </div>
+    <div class="persona-grid">
+      <a href="hub-suporte.html" onclick="HMC_PERSONA.set('suporte',true);return false;" class="persona-card">
+        <div class="persona-card-head"><div class="persona-avatar mc">BL</div><div><div class="persona-name">Hub Suporte · entry</div><div class="persona-role">Fila de tickets + moderação</div></div></div>
+        <div class="persona-desc">Hub do time de suporte com fila de tickets ordenada por SLA, fila de moderação auto-flagged, escalonamento pra Curator quando precisa decisão estratégica. Sem acesso a Financeiro, Yield, Promoções, Codex ou Council.</div>
+        <div class="persona-cta">Entrar como Beatriz <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+      <a href="40-curator/suporte-admin.html" onclick="HMC_PERSONA.set('suporte');" class="persona-card">
+        <div class="persona-card-head"><div class="persona-avatar mc">BL</div><div><div class="persona-name">Tickets direto</div><div class="persona-role">Operação atendimento</div></div></div>
+        <div class="persona-desc">Abre direto a workspace de tickets. Sidebar reduzida só com Tickets + Moderação. RBAC bloqueia outras áreas via 403.</div>
+        <div class="persona-cta">Abrir tickets <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ─── PV · ATUALIZADO ─── -->
+  <div class="persona-section">
+    <div class="persona-section-head">
+      <div class="persona-section-title">The Curator · Paulo Vieira</div>
+      <div class="persona-section-sub">— Founder · vista exclusiva c/ áreas curatoriais finais</div>
+    </div>
+    <div class="persona-grid">
+      <a href="hub-pv.html" onclick="HMC_PERSONA.set('pv',true);return false;" class="persona-card">
+        <div class="persona-card-head"><div class="persona-avatar pv">PV</div><div><div class="persona-name">Hub PV · founder dashboard</div><div class="persona-role">KPIs estratégicos + mesa curatorial</div></div></div>
+        <div class="persona-desc">Hub exclusivo do founder. KPIs estratégicos (GMV YTD, NPS, Yield), mesa curatorial com 4 áreas exclusivas (Curator's Address editor, Antechamber lado-PV, Codex publishing, decisão final de candidatos). Lembrete sobre vista exclusiva.</div>
+        <div class="persona-cta">Entrar como PV <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+      <a href="curator-address-editor.html" onclick="HMC_PERSONA.set('pv');" class="persona-card">
+        <div class="persona-card-head"><div class="persona-avatar pv">PV</div><div><div class="persona-name">Curator's Address Editor</div><div class="persona-role">Escreve a carta mensal Tier III</div></div></div>
+        <div class="persona-desc">Editor exclusivo. Auto-save, toolbar de formatação, arquivo de cartas anteriores na lateral. Distribuição automática Tier III ao publicar.</div>
+        <div class="persona-cta">Abrir editor <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+      <a href="antechamber-pv.html" onclick="HMC_PERSONA.set('pv');" class="persona-card">
+        <div class="persona-card-head"><div class="persona-avatar pv">PV</div><div><div class="persona-name">Antechamber · lado PV</div><div class="persona-role">Responde 6 Tier III · privado</div></div></div>
+        <div class="persona-desc">Vista do PV nas 6 conversas Tier III. Lista lateral + thread ativa + composer. Cada chat é privado e cego aos outros membros. Marcadores de urgência e arquivamento.</div>
+        <div class="persona-cta">Ver mensagens <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ─── CROSS-CONTEXT ─── -->
+  <div class="persona-section">
+    <div class="persona-section-head">
+      <div class="persona-section-title">Cross-context · disponíveis em todas as personas</div>
+      <div class="persona-section-sub">— Ferramentas globais</div>
+    </div>
+    <div class="persona-grid">
+      <a href="agenda.html" class="persona-card">
+        <div class="persona-card-head"><div class="persona-avatar dev"><i data-icon="calendar" class="icon icon-md"></i></div><div><div class="persona-name">Agenda</div><div class="persona-role">Cross-context</div></div></div>
+        <div class="persona-desc">Calendar agregando eventos dos 3 mundos. Integração Cal.com + Google.</div>
+        <div class="persona-cta">Abrir <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+      <a href="buscar.html" class="persona-card">
+        <div class="persona-card-head"><div class="persona-avatar dev"><i data-icon="search" class="icon icon-md"></i></div><div><div class="persona-name">Buscar</div><div class="persona-role">⌘K global</div></div></div>
+        <div class="persona-desc">Busca global · mentores, mentorias, aulas, mensagens, notas via Meilisearch.</div>
+        <div class="persona-cta">Abrir <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+      <a href="notifications.html" class="persona-card">
+        <div class="persona-card-head"><div class="persona-avatar dev"><i data-icon="bell" class="icon icon-md"></i></div><div><div class="persona-name">Avisos</div><div class="persona-role">Inbox unificado</div></div></div>
+        <div class="persona-desc">Notificações agregadas dos 3 mundos · contextualização por urgência.</div>
+        <div class="persona-cta">Abrir <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+      <a href="account.html" class="persona-card">
+        <div class="persona-card-head"><div class="persona-avatar dev"><i data-icon="user" class="icon icon-md"></i></div><div><div class="persona-name">Conta</div><div class="persona-role">Identidade global</div></div></div>
+        <div class="persona-desc">Perfil, segurança, pagamentos, papéis ativos, integrações pessoais.</div>
+        <div class="persona-cta">Abrir <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ─── A/B TEST · SIGNUP ─── -->
+  <div class="persona-section">
+    <div class="persona-section-head">
+      <div class="persona-section-title">A/B test · tela de signup</div>
+      <div class="persona-section-sub">— 3 versões pra validar com o time antes de decidir</div>
+    </div>
+    <div class="persona-grid">
+      <a href="signup-v1-2opcoes.html" class="persona-card">
+        <div class="persona-card-head">
+          <div class="persona-avatar" style="background: rgba(168,230,255,0.18); color: var(--blue-realce);">V1</div>
+          <div><div class="persona-name">V1 · 2 opções (original)</div><div class="persona-role">Mentor + Mentorado</div></div>
+        </div>
+        <div class="persona-desc">Versão original do signup com 2 cards expandidos por padrão: "Quero ser mentor" (4 etapas crivo) e "Quero ser mentorado" (acesso imediato). Sem MELID na jornada.</div>
+        <div class="persona-cta">Abrir V1 <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+      <a href="signup.html" class="persona-card">
+        <div class="persona-card-head">
+          <div class="persona-avatar" style="background: linear-gradient(135deg, var(--blue-realce), #d2a344); color: white;">V2</div>
+          <div><div class="persona-name">V2 · 3 opções colapsadas</div><div class="persona-role">+ Quero me tornar mentor</div></div>
+        </div>
+        <div class="persona-desc">Reformulação completa com 3 cards colapsados por padrão. Insere jornada "Quero me tornar mentor" que leva ao melid-bridge.html (página intermediária). Botão "Ver detalhes" expande info de cada opção.</div>
+        <div class="persona-cta">Abrir V2 <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+      <a href="signup-v3-construir.html" class="persona-card">
+        <div class="persona-card-head">
+          <div class="persona-avatar" style="background: linear-gradient(135deg, var(--blue-realce-muted), var(--text-muted)); color: white;">V3</div>
+          <div><div class="persona-name">V3 · V1 + opção discreta</div><div class="persona-role">→ LP do Mentor de Líderes</div></div>
+        </div>
+        <div class="persona-desc">V1 mantida intacta + 3ª opção discreta logo abaixo: "Quero construir uma mentoria" com CTA "Saber mais" que vai direto pra LP externa do Mentor de Líderes (lp.febracis.com). Sem reformulação visual.</div>
+        <div class="persona-cta">Abrir V3 <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+      <a href="melid-bridge.html" class="persona-card">
+        <div class="persona-card-head">
+          <div class="persona-avatar" style="background: linear-gradient(135deg, #d2a344, #8c6b1f); color: white;">MB</div>
+          <div><div class="persona-name">MELID Bridge</div><div class="persona-role">Destino interno da V2</div></div>
+        </div>
+        <div class="persona-desc">Página intermediária que recebe quem clica em "Quero me tornar mentor" na V2. Explica cascata MELID → HMC com 4 pilares, comparação dos dois produtos e depoimentos de quem fez a transição. Não é usado pela V3 (que vai direto pra LP externa).</div>
+        <div class="persona-cta">Abrir Bridge <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ─── ESTADOS / EDGE CASES ─── -->
+  <div class="persona-section">
+    <div class="persona-section-head">
+      <div class="persona-section-title">Estados de sessão / erro</div>
+      <div class="persona-section-sub">— UI de exceção (403, sessão expirou, logout)</div>
+    </div>
+    <div class="persona-grid">
+      <a href="403-forbidden.html" class="persona-card">
+        <div class="persona-card-head"><div class="persona-avatar dev"><i data-icon="lock" class="icon icon-md"></i></div><div><div class="persona-name">403 · Acesso restrito</div><div class="persona-role">Autenticado sem permissão</div></div></div>
+        <div class="persona-desc">Quando user logado tenta acessar rota fora do papel dele. Ex: Mariana tentando /clube/antechamber.</div>
+        <div class="persona-cta">Ver 403 <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+      <a href="404.html" class="persona-card">
+        <div class="persona-card-head"><div class="persona-avatar dev"><i data-icon="search" class="icon icon-md"></i></div><div><div class="persona-name">404 · Rota inexistente</div><div class="persona-role">Página não encontrada</div></div></div>
+        <div class="persona-desc">URL morto, link movido, typo no path. Editorial dark com fallbacks pra Hub + 4 atalhos rápidos.</div>
+        <div class="persona-cta">Ver 404 <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+      <a href="session-expired.html" class="persona-card">
+        <div class="persona-card-head"><div class="persona-avatar dev"><i data-icon="clock" class="icon icon-md"></i></div><div><div class="persona-name">Sessão expirou</div><div class="persona-role">Inatividade 60min</div></div></div>
+        <div class="persona-desc">Sessão encerrada por timeout. Mostra rascunho salvo localmente + permite re-login rápido na mesma conta.</div>
+        <div class="persona-cta">Ver expired <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+      <a href="logout.html" class="persona-card">
+        <div class="persona-card-head"><div class="persona-avatar dev"><i data-icon="external" class="icon icon-md"></i></div><div><div class="persona-name">Logout</div><div class="persona-role">Saída intencional</div></div></div>
+        <div class="persona-desc">Confirmação de logout com checklist de limpeza (cookies, JWT, audit log).</div>
+        <div class="persona-cta">Ver logout <i data-icon="arrow-right" class="icon"></i></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="dev-warn">
+    <i data-icon="alert" class="icon icon-lg"></i>
+    <div>
+      <strong style="color: white;">Esta página NÃO existe em produção.</strong> Em prod, login = Supabase Auth com 2FA obrigatório, IP allowlist no firewall (Cloudflare Worker `apps/edge`), JWT validado pelo middleware NestJS e RLS no Postgres aplicando role tier-based. Multi-persona como Lucas (Mentor + Member + Mentorado simultaneamente) é nativo do schema — uma única conta, múltiplos roles. Mode-switch é renderizado server-side com base em <code style="color: var(--blue-highlight); background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 11px;">user.capabilities</code> · membros sem permissão veem 403 ao tentar acessar rota inválida.
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

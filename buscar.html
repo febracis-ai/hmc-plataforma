@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Buscar · HMC</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_shared.css?v=16">
+<script src="_icons.js?v=16" defer></script>
+<script src="_modals.js?v=16" defer></script>
+<script src="_persona.js?v=16" defer></script>
+<style>
+/* ─── LAYOUT ─── */
+.bs-layout { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 28px; align-items: start; }
+@media (max-width: 1000px) { .bs-layout { grid-template-columns: minmax(0, 1fr); } .bs-sidefilter { order: -1; } }
+
+/* ─── SEARCH HERO ─── */
+.bs-hero { padding: 32px 36px; background: linear-gradient(135deg, var(--bg-card), var(--bg-card-hover)); border: 1px solid var(--divider); border-radius: 16px; margin-bottom: 22px; position: relative; overflow: hidden; }
+.bs-hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 60%; height: 200%; background: radial-gradient(ellipse, rgba(77,184,255,0.06) 0%, transparent 60%); pointer-events: none; }
+.bs-search-wrap { display: flex; align-items: center; gap: 14px; padding: 14px 18px; background: var(--bg); border: 1px solid var(--divider); border-radius: 12px; position: relative; z-index: 1; transition: all 200ms; }
+.bs-search-wrap:focus-within { border-color: var(--blue-realce); box-shadow: 0 0 0 4px var(--blue-realce-muted); }
+.bs-search-input { flex: 1; border: none; background: transparent; font-family: inherit; font-size: 17px; color: var(--text); outline: none; padding: 6px 4px; min-width: 0; }
+.bs-search-input::placeholder { color: var(--text-faint); }
+.bs-kbd { padding: 4px 9px; background: var(--bg-card); border: 1px solid var(--divider); border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; color: var(--text-muted); }
+.bs-clear { background: transparent; border: none; color: var(--text-muted); cursor: pointer; padding: 4px; border-radius: 6px; }
+.bs-clear:hover { background: var(--bg-card); color: var(--text); }
+.bs-hero-meta { display: flex; gap: 18px; padding-top: 14px; font-size: 12px; color: var(--text-muted); position: relative; z-index: 1; }
+.bs-hero-meta-item { display: flex; align-items: center; gap: 6px; }
+.bs-hero-meta-item .icon { width: 13px !important; height: 13px !important; }
+
+/* ─── SCOPE PILLS ─── */
+.bs-scope { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; overflow-x: auto; padding-bottom: 4px; }
+.bs-scope::-webkit-scrollbar { height: 0; }
+.bs-pill { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 99px; background: var(--bg-card); border: 1px solid var(--divider); font-size: 12px; font-weight: 600; color: var(--text-muted); cursor: pointer; white-space: nowrap; transition: all 150ms; }
+.bs-pill:hover { border-color: var(--blue-realce); color: var(--text); }
+.bs-pill.active { background: var(--blue-realce); color: white; border-color: var(--blue-realce); }
+.bs-pill .icon { width: 13px !important; height: 13px !important; }
+.bs-pill-count { padding: 1px 7px; background: rgba(0,0,0,0.08); border-radius: 99px; font-size: 11px; font-variant-numeric: tabular-nums; }
+.bs-pill.active .bs-pill-count { background: rgba(255,255,255,0.20); }
+
+/* ─── SIDE FILTERS ─── */
+.bs-sidefilter { display: flex; flex-direction: column; gap: 16px; }
+.bs-side-card { padding: 18px 20px; background: var(--bg-card); border: 1px solid var(--divider); border-radius: 12px; }
+.bs-side-h { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 12px; }
+.bs-side-row { display: flex; align-items: center; gap: 8px; padding: 7px 0; font-size: 13px; cursor: pointer; }
+.bs-side-row input[type="checkbox"] { accent-color: var(--blue-realce); }
+.bs-side-row-label { flex: 1; color: var(--text); }
+.bs-side-row-count { font-size: 11px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+
+/* ─── RESULT GROUP ─── */
+.bs-group { margin-bottom: 28px; }
+.bs-group-head { display: flex; justify-content: space-between; align-items: baseline; padding: 0 4px 10px; border-bottom: 1px solid var(--divider); margin-bottom: 12px; }
+.bs-group-title { display: flex; align-items: baseline; gap: 12px; }
+.bs-group-icon { width: 26px; height: 26px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; vertical-align: middle; margin-right: 6px; }
+.bs-group-name { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 500; letter-spacing: -0.015em; display: inline-flex; align-items: center; }
+.bs-group-count { font-size: 12px; color: var(--text-muted); font-weight: 600; }
+
+/* ─── RESULT ROW ─── */
+.bs-row { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; gap: 14px; padding: 14px 16px; background: var(--bg-card); border: 1px solid var(--divider); border-radius: 10px; margin-bottom: 8px; align-items: center; transition: all 180ms; text-decoration: none; color: inherit; }
+.bs-row:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(11,11,15,0.05); border-color: var(--text-muted); }
+.bs-row-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: var(--bg); border: 1px solid var(--divider); color: var(--blue-realce); }
+.bs-row-icon.aula { background: var(--blue-realce-muted); border-color: var(--blue-realce-muted); }
+.bs-row-icon.msg { background: rgba(168,230,255,0.18); border-color: transparent; color: var(--blue-realce); }
+.bs-row-icon.mentor { background: linear-gradient(135deg, var(--blue-realce), var(--blue-chrome)); color: white; font-family: 'Playfair Display', serif; font-weight: 600; font-size: 13px; border: none; }
+.bs-row-icon.nota { background: rgba(210,163,68,0.12); color: #d2a344; border-color: transparent; }
+.bs-row-icon.evento { background: rgba(46,204,113,0.10); color: #2ecc71; border-color: transparent; }
+.bs-row-info { min-width: 0; }
+.bs-row-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; line-height: 1.35; }
+.bs-row-title mark { background: rgba(77,184,255,0.20); color: var(--text); padding: 0 3px; border-radius: 3px; font-weight: 700; }
+.bs-row-snippet { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-bottom: 4px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.bs-row-snippet mark { background: rgba(77,184,255,0.16); color: var(--text); padding: 0 2px; border-radius: 2px; }
+.bs-row-meta { display: flex; gap: 10px; flex-wrap: wrap; font-size: 11px; color: var(--text-faint); align-items: center; }
+.bs-row-meta-dot { color: var(--divider); }
+.bs-row-badge { padding: 3px 8px; font-size: 10px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; border-radius: 4px; flex-shrink: 0; }
+.bs-row-badge.continuing { background: var(--blue-realce); color: white; }
+.bs-row-badge.your { background: rgba(210,163,68,0.15); color: #b8862e; }
+.bs-row-badge.unread { background: rgba(243,156,18,0.12); color: #f39c12; }
+.bs-row-badge.testimonial { background: rgba(46,204,113,0.10); color: #2ecc71; }
+.bs-row-badge.you-tag { background: rgba(77,184,255,0.18); color: var(--blue-realce); }
+
+/* ─── EMPTY HISTORY ─── */
+.bs-history { padding: 16px 18px; background: var(--bg-card); border: 1px dashed var(--divider); border-radius: 10px; margin-bottom: 24px; }
+.bs-history-h { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+.bs-history-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.bs-history-chip { padding: 5px 11px; background: var(--bg); border: 1px solid var(--divider); border-radius: 99px; font-size: 12px; color: var(--text-muted); cursor: pointer; transition: all 150ms; }
+.bs-history-chip:hover { border-color: var(--blue-realce); color: var(--blue-realce); }
+.bs-history-chip .icon { width: 11px !important; height: 11px !important; opacity: 0.6; margin-right: 4px; vertical-align: middle; }
+
+/* ─── MOBILE ─── */
+@media (max-width: 700px) {
+  .bs-hero { padding: 22px 20px; }
+  .bs-search-input { font-size: 16px; }
+  .bs-hero-meta { gap: 12px; flex-wrap: wrap; }
+  .bs-row { padding: 12px 14px; gap: 12px; grid-template-columns: 40px minmax(0, 1fr); }
+  .bs-row-badge { grid-column: 1 / -1; justify-self: start; margin-top: 4px; }
+  .bs-row-icon { width: 40px; height: 40px; }
+}
+</style>
+</head>
+<body data-persona-aware="cross-context" data-active-mode="hub">
+
+<button class="mobile-fab" data-sidebar-mobile-toggle aria-label="Menu"><i data-icon="menu" class="icon"></i></button>
+<div class="drawer-backdrop" data-sidebar-mobile-toggle></div>
+
+<div class="app">
+
+  <aside class="sidebar">
+    <a href="hub.html" class="sidebar-brand"><img src="hmc-logo.png" alt="" class="brand-mark-img"><div><div class="brand-text">High Mentor Club</div><div class="brand-sub">Curated by Paulo Vieira · MMXXVI</div></div></a>
+    <div class="mode-switch">
+      <a href="hub.html" class="mode-switch-item" data-short="H"><i data-icon="home" class="icon"></i><span>Hub</span></a>
+      <a href="10-clube/01-dashboard.html" class="mode-switch-item" data-short="C"><i data-icon="landmark" class="icon"></i><span>Clube</span></a>
+      <a href="20-mentor/studio-home.html" class="mode-switch-item" data-short="S"><i data-icon="briefcase" class="icon"></i><span>Studio</span></a>
+      <a href="30-mentorado/biblioteca.html" class="mode-switch-item" data-short="E"><i data-icon="book-open" class="icon"></i><span>Estudos</span></a>
+    </div>
+    <div class="sidebar-nav-scroll">
+      <div class="nav-section">
+        <a href="notifications.html" class="nav-item has-badge"><i data-icon="bell" class="icon icon-sm"></i>Avisos <span class="badge-count">12</span></a>
+        <a href="agenda.html" class="nav-item"><i data-icon="calendar" class="icon icon-sm"></i>Agenda</a>
+        <a href="buscar.html" class="nav-item active"><i data-icon="search" class="icon icon-sm"></i>Buscar<span class="nav-dot"></span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">— Atalhos</div>
+        <a href="10-clube/01-dashboard.html" class="nav-item"><i data-icon="home" class="icon icon-sm"></i>Sala do Membro</a>
+        <a href="20-mentor/studio-home.html" class="nav-item"><i data-icon="briefcase" class="icon icon-sm"></i>Studio</a>
+        <a href="30-mentorado/biblioteca.html" class="nav-item"><i data-icon="book-open" class="icon icon-sm"></i>Biblioteca</a>
+        <a href="40-curator/aprovacoes.html" class="nav-item has-badge"><i data-icon="shield" class="icon icon-sm"></i>Curator <span class="badge-count">3</span></a>
+      </div>
+    </div>
+    <div class="sidebar-footer-v3">
+      <a href="account.html" class="user-pill-v3"><div class="avatar-sm">LV</div><div><div class="user-pill-v3-name">Lucas Vieira</div><div class="user-pill-v3-role">Seat 12</div></div></a>
+      <button class="sidebar-toggle-btn" data-sidebar-toggle><i data-icon="chevron-left" class="icon"></i><span>Recolher menu</span></button>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div class="page-head" style="margin-bottom: 24px;">
+      <div class="page-head-text">
+        <div class="page-eyebrow"><span class="gold-rule"></span><span class="page-eyebrow-text">Busca global · Meilisearch</span></div>
+        <h1 class="page-title">Buscar <span class="page-title-serif-italic">em tudo</span>.</h1>
+        <p class="page-sub">Mentores, mentorias, aulas, mensagens, notas, eventos · tudo o que você tem acesso. RLS aplicado por padrão.</p>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <div class="bs-hero">
+      <div class="bs-search-wrap">
+        <i data-icon="search" class="icon icon-lg" style="color: var(--text-muted);"></i>
+        <input type="search" class="bs-search-input" value="P&L" autofocus placeholder="Digite uma busca · mentores, aulas, mensagens...">
+        <button class="bs-clear" aria-label="Limpar"><i data-icon="x" class="icon icon-sm"></i></button>
+        <span class="bs-kbd">⌘K</span>
+      </div>
+      <div class="bs-hero-meta">
+        <span class="bs-hero-meta-item"><i data-icon="check" class="icon"></i> <strong style="color: var(--text);">12 resultados</strong> em ~80ms</span>
+        <span class="bs-hero-meta-item"><i data-icon="shield-check" class="icon"></i> RLS filtra por papel</span>
+        <span class="bs-hero-meta-item"><i data-icon="bookmark" class="icon"></i> <a href="buscar.html" style="color: var(--blue-realce);">Salvar esta busca</a></span>
+      </div>
+    </div>
+
+    <!-- BUSCAS RECENTES (quando vazio mostraria isso; aqui mostro como complemento) -->
+    <div class="bs-history">
+      <div class="bs-history-h">
+        <span>— Buscas recentes</span>
+        <a href="buscar.html" style="color: var(--text-muted); text-decoration: none; font-weight: 600; text-transform: none; letter-spacing: 0; font-size: 11px;">Limpar histórico</a>
+      </div>
+      <div class="bs-history-chips">
+        <button class="bs-history-chip"><i data-icon="clock" class="icon"></i>P&amp;L</button>
+        <button class="bs-history-chip"><i data-icon="clock" class="icon"></i>Renata Mendes</button>
+        <button class="bs-history-chip"><i data-icon="clock" class="icon"></i>Cross-Floor</button>
+        <button class="bs-history-chip"><i data-icon="clock" class="icon"></i>Council 14 nov</button>
+        <button class="bs-history-chip"><i data-icon="clock" class="icon"></i>Mariana Souza</button>
+        <button class="bs-history-chip"><i data-icon="clock" class="icon"></i>módulo 03</button>
+      </div>
+    </div>
+
+    <!-- SCOPE PILLS -->
+    <div class="bs-scope">
+      <button class="bs-pill active"><i data-icon="bell" class="icon"></i>Tudo<span class="bs-pill-count">12</span></button>
+      <button class="bs-pill"><i data-icon="film" class="icon"></i>Aulas<span class="bs-pill-count">4</span></button>
+      <button class="bs-pill"><i data-icon="message-circle" class="icon"></i>Mensagens<span class="bs-pill-count">3</span></button>
+      <button class="bs-pill"><i data-icon="user" class="icon"></i>Mentores<span class="bs-pill-count">2</span></button>
+      <button class="bs-pill"><i data-icon="bookmark" class="icon"></i>Notas<span class="bs-pill-count">2</span></button>
+      <button class="bs-pill"><i data-icon="calendar" class="icon"></i>Eventos<span class="bs-pill-count">1</span></button>
+    </div>
+
+    <div class="bs-layout">
+
+      <!-- FILTROS LATERAIS -->
+      <aside class="bs-sidefilter">
+
+        <div class="bs-side-card">
+          <div class="bs-side-h">— Onde</div>
+          <label class="bs-side-row"><input type="checkbox" checked><span class="bs-side-row-label">Estudos</span><span class="bs-side-row-count">5</span></label>
+          <label class="bs-side-row"><input type="checkbox" checked><span class="bs-side-row-label">Studio</span><span class="bs-side-row-count">4</span></label>
+          <label class="bs-side-row"><input type="checkbox" checked><span class="bs-side-row-label">Clube</span><span class="bs-side-row-count">2</span></label>
+          <label class="bs-side-row"><input type="checkbox"><span class="bs-side-row-label">Público</span><span class="bs-side-row-count">1</span></label>
+        </div>
+
+        <div class="bs-side-card">
+          <div class="bs-side-h">— Quando</div>
+          <label class="bs-side-row"><input type="radio" name="when" checked><span class="bs-side-row-label">Qualquer época</span></label>
+          <label class="bs-side-row"><input type="radio" name="when"><span class="bs-side-row-label">Últimas 24h</span></label>
+          <label class="bs-side-row"><input type="radio" name="when"><span class="bs-side-row-label">Última semana</span></label>
+          <label class="bs-side-row"><input type="radio" name="when"><span class="bs-side-row-label">Último mês</span></label>
+        </div>
+
+        <div class="bs-side-card">
+          <div class="bs-side-h">— Estado</div>
+          <label class="bs-side-row"><input type="checkbox"><span class="bs-side-row-label">Não lido</span><span class="bs-side-row-count">1</span></label>
+          <label class="bs-side-row"><input type="checkbox"><span class="bs-side-row-label">Em progresso</span><span class="bs-side-row-count">1</span></label>
+          <label class="bs-side-row"><input type="checkbox"><span class="bs-side-row-label">Meus conteúdos</span><span class="bs-side-row-count">5</span></label>
+        </div>
+
+        <button class="btn btn-outline btn-sm w-full"><i data-icon="x" class="icon icon-sm"></i><span style="margin-left:6px">Limpar filtros</span></button>
+
+      </aside>
+
+      <!-- RESULTADOS -->
+      <div>
+
+        <!-- AULAS -->
+        <section class="bs-group">
+          <div class="bs-group-head">
+            <div class="bs-group-title">
+              <span class="bs-group-name"><span class="bs-group-icon" style="background: var(--blue-realce-muted); color: var(--blue-realce);"><i data-icon="film" class="icon icon-sm"></i></span> Aulas</span>
+            </div>
+            <span class="bs-group-count">4 de 4</span>
+          </div>
+
+          <a href="30-mentorado/player.html" class="bs-row">
+            <div class="bs-row-icon aula"><i data-icon="play" class="icon"></i></div>
+            <div class="bs-row-info">
+              <div class="bs-row-title">Como pensar <mark>P&amp;L</mark> sendo gerente</div>
+              <div class="bs-row-snippet">"...quando você vira gerente, <mark>P&amp;L</mark> deixa de ser planilha do CFO e vira sua narrativa pessoal de impacto. As 3 perguntas que mudam a conversa com o board..."</div>
+              <div class="bs-row-meta">
+                <span>Renata Mendes</span><span class="bs-row-meta-dot">·</span>
+                <span>Módulo 03 · Aula 02</span><span class="bs-row-meta-dot">·</span>
+                <span>24:11</span><span class="bs-row-meta-dot">·</span>
+                <span>parou em 12:43</span>
+              </div>
+            </div>
+            <span class="bs-row-badge continuing">Continuando</span>
+          </a>
+
+          <a href="20-mentor/aulas-biblioteca.html" class="bs-row">
+            <div class="bs-row-icon aula"><i data-icon="play" class="icon"></i></div>
+            <div class="bs-row-info">
+              <div class="bs-row-title"><mark>P&amp;L</mark> 101 para não-financeiros</div>
+              <div class="bs-row-snippet">"Aula introdutória sobre <mark>P&amp;L</mark>. Vamos dividir em receita, custo direto, despesas, EBITDA. Sem fórmula mágica, foco em entender o que cada linha conta..."</div>
+              <div class="bs-row-meta">
+                <span>Sua aula</span><span class="bs-row-meta-dot">·</span>
+                <span>Vieira de Liderança · M03 A01</span><span class="bs-row-meta-dot">·</span>
+                <span>26:11</span><span class="bs-row-meta-dot">·</span>
+                <span>142 views</span>
+              </div>
+            </div>
+            <span class="bs-row-badge your">Sua aula</span>
+          </a>
+
+          <a href="20-mentor/aulas-biblioteca.html" class="bs-row">
+            <div class="bs-row-icon aula"><i data-icon="play" class="icon"></i></div>
+            <div class="bs-row-info">
+              <div class="bs-row-title">Como apresentar <mark>P&amp;L</mark> pro board</div>
+              <div class="bs-row-snippet">"O board não quer ver número. Quer ver narrativa. Esta aula é sobre como contar a história do trimestre através do <mark>P&amp;L</mark> em 3 slides..."</div>
+              <div class="bs-row-meta">
+                <span>Sua aula</span><span class="bs-row-meta-dot">·</span>
+                <span>Vieira · M03 A05</span><span class="bs-row-meta-dot">·</span>
+                <span>19:32</span>
+              </div>
+            </div>
+            <span class="bs-row-badge your">Sua aula</span>
+          </a>
+
+          <a href="00-public/mentor-public.html" class="bs-row">
+            <div class="bs-row-icon aula"><i data-icon="play" class="icon"></i></div>
+            <div class="bs-row-info">
+              <div class="bs-row-title">Workshop <mark>P&amp;L</mark> para gerentes</div>
+              <div class="bs-row-snippet">"Curso intensivo de 3 semanas focado em <mark>P&amp;L</mark> aplicado pra gestores que precisam apresentar números mas não vieram de finance..."</div>
+              <div class="bs-row-meta">
+                <span>Seu programa secundário</span><span class="bs-row-meta-dot">·</span>
+                <span>14 aulas</span><span class="bs-row-meta-dot">·</span>
+                <span>R$ 2.400</span>
+              </div>
+            </div>
+            <span class="bs-row-badge your">Seu</span>
+          </a>
+        </section>
+
+        <!-- MENSAGENS -->
+        <section class="bs-group">
+          <div class="bs-group-head">
+            <div class="bs-group-title">
+              <span class="bs-group-name"><span class="bs-group-icon" style="background: rgba(168,230,255,0.18); color: var(--blue-realce);"><i data-icon="message-circle" class="icon icon-sm"></i></span> Mensagens em comunidades</span>
+            </div>
+            <span class="bs-group-count">3 de 3</span>
+          </div>
+
+          <a href="30-mentorado/comunidade-canal.html" class="bs-row">
+            <div class="bs-row-icon mentor">PA</div>
+            <div class="bs-row-info">
+              <div class="bs-row-title">"Galera, alguém já fez o exercício de decompor o <mark>P&amp;L</mark>..."</div>
+              <div class="bs-row-snippet">"...da própria área? Tô patinando — meu time não tem rateio claro de overhead e tô gastando 3h pra produzir 1 número defensável."</div>
+              <div class="bs-row-meta">
+                <span>Pedro Almeida</span><span class="bs-row-meta-dot">·</span>
+                <span>#dúvidas-módulo-3</span><span class="bs-row-meta-dot">·</span>
+                <span>você foi marcado</span><span class="bs-row-meta-dot">·</span>
+                <span>há 1h</span>
+              </div>
+            </div>
+            <span class="bs-row-badge unread">Não lida</span>
+          </a>
+
+          <a href="30-mentorado/comunidade-canal.html" class="bs-row">
+            <div class="bs-row-icon mentor">MS</div>
+            <div class="bs-row-info">
+              <div class="bs-row-title">"Pedro, solução prática pra teu bloqueio de <mark>P&amp;L</mark>..."</div>
+              <div class="bs-row-snippet">"...em vez de buscar rateio perfeito, divide overhead pelo nº de heads na sua área proporcional ao orçamento total. (overhead × seu orçamento / total)..."</div>
+              <div class="bs-row-meta">
+                <span>Mariana Souza</span><span class="bs-row-meta-dot">·</span>
+                <span>#dúvidas-módulo-3</span><span class="bs-row-meta-dot">·</span>
+                <span>há 35min</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="00-public/mentor-public.html" class="bs-row">
+            <div class="bs-row-icon mentor">PS</div>
+            <div class="bs-row-info">
+              <div class="bs-row-title">"Frame do <mark>P&amp;L</mark> mudou tudo. Comecei a falar a língua do board..."</div>
+              <div class="bs-row-snippet">"Antes do programa eu tinha medo de apresentar pra C-level. Agora não só apresento, como conduzo. Lucas, obrigada."</div>
+              <div class="bs-row-meta">
+                <span>Patrícia Soares</span><span class="bs-row-meta-dot">·</span>
+                <span>depoimento público</span><span class="bs-row-meta-dot">·</span>
+                <span>há 12 dias</span>
+              </div>
+            </div>
+            <span class="bs-row-badge testimonial">Depoimento</span>
+          </a>
+        </section>
+
+        <!-- MENTORES -->
+        <section class="bs-group">
+          <div class="bs-group-head">
+            <div class="bs-group-title">
+              <span class="bs-group-name"><span class="bs-group-icon" style="background: var(--blue-realce-muted); color: var(--blue-realce);"><i data-icon="user" class="icon icon-sm"></i></span> Mentores</span>
+            </div>
+            <span class="bs-group-count">2 de 2</span>
+          </div>
+
+          <a href="00-public/mentor-public.html" class="bs-row">
+            <div class="bs-row-icon mentor">LV</div>
+            <div class="bs-row-info">
+              <div class="bs-row-title">Lucas Vieira · Vieira de Liderança</div>
+              <div class="bs-row-snippet">"Mentor de C-level e diretores sêniores. Foco em <mark>P&amp;L</mark>, narrativa de impacto, gestão de stakeholders críticos. <mark>P&amp;L</mark> aparece em 4 aulas suas + 2 sessões 1:1."</div>
+              <div class="bs-row-meta">
+                <span>Tier II</span><span class="bs-row-meta-dot">·</span>
+                <span>Seat 12</span><span class="bs-row-meta-dot">·</span>
+                <span>42 mentorados ativos</span>
+              </div>
+            </div>
+            <span class="bs-row-badge you-tag">Você</span>
+          </a>
+
+          <a href="00-public/mentor-public.html" class="bs-row">
+            <div class="bs-row-icon mentor">FA</div>
+            <div class="bs-row-info">
+              <div class="bs-row-title">Felipe Aragão · Aragão Negócios</div>
+              <div class="bs-row-snippet">"Family office + análise de <mark>P&amp;L</mark> consolidada multi-empresa. Foco em founders com 2+ empresas."</div>
+              <div class="bs-row-meta">
+                <span>Tier II</span><span class="bs-row-meta-dot">·</span>
+                <span>Seat 24</span>
+              </div>
+            </div>
+          </a>
+        </section>
+
+        <!-- NOTAS -->
+        <section class="bs-group">
+          <div class="bs-group-head">
+            <div class="bs-group-title">
+              <span class="bs-group-name"><span class="bs-group-icon" style="background: rgba(210,163,68,0.12); color: #d2a344;"><i data-icon="bookmark" class="icon icon-sm"></i></span> Suas notas</span>
+            </div>
+            <span class="bs-group-count">2 de 2</span>
+          </div>
+
+          <a href="30-mentorado/notas.html" class="bs-row">
+            <div class="bs-row-icon nota"><i data-icon="bookmark" class="icon"></i></div>
+            <div class="bs-row-info">
+              <div class="bs-row-title">"60% do que eu achava que era lucro era margem de contribuição"</div>
+              <div class="bs-row-snippet">"Renata abriu a minha cabeça nessa sessão. Eu confundia <mark>P&amp;L</mark> com fluxo de caixa há 5 anos. Anotar pra trazer pra próxima conversa com CFO."</div>
+              <div class="bs-row-meta">
+                <span>Sua nota</span><span class="bs-row-meta-dot">·</span>
+                <span>Sessão 1:1 com Renata</span><span class="bs-row-meta-dot">·</span>
+                <span>há 8 dias</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="30-mentorado/notas.html" class="bs-row">
+            <div class="bs-row-icon nota"><i data-icon="bookmark" class="icon"></i></div>
+            <div class="bs-row-info">
+              <div class="bs-row-title">Framework 3 perguntas <mark>P&amp;L</mark> pro board</div>
+              <div class="bs-row-snippet">"1. Margem ou volume? 2. Receita ou caixa? 3. Cliente novo ou cliente atual? Esse trio destrava decisão executiva em 25 min."</div>
+              <div class="bs-row-meta">
+                <span>Sua nota</span><span class="bs-row-meta-dot">·</span>
+                <span>Aula 02 · M03</span><span class="bs-row-meta-dot">·</span>
+                <span>há 12 dias</span>
+              </div>
+            </div>
+          </a>
+        </section>
+
+        <!-- EVENTOS -->
+        <section class="bs-group">
+          <div class="bs-group-head">
+            <div class="bs-group-title">
+              <span class="bs-group-name"><span class="bs-group-icon" style="background: rgba(46,204,113,0.10); color: #2ecc71;"><i data-icon="calendar" class="icon icon-sm"></i></span> Eventos</span>
+            </div>
+            <span class="bs-group-count">1 de 1</span>
+          </div>
+
+          <a href="agenda.html" class="bs-row">
+            <div class="bs-row-icon evento"><i data-icon="calendar" class="icon"></i></div>
+            <div class="bs-row-info">
+              <div class="bs-row-title">Hotseat · caso de <mark>P&amp;L</mark> deteriorado</div>
+              <div class="bs-row-snippet">"André Castelo apresenta caso real de turnaround financeiro de empresa do portfolio. Discussão aberta após a apresentação."</div>
+              <div class="bs-row-meta">
+                <span>HMC Council mensal</span><span class="bs-row-meta-dot">·</span>
+                <span>10 jun · 20h</span><span class="bs-row-meta-dot">·</span>
+                <span>Online</span>
+              </div>
+            </div>
+            <span class="bs-row-badge testimonial">Council</span>
+          </a>
+        </section>
+
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+
+<div class="wf-note">Buscar · Meilisearch</div>
+
+</body>
+</html>

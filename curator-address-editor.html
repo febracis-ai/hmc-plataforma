@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curator's Address · Editor · PV</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_shared.css?v=16">
+<script src="_icons.js?v=16" defer></script>
+<script src="_modals.js?v=16" defer></script>
+<script src="_persona.js?v=16" defer></script>
+<style>
+.ed-layout { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 24px; align-items: start; }
+@media (max-width: 1100px) { .ed-layout { grid-template-columns: minmax(0, 1fr); } .ed-side { order: -1; } }
+.ed-side { display: flex; flex-direction: column; gap: 14px; position: sticky; top: 16px; }
+@media (max-width: 1100px) { .ed-side { position: static; } }
+
+.ed-side-card { padding: 18px 20px; background: var(--bg-card); border: 1px solid var(--divider); border-radius: 12px; }
+.ed-side-h { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 12px; }
+
+.ed-paper { background: var(--bg-card); border: 1px solid var(--divider); border-radius: 16px; padding: 48px 56px; }
+.ed-meta-row { display: flex; gap: 12px; align-items: center; padding-bottom: 18px; margin-bottom: 24px; border-bottom: 1px solid var(--divider); flex-wrap: wrap; }
+.ed-status { padding: 4px 10px; border-radius: 4px; font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+.ed-status.draft { background: rgba(243,156,18,0.10); color: #f39c12; }
+.ed-meta-pill { display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; background: var(--bg); border: 1px solid var(--divider); border-radius: 99px; font-size: 12px; color: var(--text-muted); }
+.ed-meta-pill .icon { width: 12px !important; height: 12px !important; opacity: 0.7; }
+
+.ed-input-meta { width: 100%; border: none; background: transparent; font-family: inherit; padding: 8px 0; color: var(--text); outline: none; }
+.ed-input-meta.eyebrow { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #d2a344; font-weight: 700; margin-bottom: 12px; padding: 4px 0; }
+.ed-input-meta.title { font-family: 'Playfair Display', serif; font-size: 38px; font-weight: 500; letter-spacing: -0.025em; line-height: 1.1; margin-bottom: 20px; }
+.ed-input-meta.subtitle { font-family: 'Playfair Display', serif; font-style: italic; font-size: 17px; color: var(--text-muted); margin-bottom: 24px; padding: 4px 0; }
+.ed-input-meta:focus { background: rgba(168,230,255,0.04); border-radius: 4px; padding-left: 8px; padding-right: 8px; }
+
+.ed-toolbar { display: flex; gap: 4px; padding: 8px; background: var(--bg); border: 1px solid var(--divider); border-radius: 10px; margin-bottom: 14px; flex-wrap: wrap; position: sticky; top: 12px; z-index: 10; }
+.ed-tool { width: 32px; height: 32px; border-radius: 6px; background: transparent; border: none; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; font-family: inherit; font-size: 13px; }
+.ed-tool:hover { background: var(--bg-card-hover); color: var(--text); }
+.ed-tool.active { background: var(--blue-realce-muted); color: var(--blue-realce); }
+.ed-tool-divider { width: 1px; height: 22px; background: var(--divider); margin: 5px 4px; }
+
+.ed-body { font-family: 'Inter', sans-serif; font-size: 17px; line-height: 1.75; color: var(--text); min-height: 320px; padding: 8px; border-radius: 6px; outline: none; }
+.ed-body:focus { background: rgba(168,230,255,0.02); }
+.ed-body p { margin-bottom: 22px; }
+.ed-body p:first-of-type::first-letter { font-family: 'Playfair Display', serif; font-size: 64px; line-height: 1; float: left; margin: 6px 14px 0 0; color: var(--blue-realce); font-weight: 500; }
+.ed-body blockquote { font-family: 'Playfair Display', serif; font-style: italic; font-size: 22px; line-height: 1.55; margin: 28px 0; padding-left: 22px; border-left: 3px solid var(--blue-realce); }
+
+.ed-action-bar { display: flex; gap: 10px; padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--divider); border-radius: 12px; margin-bottom: 18px; align-items: center; flex-wrap: wrap; position: sticky; bottom: 12px; z-index: 5; }
+.ed-action-bar-info { font-size: 12px; color: var(--text-muted); margin-right: auto; }
+.ed-action-bar-info strong { color: var(--text); }
+
+.ed-archive-card { padding: 14px 16px; background: var(--bg); border: 1px solid var(--divider); border-radius: 10px; margin-bottom: 8px; cursor: pointer; transition: all 150ms; }
+.ed-archive-card:hover { border-color: var(--blue-realce); }
+.ed-archive-card.active { border-color: var(--blue-realce); background: var(--blue-realce-muted); }
+.ed-archive-month { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 3px; }
+.ed-archive-title { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 500; line-height: 1.35; }
+</style>
+</head>
+<body data-persona-aware="cross-context" data-active-mode="hub-pv">
+
+<button class="mobile-fab" data-sidebar-mobile-toggle aria-label="Menu"><i data-icon="menu" class="icon"></i></button>
+<div class="drawer-backdrop" data-sidebar-mobile-toggle></div>
+
+<div class="app">
+  <aside class="sidebar">
+    <a href="hub-pv.html" class="sidebar-brand"><img src="hmc-logo.png" alt="" class="brand-mark-img"><div><div class="brand-text">High Mentor Club</div><div class="brand-sub">Curated by Paulo Vieira · MMXXVI</div></div></a>
+    <div class="mode-switch">
+      <a href="hub-pv.html" class="mode-switch-item" data-short="H"><i data-icon="home" class="icon"></i><span>Hub</span></a>
+      <a href="10-clube/01-dashboard.html" class="mode-switch-item" data-short="C"><i data-icon="landmark" class="icon"></i><span>Clube</span></a>
+      <a href="40-curator/aprovacoes.html" class="mode-switch-item active" data-short="X"><i data-icon="shield-check" class="icon"></i><span>Curator</span></a>
+    </div>
+    <div class="sidebar-nav-scroll">
+      <div class="nav-section">
+        <a href="notifications.html" class="nav-item has-badge"><i data-icon="bell" class="icon icon-sm"></i>Avisos <span class="badge-count">4</span></a>
+        <a href="agenda.html" class="nav-item"><i data-icon="calendar" class="icon icon-sm"></i>Agenda</a>
+        <a href="buscar.html" class="nav-item"><i data-icon="search" class="icon icon-sm"></i>Buscar</a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">— Curadoria PV</div>
+        <a href="curator-address-editor.html" class="nav-item active"><i data-icon="mic" class="icon icon-sm"></i>Address (editor)<span class="nav-dot"></span></a>
+        <a href="antechamber-pv.html" class="nav-item has-badge"><i data-icon="lock" class="icon icon-sm"></i>Antechamber <span class="badge-count">6</span></a>
+        <a href="40-curator/codex-publishing.html" class="nav-item"><i data-icon="book" class="icon icon-sm"></i>Codex publishing</a>
+        <a href="40-curator/aprovacoes.html" class="nav-item has-badge"><i data-icon="shield-check" class="icon icon-sm"></i>Aprovações <span class="badge-count">3</span></a>
+      </div>
+    </div>
+    <div class="sidebar-footer-v3">
+      <a href="account.html" class="user-pill-v3"><div class="avatar-sm" style="background: linear-gradient(135deg, var(--blue-deep), var(--blue-realce)); color: var(--blue-highlight);">PV</div><div><div class="user-pill-v3-name">Paulo Vieira</div><div class="user-pill-v3-role">The Curator · Founder</div></div></a>
+      <button class="sidebar-toggle-btn" data-sidebar-toggle><i data-icon="chevron-left" class="icon"></i><span>Recolher menu</span></button>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div class="page-head">
+      <div class="page-head-text">
+        <div class="page-eyebrow"><span class="gold-rule"></span><span class="page-eyebrow-text">Curator's Address · Editor exclusivo</span></div>
+        <h1 class="page-title">Sua <span class="page-title-serif-italic">próxima carta</span>.</h1>
+        <p class="page-sub">Endereçada ao Inner Council · publicação mensal · só você escreve. Auto-save a cada 30 segundos.</p>
+      </div>
+    </div>
+
+    <div class="ed-layout">
+
+      <div>
+
+        <!-- Action bar -->
+        <div class="ed-action-bar">
+          <div class="ed-action-bar-info">Auto-save · <strong>há 12 segundos</strong> · 6 parágrafos · 542 palavras · ~14 min leitura</div>
+          <button class="btn btn-outline btn-sm"><i data-icon="external" class="icon icon-sm"></i><span style="margin-left:6px">Pré-visualizar</span></button>
+          <button class="btn btn-outline btn-sm"><i data-icon="upload" class="icon icon-sm"></i><span style="margin-left:6px">Gravar áudio</span></button>
+          <button class="btn btn-chrome btn-sm"><i data-icon="send" class="icon icon-sm"></i><span style="margin-left:6px">Publicar</span></button>
+        </div>
+
+        <!-- Editor toolbar -->
+        <div class="ed-toolbar">
+          <button class="ed-tool" title="Negrito"><strong>B</strong></button>
+          <button class="ed-tool active" title="Itálico"><em>I</em></button>
+          <button class="ed-tool" title="Underline"><span style="text-decoration: underline;">U</span></button>
+          <div class="ed-tool-divider"></div>
+          <button class="ed-tool" title="H2">H</button>
+          <button class="ed-tool" title="Lista"><i data-icon="hash" class="icon icon-sm"></i></button>
+          <button class="ed-tool" title="Citação">"</button>
+          <div class="ed-tool-divider"></div>
+          <button class="ed-tool" title="Link"><i data-icon="link" class="icon icon-sm"></i></button>
+          <button class="ed-tool" title="Imagem"><i data-icon="camera" class="icon icon-sm"></i></button>
+          <button class="ed-tool" title="Divisor">—</button>
+          <div class="ed-tool-divider"></div>
+          <button class="ed-tool" title="Voltar"><i data-icon="chevron-left" class="icon icon-sm"></i></button>
+          <button class="ed-tool" title="Avançar"><i data-icon="chevron-right" class="icon icon-sm"></i></button>
+        </div>
+
+        <!-- Paper / canvas -->
+        <div class="ed-paper">
+          <div class="ed-meta-row">
+            <span class="ed-status draft">Rascunho · julho 2026</span>
+            <span class="ed-meta-pill"><i data-icon="lock" class="icon"></i> Tier III only</span>
+            <span class="ed-meta-pill"><i data-icon="clock" class="icon"></i> Publica em 5 dias</span>
+            <span class="ed-meta-pill"><i data-icon="users" class="icon"></i> 6 leitores</span>
+          </div>
+
+          <input class="ed-input-meta eyebrow" type="text" value="— Curator's Address · Julho 2026">
+          <input class="ed-input-meta title" type="text" value="O que The House não viu.">
+          <input class="ed-input-meta subtitle" type="text" placeholder="Subtítulo opcional..." value="Três lições da primeira peregrinação que ainda não viraram regra rasa.">
+
+          <div class="ed-body" contenteditable="true">
+            <p>A primeira peregrinação ensinou três coisas. Nenhuma delas está no Codex ainda. Algumas talvez nunca devam estar — escrever uma lição forte ao mesmo tempo a achata. Mas vou tentar pelo menos colocar a primeira em palavras, e deixar as outras pra meses futuros.</p>
+
+            <p>Quando começamos a desenhar The House, eu pensei que o filtro seria o desafio físico — caminhar, dormir mal, comer no chão. Estava errado. O filtro foi outro: <em>conviver sem agenda</em>. Foi a primeira vez em décadas que treze adultos de alta performance ficaram juntos quatro dias sem reunião pra puxar.</p>
+
+            <blockquote>Quem está acostumado a curar ambiente fica desconfortável quando ninguém cura o seu. Esse desconforto é o filtro.</blockquote>
+
+            <p>Vocês viram acontecer. Marcelo, que coordena três conselhos diariamente, no segundo dia não sabia o que fazer com as próprias mãos depois do almoço. Carlos verbalizou: "estou com vontade de inventar uma pauta só pra ter o que segurar". Foi exatamente o que eu não queria.</p>
+
+            <p>A lição é estrutural: o clube precisa preservar — não só permitir, <strong>preservar</strong> — espaços onde a curadoria de PV não está presente também. Onde vocês não são convocados pra cumprir nada. Onde a única tarefa é a presença de vocês com vocês mesmos.</p>
+
+            <p>Por isso vou propor mudança no formato de The Bridge desta vez. Vou tirar 30% da minha programação. Vou abrir esses blocos como "tempo morto curado" — sem mim, sem pauta, sem registro. Quero ver como vocês os preenchem...</p>
+
+            <p style="opacity: 0.4; font-style: italic;">[continuar escrevendo aqui...]</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SIDEBAR · arquivo + metadata -->
+      <aside class="ed-side">
+
+        <div class="ed-side-card">
+          <div class="ed-side-h">— Metadados desta carta</div>
+          <div style="font-size: 13px; line-height: 1.7;">
+            <div style="display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid var(--divider);"><span class="muted">Versão</span><span><strong>v4 · rascunho</strong></span></div>
+            <div style="display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid var(--divider);"><span class="muted">Última edição</span><span><strong>há 12 seg</strong></span></div>
+            <div style="display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid var(--divider);"><span class="muted">Publicação</span><span><strong>15 jul · 06h</strong></span></div>
+            <div style="display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid var(--divider);"><span class="muted">Distribuição</span><span><strong>Tier III · 6 membros</strong></span></div>
+            <div style="display: flex; justify-content: space-between; padding: 5px 0;"><span class="muted">Áudio narrado</span><span style="color: #f39c12;"><strong>Pendente</strong></span></div>
+          </div>
+        </div>
+
+        <div class="ed-side-card">
+          <div class="ed-side-h">— Arquivo · cartas anteriores</div>
+          <div class="ed-archive-card">
+            <div class="ed-archive-month">Junho 2026 · publicada</div>
+            <div class="ed-archive-title">Sobre o filtro e a porta</div>
+          </div>
+          <div class="ed-archive-card">
+            <div class="ed-archive-month">Maio 2026 · publicada</div>
+            <div class="ed-archive-title">Cross-Floor e a linguagem da casa</div>
+          </div>
+          <div class="ed-archive-card">
+            <div class="ed-archive-month">Abril 2026 · publicada</div>
+            <div class="ed-archive-title">Quando dizer não</div>
+          </div>
+          <div class="ed-archive-card">
+            <div class="ed-archive-month">Março 2026 · publicada</div>
+            <div class="ed-archive-title">O que aprendi nas três primeiras peregrinações</div>
+          </div>
+          <a href="10-clube/curator-address.html" style="display: block; margin-top: 12px; font-size: 12px; color: var(--blue-realce); font-weight: 600;">Ver arquivo completo →</a>
+        </div>
+
+        <div class="ed-side-card" style="border-left: 3px solid #d2a344;">
+          <div class="ed-side-h" style="color: #d2a344;">— Lembrete</div>
+          <p style="font-size: 12px; line-height: 1.6; color: var(--text-muted); margin-bottom: 12px;">Address é exclusivamente sua. Não pode ser editada pelo Curator team. Auto-publish é desligado por padrão — você confirma manualmente.</p>
+          <p style="font-size: 11px; color: var(--text-faint);">Audit log · cada edição gera entry em <a href="40-curator/logs.html" style="color: var(--blue-realce);">/logs</a>.</p>
+        </div>
+
+      </aside>
+
+    </div>
+
+  </main>
+</div>
+<div class="wf-note">Curator's Address · Editor PV</div>
+</body>
+</html>

@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lucas Vieira · Mentor HMC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../_shared.css?v=16">
+  <script src="../_icons.js?v=16" defer></script>
+  <style>
+    /* Header minimal igual ao catalog */
+    .top-nav.liquid-glass.minimal .top-nav-inner {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+    }
+    .nav-back-group { display: inline-flex; gap: 8px; }
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.78);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      transition: all 220ms;
+    }
+    .nav-back:hover {
+      background: rgba(77,184,255,0.10);
+      border-color: rgba(77,184,255,0.30);
+      color: var(--blue-highlight);
+    }
+    .nav-back.primary {
+      background: rgba(77,184,255,0.08);
+      border-color: rgba(77,184,255,0.20);
+      color: var(--blue-highlight);
+    }
+    .nav-center { display: flex; align-items: center; gap: 12px; justify-content: center; }
+    .nav-center img {
+      width: 36px; height: 36px;
+      object-fit: contain;
+     
+    }
+    .nav-center-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px; font-weight: 500;
+      color: white; letter-spacing: -0.01em;
+    }
+    .nav-right { justify-self: end; }
+
+    /* Hero do mentor com mais espaço pro nav fixed */
+    .mentor-hero-pad { padding-top: 140px; }
+
+    /* Sections dark */
+    .m-section { padding: 64px 56px; max-width: 1240px; margin: 0 auto; }
+    .m-section-eyebrow { font-size: 10px; color: var(--blue-highlight); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 600; }
+    .m-section-title { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 500; letter-spacing: -0.025em; color: white; margin-top: 6px; }
+    .m-section-sub { font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 6px; }
+
+    /* Surface dark */
+    .m-surface {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 32px;
+    }
+
+    /* Pricing dark */
+    .pricing-dark {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 36px;
+      transition: all 220ms;
+    }
+    .pricing-dark.featured {
+      background: rgba(77,184,255,0.06);
+      border-color: var(--blue-realce);
+      box-shadow: 0 0 0 4px rgba(77,184,255,0.10);
+      position: relative;
+    }
+    .pricing-dark-tag {
+      position: absolute; top: -12px; left: 24px;
+      background: var(--blue-realce); color: white;
+      padding: 5px 14px; border-radius: 999px;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+    }
+    .pricing-title-d { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; color: white; margin-bottom: 8px; }
+    .pricing-amount-d { font-family: 'Playfair Display', serif; font-size: 52px; font-weight: 500; letter-spacing: -0.04em; line-height: 1; color: white; margin-bottom: 4px; font-variant-numeric: tabular-nums; }
+    .pricing-amount-d sup { font-size: 18px; margin-right: 4px; color: rgba(255,255,255,0.50); }
+    .pricing-period-d { font-size: 12px; color: rgba(255,255,255,0.55); margin-bottom: 24px; }
+    .pricing-features-d { list-style: none; padding: 0; margin: 24px 0; }
+    .pricing-features-d li {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 13px; color: rgba(255,255,255,0.78);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .pricing-features-d li::before {
+      content: '✓'; color: var(--blue-highlight); font-weight: 700;
+    }
+
+    /* Video card dark */
+    .vc-dark {
+      flex: 0 0 280px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 220ms;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .vc-dark:hover {
+      background: rgba(77,184,255,0.05);
+      border-color: rgba(77,184,255,0.25);
+      transform: translateY(-2px);
+    }
+    .vc-thumb-d {
+      height: 160px;
+      background: linear-gradient(135deg, var(--blue-realce) 0%, var(--blue-chrome) 100%);
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .vc-thumb-d::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at top right, rgba(77,184,255,0.20) 0%, transparent 60%);
+    }
+    .vc-play-d {
+      position: relative; z-index: 1;
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.40);
+      border: 1px solid rgba(255,255,255,0.30);
+      display: flex; align-items: center; justify-content: center;
+      color: white; backdrop-filter: blur(4px);
+    }
+    .vc-dur-d {
+      position: absolute; bottom: 8px; right: 8px;
+      background: rgba(0,0,0,0.70); color: white;
+      font-size: 10px; font-weight: 600;
+      padding: 3px 8px; border-radius: 4px;
+      z-index: 1;
+    }
+    .vc-meta-d { padding: 16px; }
+    .vc-title-d { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 500; color: white; margin-bottom: 4px; line-height: 1.35; }
+    .vc-info-d { font-size: 11px; color: rgba(255,255,255,0.55); }
+
+    /* Depoimento dark */
+    .test-dark {
+      padding: 28px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+    }
+
+    /* Botão na hero (já fica visível por btn-chrome) */
+  </style>
+</head>
+<body style="background: var(--blue-deep); color: white;">
+
+<!-- HEADER MINIMAL · 2 voltas + logo central -->
+<nav class="top-nav liquid-glass minimal" id="topNav">
+  <div class="top-nav-inner">
+    <div class="nav-back-group">
+      <a href="../landing.html" class="nav-back">← Home</a>
+      <a href="catalog.html" class="nav-back primary" id="backBtn">Lista de mentores</a>
+    </div>
+    <a href="../landing.html" class="nav-center" style="text-decoration: none;">
+      <img src="../hmc-logo.png" alt="HMC">
+      <span class="nav-center-text">High Mentor Club</span>
+    </a>
+    <div class="nav-right"></div>
+  </div>
+</nav>
+
+<script>
+  // Scroll glass intensify
+  const nav = document.getElementById('topNav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+
+  // Smart back: se veio do catálogo, destaca "Lista de mentores";
+  // se veio direto da landing/externo, destaca "Home"
+  const referrer = document.referrer || '';
+  const homeBtn = document.querySelector('.nav-back:not(.primary)');
+  const listBtn = document.getElementById('backBtn');
+  if (!referrer.includes('catalog')) {
+    // Came from landing or direct: reorder priority
+    homeBtn.classList.add('primary');
+    listBtn.classList.remove('primary');
+  }
+</script>
+
+<!-- HERO DO MENTOR -->
+<section class="mentor-hero mentor-hero-pad">
+  <div class="mentor-hero-inner">
+    <div>
+      <div class="eyebrow" style="color: var(--blue-highlight); margin-bottom: 16px;">— Tier II · Seat 12 · Founding Member</div>
+      <h1 style="font-family: 'Playfair Display', serif; font-size: 64px; font-weight: 500; letter-spacing: -0.04em; line-height: 1.02; color: white; margin-bottom: 20px;">
+        Lucas <span class="serif-italic">Vieira</span>
+      </h1>
+      <p style="font-size: 18px; line-height: 1.55; color: rgba(255,255,255,0.70); max-width: 560px; margin-bottom: 32px;">
+        Mentoria Vieira de Liderança. Especialista em transformar gerentes técnicos em executivos sênior. 42 mentorados ativos, 11 anos de carreira corporativa antes da mentoria.
+      </p>
+      <div style="display: flex; gap: 12px;">
+        <a href="checkout.html" class="btn btn-chrome">Quero a mentoria</a>
+        <button class="btn btn-outline" style="background: transparent; border-color: rgba(255,255,255,0.20); color: white;">Conversar antes</button>
+      </div>
+      <div style="margin-top: 32px; display: flex; gap: 32px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.10);">
+        <div>
+          <div style="font-family: 'Playfair Display', serif; font-size: 28px; color: white; font-weight: 500;">4,9★</div>
+          <div style="font-size: 11px; color: rgba(255,255,255,0.55); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; margin-top: 4px;">387 reviews</div>
+        </div>
+        <div>
+          <div style="font-family: 'Playfair Display', serif; font-size: 28px; color: white; font-weight: 500;">42</div>
+          <div style="font-size: 11px; color: rgba(255,255,255,0.55); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; margin-top: 4px;">mentorados ativos</div>
+        </div>
+        <div>
+          <div style="font-family: 'Playfair Display', serif; font-size: 28px; color: white; font-weight: 500;">11 anos</div>
+          <div style="font-size: 11px; color: rgba(255,255,255,0.55); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; margin-top: 4px;">carreira corp</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="width: 240px; height: 320px; background: linear-gradient(135deg, var(--blue-realce) 0%, var(--blue-chrome) 100%); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 96px; color: var(--blue-highlight); font-weight: 500; border: 1px solid rgba(77,184,255,0.30);">LV</div>
+    </div>
+  </div>
+</section>
+
+<!-- AULAS NETFLIX (dark) -->
+<section class="m-section">
+  <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px;">
+    <div>
+      <div class="m-section-eyebrow">— Aulas disponíveis (preview)</div>
+      <div class="m-section-title">O método em ação</div>
+      <div class="m-section-sub">3 aulas grátis. A biblioteca completa libera após inscrição.</div>
+    </div>
+  </div>
+
+  <div class="video-row">
+    <div class="vc-dark">
+      <div class="vc-thumb-d">
+        <div class="vc-play-d"><i data-icon="play" class="icon icon-md"></i></div>
+        <div class="vc-dur-d">14:32</div>
+      </div>
+      <div class="vc-meta-d">
+        <div class="vc-title-d">A diferença entre gerente e executivo</div>
+        <div class="vc-info-d">Módulo 01 · Aula gratuita</div>
+      </div>
+    </div>
+    <div class="vc-dark">
+      <div class="vc-thumb-d">
+        <div class="vc-play-d"><i data-icon="play" class="icon icon-md"></i></div>
+        <div class="vc-dur-d">22:08</div>
+      </div>
+      <div class="vc-meta-d">
+        <div class="vc-title-d">O erro de quem foca em performance</div>
+        <div class="vc-info-d">Módulo 01 · Aula gratuita</div>
+      </div>
+    </div>
+    <div class="vc-dark">
+      <div class="vc-thumb-d">
+        <div class="vc-play-d"><i data-icon="play" class="icon icon-md"></i></div>
+        <div class="vc-dur-d">18:45</div>
+      </div>
+      <div class="vc-meta-d">
+        <div class="vc-title-d">Mapa de stakeholders sênior</div>
+        <div class="vc-info-d">Módulo 02 · Aula gratuita</div>
+      </div>
+    </div>
+    <div class="vc-dark" style="opacity: 0.55;">
+      <div class="vc-thumb-d">
+        <div class="vc-play-d"><i data-icon="lock" class="icon icon-md"></i></div>
+        <div class="vc-dur-d">24:11</div>
+      </div>
+      <div class="vc-meta-d">
+        <div class="vc-title-d">Como pensar P&amp;L sendo gerente</div>
+        <div class="vc-info-d">Módulo 03 · Trancada</div>
+      </div>
+    </div>
+    <div class="vc-dark" style="opacity: 0.55;">
+      <div class="vc-thumb-d">
+        <div class="vc-play-d"><i data-icon="lock" class="icon icon-md"></i></div>
+        <div class="vc-dur-d">19:53</div>
+      </div>
+      <div class="vc-meta-d">
+        <div class="vc-title-d">Negociação com C-level</div>
+        <div class="vc-info-d">Módulo 03 · Trancada</div>
+      </div>
+    </div>
+    <div class="vc-dark" style="opacity: 0.55;">
+      <div class="vc-thumb-d">
+        <div class="vc-play-d"><i data-icon="lock" class="icon icon-md"></i></div>
+        <div class="vc-dur-d">31:20</div>
+      </div>
+      <div class="vc-meta-d">
+        <div class="vc-title-d">Sua marca dentro da empresa</div>
+        <div class="vc-info-d">Módulo 04 · Trancada</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ESTRUTURA DA MENTORIA + INCLUSOS -->
+<section class="m-section">
+  <div class="grid grid-12-8" style="gap: 32px;">
+    <div class="m-surface" style="padding: 40px;">
+      <div class="m-section-eyebrow">— A jornada completa</div>
+      <h2 class="m-section-title" style="margin-bottom: 24px;">12 meses · 8 módulos · 64 aulas</h2>
+
+      <div style="padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; gap: 16px;">
+        <div>
+          <div style="display: flex; gap: 10px; margin-bottom: 4px; align-items: center;">
+            <span style="font-family: 'Playfair Display', serif; font-size: 18px; color: var(--blue-highlight); font-weight: 600;">01</span>
+            <span style="font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 500; color: white;">Posicionamento sênior</span>
+          </div>
+          <div style="color: rgba(255,255,255,0.55); font-size: 12px; margin-top: 4px;">8 aulas · 2 hotseats · 1 sessão 1:1 · 3 semanas</div>
+        </div>
+        <span style="color: rgba(255,255,255,0.40); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">Mês 1</span>
+      </div>
+
+      <div style="padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; gap: 16px;">
+        <div>
+          <div style="display: flex; gap: 10px; margin-bottom: 4px; align-items: center;">
+            <span style="font-family: 'Playfair Display', serif; font-size: 18px; color: var(--blue-highlight); font-weight: 600;">02</span>
+            <span style="font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 500; color: white;">Influência sem autoridade</span>
+          </div>
+          <div style="color: rgba(255,255,255,0.55); font-size: 12px; margin-top: 4px;">10 aulas · 2 hotseats · 1 sessão 1:1 · 4 semanas</div>
+        </div>
+        <span style="color: rgba(255,255,255,0.40); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">Mês 2</span>
+      </div>
+
+      <div style="padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; gap: 16px;">
+        <div>
+          <div style="display: flex; gap: 10px; margin-bottom: 4px; align-items: center;">
+            <span style="font-family: 'Playfair Display', serif; font-size: 18px; color: var(--blue-highlight); font-weight: 600;">03</span>
+            <span style="font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 500; color: white;">Mentalidade de P&amp;L</span>
+          </div>
+          <div style="color: rgba(255,255,255,0.55); font-size: 12px; margin-top: 4px;">9 aulas · 3 hotseats · 1 sessão 1:1 · 4 semanas</div>
+        </div>
+        <span style="color: rgba(255,255,255,0.40); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">Mês 3-4</span>
+      </div>
+
+      <div style="padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; gap: 16px;">
+        <div>
+          <div style="display: flex; gap: 10px; margin-bottom: 4px; align-items: center;">
+            <span style="font-family: 'Playfair Display', serif; font-size: 18px; color: var(--blue-highlight); font-weight: 600;">04</span>
+            <span style="font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 500; color: white;">Negociação com C-level</span>
+          </div>
+          <div style="color: rgba(255,255,255,0.55); font-size: 12px; margin-top: 4px;">8 aulas · 2 hotseats · 1 sessão 1:1 · 4 semanas</div>
+        </div>
+        <span style="color: rgba(255,255,255,0.40); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">Mês 5-6</span>
+      </div>
+
+      <div style="padding: 18px 0; display: flex; justify-content: space-between; align-items: center; gap: 16px;">
+        <div>
+          <div style="display: flex; gap: 10px; margin-bottom: 4px; align-items: center;">
+            <span style="font-family: 'Playfair Display', serif; font-size: 18px; color: var(--blue-highlight); font-weight: 600;">05–08</span>
+            <span style="font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 500; color: white;">Especializações (à escolha)</span>
+          </div>
+          <div style="color: rgba(255,255,255,0.55); font-size: 12px; margin-top: 4px;">29 aulas · 12 hotseats · 4 sessões 1:1 · 24 semanas</div>
+        </div>
+        <span style="color: rgba(255,255,255,0.40); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">Mês 7-12</span>
+      </div>
+    </div>
+
+    <div class="m-surface">
+      <div class="m-section-eyebrow">— O que está incluso</div>
+      <ul class="pricing-features-d" style="margin: 16px 0 0;">
+        <li>64 aulas em vídeo HD (Mux player)</li>
+        <li>8 sessões 1:1 com Lucas</li>
+        <li>24 hotseats em grupo</li>
+        <li>Acesso à comunidade do mentor</li>
+        <li>Material complementar PDF</li>
+        <li>Certificado de conclusão verificável</li>
+        <li>Suporte direto via Antechamber privada</li>
+        <li>Selo "Mentorado de Vieira" no LinkedIn</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="m-section">
+  <div style="margin-bottom: 32px;">
+    <div class="m-section-eyebrow">— Investimento</div>
+    <div class="m-section-title">Duas formas <span class="serif-italic">de entrar</span></div>
+  </div>
+
+  <div class="grid grid-2" style="gap: 32px;">
+    <div class="pricing-dark">
+      <div class="pricing-title-d">À vista</div>
+      <div class="pricing-amount-d"><sup>R$</sup>68.000</div>
+      <div class="pricing-period-d">Pagamento único · acesso vitalício</div>
+      <ul class="pricing-features-d">
+        <li>Acesso completo aos 8 módulos</li>
+        <li>Vitalício · sem renovação</li>
+        <li>10% de desconto vs. parcelado</li>
+      </ul>
+      <a href="checkout.html" class="btn btn-outline w-full" style="margin-top: 16px; background: transparent; border-color: rgba(255,255,255,0.20); color: white;">Pagar via CISPay</a>
+    </div>
+
+    <div class="pricing-dark featured">
+      <div class="pricing-dark-tag">Mais escolhido</div>
+      <div class="pricing-title-d">Parcelado</div>
+      <div class="pricing-amount-d"><sup>R$</sup>6.800<span style="font-size: 18px; color: rgba(255,255,255,0.55); font-weight: 400;">/mês</span></div>
+      <div class="pricing-period-d">12× sem juros · cartão ou boleto</div>
+      <ul class="pricing-features-d">
+        <li>Acesso completo aos 8 módulos</li>
+        <li>Liberação progressiva por módulo</li>
+        <li>Reembolso garantido em 7 dias</li>
+      </ul>
+      <a href="checkout.html" class="btn btn-chrome w-full" style="margin-top: 16px;">Iniciar inscrição</a>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section class="m-section">
+  <div style="margin-bottom: 32px;">
+    <div class="m-section-eyebrow">— Quem já passou por aqui</div>
+    <div class="m-section-title">387 reviews <span class="serif-italic">verificados</span></div>
+  </div>
+
+  <div class="grid grid-3" style="gap: 20px;">
+    <div class="test-dark">
+      <div style="font-size: 12px; color: var(--blue-highlight); margin-bottom: 12px;">★★★★★</div>
+      <p style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 17px; line-height: 1.55; margin-bottom: 20px; color: rgba(255,255,255,0.88);">"Em 8 meses passei de gerente sênior a diretor regional. O Lucas não vende motivação, vende mapa."</p>
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--blue-realce); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-family: 'Playfair Display', serif;">MR</div>
+        <div>
+          <div style="font-weight: 600; font-size: 13px; color: white;">Mariana Rocha</div>
+          <div style="color: rgba(255,255,255,0.55); font-size: 11px;">Diretora Regional · BTG</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="test-dark">
+      <div style="font-size: 12px; color: var(--blue-highlight); margin-bottom: 12px;">★★★★★</div>
+      <p style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 17px; line-height: 1.55; margin-bottom: 20px; color: rgba(255,255,255,0.88);">"Saí do operacional puro e entrei numa estrutura de C-level com 80% mais salário. Vale cada centavo."</p>
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--blue-realce); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-family: 'Playfair Display', serif;">DC</div>
+        <div>
+          <div style="font-weight: 600; font-size: 13px; color: white;">Daniel Coutinho</div>
+          <div style="color: rgba(255,255,255,0.55); font-size: 11px;">CFO · Cogna Educação</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="test-dark">
+      <div style="font-size: 12px; color: var(--blue-highlight); margin-bottom: 12px;">★★★★★</div>
+      <p style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 17px; line-height: 1.55; margin-bottom: 20px; color: rgba(255,255,255,0.88);">"Frame do P&amp;L mudou tudo. Comecei a falar a língua do board e fui ouvida."</p>
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--blue-realce); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-family: 'Playfair Display', serif;">PS</div>
+        <div>
+          <div style="font-weight: 600; font-size: 13px; color: white;">Patrícia Soares</div>
+          <div style="color: rgba(255,255,255,0.55); font-size: 11px;">VP Operations · Magazine Luiza</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="m-section" style="padding-bottom: 96px;">
+  <div style="padding: 56px; background: rgba(77,184,255,0.06); border: 1px solid var(--blue-chrome-translucent); border-radius: 20px; text-align: center; position: relative; overflow: hidden;">
+    <div style="position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(77,184,255,0.12) 0%, transparent 60%); pointer-events: none;"></div>
+    <div style="position: relative; z-index: 1;">
+      <div style="font-size: 10px; color: var(--blue-highlight); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 600; margin-bottom: 12px;">— Pronto pra começar?</div>
+      <h3 style="font-family: 'Playfair Display', serif; font-size: 40px; font-weight: 500; letter-spacing: -0.03em; color: white; line-height: 1.1; margin-bottom: 16px; max-width: 540px; margin-left: auto; margin-right: auto;">
+        12 meses depois, <span class="serif-italic">você é outra pessoa.</span>
+      </h3>
+      <p style="color: rgba(255,255,255,0.65); font-size: 14px; max-width: 480px; margin: 0 auto 28px; line-height: 1.65;">
+        Pagamento via CISPay. Acesso liberado na hora. Primeira sessão 1:1 agendada na semana de boas-vindas.
+      </p>
+      <a href="checkout.html" class="btn btn-chrome btn-lg" style="padding: 18px 40px;">Iniciar inscrição via CISPay →</a>
+    </div>
+  </div>
+</section>
+
+<footer style="padding: 32px 56px; border-top: 1px solid var(--divider-on-dark); text-align: center;">
+  <div style="font-size: 10px; color: rgba(255,255,255,0.40); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 600;">Excelência · Conexão · Impacto · MMXXVI</div>
+</footer>
+
+<div class="wf-note">Público · Landing Mentor</div>
+
+</body>
+</html>

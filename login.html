@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entrar · HMC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_shared.css?v=16">
+  <script src="_icons.js?v=16" defer></script>
+</head>
+<body>
+
+<div class="auth-shell">
+
+  <!-- LATERAL DARK COM SELO -->
+  <div class="auth-side">
+    <a href="landing.html" style="display: flex; align-items: center; gap: 12px; color: white; text-decoration: none;">
+      <img src="hmc-logo.png" alt="" style="width: 36px; height: 36px;">
+      <span style="font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 500;">High Mentor Club</span>
+    </a>
+
+    <div>
+      <div style="width: 48px; height: 1px; background: var(--blue-realce); margin-bottom: 20px;"></div>
+      <div style="font-size: 10px; color: var(--blue-highlight); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 600; margin-bottom: 16px;">— Bem-vindo de volta</div>
+      <h1 style="font-family: 'Playfair Display', serif; font-size: 56px; font-weight: 500; letter-spacing: -0.035em; line-height: 1.05; color: white; margin-bottom: 24px;">
+        Seu lugar, <span class="serif-italic">sua cadeira</span>.
+      </h1>
+      <p style="font-size: 15px; line-height: 1.6; color: var(--text-on-dark-muted); max-width: 380px;">
+        Mentor com Studio ativo, mentorado acompanhando programa, ou membro do clube: tudo está dentro da mesma porta.
+      </p>
+    </div>
+
+    <div style="font-size: 10px; color: var(--text-on-dark-faint); letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600;">Excelência · Conexão · Impacto</div>
+  </div>
+
+  <!-- FORM -->
+  <div class="auth-content">
+    <div class="auth-card">
+      <div style="margin-bottom: 32px;">
+        <div class="eyebrow-chrome" style="margin-bottom: 8px;">— Entrar</div>
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 500; letter-spacing: -0.025em;">Acesse a plataforma</h2>
+      </div>
+
+      <form>
+        <label class="auth-label">E-mail</label>
+        <input type="email" class="auth-input" placeholder="seu@email.com" value="lucas@vieiraleadership.com">
+
+        <label class="auth-label">Senha</label>
+        <input type="password" class="auth-input" placeholder="••••••••" value="passwordmasked">
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin: 8px 0 24px; font-size: 13px;">
+          <label style="display: flex; gap: 8px; align-items: center; cursor: pointer;">
+            <input type="checkbox" checked>
+            <span class="muted">Manter conectado</span>
+          </label>
+          <a href="forgot-password.html" class="muted" style="color: var(--blue-realce); font-weight: 500;">Esqueci a senha</a>
+        </div>
+
+        <a href="hub.html" class="btn btn-chrome w-full" style="padding: 14px;">Entrar →</a>
+
+        <div style="margin: 24px 0; display: flex; align-items: center; gap: 12px;">
+          <div style="flex: 1; height: 1px; background: var(--divider);"></div>
+          <span class="muted" style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">ou</span>
+          <div style="flex: 1; height: 1px; background: var(--divider);"></div>
+        </div>
+
+        <button type="button" class="btn btn-outline w-full" style="padding: 12px; margin-bottom: 12px;">Entrar com Google</button>
+        <button type="button" class="btn btn-outline w-full" style="padding: 12px;">Entrar com LinkedIn</button>
+
+        <div style="margin-top: 32px; text-align: center; font-size: 13px;" class="muted">
+          Ainda não tem conta? <a href="signup.html" style="color: var(--blue-realce); font-weight: 600;">Iniciar candidatura</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

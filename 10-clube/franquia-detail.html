@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>São Paulo · Jardins · Franquia do ecossistema PV · HMC Bridge</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_shared.css?v=16"><script src="../_icons.js?v=16" defer></script>
+<script src="../_modals.js?v=16" defer></script>
+<script src="../_persona.js?v=16" defer></script>
+<script>document.addEventListener("DOMContentLoaded",()=>{if(window.HMC_PERSONA&&window.HMC_PERSONA.applyTierAwareSidebar)window.HMC_PERSONA.applyTierAwareSidebar();});</script>
+<style>
+.f-hero { background: linear-gradient(135deg, #050A15 0%, #0A1530 60%, #102b5e 100%); border-radius: 20px; padding: 48px 52px; margin-bottom: 32px; color: white; position: relative; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 36px; align-items: center; }
+.f-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 80% 0%, rgba(168,230,255,0.18) 0%, transparent 60%); pointer-events: none; }
+.f-flag-big { width: 220px; height: 220px; border-radius: 26px; background: linear-gradient(135deg, var(--blue-realce), var(--blue-chrome)); display: flex; align-items: center; justify-content: center; color: var(--blue-highlight); font-family: 'Playfair Display', serif; font-size: 76px; font-weight: 500; box-shadow: 0 24px 60px rgba(10,21,48,0.40); position: relative; z-index: 1; margin: 0 auto; }
+.f-status-pill { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: rgba(46,204,113,0.20); border: 1px solid rgba(46,204,113,0.45); color: #2ecc71; border-radius: 100px; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; margin-bottom: 18px; }
+.kpi-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-bottom: 32px; }
+.kpi-card { padding: 22px; background: var(--bg-card); border: 1px solid var(--divider); border-radius: 12px; }
+.kpi-label { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 8px; }
+.kpi-val { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 500; letter-spacing: -0.02em; }
+.kpi-trend { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+.mentorado-row { display: grid; grid-template-columns: 44px minmax(0, 1fr) 120px auto; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--divider); align-items: center; }
+.mentorado-row:last-child { border-bottom: none; }
+.mentorado-avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--blue-realce-muted); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px; }
+.indication-tag { font-size: 10px; padding: 3px 8px; border-radius: 4px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; display: inline-block; }
+.indication-tag.in-progress { background: rgba(243,156,18,0.15); color: #f39c12; }
+.indication-tag.converted { background: rgba(46,204,113,0.15); color: #2ecc71; }
+.indication-tag.declined { background: rgba(229,83,83,0.15); color: #FF8888; }
+@media (max-width: 900px) { .f-hero { grid-template-columns: 1fr; } .kpi-row { grid-template-columns: repeat(2, 1fr); } }
+</style>
+</head>
+<body data-persona-aware="mode-page" data-mode-context="clube" data-required-mode="clube">
+<button class="mobile-fab" data-sidebar-mobile-toggle aria-label="Menu"><i data-icon="menu" class="icon"></i></button>
+<div class="drawer-backdrop" data-sidebar-mobile-toggle></div>
+<div class="app">
+<aside class="sidebar">
+  <a href="../hub.html" class="sidebar-brand"><img src="../hmc-logo.png" alt="" class="brand-mark-img"><div><div class="brand-text">High Mentor Club</div><div class="brand-sub">Curated by Paulo Vieira · MMXXVI</div></div></a>
+  <div class="mode-switch">
+    <a href="../hub.html" class="mode-switch-item" data-short="H"><i data-icon="home" class="icon"></i><span>Hub</span></a>
+    <a href="../10-clube/01-dashboard.html" class="mode-switch-item active" data-short="C"><i data-icon="landmark" class="icon"></i><span>Clube</span></a>
+    <a href="../20-mentor/studio-home.html" class="mode-switch-item" data-short="S"><i data-icon="briefcase" class="icon"></i><span>Studio</span></a>
+    <a href="../30-mentorado/biblioteca.html" class="mode-switch-item" data-short="E"><i data-icon="book-open" class="icon"></i><span>Estudos</span></a>
+  </div>
+  <div class="sidebar-nav-scroll">
+    <div class="nav-section">
+      <a href="../notifications.html" class="nav-item has-badge"><i data-icon="bell" class="icon icon-sm"></i>Avisos <span class="badge-count">12</span></a>
+      <a href="../agenda.html" class="nav-item"><i data-icon="calendar" class="icon icon-sm"></i>Agenda</a>
+      <a href="../buscar.html" class="nav-item"><i data-icon="search" class="icon icon-sm"></i>Buscar</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">— A Plataforma</div>
+      <a href="01-dashboard.html" class="nav-item"><i data-icon="home" class="icon icon-sm"></i>Sala do Membro</a>
+      <a href="02-calendar.html" class="nav-item"><i data-icon="users" class="icon icon-sm"></i>Council</a>
+      <a href="03-codex.html" class="nav-item"><i data-icon="book" class="icon icon-sm"></i>Codex</a>
+      <a href="04-cross-floor.html" class="nav-item"><i data-icon="compass" class="icon icon-sm"></i>Cross-Floor</a>
+      <a href="05-yield.html" class="nav-item"><i data-icon="dollar" class="icon icon-sm"></i>Yield</a>
+      <a href="06-pilgrimages.html" class="nav-item"><i data-icon="map-pin" class="icon icon-sm"></i>Pilgrimages</a>
+      <a href="07-seal.html" class="nav-item"><i data-icon="award" class="icon icon-sm"></i>Selo</a>
+      <a href="perfil-tier.html" class="nav-item"><i data-icon="shield" class="icon icon-sm"></i>Meu Tier</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">— Tier III · Sovereign Mentor</div>
+      <a href="quatro-motores.html" class="nav-item"><i data-icon="zap" class="icon icon-sm"></i>Os Quatro Motores</a>
+      <a href="antechamber.html" class="nav-item"><i data-icon="lock" class="icon icon-sm"></i>Antechamber</a>
+      <a href="curator-address.html" class="nav-item"><i data-icon="mic" class="icon icon-sm"></i>Curator's Address</a>
+      <a href="bridge.html" class="nav-item active"><i data-icon="link" class="icon icon-sm"></i>The Bridge<span class="nav-dot"></span></a>
+    </div>
+  </div>
+  <div class="sidebar-footer-v3">
+    <a href="../account.html" class="user-pill-v3"><div class="avatar-sm">LV</div><div><div class="user-pill-v3-name">Lucas Vieira</div><div class="user-pill-v3-role">Seat 12 · Tier II</div></div></a>
+    <button class="sidebar-toggle-btn" data-sidebar-toggle><i data-icon="chevron-left" class="icon"></i><span>Recolher menu</span></button>
+  </div>
+</aside>
+
+<main class="main">
+
+  <div style="display: flex; gap: 8px; font-size: 12px; color: var(--text-muted); margin-bottom: 16px;"><a href="bridge.html" class="muted">The Bridge</a><span class="faint">/</span><span style="color: var(--text);">São Paulo · Jardins</span></div>
+
+  <div class="f-hero">
+    <div style="position: relative; z-index: 1;">
+      <div class="f-status-pill"><i data-icon="check" class="icon icon-sm"></i> Aceita indicações · 8 vagas</div>
+      <div style="font-size: 11px; color: var(--blue-highlight); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; margin-bottom: 12px;">— Franquia do ecossistema PV</div>
+      <h1 style="font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 500; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 14px;">São Paulo · <span class="serif-italic" style="background: linear-gradient(135deg, #A8E6FF, #4DB8FF); -webkit-background-clip: text; background-clip: text; color: transparent;">Jardins</span></h1>
+      <p style="font-size: 15px; line-height: 1.6; color: rgba(255,255,255,0.72); margin-bottom: 20px; max-width: 520px;">Franqueado: <strong style="color: white;">Carlos Ribeiro</strong> · Tier III HMC · franquia há 4 anos · sede na Alameda Lorena. Especialidade: executivos C-level de finance + healthcare premium.</p>
+      <div style="display: flex; gap: 18px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.12); font-size: 13px;">
+        <div><i data-icon="map-pin" class="icon icon-sm" style="display: inline-block; vertical-align: middle;"></i> SP · Jardins</div>
+        <div><i data-icon="calendar" class="icon icon-sm" style="display: inline-block; vertical-align: middle;"></i> Desde 2022</div>
+        <div><i data-icon="users" class="icon icon-sm" style="display: inline-block; vertical-align: middle;"></i> 42 mentorados ativos</div>
+      </div>
+    </div>
+    <div class="f-flag-big">SP</div>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi-card"><div class="kpi-label">— Vagas abertas</div><div class="kpi-val">8</div><div class="kpi-trend">de 50 lugares</div></div>
+    <div class="kpi-card"><div class="kpi-label">— Comissão HMC</div><div class="kpi-val">8%</div><div class="kpi-trend">sobre ticket convertido</div></div>
+    <div class="kpi-card"><div class="kpi-label">— Pagamento</div><div class="kpi-val">12×</div><div class="kpi-trend">parcelas mensais</div></div>
+    <div class="kpi-card"><div class="kpi-label">— Tempo médio close</div><div class="kpi-val">38 dias</div><div class="kpi-trend">indicação → assinatura</div></div>
+  </div>
+
+  <div class="grid grid-12-8 gap-loose">
+
+    <div class="flex-col gap-4">
+
+      <div class="surface" style="padding: 32px;">
+        <div class="eyebrow-chrome" style="margin-bottom: 16px;">— Suas indicações pra esta franquia</div>
+
+        <div class="mentorado-row">
+          <div class="mentorado-avatar">DC</div>
+          <div>
+            <div style="font-weight: 600;">Daniel Coutinho</div>
+            <div class="muted" style="font-size: 12px;">Indicado em 12 abr · em fase de close · pitch agendado 08 jun</div>
+          </div>
+          <div class="indication-tag in-progress">Em fechamento</div>
+          <button class="btn btn-secondary btn-sm">Ver →</button>
+        </div>
+
+        <div class="mentorado-row">
+          <div class="mentorado-avatar">JV</div>
+          <div>
+            <div style="font-weight: 600;">João Vasques</div>
+            <div class="muted" style="font-size: 12px;">Indicado em 28 mar · convertido em 02 mai · comissão R$ 8.4k</div>
+          </div>
+          <div class="indication-tag converted">Convertido</div>
+          <button class="btn btn-secondary btn-sm">Ver →</button>
+        </div>
+
+        <div class="mentorado-row">
+          <div class="mentorado-avatar">CN</div>
+          <div>
+            <div style="font-weight: 600;">Camila Nunes</div>
+            <div class="muted" style="font-size: 12px;">Indicada em 14 jan · convertida em 22 fev · comissão R$ 6.8k</div>
+          </div>
+          <div class="indication-tag converted">Convertido</div>
+          <button class="btn btn-secondary btn-sm">Ver →</button>
+        </div>
+
+        <div class="mentorado-row">
+          <div class="mentorado-avatar">RM</div>
+          <div>
+            <div style="font-weight: 600;">Rodrigo Marques</div>
+            <div class="muted" style="font-size: 12px;">Indicado em 18 fev · não converteu (perfil divergente do programa) · liberado</div>
+          </div>
+          <div class="indication-tag declined">Não convertido</div>
+          <button class="btn btn-secondary btn-sm">Ver →</button>
+        </div>
+
+      </div>
+
+      <div class="surface" style="padding: 32px;">
+        <div class="eyebrow-chrome" style="margin-bottom: 16px;">— Sobre o franqueado</div>
+        <div style="display: flex; gap: 18px; align-items: flex-start; padding-bottom: 20px; margin-bottom: 20px; border-bottom: 1px solid var(--divider);">
+          <div style="width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, var(--blue-deep), var(--blue-realce)); color: var(--blue-highlight); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 600; font-size: 22px; flex-shrink: 0;">CR</div>
+          <div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; margin-bottom: 4px;">Carlos Ribeiro</div>
+            <div class="muted" style="font-size: 12px; margin-bottom: 10px;">Tier III HMC · Seat 02 · Founding Member · franqueado do ecossistema PV desde 2022</div>
+            <div style="display: flex; gap: 8px;">
+              <span class="badge badge-accent">CFO ex-Itaú</span>
+              <span class="badge badge-accent">Board Vinci Partners</span>
+              <span class="badge badge-accent">FGV-EAESP</span>
+            </div>
+          </div>
+        </div>
+        <p style="font-size: 14px; line-height: 1.7; color: var(--text);">Carlos rodou a tese institutional sales por 15 anos antes de virar franqueado do ecossistema PV. Hoje atende preferencialmente executivos sêniores de instituições financeiras (CFO, COO, CRO) e médicos especialistas que querem transição pra board/conselho. <strong>Sweet spot:</strong> ticket médio R$ 14k-18k mensais por mentorado, programas de 12-18 meses.</p>
+      </div>
+
+      <div class="surface" style="padding: 32px;">
+        <div class="eyebrow-chrome" style="margin-bottom: 16px;">— Perfil ideal de indicação</div>
+        <ul style="list-style: none; padding: 0; font-size: 14px; line-height: 2; color: var(--text);">
+          <li>↳ C-level ou diretor sênior (≥ 8 anos no nível)</li>
+          <li>↳ Compensação total ≥ R$ 800k/ano</li>
+          <li>↳ Buscando transição de carreira ou expansão pra board</li>
+          <li>↳ Faixa etária 38-55</li>
+          <li>↳ Capacidade financeira pra programa 12-18m (R$ 200k-340k)</li>
+          <li>↳ Disponibilidade de 4h semanais</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="flex-col gap-4">
+
+      <div class="surface" style="padding: 28px;">
+        <div class="eyebrow-chrome" style="margin-bottom: 14px;">— Indicar mentorado</div>
+        <p class="muted" style="font-size: 12px; line-height: 1.55; margin-bottom: 16px;">Indique um mentorado do seu Studio. A franquia entra em contato com pitch da franquia. Comissão automática se converter.</p>
+        <a href="../20-mentor/mentorados.html" class="btn btn-chrome w-full" style="padding: 12px; margin-bottom: 8px;"><i data-icon="user-plus" class="icon icon-sm"></i> Indicar agora</a>
+        <a href="../30-mentorado/comunidade.html" class="btn btn-outline w-full" style="padding: 12px;">Falar c/ Carlos</a>
+      </div>
+
+      <div class="surface" style="padding: 24px;">
+        <div class="eyebrow-chrome" style="margin-bottom: 12px;">— Comissão acumulada</div>
+        <div style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 500; letter-spacing: -0.02em;">R$ 15.200</div>
+        <div class="muted" style="font-size: 12px; margin-top: 4px;">2 conversões · próximo crédito 05/jul</div>
+      </div>
+
+      <div class="surface" style="padding: 24px;">
+        <div class="eyebrow-chrome" style="margin-bottom: 12px;">— Próx janela check-in</div>
+        <div style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500;">15 jul · 16h</div>
+        <div class="muted" style="font-size: 12px; margin-top: 4px; line-height: 1.55;">Carlos abre 2 reuniões/mês pra Tier III alinhar pipeline de indicações</div>
+      </div>
+
+      <div class="surface" style="padding: 24px;">
+        <div class="eyebrow-chrome" style="margin-bottom: 12px;">— Outras franquias</div>
+        <a href="franquia-detail.html" class="muted" style="display: block; font-size: 13px; padding: 6px 0;">↳ Rio · Leblon</a>
+        <a href="franquia-detail.html" class="muted" style="display: block; font-size: 13px; padding: 6px 0;">↳ BH · Savassi</a>
+        <a href="franquia-detail.html" class="muted" style="display: block; font-size: 13px; padding: 6px 0;">↳ Recife · Boa Viagem</a>
+        <a href="bridge.html" style="display: block; font-size: 13px; padding: 6px 0; color: var(--blue-realce); font-weight: 600;">Ver todas →</a>
+      </div>
+
+    </div>
+
+  </div>
+
+</main>
+</div>
+<div class="wf-note">Clube · Bridge · Franquia SP-Jardins</div>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Membros ativos · HMC Curator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../_shared.css?v=16">
+  <script src="../_icons.js?v=16" defer></script>
+<script src="../_persona.js?v=16" defer></script>
+<script src="../_modals.js?v=16" defer></script>
+</head>
+<body data-persona-aware="mode-page" data-mode-context="curator" data-required-mode="curator">
+<button class="mobile-fab" data-sidebar-mobile-toggle aria-label="Menu"><i data-icon="menu" class="icon"></i></button>
+<div class="drawer-backdrop" data-sidebar-mobile-toggle></div>
+<div class="app">
+  <aside class="sidebar">
+    <a href="../hub.html" class="sidebar-brand"><img src="../hmc-logo.png" alt="" class="brand-mark-img"><div><div class="brand-text">High Mentor Club</div><div class="brand-sub">Curated by Paulo Vieira · MMXXVI</div></div></a>
+    <div class="mode-switch">
+    <a href="../hub-curator.html" class="mode-switch-item" data-short="H"><i data-icon="home" class="icon"></i><span>Hub</span></a>
+    <a href="aprovacoes.html" class="mode-switch-item active" data-short="X"><i data-icon="shield-check" class="icon"></i><span>Curator</span></a>
+  </div>
+    <div class="sidebar-nav-scroll">
+      <div class="nav-section">
+        <a href="../notifications.html" class="nav-item has-badge"><i data-icon="bell" class="icon icon-sm"></i>Avisos <span class="badge-count">7</span></a>
+        <a href="../agenda.html" class="nav-item"><i data-icon="calendar" class="icon icon-sm"></i>Agenda</a>
+        <a href="../buscar.html" class="nav-item"><i data-icon="search" class="icon icon-sm"></i>Buscar</a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">— Curadoria</div>
+        <a href="aprovacoes.html" class="nav-item has-badge"><i data-icon="shield-check" class="icon icon-sm"></i>Aprovações <span class="badge-count">3</span></a>
+        <a href="membros-ativos.html" class="nav-item active"><i data-icon="users" class="icon icon-sm"></i>Membros ativos<span class="nav-dot"></span></a>
+        <a href="tier-promotion.html" class="nav-item has-badge"><i data-icon="trending-up" class="icon icon-sm"></i>Promoções de Tier <span class="badge-count">5</span></a>
+        <a href="disputas-cross-floor.html" class="nav-item"><i data-icon="alert" class="icon icon-sm"></i>Disputas Cross-Floor</a>
+        <a href="moderacao.html" class="nav-item"><i data-icon="message" class="icon icon-sm"></i>Moderação</a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">— Negócio HMC</div>
+        <a href="financeiro-consolidado.html" class="nav-item"><i data-icon="dollar" class="icon icon-sm"></i>Financeiro</a>
+        <a href="yield-cis.html" class="nav-item"><i data-icon="trending-up" class="icon icon-sm"></i>Yield CIS</a>
+        <a href="analytics-clube.html" class="nav-item"><i data-icon="bar-chart" class="icon icon-sm"></i>Analytics</a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">— Operação</div>
+        <a href="council-admin.html" class="nav-item"><i data-icon="landmark" class="icon icon-sm"></i>Council (agenda)</a>
+        <a href="pilgrimages-admin.html" class="nav-item"><i data-icon="compass" class="icon icon-sm"></i>Pilgrimages</a>
+        <a href="codex-publishing.html" class="nav-item"><i data-icon="book" class="icon icon-sm"></i>Codex publishing</a>
+        <a href="antechamber-admin.html" class="nav-item"><i data-icon="mic" class="icon icon-sm"></i>Antechamber</a>
+        <a href="logs.html" class="nav-item"><i data-icon="file-text" class="icon icon-sm"></i>Logs</a>
+        <a href="suporte-admin.html" class="nav-item"><i data-icon="help" class="icon icon-sm"></i>Suporte</a>
+        <a href="config-admin.html" class="nav-item"><i data-icon="settings" class="icon icon-sm"></i>Configurações</a>
+      </div>
+    </div>
+    <div class="sidebar-footer-v3">
+      <a href="../account.html" class="user-pill-v3"><div class="avatar-sm">MC</div><div><div class="user-pill-v3-name">Michelle</div><div class="user-pill-v3-role">Time Curadoria</div></div></a>
+      <button class="sidebar-toggle-btn" data-sidebar-toggle><i data-icon="chevron-left" class="icon"></i><span>Recolher menu</span></button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="page-head">
+      <div class="page-head-text">
+        <div class="page-eyebrow"><span class="gold-rule"></span><span class="page-eyebrow-text">Curator · Membros</span></div>
+        <h1 class="page-title">Membros <span class="page-title-serif-italic">ativos</span> do clube.</h1>
+        <p class="page-sub">68 mentores HMC ativos · Tier I (24), Tier II (32), Tier III (12). Última admissão há 3 semanas.</p>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <button class="btn btn-outline btn-sm"><i data-icon="download" class="icon icon-sm"></i> Exportar</button>
+        <a href="aprovacoes.html" class="btn btn-chrome btn-sm"><i data-icon="user-plus" class="icon icon-sm"></i> Aprovar novos</a>
+      </div>
+    </div>
+
+    <div class="grid grid-4 mb-12" style="gap: 24px;">
+      <div class="stat-block"><div class="stat-eyebrow">— Total ativos</div><div class="stat-display">68</div><div class="stat-delta">↗ +3 últimos 90d</div></div>
+      <div class="stat-block"><div class="stat-eyebrow">— Tier III</div><div class="stat-display">12</div><div class="stat-delta">Founding · seats permanentes</div></div>
+      <div class="stat-block"><div class="stat-eyebrow">— Renovação Council</div><div class="stat-display">94%</div><div class="stat-delta">Aderência últimos 6 meses</div></div>
+      <div class="stat-block"><div class="stat-eyebrow">— Em observação</div><div class="stat-display">3</div><div class="stat-delta">Engajamento baixo · revisar</div></div>
+    </div>
+
+    <div style="display: flex; gap: 10px; margin-bottom: 20px; align-items: center; flex-wrap: wrap;">
+      <span class="filter-pill active" style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: var(--blue-realce); color: white; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer;">Todos · 68</span>
+      <span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: var(--bg-card); border: 1px solid var(--divider); color: var(--text-muted); font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer;">Tier I · 24</span>
+      <span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: var(--bg-card); border: 1px solid var(--divider); color: var(--text-muted); font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer;">Tier II · 32</span>
+      <span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: var(--bg-card); border: 1px solid var(--divider); color: var(--text-muted); font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer;">Tier III · 12</span>
+      <span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: rgba(200,68,43,0.10); border: 1px solid rgba(200,68,43,0.20); color: #C8442B; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer;">Em observação · 3</span>
+      <input type="search" class="search" placeholder="Buscar membro..." style="margin-left: auto; max-width: 280px;">
+    </div>
+
+    <div class="surface" style="padding: 0;">
+      <div style="display: grid; grid-template-columns: 48px 1fr 100px 120px 120px 130px auto; gap: 18px; padding: 14px 22px; border-bottom: 1px solid var(--divider); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">
+        <div></div><div>Membro</div><div>Tier</div><div>Seat</div><div>Mentorados</div><div>Última ativ.</div><div></div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 48px 1fr 100px 120px 120px 130px auto; gap: 18px; padding: 14px 22px; border-bottom: 1px solid var(--divider); align-items: center; font-size: 13px;">
+        <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--blue-realce); color: white; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 600; font-size: 13px;">LV</div>
+        <div><div style="font-weight: 600;">Lucas Vieira</div><div class="muted" style="font-size: 11px;">lucas@vieiraleadership.com · Fortaleza/CE</div></div>
+        <div><span class="badge badge-accent" style="font-size: 9px;">Tier II</span></div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-weight: 600;">#12</div>
+        <div>42</div>
+        <div class="muted" style="font-size: 12px;">Agora</div>
+        <button class="btn btn-secondary btn-sm">Perfil</button>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 48px 1fr 100px 120px 120px 130px auto; gap: 18px; padding: 14px 22px; border-bottom: 1px solid var(--divider); align-items: center; font-size: 13px;">
+        <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--blue-chrome); color: white; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 600; font-size: 13px;">RM</div>
+        <div><div style="font-weight: 600;">Renata Mendes</div><div class="muted" style="font-size: 11px;">renata@negociacao.com.br · São Paulo/SP</div></div>
+        <div><span class="badge badge-accent" style="font-size: 9px;">Tier II</span></div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-weight: 600;">#07</div>
+        <div>38</div>
+        <div class="muted" style="font-size: 12px;">há 1h</div>
+        <button class="btn btn-secondary btn-sm">Perfil</button>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 48px 1fr 100px 120px 120px 130px auto; gap: 18px; padding: 14px 22px; border-bottom: 1px solid var(--divider); align-items: center; font-size: 13px;">
+        <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--blue-realce), var(--blue-chrome)); color: var(--blue-highlight); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 600; font-size: 13px;">PV</div>
+        <div><div style="font-weight: 600;">Paulo Vieira <span class="badge" style="background: var(--blue-deep); color: var(--blue-highlight); font-size: 9px; margin-left: 4px;">The Curator</span></div><div class="muted" style="font-size: 11px;">pv@febracis.com.br · Founder</div></div>
+        <div><span class="badge badge-tier-3" style="font-size: 9px;">Tier III</span></div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-weight: 600;">#01</div>
+        <div>—</div>
+        <div class="muted" style="font-size: 12px;">há 4h</div>
+        <button class="btn btn-secondary btn-sm">Perfil</button>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 48px 1fr 100px 120px 120px 130px auto; gap: 18px; padding: 14px 22px; border-bottom: 1px solid var(--divider); align-items: center; font-size: 13px;">
+        <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--blue-realce); color: white; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 600; font-size: 13px;">AC</div>
+        <div><div style="font-weight: 600;">André Castelo</div><div class="muted" style="font-size: 11px;">andre@castelo.com · Belo Horizonte/MG</div></div>
+        <div><span class="badge" style="font-size: 9px;">Tier I</span></div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-weight: 600;">#34</div>
+        <div>18</div>
+        <div class="muted" style="font-size: 12px;">Ontem</div>
+        <button class="btn btn-secondary btn-sm">Perfil</button>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 48px 1fr 100px 120px 120px 130px auto; gap: 18px; padding: 14px 22px; align-items: center; font-size: 13px;">
+        <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--text-faint); color: white; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 600; font-size: 13px;">CB</div>
+        <div><div style="font-weight: 600;">Carlos Bandeira <span class="badge" style="background: rgba(200,68,43,0.10); color: #C8442B; font-size: 9px; margin-left: 4px;">Observação</span></div><div class="muted" style="font-size: 11px;">carlos@bandeira.com · Recife/PE · sem Council há 4 meses</div></div>
+        <div><span class="badge" style="font-size: 9px;">Tier I</span></div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-weight: 600;">#42</div>
+        <div>6</div>
+        <div class="muted" style="font-size: 12px; color: #C8442B;">há 47d</div>
+        <button class="btn btn-secondary btn-sm">Conversar</button>
+      </div>
+    </div>
+  </main>
+</div>
+<div class="wf-note">Curator · Membros ativos</div>
+</body>
+</html>

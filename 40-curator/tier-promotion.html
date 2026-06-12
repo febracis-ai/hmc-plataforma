@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Promoções de Tier · HMC Curator</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_shared.css?v=16"><script src="../_icons.js?v=16" defer></script>
+<script src="../_persona.js?v=16" defer></script>
+<script src="../_modals.js?v=16" defer></script>
+<style>
+.pipe-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 36px; }
+.pipe-col { padding: 22px; background: var(--bg-card); border: 1px solid var(--divider); border-radius: 14px; }
+.pipe-head { display: flex; justify-content: space-between; align-items: center; padding-bottom: 14px; margin-bottom: 16px; border-bottom: 1px solid var(--divider); }
+.pipe-h { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; color: var(--text); }
+.pipe-count { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 500; }
+.candidate-card { padding: 14px 16px; background: var(--bg); border: 1px solid var(--divider); border-radius: 10px; margin-bottom: 10px; display: block; text-decoration: none; color: inherit; transition: all 150ms; }
+.candidate-card:hover { border-color: var(--blue-realce); transform: translateY(-1px); }
+.candidate-row { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
+.candidate-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--blue-realce-muted); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 12px; flex-shrink: 0; }
+.candidate-name { font-weight: 600; font-size: 13px; }
+.candidate-meta { font-size: 11px; color: var(--text-muted); }
+.tier-transition { display: inline-flex; align-items: center; gap: 6px; margin-left: 8px; vertical-align: middle; }
+.tier-transition img { width: 22px; height: 22px; object-fit: contain; display: block; opacity: 0.85; }
+.tier-transition img.target { opacity: 1; filter: drop-shadow(0 2px 6px rgba(210,163,68,0.30)); }
+.tier-transition-arrow { color: var(--blue-realce); font-size: 11px; font-weight: 700; }
+.candidate-bar { height: 4px; background: var(--bg-card-hover); border-radius: 2px; overflow: hidden; margin-bottom: 8px; }
+.candidate-bar > div { height: 100%; background: var(--blue-realce); }
+.endorsements-row { display: flex; gap: 4px; margin-bottom: 6px; }
+.endorse-pill { padding: 2px 8px; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; border-radius: 4px; }
+.endorse-pill.ok { background: rgba(46,204,113,0.15); color: #2ecc71; }
+.endorse-pill.pend { background: rgba(243,156,18,0.15); color: #f39c12; }
+.endorse-pill.miss { background: var(--bg-card-hover); color: var(--text-faint); }
+@media (max-width: 1100px) { .pipe-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body data-persona-aware="mode-page" data-mode-context="curator" data-required-mode="curator">
+<button class="mobile-fab" data-sidebar-mobile-toggle aria-label="Menu"><i data-icon="menu" class="icon"></i></button>
+<div class="drawer-backdrop" data-sidebar-mobile-toggle></div>
+<div class="app">
+<aside class="sidebar">
+  <a href="../hub.html" class="sidebar-brand"><img src="../hmc-logo.png" alt="" class="brand-mark-img"><div><div class="brand-text">High Mentor Club</div><div class="brand-sub">Curated by Paulo Vieira · MMXXVI</div></div></a>
+  <div class="mode-switch">
+    <a href="../hub-curator.html" class="mode-switch-item" data-short="H"><i data-icon="home" class="icon"></i><span>Hub</span></a>
+    <a href="aprovacoes.html" class="mode-switch-item active" data-short="X"><i data-icon="shield-check" class="icon"></i><span>Curator</span></a>
+  </div>
+  <div class="sidebar-nav-scroll">
+    <div class="nav-section">
+      <a href="../notifications.html" class="nav-item has-badge"><i data-icon="bell" class="icon icon-sm"></i>Avisos <span class="badge-count">7</span></a>
+      <a href="../agenda.html" class="nav-item"><i data-icon="calendar" class="icon icon-sm"></i>Agenda</a>
+      <a href="../buscar.html" class="nav-item"><i data-icon="search" class="icon icon-sm"></i>Buscar</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">— Curadoria</div>
+      <a href="aprovacoes.html" class="nav-item has-badge"><i data-icon="shield-check" class="icon icon-sm"></i>Aprovações <span class="badge-count">3</span></a>
+      <a href="membros-ativos.html" class="nav-item"><i data-icon="users" class="icon icon-sm"></i>Membros ativos</a>
+      <a href="tier-promotion.html" class="nav-item has-badge active"><i data-icon="trending-up" class="icon icon-sm"></i>Promoções de Tier<span class="badge-count">5</span><span class="nav-dot"></span></a>
+      <a href="disputas-cross-floor.html" class="nav-item"><i data-icon="alert" class="icon icon-sm"></i>Disputas Cross-Floor</a>
+      <a href="moderacao.html" class="nav-item"><i data-icon="message" class="icon icon-sm"></i>Moderação</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">— Negócio HMC</div>
+      <a href="financeiro-consolidado.html" class="nav-item"><i data-icon="dollar" class="icon icon-sm"></i>Financeiro</a>
+      <a href="yield-cis.html" class="nav-item"><i data-icon="trending-up" class="icon icon-sm"></i>Yield CIS</a>
+      <a href="analytics-clube.html" class="nav-item"><i data-icon="bar-chart" class="icon icon-sm"></i>Analytics</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">— Operação</div>
+      <a href="council-admin.html" class="nav-item"><i data-icon="landmark" class="icon icon-sm"></i>Council</a>
+      <a href="pilgrimages-admin.html" class="nav-item"><i data-icon="compass" class="icon icon-sm"></i>Pilgrimages</a>
+      <a href="codex-publishing.html" class="nav-item"><i data-icon="book" class="icon icon-sm"></i>Codex</a>
+      <a href="antechamber-admin.html" class="nav-item"><i data-icon="mic" class="icon icon-sm"></i>Antechamber</a>
+      <a href="logs.html" class="nav-item"><i data-icon="file-text" class="icon icon-sm"></i>Logs</a>
+      <a href="suporte-admin.html" class="nav-item"><i data-icon="help" class="icon icon-sm"></i>Suporte</a>
+      <a href="config-admin.html" class="nav-item"><i data-icon="settings" class="icon icon-sm"></i>Configurações</a>
+    </div>
+  </div>
+  <div class="sidebar-footer-v3">
+    <a href="../account.html" class="user-pill-v3"><div class="avatar-sm">MC</div><div><div class="user-pill-v3-name">Michelle</div><div class="user-pill-v3-role">Time Curadoria</div></div></a>
+    <button class="sidebar-toggle-btn" data-sidebar-toggle><i data-icon="chevron-left" class="icon"></i><span>Recolher menu</span></button>
+  </div>
+</aside>
+
+<main class="main">
+  <div class="page-head">
+    <div class="page-head-text">
+      <div class="page-eyebrow"><span class="gold-rule"></span><span class="page-eyebrow-text">Curator · Promoções de Tier</span></div>
+      <h1 class="page-title">Pipeline de <span class="page-title-serif-italic">promoção</span>.</h1>
+      <p class="page-sub">Membros movendo-se entre tiers · critérios objetivos atendidos + endorsos coletados + decisão curatorial final. 5 em análise.</p>
+    </div>
+    <a href="aprovacoes.html" class="btn btn-chrome btn-sm"><i data-icon="plus" class="icon icon-sm"></i> Iniciar revisão</a>
+  </div>
+
+  <div class="grid grid-3 mb-12" style="gap: 16px;">
+    <div class="stat-block"><div class="stat-eyebrow">— Em análise</div><div class="stat-display">5</div><div class="stat-delta">3 Tier I→II · 2 Tier II→III</div></div>
+    <div class="stat-block"><div class="stat-eyebrow">— Promovidos YTD</div><div class="stat-display">8</div><div class="stat-delta">7 Tier I→II · 1 Tier II→III</div></div>
+    <div class="stat-block"><div class="stat-eyebrow">— Próx Council</div><div class="stat-display" style="font-size: 26px;">10 jul · 20h</div><div class="stat-delta">Votações de 4 promoções na pauta</div></div>
+  </div>
+
+  <div class="pipe-grid">
+
+    <div class="pipe-col">
+      <div class="pipe-head">
+        <div class="pipe-h">— Critérios objetivos</div>
+        <div class="pipe-count">5</div>
+      </div>
+
+      <a href="candidato-dossie.html" class="candidate-card">
+        <div class="candidate-row">
+          <div class="candidate-avatar">LV</div>
+          <div style="flex: 1;">
+            <div class="candidate-name">Lucas Vieira · Seat 12</div>
+            <div class="candidate-meta">Tier II → III · iniciado 28 mar <span class="tier-transition"><img src="../tier-seals/tier-2.png?v=16" alt="Tier II"><span class="tier-transition-arrow">→</span><img src="../tier-seals/tier-3.png?v=16" alt="Tier III" class="target"></span></div>
+          </div>
+        </div>
+        <div class="candidate-bar"><div style="width: 66%;"></div></div>
+        <div class="muted" style="font-size: 11px;">4 de 6 critérios objetivos cumpridos</div>
+      </a>
+
+      <a href="candidato-dossie.html" class="candidate-card">
+        <div class="candidate-row">
+          <div class="candidate-avatar">RB</div>
+          <div style="flex: 1;">
+            <div class="candidate-name">Rafael Bandeira · Seat 18</div>
+            <div class="candidate-meta">Tier II → III · iniciado 12 abr <span class="tier-transition"><img src="../tier-seals/tier-2.png?v=16" alt="Tier II"><span class="tier-transition-arrow">→</span><img src="../tier-seals/tier-3.png?v=16" alt="Tier III" class="target"></span></div>
+          </div>
+        </div>
+        <div class="candidate-bar"><div style="width: 50%;"></div></div>
+        <div class="muted" style="font-size: 11px;">3 de 6 critérios · falta GMV + 2 endorsos</div>
+      </a>
+
+      <a href="candidato-dossie.html" class="candidate-card">
+        <div class="candidate-row">
+          <div class="candidate-avatar">JF</div>
+          <div style="flex: 1;">
+            <div class="candidate-name">Júlia Fontes · Seat 24</div>
+            <div class="candidate-meta">Tier I → II · iniciado 02 mai <span class="tier-transition"><img src="../tier-seals/tier-1.png?v=16" alt="Tier I"><span class="tier-transition-arrow">→</span><img src="../tier-seals/tier-2.png?v=16" alt="Tier II" class="target"></span></div>
+          </div>
+        </div>
+        <div class="candidate-bar"><div style="width: 75%;"></div></div>
+        <div class="muted" style="font-size: 11px;">3 de 4 critérios · falta presença Council</div>
+      </a>
+
+      <a href="candidato-dossie.html" class="candidate-card">
+        <div class="candidate-row">
+          <div class="candidate-avatar">MO</div>
+          <div style="flex: 1;">
+            <div class="candidate-name">Marcelo Otto · Seat 31</div>
+            <div class="candidate-meta">Tier I → II · iniciado 14 mai <span class="tier-transition"><img src="../tier-seals/tier-1.png?v=16" alt="Tier I"><span class="tier-transition-arrow">→</span><img src="../tier-seals/tier-2.png?v=16" alt="Tier II" class="target"></span></div>
+          </div>
+        </div>
+        <div class="candidate-bar"><div style="width: 100%;"></div></div>
+        <div class="muted" style="font-size: 11px;">4 de 4 critérios cumpridos · pronto pra endorsos</div>
+      </a>
+
+      <a href="candidato-dossie.html" class="candidate-card">
+        <div class="candidate-row">
+          <div class="candidate-avatar">PA</div>
+          <div style="flex: 1;">
+            <div class="candidate-name">Pedro Almeida · Seat 39</div>
+            <div class="candidate-meta">Tier I → II · iniciado 22 mai <span class="tier-transition"><img src="../tier-seals/tier-1.png?v=16" alt="Tier I"><span class="tier-transition-arrow">→</span><img src="../tier-seals/tier-2.png?v=16" alt="Tier II" class="target"></span></div>
+          </div>
+        </div>
+        <div class="candidate-bar"><div style="width: 50%;"></div></div>
+        <div class="muted" style="font-size: 11px;">2 de 4 critérios · GMV ainda imaturo</div>
+      </a>
+
+    </div>
+
+    <div class="pipe-col">
+      <div class="pipe-head">
+        <div class="pipe-h">— Coletando endorsos</div>
+        <div class="pipe-count">3</div>
+      </div>
+
+      <a href="candidato-dossie.html" class="candidate-card">
+        <div class="candidate-row">
+          <div class="candidate-avatar">LV</div>
+          <div style="flex: 1;">
+            <div class="candidate-name">Lucas Vieira</div>
+            <div class="candidate-meta">Tier II → III · há 14 dias <span class="tier-transition"><img src="../tier-seals/tier-2.png?v=16" alt="Tier II"><span class="tier-transition-arrow">→</span><img src="../tier-seals/tier-3.png?v=16" alt="Tier III" class="target"></span></div>
+          </div>
+        </div>
+        <div class="endorsements-row">
+          <span class="endorse-pill ok">PV ✓</span>
+          <span class="endorse-pill ok">MC ✓</span>
+          <span class="endorse-pill pend">CR ?</span>
+        </div>
+        <div class="muted" style="font-size: 11px;">2 de 3 endorsos · aguarda Carlos Ribeiro</div>
+      </a>
+
+      <a href="candidato-dossie.html" class="candidate-card">
+        <div class="candidate-row">
+          <div class="candidate-avatar">JF</div>
+          <div style="flex: 1;">
+            <div class="candidate-name">Júlia Fontes</div>
+            <div class="candidate-meta">Tier I → II · há 8 dias <span class="tier-transition"><img src="../tier-seals/tier-1.png?v=16" alt="Tier I"><span class="tier-transition-arrow">→</span><img src="../tier-seals/tier-2.png?v=16" alt="Tier II" class="target"></span></div>
+          </div>
+        </div>
+        <div class="endorsements-row">
+          <span class="endorse-pill ok">DC ✓</span>
+          <span class="endorse-pill ok">RB ✓</span>
+          <span class="endorse-pill miss">— pend</span>
+        </div>
+        <div class="muted" style="font-size: 11px;">2 de 3 endorsos · janela até 22 jun</div>
+      </a>
+
+      <a href="candidato-dossie.html" class="candidate-card">
+        <div class="candidate-row">
+          <div class="candidate-avatar">MO</div>
+          <div style="flex: 1;">
+            <div class="candidate-name">Marcelo Otto</div>
+            <div class="candidate-meta">Tier I → II · há 2 dias <span class="tier-transition"><img src="../tier-seals/tier-1.png?v=16" alt="Tier I"><span class="tier-transition-arrow">→</span><img src="../tier-seals/tier-2.png?v=16" alt="Tier II" class="target"></span></div>
+          </div>
+        </div>
+        <div class="endorsements-row">
+          <span class="endorse-pill ok">PV ✓</span>
+          <span class="endorse-pill ok">LV ✓</span>
+          <span class="endorse-pill ok">MC ✓</span>
+        </div>
+        <div class="muted" style="font-size: 11px;">✓ 3 de 3 endorsos · pronto pra Council</div>
+      </a>
+
+    </div>
+
+    <div class="pipe-col">
+      <div class="pipe-head">
+        <div class="pipe-h">— Votação Council</div>
+        <div class="pipe-count">1</div>
+      </div>
+
+      <a href="candidato-dossie.html" class="candidate-card" style="border-color: var(--blue-realce);">
+        <div class="candidate-row">
+          <div class="candidate-avatar">MO</div>
+          <div style="flex: 1;">
+            <div class="candidate-name">Marcelo Otto · Seat 31</div>
+            <div class="candidate-meta">Tier I → II · pauta 10/07 <span class="tier-transition"><img src="../tier-seals/tier-1.png?v=16" alt="Tier I"><span class="tier-transition-arrow">→</span><img src="../tier-seals/tier-2.png?v=16" alt="Tier II" class="target"></span></div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 6px; margin-bottom: 8px; font-size: 11px;">
+          <span style="padding: 4px 8px; background: rgba(46,204,113,0.15); color: #2ecc71; border-radius: 4px; font-weight: 700; letter-spacing: 0.08em;">PRONTO</span>
+          <span style="padding: 4px 8px; background: var(--bg-card-hover); color: var(--text); border-radius: 4px; font-weight: 600;">Quorum: 2/3</span>
+        </div>
+        <div class="muted" style="font-size: 11px;">Council mensal · resultado em 10 jul 22h</div>
+      </a>
+
+      <div style="text-align: center; padding: 28px 16px; color: var(--text-muted); font-size: 12px;">
+        <div style="opacity: 0.5; font-size: 32px; margin-bottom: 10px;">—</div>
+        Mais candidatos chegam aqui após coletar 3 endorsos.
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="surface" style="padding: 32px;">
+    <div class="eyebrow-chrome" style="margin-bottom: 16px;">— Histórico de promoções · 2026</div>
+    <div style="display: grid; grid-template-columns: 1fr; gap: 12px;">
+
+      <div style="display: grid; grid-template-columns: 120px 1fr 100px 100px; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--divider); align-items: center;">
+        <div class="muted" style="font-size: 12px; font-family: 'JetBrains Mono', monospace;">28 mai 2026</div>
+        <div><strong>Daniel Coutinho</strong> promovido a Tier II</div>
+        <div style="font-size: 11px; color: #2ecc71; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;">Aprovado</div>
+        <div class="muted" style="font-size: 11px; text-align: right;">Council #22 · 34-3</div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 120px 1fr 100px 100px; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--divider); align-items: center;">
+        <div class="muted" style="font-size: 12px; font-family: 'JetBrains Mono', monospace;">12 mai 2026</div>
+        <div><strong>Carlos Ribeiro</strong> promovido a Tier III</div>
+        <div style="font-size: 11px; color: #2ecc71; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;">Aprovado</div>
+        <div class="muted" style="font-size: 11px; text-align: right;">Curatorial PV</div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 120px 1fr 100px 100px; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--divider); align-items: center;">
+        <div class="muted" style="font-size: 12px; font-family: 'JetBrains Mono', monospace;">28 abr 2026</div>
+        <div><strong>Pedro Almeida</strong> promoção <em>negada</em> a Tier II</div>
+        <div style="font-size: 11px; color: #e74c3c; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;">Rejeitado</div>
+        <div class="muted" style="font-size: 11px; text-align: right;">Council #21 · 11-29</div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 120px 1fr 100px 100px; gap: 16px; padding: 14px 0; align-items: center;">
+        <div class="muted" style="font-size: 12px; font-family: 'JetBrains Mono', monospace;">14 abr 2026</div>
+        <div><strong>Camila Reis</strong> promovida a Tier II</div>
+        <div style="font-size: 11px; color: #2ecc71; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;">Aprovado</div>
+        <div class="muted" style="font-size: 11px; text-align: right;">Council #21 · 38-0</div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+</div>
+<div class="wf-note">Curator · Promoções de Tier</div>
+</body>
+</html>

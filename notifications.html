@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Avisos · HMC</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_shared.css?v=16">
+<script src="_icons.js?v=16" defer></script>
+<script src="_modals.js?v=16" defer></script>
+<script src="_persona.js?v=16" defer></script>
+<style>
+/* ─── LAYOUT ─── */
+.nt-layout { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 28px; align-items: start; }
+@media (max-width: 1100px) { .nt-layout { grid-template-columns: minmax(0, 1fr); } .nt-side { order: -1; } }
+
+/* ─── FILTROS ─── */
+.nt-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; overflow-x: auto; padding-bottom: 4px; }
+.nt-filters::-webkit-scrollbar { height: 0; }
+.nt-pill { display: inline-flex; align-items: center; gap: 7px; padding: 8px 14px; border-radius: 99px; background: var(--bg-card); border: 1px solid var(--divider); font-size: 12px; font-weight: 600; color: var(--text-muted); cursor: pointer; white-space: nowrap; transition: all 150ms; }
+.nt-pill:hover { border-color: var(--blue-realce); color: var(--text); }
+.nt-pill.active { background: var(--blue-realce); color: white; border-color: var(--blue-realce); }
+.nt-pill .icon { width: 13px !important; height: 13px !important; }
+.nt-pill-count { padding: 1px 7px; background: rgba(0,0,0,0.08); border-radius: 99px; font-size: 11px; font-variant-numeric: tabular-nums; }
+.nt-pill.active .nt-pill-count { background: rgba(255,255,255,0.20); }
+
+/* ─── BARRA STICKY DE AÇÕES ─── */
+.nt-actions-bar { display: flex; gap: 10px; padding: 12px 16px; background: var(--bg-card); border: 1px solid var(--divider); border-radius: 12px; margin-bottom: 24px; align-items: center; flex-wrap: wrap; }
+.nt-actions-bar-info { font-size: 13px; color: var(--text-muted); margin-right: auto; }
+.nt-actions-bar-info strong { color: var(--text); }
+
+/* ─── GRUPO POR DIA ─── */
+.nt-day { margin-bottom: 24px; }
+.nt-day-head { display: flex; align-items: baseline; gap: 12px; padding: 0 4px 10px; margin-bottom: 8px; }
+.nt-day-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 500; letter-spacing: -0.015em; }
+.nt-day-meta { font-size: 11px; color: var(--text-muted); letter-spacing: 0.10em; text-transform: uppercase; font-weight: 600; }
+
+/* ─── CARD DE NOTIFICAÇÃO ─── */
+.nt-item { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; gap: 16px; padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--divider); border-radius: 12px; margin-bottom: 8px; align-items: center; transition: all 200ms; text-decoration: none; color: inherit; position: relative; }
+.nt-item:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(11,11,15,0.05); }
+.nt-item::before { content: ''; position: absolute; left: 0; top: 14px; bottom: 14px; width: 3px; border-radius: 0 3px 3px 0; background: transparent; }
+.nt-item.cat-clube::before { background: linear-gradient(180deg, #d2a344, #8c6b1f); }
+.nt-item.cat-studio::before { background: linear-gradient(180deg, #4DB8FF, #1554B3); }
+.nt-item.cat-estudos::before { background: linear-gradient(180deg, #A8E6FF, #4DB8FF); }
+.nt-item.cat-curator::before { background: linear-gradient(180deg, #d2a344, #d2a344); }
+.nt-item.cat-financeiro::before { background: var(--text-muted); }
+.nt-item.unread { background: linear-gradient(90deg, rgba(77,184,255,0.04) 0%, var(--bg-card) 30%); }
+
+.nt-avatar { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; }
+.nt-avatar.cat-clube { background: rgba(210,163,68,0.12); color: #d2a344; }
+.nt-avatar.cat-studio { background: var(--blue-realce-muted); color: var(--blue-realce); }
+.nt-avatar.cat-estudos { background: rgba(168,230,255,0.18); color: var(--blue-highlight); }
+.nt-avatar.cat-curator { background: rgba(210,163,68,0.18); color: #d2a344; }
+.nt-avatar.cat-financeiro { background: var(--bg-card-hover); color: var(--text-muted); }
+.nt-avatar.is-person { background: linear-gradient(135deg, var(--blue-realce), var(--blue-chrome)); color: white; font-family: 'Playfair Display', serif; font-weight: 600; font-size: 14px; }
+
+.nt-body { min-width: 0; }
+.nt-row1 { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
+.nt-tag { font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; }
+.nt-tag.clube { background: rgba(210,163,68,0.10); color: #b8862e; }
+.nt-tag.studio { background: var(--blue-realce-muted); color: var(--blue-realce); }
+.nt-tag.estudos { background: rgba(168,230,255,0.18); color: var(--blue-realce); }
+.nt-tag.curator { background: rgba(210,163,68,0.18); color: #8c6b1f; }
+.nt-tag.financeiro { background: var(--bg-card-hover); color: var(--text-muted); }
+.nt-time { font-size: 11px; color: var(--text-faint); font-weight: 500; }
+.nt-text { font-size: 14px; line-height: 1.45; color: var(--text); }
+.nt-text strong { font-weight: 600; }
+.nt-item.unread .nt-text { color: var(--text); font-weight: 500; }
+.nt-actions { display: flex; gap: 4px; align-items: center; flex-shrink: 0; }
+.nt-action { width: 34px; height: 34px; border-radius: 8px; background: transparent; border: 1px solid transparent; color: var(--text-muted); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 150ms; }
+.nt-action:hover { background: var(--bg); border-color: var(--divider); color: var(--text); }
+.nt-action.primary { background: var(--blue-realce); color: white; border-color: var(--blue-realce); padding: 0 14px; width: auto; font-size: 12px; font-weight: 600; gap: 6px; text-decoration: none; }
+.nt-action.primary:hover { background: var(--blue-chrome); color: white; }
+.nt-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--blue-realce); flex-shrink: 0; box-shadow: 0 0 0 3px var(--blue-realce-muted); }
+
+/* ─── SIDEBAR ─── */
+.nt-side { display: flex; flex-direction: column; gap: 14px; }
+.nt-side-card { padding: 18px 20px; background: var(--bg-card); border: 1px solid var(--divider); border-radius: 14px; }
+.nt-side-h { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 12px; }
+.nt-side-stat { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--divider); font-size: 13px; }
+.nt-side-stat:last-child { border-bottom: none; padding-bottom: 0; }
+.nt-side-stat-val { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* ─── MOBILE ─── */
+@media (max-width: 700px) {
+  .nt-item { grid-template-columns: 40px minmax(0, 1fr); padding: 14px 16px; gap: 12px; }
+  .nt-actions { grid-column: 1 / -1; padding-top: 10px; border-top: 1px solid var(--divider); margin-top: 4px; }
+  .nt-action { flex: 1; min-height: 40px; }
+  .nt-avatar { width: 40px; height: 40px; }
+  .nt-actions-bar { padding: 10px 12px; gap: 8px; }
+  .nt-actions-bar-info { width: 100%; margin-right: 0; margin-bottom: 4px; font-size: 12px; }
+}
+</style>
+</head>
+<body data-persona-aware="cross-context" data-active-mode="agenda">
+
+<button class="mobile-fab" data-sidebar-mobile-toggle aria-label="Menu"><i data-icon="menu" class="icon"></i></button>
+<div class="drawer-backdrop" data-sidebar-mobile-toggle></div>
+
+<div class="app">
+
+  <aside class="sidebar">
+    <a href="hub.html" class="sidebar-brand"><img src="hmc-logo.png" alt="" class="brand-mark-img"><div><div class="brand-text">High Mentor Club</div><div class="brand-sub">Curated by Paulo Vieira · MMXXVI</div></div></a>
+    <div class="mode-switch">
+      <a href="hub.html" class="mode-switch-item" data-short="H"><i data-icon="home" class="icon"></i><span>Hub</span></a>
+      <a href="10-clube/01-dashboard.html" class="mode-switch-item" data-short="C"><i data-icon="landmark" class="icon"></i><span>Clube</span></a>
+      <a href="20-mentor/studio-home.html" class="mode-switch-item" data-short="S"><i data-icon="briefcase" class="icon"></i><span>Studio</span></a>
+      <a href="30-mentorado/biblioteca.html" class="mode-switch-item" data-short="E"><i data-icon="book-open" class="icon"></i><span>Estudos</span></a>
+    </div>
+    <div class="sidebar-nav-scroll">
+      <div class="nav-section">
+        <a href="notifications.html" class="nav-item active has-badge"><i data-icon="bell" class="icon icon-sm"></i>Avisos <span class="badge-count">12</span><span class="nav-dot"></span></a>
+        <a href="agenda.html" class="nav-item"><i data-icon="calendar" class="icon icon-sm"></i>Agenda</a>
+        <a href="buscar.html" class="nav-item"><i data-icon="search" class="icon icon-sm"></i>Buscar</a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">— Atalhos</div>
+        <a href="10-clube/01-dashboard.html" class="nav-item"><i data-icon="home" class="icon icon-sm"></i>Sala do Membro</a>
+        <a href="20-mentor/studio-home.html" class="nav-item"><i data-icon="briefcase" class="icon icon-sm"></i>Studio</a>
+        <a href="30-mentorado/biblioteca.html" class="nav-item"><i data-icon="book-open" class="icon icon-sm"></i>Biblioteca</a>
+        <a href="40-curator/aprovacoes.html" class="nav-item has-badge"><i data-icon="shield" class="icon icon-sm"></i>Curator <span class="badge-count">3</span></a>
+      </div>
+    </div>
+    <div class="sidebar-footer-v3">
+      <a href="account.html" class="user-pill-v3"><div class="avatar-sm">LV</div><div><div class="user-pill-v3-name">Lucas Vieira</div><div class="user-pill-v3-role">Seat 12</div></div></a>
+      <button class="sidebar-toggle-btn" data-sidebar-toggle><i data-icon="chevron-left" class="icon"></i><span>Recolher menu</span></button>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div class="page-head">
+      <div class="page-head-text">
+        <div class="page-eyebrow"><span class="gold-rule"></span><span class="page-eyebrow-text">Inbox unificado</span></div>
+        <h1 class="page-title">Suas <span class="page-title-serif-italic">notificações</span>.</h1>
+        <p class="page-sub">12 não lidas em 4 contextos. Cada item te leva direto pro destino · pode ser arquivado ou silenciado por categoria.</p>
+      </div>
+    </div>
+
+    <!-- FILTROS -->
+    <div class="nt-filters">
+      <button class="nt-pill active"><i data-icon="bell" class="icon"></i>Todas<span class="nt-pill-count">12</span></button>
+      <button class="nt-pill"><i data-icon="landmark" class="icon"></i>Clube<span class="nt-pill-count">2</span></button>
+      <button class="nt-pill"><i data-icon="briefcase" class="icon"></i>Studio<span class="nt-pill-count">4</span></button>
+      <button class="nt-pill"><i data-icon="book-open" class="icon"></i>Estudos<span class="nt-pill-count">3</span></button>
+      <button class="nt-pill"><i data-icon="shield" class="icon"></i>Curator<span class="nt-pill-count">3</span></button>
+      <button class="nt-pill"><i data-icon="dollar" class="icon"></i>Financeiro<span class="nt-pill-count">1</span></button>
+    </div>
+
+    <div class="nt-layout">
+
+      <!-- COLUNA PRINCIPAL -->
+      <div>
+
+        <!-- BARRA DE AÇÕES -->
+        <div class="nt-actions-bar">
+          <div class="nt-actions-bar-info"><strong>12 não lidas</strong> · 8 lidas hoje</div>
+          <button class="btn btn-outline btn-sm"><i data-icon="check" class="icon icon-sm"></i><span style="margin-left:6px">Marcar todas lidas</span></button>
+          <button class="btn btn-outline btn-sm"><i data-icon="settings" class="icon icon-sm"></i><span style="margin-left:6px">Preferências</span></button>
+        </div>
+
+        <!-- HOJE -->
+        <section class="nt-day">
+          <div class="nt-day-head">
+            <div class="nt-day-title">Hoje</div>
+            <div class="nt-day-meta">Quarta · 03 jun · 5 não lidas</div>
+          </div>
+
+          <a href="20-mentor/studio-home.html" class="nt-item cat-studio unread">
+            <div class="nt-avatar is-person">MS</div>
+            <div class="nt-body">
+              <div class="nt-row1">
+                <span class="nt-tag studio">Studio · venda</span>
+                <span class="nt-time">há 12 min</span>
+                <span class="nt-dot" aria-label="Não lida"></span>
+              </div>
+              <div class="nt-text"><strong>Mariana Souza</strong> comprou a Mentoria Vieira de Liderança · R$ 6.800/mês · 12× sem juros</div>
+            </div>
+            <div class="nt-actions">
+              <button class="nt-action" aria-label="Marcar lida" title="Marcar lida"><i data-icon="check" class="icon icon-sm"></i></button>
+              <button class="nt-action" aria-label="Arquivar" title="Arquivar"><i data-icon="external" class="icon icon-sm"></i></button>
+              <a href="20-mentor/mentorado-detail.html" class="nt-action primary"><i data-icon="user-plus" class="icon icon-sm"></i> Receber</a>
+            </div>
+          </a>
+
+          <a href="30-mentorado/comunidade-canal.html" class="nt-item cat-estudos unread">
+            <div class="nt-avatar is-person">PA</div>
+            <div class="nt-body">
+              <div class="nt-row1">
+                <span class="nt-tag estudos">Estudos · menção</span>
+                <span class="nt-time">há 1h · #dúvidas-módulo-3</span>
+                <span class="nt-dot" aria-label="Não lida"></span>
+              </div>
+              <div class="nt-text"><strong>Pedro Almeida</strong> te marcou: "Galera, alguém já fez o exercício de decompor o P&amp;L da própria área? Tô patinando..."</div>
+            </div>
+            <div class="nt-actions">
+              <button class="nt-action" aria-label="Marcar lida"><i data-icon="check" class="icon icon-sm"></i></button>
+              <a href="30-mentorado/comunidade-canal.html" class="nt-action primary"><i data-icon="message" class="icon icon-sm"></i> Responder</a>
+            </div>
+          </a>
+
+          <a href="40-curator/aprovacoes.html" class="nt-item cat-curator unread">
+            <div class="nt-avatar cat-curator"><i data-icon="shield" class="icon"></i></div>
+            <div class="nt-body">
+              <div class="nt-row1">
+                <span class="nt-tag curator">Curator · endosso</span>
+                <span class="nt-time">há 3h</span>
+                <span class="nt-dot" aria-label="Não lida"></span>
+              </div>
+              <div class="nt-text"><strong>Patrícia Lemos</strong> indicou <strong>Marcelo Otto</strong> para Tier I · 3/3 endorsos completos · entra no próximo Council</div>
+            </div>
+            <div class="nt-actions">
+              <button class="nt-action" aria-label="Marcar lida"><i data-icon="check" class="icon icon-sm"></i></button>
+              <a href="40-curator/candidato-dossie.html" class="nt-action primary"><i data-icon="file-text" class="icon icon-sm"></i> Dossiê</a>
+            </div>
+          </a>
+
+          <a href="20-mentor/aulas-biblioteca.html" class="nt-item cat-studio unread">
+            <div class="nt-avatar cat-studio"><i data-icon="video" class="icon"></i></div>
+            <div class="nt-body">
+              <div class="nt-row1">
+                <span class="nt-tag studio">Studio · sistema</span>
+                <span class="nt-time">há 4h · Mux</span>
+                <span class="nt-dot" aria-label="Não lida"></span>
+              </div>
+              <div class="nt-text">Upload da aula <strong>"Como pensar P&amp;L sendo gerente"</strong> concluído (24:11 · 1.2GB). Aguardando sua revisão pra publicar.</div>
+            </div>
+            <div class="nt-actions">
+              <button class="nt-action" aria-label="Snooze 1h" title="Snooze 1h"><i data-icon="clock" class="icon icon-sm"></i></button>
+              <a href="20-mentor/aula-edit.html" class="nt-action primary"><i data-icon="play" class="icon icon-sm"></i> Revisar</a>
+            </div>
+          </a>
+
+          <a href="30-mentorado/biblioteca.html" class="nt-item cat-estudos unread">
+            <div class="nt-avatar is-person">RM</div>
+            <div class="nt-body">
+              <div class="nt-row1">
+                <span class="nt-tag estudos">Estudos · nova aula</span>
+                <span class="nt-time">há 6h</span>
+                <span class="nt-dot" aria-label="Não lida"></span>
+              </div>
+              <div class="nt-text"><strong>Renata Mendes</strong> publicou nova aula: <strong>"Construindo tese de carreira lateral"</strong> · 18 min · módulo 04</div>
+            </div>
+            <div class="nt-actions">
+              <button class="nt-action" aria-label="Marcar lida"><i data-icon="check" class="icon icon-sm"></i></button>
+              <a href="30-mentorado/player.html" class="nt-action primary"><i data-icon="play" class="icon icon-sm"></i> Assistir</a>
+            </div>
+          </a>
+        </section>
+
+        <!-- ONTEM -->
+        <section class="nt-day">
+          <div class="nt-day-head">
+            <div class="nt-day-title">Ontem</div>
+            <div class="nt-day-meta">Terça · 02 jun · 4 não lidas</div>
+          </div>
+
+          <a href="20-mentor/receitas.html" class="nt-item cat-financeiro unread">
+            <div class="nt-avatar cat-financeiro"><i data-icon="credit-card" class="icon"></i></div>
+            <div class="nt-body">
+              <div class="nt-row1">
+                <span class="nt-tag financeiro">Financeiro · CISPay</span>
+                <span class="nt-time">ontem · 22h14</span>
+                <span class="nt-dot" aria-label="Não lida"></span>
+              </div>
+              <div class="nt-text">Parcela 03/12 da <strong>Daniela Pires</strong> confirmada · R$ 6.800 · split aplicado · payout sai 05/jun</div>
+            </div>
+            <div class="nt-actions">
+              <button class="nt-action" aria-label="Marcar lida"><i data-icon="check" class="icon icon-sm"></i></button>
+              <a href="20-mentor/receitas.html" class="nt-action" aria-label="Detalhe"><i data-icon="external" class="icon icon-sm"></i></a>
+            </div>
+          </a>
+
+          <a href="10-clube/04-cross-floor.html" class="nt-item cat-clube unread">
+            <div class="nt-avatar is-person">AC</div>
+            <div class="nt-body">
+              <div class="nt-row1">
+                <span class="nt-tag clube">Clube · Cross-Floor</span>
+                <span class="nt-time">ontem · 18h</span>
+                <span class="nt-dot" aria-label="Não lida"></span>
+              </div>
+              <div class="nt-text"><strong>André Castelo</strong> indicou <strong>Júlia Fontes</strong> para Tier I · você foi convidado a endossar</div>
+            </div>
+            <div class="nt-actions">
+              <button class="nt-action" aria-label="Marcar lida"><i data-icon="check" class="icon icon-sm"></i></button>
+              <a href="40-curator/aprovacoes.html" class="nt-action primary"><i data-icon="shield-check" class="icon icon-sm"></i> Endossar</a>
+            </div>
+          </a>
+
+          <a href="10-clube/curator-letter.html" class="nt-item cat-clube unread">
+            <div class="nt-avatar is-person" style="background: linear-gradient(135deg, var(--blue-deep), var(--blue-realce)); color: var(--blue-highlight);">PV</div>
+            <div class="nt-body">
+              <div class="nt-row1">
+                <span class="nt-tag clube">Clube · Antechamber</span>
+                <span class="nt-time">ontem · 14h</span>
+                <span class="nt-dot" aria-label="Não lida"></span>
+              </div>
+              <div class="nt-text"><strong>The Curator</strong> deixou nova carta (junho): <em>"Sobre o filtro e a porta"</em> · ~14 min · disponível em áudio</div>
+            </div>
+            <div class="nt-actions">
+              <button class="nt-action" aria-label="Marcar lida"><i data-icon="check" class="icon icon-sm"></i></button>
+              <a href="10-clube/curator-letter.html" class="nt-action primary"><i data-icon="play" class="icon icon-sm"></i> Ler</a>
+            </div>
+          </a>
+
+          <a href="20-mentor/sessoes-1-1.html" class="nt-item cat-studio unread">
+            <div class="nt-avatar is-person">DC</div>
+            <div class="nt-body">
+              <div class="nt-row1">
+                <span class="nt-tag studio">Studio · 1:1</span>
+                <span class="nt-time">ontem · 11h22</span>
+                <span class="nt-dot" aria-label="Não lida"></span>
+              </div>
+              <div class="nt-text"><strong>Daniel Coutinho</strong> reagendou sessão de 04/jun (14h) pra 06/jun (16h) · motivo: viagem de cliente</div>
+            </div>
+            <div class="nt-actions">
+              <button class="nt-action" aria-label="Marcar lida"><i data-icon="check" class="icon icon-sm"></i></button>
+              <a href="agenda.html" class="nt-action" aria-label="Agenda"><i data-icon="calendar" class="icon icon-sm"></i></a>
+            </div>
+          </a>
+        </section>
+
+        <!-- ESTA SEMANA -->
+        <section class="nt-day">
+          <div class="nt-day-head">
+            <div class="nt-day-title">Esta semana</div>
+            <div class="nt-day-meta">26 mai – 01 jun · 3 lidas</div>
+          </div>
+
+          <a href="10-clube/02-calendar.html" class="nt-item cat-clube" style="opacity: 0.75;">
+            <div class="nt-avatar cat-clube"><i data-icon="landmark" class="icon"></i></div>
+            <div class="nt-body">
+              <div class="nt-row1">
+                <span class="nt-tag clube">Clube · Council</span>
+                <span class="nt-time">28 mai</span>
+              </div>
+              <div class="nt-text">HMC Council mensal confirmado para <strong>10/jun · 20h</strong> · hotseats André + Patrícia</div>
+            </div>
+            <div class="nt-actions">
+              <a href="10-clube/02-calendar.html" class="nt-action" aria-label="Ver"><i data-icon="external" class="icon icon-sm"></i></a>
+            </div>
+          </a>
+
+          <a href="40-curator/yield-cis.html" class="nt-item cat-clube" style="opacity: 0.75;">
+            <div class="nt-avatar cat-clube"><i data-icon="dollar" class="icon"></i></div>
+            <div class="nt-body">
+              <div class="nt-row1">
+                <span class="nt-tag clube">Clube · Yield CIS</span>
+                <span class="nt-time">27 mai</span>
+              </div>
+              <div class="nt-text">Seu Yield de maio fechou em <strong>R$ 18.420</strong> (28 leads convertidos · CIS 16%). Crédito processado em 05/jun.</div>
+            </div>
+            <div class="nt-actions">
+              <a href="10-clube/05-yield.html" class="nt-action" aria-label="Ver"><i data-icon="external" class="icon icon-sm"></i></a>
+            </div>
+          </a>
+
+          <a href="30-mentorado/biblioteca.html" class="nt-item cat-estudos" style="opacity: 0.75;">
+            <div class="nt-avatar is-person">BV</div>
+            <div class="nt-body">
+              <div class="nt-row1">
+                <span class="nt-tag estudos">Estudos · agenda</span>
+                <span class="nt-time">26 mai</span>
+              </div>
+              <div class="nt-text"><strong>Bruno Vaz</strong> agendou novo encontro ao vivo do Funil B2B · 05/jun 20h</div>
+            </div>
+            <div class="nt-actions">
+              <a href="agenda.html" class="nt-action" aria-label="Agenda"><i data-icon="calendar" class="icon icon-sm"></i></a>
+            </div>
+          </a>
+        </section>
+
+        <!-- VAZIO STATE / FIM -->
+        <div style="text-align: center; padding: 32px 16px; color: var(--text-muted); font-size: 13px;">
+          <div style="opacity: 0.4; font-size: 24px; margin-bottom: 10px;">·</div>
+          Notificações &gt; 30 dias são arquivadas automaticamente · <a href="notifications.html" style="color: var(--blue-realce);">ver arquivo</a>
+        </div>
+
+      </div>
+
+      <!-- SIDEBAR -->
+      <aside class="nt-side">
+        <div class="nt-side-card">
+          <div class="nt-side-h">— Resumo</div>
+          <div class="nt-side-stat"><span style="color: var(--text-muted);">Não lidas</span><span class="nt-side-stat-val" style="color: var(--blue-realce);">12</span></div>
+          <div class="nt-side-stat"><span style="color: var(--text-muted);">Lidas hoje</span><span class="nt-side-stat-val">8</span></div>
+          <div class="nt-side-stat"><span style="color: var(--text-muted);">Esta semana</span><span class="nt-side-stat-val">47</span></div>
+          <div class="nt-side-stat"><span style="color: var(--text-muted);">Arquivadas</span><span class="nt-side-stat-val">142</span></div>
+        </div>
+
+        <div class="nt-side-card">
+          <div class="nt-side-h">— Origens mais frequentes</div>
+          <div class="nt-side-stat"><span><span class="nt-tag studio" style="margin-right: 8px;">Studio</span></span><span class="nt-side-stat-val">4</span></div>
+          <div class="nt-side-stat"><span><span class="nt-tag estudos" style="margin-right: 8px;">Estudos</span></span><span class="nt-side-stat-val">3</span></div>
+          <div class="nt-side-stat"><span><span class="nt-tag curator" style="margin-right: 8px;">Curator</span></span><span class="nt-side-stat-val">3</span></div>
+          <div class="nt-side-stat"><span><span class="nt-tag clube" style="margin-right: 8px;">Clube</span></span><span class="nt-side-stat-val">2</span></div>
+        </div>
+
+        <div class="nt-side-card" style="border-left: 3px solid var(--blue-realce);">
+          <div class="nt-side-h" style="color: var(--blue-realce);">— Sugestão</div>
+          <div style="font-size: 13px; line-height: 1.55; color: var(--text); margin-bottom: 14px;">Você recebe muitas notificações de <strong>upload Mux</strong>. Silenciar essas por padrão?</div>
+          <div style="display: flex; gap: 6px;">
+            <button class="btn btn-outline btn-sm" style="flex: 1; padding: 8px;">Não</button>
+            <button class="btn btn-chrome btn-sm" style="flex: 1; padding: 8px;">Silenciar</button>
+          </div>
+        </div>
+
+        <div class="nt-side-card">
+          <div class="nt-side-h">— Preferências rápidas</div>
+          <a href="account.html" style="display: block; padding: 8px 0; font-size: 13px; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--divider);">↳ Email digest diário</a>
+          <a href="account.html" style="display: block; padding: 8px 0; font-size: 13px; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--divider);">↳ Push notifications</a>
+          <a href="account.html" style="display: block; padding: 8px 0; font-size: 13px; color: var(--text); text-decoration: none;">↳ Hora de silêncio</a>
+        </div>
+      </aside>
+
+    </div>
+
+  </main>
+
+</div>
+
+<div class="wf-note">Avisos · Lucas</div>
+
+</body>
+</html>

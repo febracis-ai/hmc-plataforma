@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audit Log Viewer · _dev · HMC</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_shared.css?v=16">
+<script src="../_icons.js?v=16" defer></script>
+<script src="../_modals.js?v=16" defer></script>
+<style>
+body { background: var(--blue-deep); min-height: 100vh; color: white; padding: 0; }
+.dev-wrap { max-width: 1440px; margin: 0 auto; padding: clamp(32px, 4vw, 48px); }
+.dev-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; flex-wrap: wrap; gap: 16px; padding-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.dev-brand { display: flex; align-items: center; gap: 12px; color: white; text-decoration: none; }
+.dev-brand img { width: 32px; height: 32px; }
+.dev-badge { padding: 8px 16px; background: rgba(229,83,83,0.15); border: 1px solid rgba(229,83,83,0.40); color: #FF8888; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; border-radius: 999px; display: inline-flex; align-items: center; gap: 8px; }
+.dev-nav { display: flex; gap: 18px; }
+.dev-nav a { font-size: 13px; color: rgba(255,255,255,0.55); text-decoration: none; padding: 6px 14px; border-radius: 6px; transition: all 150ms; }
+.dev-nav a:hover { color: white; background: rgba(255,255,255,0.04); }
+.dev-nav a.active { color: white; background: rgba(77,184,255,0.10); font-weight: 600; }
+.dev-h1 { font-family: 'Playfair Display', serif; font-size: 38px; font-weight: 500; letter-spacing: -0.025em; margin-bottom: 8px; }
+.dev-sub { font-size: 14px; color: rgba(255,255,255,0.55); margin-bottom: 36px; max-width: 640px; line-height: 1.6; }
+.filter-bar { display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; align-items: center; }
+.filter-bar input, .filter-bar select { padding: 11px 14px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.10); border-radius: 8px; font-size: 13px; color: white; font-family: inherit; }
+.audit-table { background: rgba(0,0,0,0.20); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; overflow: hidden; }
+.audit-row { display: grid; grid-template-columns: 170px 100px 130px minmax(0, 1fr) 100px; gap: 14px; padding: 14px 24px; border-bottom: 1px solid rgba(255,255,255,0.05); align-items: center; font-size: 12px; }
+.audit-row:last-child { border-bottom: none; }
+.audit-row.head { background: rgba(255,255,255,0.04); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; color: rgba(168,230,255,0.55); }
+.audit-ts { font-family: 'JetBrains Mono', monospace; color: rgba(255,255,255,0.55); font-size: 11px; }
+.audit-actor { display: flex; align-items: center; gap: 8px; }
+.audit-actor-avatar { width: 24px; height: 24px; border-radius: 50%; background: var(--blue-realce-muted); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; }
+.audit-actor-name { font-size: 12px; font-weight: 600; color: white; }
+.audit-action { font-family: 'JetBrains Mono', monospace; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; display: inline-block; }
+.audit-action.read { background: rgba(77,184,255,0.12); color: var(--blue-highlight); }
+.audit-action.write { background: rgba(46,204,113,0.15); color: #2ecc71; }
+.audit-action.delete { background: rgba(229,83,83,0.15); color: #FF8888; }
+.audit-action.flag { background: rgba(243,156,18,0.15); color: #f39c12; }
+.audit-target { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: rgba(255,255,255,0.85); }
+.audit-detail-btn { padding: 4px 10px; background: transparent; border: 1px solid rgba(255,255,255,0.15); border-radius: 4px; font-size: 10px; cursor: pointer; color: rgba(255,255,255,0.65); }
+.audit-detail-btn:hover { color: white; background: rgba(255,255,255,0.05); }
+</style>
+</head>
+<body>
+
+<div class="dev-wrap">
+
+  <div class="dev-header">
+    <a href="../dev-login.html" class="dev-brand">
+      <img src="../hmc-logo.png" alt="">
+      <span style="font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 500;">HMC</span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: rgba(255,255,255,0.45);">/_dev</span>
+    </a>
+    <nav class="dev-nav">
+      <a href="../dev-login.html">Persona switch</a>
+      <a href="feature-flags.html">Feature flags</a>
+      <a href="seed-data.html">Seed data</a>
+      <a href="audit-viewer.html" class="active">Audit log</a>
+    </nav>
+    <div class="dev-badge"><i data-icon="alert" class="icon icon-sm"></i> Internal · Compliance + Sec</div>
+  </div>
+
+  <h1 class="dev-h1">Audit log viewer</h1>
+  <p class="dev-sub">Stream completo de operações sensíveis em todos os ambientes. Append-only · 24m de retenção · LGPD compliant. View paralela à <a href="../40-curator/logs.html" style="color: var(--blue-highlight);">Logs curatoriais</a> (somente ações de membros).</p>
+
+  <div class="filter-bar">
+    <input type="search" placeholder="Buscar (actor, target, IP)..." style="width: 260px;">
+    <select><option>Todas ações</option><option>read</option><option>write</option><option>delete</option><option>flag-change</option></select>
+    <select><option>Todos ambientes</option><option>dev</option><option>staging</option><option>production</option></select>
+    <select><option>Últimas 24h</option><option>Últimos 7 dias</option><option>Últimos 30 dias</option><option>Custom</option></select>
+    <button class="btn btn-outline btn-sm" style="color: white; border-color: rgba(255,255,255,0.30);"><i data-icon="external" class="icon icon-sm"></i> Exportar CSV</button>
+  </div>
+
+  <div class="grid grid-3" style="gap: 14px; margin-bottom: 24px;">
+    <div style="padding: 18px 20px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px;">
+      <div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(168,230,255,0.55); font-weight: 700; margin-bottom: 6px;">— Eventos 24h</div>
+      <div style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 500;">1.847</div>
+    </div>
+    <div style="padding: 18px 20px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px;">
+      <div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(168,230,255,0.55); font-weight: 700; margin-bottom: 6px;">— Ações destrutivas 24h</div>
+      <div style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 500;">4</div>
+    </div>
+    <div style="padding: 18px 20px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px;">
+      <div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(168,230,255,0.55); font-weight: 700; margin-bottom: 6px;">— Anomalias detectadas</div>
+      <div style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 500;">0</div>
+    </div>
+  </div>
+
+  <div class="audit-table">
+
+    <div class="audit-row head">
+      <div>Timestamp</div>
+      <div>Ação</div>
+      <div>Ator</div>
+      <div>Target / detalhe</div>
+      <div></div>
+    </div>
+
+    <div class="audit-row">
+      <div class="audit-ts">2026-06-03 14:22:08</div>
+      <div><span class="audit-action flag">flag-change</span></div>
+      <div class="audit-actor"><div class="audit-actor-avatar" style="background: rgba(212,165,84,0.20);">MC</div><div class="audit-actor-name">michelle</div></div>
+      <div class="audit-target">FLAG <code>cross_floor_v2_marketplace</code> · rollout 30% → 50% (prod) · ip: 187.34.x.x</div>
+      <div style="text-align: right;"><button class="audit-detail-btn">JSON</button></div>
+    </div>
+
+    <div class="audit-row">
+      <div class="audit-ts">2026-06-03 14:18:42</div>
+      <div><span class="audit-action write">write</span></div>
+      <div class="audit-actor"><div class="audit-actor-avatar">SY</div><div class="audit-actor-name">sys/inngest</div></div>
+      <div class="audit-target">CISPay webhook processed · invoice_id <code>inv_4587</code> · status <code>paid</code> · amount R$ 6.800</div>
+      <div style="text-align: right;"><button class="audit-detail-btn">JSON</button></div>
+    </div>
+
+    <div class="audit-row">
+      <div class="audit-ts">2026-06-03 14:14:21</div>
+      <div><span class="audit-action write">write</span></div>
+      <div class="audit-actor"><div class="audit-actor-avatar">LV</div><div class="audit-actor-name">lucas</div></div>
+      <div class="audit-target">aula <code>aula_233</code> updated · field <code>visibility</code> → <code>draft</code> → <code>public</code></div>
+      <div style="text-align: right;"><button class="audit-detail-btn">JSON</button></div>
+    </div>
+
+    <div class="audit-row">
+      <div class="audit-ts">2026-06-03 13:58:09</div>
+      <div><span class="audit-action delete">delete</span></div>
+      <div class="audit-actor"><div class="audit-actor-avatar" style="background: rgba(212,165,84,0.20);">MC</div><div class="audit-actor-name">michelle</div></div>
+      <div class="audit-target">community_post <code>post_8821</code> moderated → deleted · reason: spam · LGPD purge agendado</div>
+      <div style="text-align: right;"><button class="audit-detail-btn">JSON</button></div>
+    </div>
+
+    <div class="audit-row">
+      <div class="audit-ts">2026-06-03 13:42:55</div>
+      <div><span class="audit-action read">read</span></div>
+      <div class="audit-actor"><div class="audit-actor-avatar" style="background: rgba(212,165,84,0.20);">MC</div><div class="audit-actor-name">michelle</div></div>
+      <div class="audit-target">PII access · member_id <code>seat_12</code> · field <code>cpf</code> + <code>endereco</code> · justification: candidatura review</div>
+      <div style="text-align: right;"><button class="audit-detail-btn">JSON</button></div>
+    </div>
+
+    <div class="audit-row">
+      <div class="audit-ts">2026-06-03 13:30:12</div>
+      <div><span class="audit-action write">write</span></div>
+      <div class="audit-actor"><div class="audit-actor-avatar" style="background: rgba(168,230,255,0.20); color: var(--blue-highlight);">PV</div><div class="audit-actor-name">paulo</div></div>
+      <div class="audit-target">codex_entry created · id <code>codex_22</code> · "Sobre o filtro e a porta"</div>
+      <div style="text-align: right;"><button class="audit-detail-btn">JSON</button></div>
+    </div>
+
+    <div class="audit-row">
+      <div class="audit-ts">2026-06-03 12:18:03</div>
+      <div><span class="audit-action write">write</span></div>
+      <div class="audit-actor"><div class="audit-actor-avatar">MS</div><div class="audit-actor-name">mariana</div></div>
+      <div class="audit-target">checkout completed · program <code>negociacao-alto-valor</code> · invoice <code>inv_4587</code></div>
+      <div style="text-align: right;"><button class="audit-detail-btn">JSON</button></div>
+    </div>
+
+    <div class="audit-row">
+      <div class="audit-ts">2026-06-03 11:48:32</div>
+      <div><span class="audit-action delete">delete</span></div>
+      <div class="audit-actor"><div class="audit-actor-avatar">SY</div><div class="audit-actor-name">sys/lgpd-cron</div></div>
+      <div class="audit-target">LGPD purge cycle · 14 inactive accounts anonymized · 6 hard-deleted after 180d</div>
+      <div style="text-align: right;"><button class="audit-detail-btn">JSON</button></div>
+    </div>
+
+    <div class="audit-row">
+      <div class="audit-ts">2026-06-03 11:30:18</div>
+      <div><span class="audit-action flag">flag-change</span></div>
+      <div class="audit-actor"><div class="audit-actor-avatar">LV</div><div class="audit-actor-name">lucas</div></div>
+      <div class="audit-target">FLAG <code>studio_custom_domain</code> · 0% → 5% (prod) · approved by: michelle, paulo</div>
+      <div style="text-align: right;"><button class="audit-detail-btn">JSON</button></div>
+    </div>
+
+    <div class="audit-row">
+      <div class="audit-ts">2026-06-03 10:42:11</div>
+      <div><span class="audit-action read">read</span></div>
+      <div class="audit-actor"><div class="audit-actor-avatar">LV</div><div class="audit-actor-name">lucas</div></div>
+      <div class="audit-target">analytics dashboard accessed · cohort <code>q1_2026</code> · 248 records</div>
+      <div style="text-align: right;"><button class="audit-detail-btn">JSON</button></div>
+    </div>
+
+  </div>
+
+  <div style="margin-top: 18px; text-align: center; padding: 16px; color: rgba(255,255,255,0.45); font-size: 12px;">
+    Mostrando 10 de 1.847 eventos das últimas 24h · <a href="audit-viewer.html" style="color: var(--blue-highlight);">Carregar mais</a>
+  </div>
+
+</div>
+
+</body>
+</html>

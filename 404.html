@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 · Página não encontrada · HMC</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_shared.css?v=16">
+<script src="_icons.js?v=16" defer></script>
+<style>
+  body { background: var(--blue-deep); color: white; min-height: 100vh; display: flex; flex-direction: column; }
+  .nf-shell { flex: 1; display: flex; align-items: center; justify-content: center; padding: 56px 32px; position: relative; overflow: hidden; }
+  .nf-shell::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at center, rgba(77,184,255,0.10) 0%, transparent 60%); pointer-events: none; }
+  .nf-inner { max-width: 720px; text-align: center; position: relative; z-index: 1; }
+  .nf-code { font-family: 'Playfair Display', serif; font-size: 220px; font-weight: 500; line-height: 1; letter-spacing: -0.04em; background: linear-gradient(180deg, #A8E6FF, #4DB8FF); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 24px; }
+  .nf-rule { width: 56px; height: 1px; background: var(--blue-realce); margin: 0 auto 18px; }
+  .nf-eyebrow { font-size: 11px; color: var(--blue-highlight); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; margin-bottom: 18px; }
+  .nf-title { font-family: 'Playfair Display', serif; font-size: 44px; font-weight: 500; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 18px; }
+  .nf-sub { font-size: 16px; line-height: 1.65; color: rgba(255,255,255,0.65); max-width: 520px; margin: 0 auto 36px; }
+  .nf-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .nf-quick { margin-top: 56px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; max-width: 600px; margin-left: auto; margin-right: auto; }
+  .nf-quick a { padding: 18px 14px; background: rgba(255,255,255,0.04); border: 1px solid var(--divider-on-dark); border-radius: 12px; color: white; text-decoration: none; font-size: 13px; font-weight: 500; transition: all 200ms; display: flex; align-items: center; gap: 10px; justify-content: center; }
+  .nf-quick a:hover { background: rgba(77,184,255,0.08); border-color: rgba(77,184,255,0.30); transform: translateY(-2px); }
+  @media (max-width: 700px) { .nf-code { font-size: 140px; } .nf-title { font-size: 30px; } }
+</style>
+</head>
+<body>
+
+<div class="nf-shell">
+  <div class="nf-inner">
+    <div class="nf-code">404</div>
+    <div class="nf-rule"></div>
+    <div class="nf-eyebrow">— Rota inexistente</div>
+    <h1 class="nf-title">Esta cadeira <span class="serif-italic">não existe</span>.</h1>
+    <p class="nf-sub">A página que você tentou acessar não está no mapa do clube. Talvez o link tenha sido movido, ou o endereço não confere. Não há motivo para frustração — voltemos ao caminho.</p>
+
+    <div class="nf-cta">
+      <a href="hub.html" class="btn btn-chrome btn-lg">Ir para o Hub</a>
+      <a href="landing.html" class="btn btn-outline btn-lg" style="color: white; border-color: rgba(255,255,255,0.30);">Página inicial</a>
+    </div>
+
+    <div class="nf-quick">
+      <a href="00-public/catalog.html"><i data-icon="search" class="icon icon-sm"></i> Catálogo</a>
+      <a href="10-clube/01-dashboard.html"><i data-icon="landmark" class="icon icon-sm"></i> Clube</a>
+      <a href="20-mentor/studio-home.html"><i data-icon="briefcase" class="icon icon-sm"></i> Studio</a>
+      <a href="30-mentorado/biblioteca.html"><i data-icon="book-open" class="icon icon-sm"></i> Estudos</a>
+    </div>
+  </div>
+</div>
+
+<footer style="padding: 28px 32px; border-top: 1px solid var(--divider-on-dark); text-align: center;">
+  <div style="font-size: 10px; color: rgba(255,255,255,0.40); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 600;">Excelência · Conexão · Impacto · MMXXVI</div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aulas · HMC Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_shared.css?v=16"><script src="../_icons.js?v=16" defer></script>
+<script src="../_persona.js?v=16" defer></script>
+<script src="../_modals.js?v=16" defer></script>
+<style>
+.aula-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+.aula-card { display: block; text-decoration: none; color: inherit; border-radius: 12px; overflow: hidden; background: var(--bg-card); border: 1px solid var(--divider); transition: all 180ms; }
+.aula-card:hover { border-color: var(--blue-realce); transform: translateY(-2px); }
+.aula-thumb { aspect-ratio: 16/9; background: linear-gradient(135deg, var(--blue-deep), var(--blue-realce)); display: flex; align-items: center; justify-content: center; position: relative; color: white; }
+.aula-thumb-play { width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.20); backdrop-filter: blur(20px); display: flex; align-items: center; justify-content: center; }
+.aula-thumb-duration { position: absolute; bottom: 8px; right: 8px; padding: 3px 8px; background: rgba(0,0,0,0.65); font-size: 11px; font-family: 'JetBrains Mono', monospace; border-radius: 4px; }
+.aula-meta { padding: 14px 16px; }
+.aula-badges { display: flex; gap: 5px; margin-bottom: 8px; }
+.aula-title { font-weight: 600; font-size: 13px; line-height: 1.35; margin-bottom: 6px; }
+.aula-info { font-size: 11px; color: var(--text-muted); }
+.modulo-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--divider); }
+.filter-pill { padding: 6px 14px; border-radius: 999px; background: var(--bg-card); border: 1px solid var(--divider); font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-muted); cursor: pointer; }
+.filter-pill.active { background: var(--blue-realce); color: white; border-color: var(--blue-realce); }
+</style>
+</head>
+<body data-persona-aware="mode-page" data-mode-context="studio" data-required-mode="studio">
+<button class="mobile-fab" data-sidebar-mobile-toggle aria-label="Menu"><i data-icon="menu" class="icon"></i></button>
+<div class="drawer-backdrop" data-sidebar-mobile-toggle></div>
+<div class="app">
+<aside class="sidebar">
+  <a href="../hub.html" class="sidebar-brand"><img src="../hmc-logo.png" alt="" class="brand-mark-img"><div><div class="brand-text">High Mentor Club</div><div class="brand-sub">Curated by Paulo Vieira · MMXXVI</div></div></a>
+  <div class="mode-switch">
+    <a href="../hub.html" class="mode-switch-item" data-short="H"><i data-icon="home" class="icon"></i><span>Hub</span></a>
+    <a href="../10-clube/01-dashboard.html" class="mode-switch-item" data-short="C"><i data-icon="landmark" class="icon"></i><span>Clube</span></a>
+    <a href="../20-mentor/studio-home.html" class="mode-switch-item active" data-short="S"><i data-icon="briefcase" class="icon"></i><span>Studio</span></a>
+    <a href="../30-mentorado/biblioteca.html" class="mode-switch-item" data-short="E"><i data-icon="book-open" class="icon"></i><span>Estudos</span></a>
+  </div>
+  <div class="sidebar-nav-scroll">
+    <div class="nav-section">
+      <a href="../notifications.html" class="nav-item has-badge"><i data-icon="bell" class="icon icon-sm"></i>Avisos <span class="badge-count">12</span></a>
+      <a href="../agenda.html" class="nav-item"><i data-icon="calendar" class="icon icon-sm"></i>Agenda</a>
+      <a href="../buscar.html" class="nav-item"><i data-icon="search" class="icon icon-sm"></i>Buscar</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">— Studio</div>
+      <a href="studio-home.html" class="nav-item"><i data-icon="briefcase" class="icon icon-sm"></i>Visão geral</a>
+      <a href="mentorias.html" class="nav-item"><i data-icon="video" class="icon icon-sm"></i>Mentorias</a>
+      <a href="aulas-biblioteca.html" class="nav-item active"><i data-icon="film" class="icon icon-sm"></i>Aulas<span class="nav-dot"></span></a>
+      <a href="mentorados.html" class="nav-item"><i data-icon="users" class="icon icon-sm"></i>Mentorados</a>
+      <a href="sessoes-1-1.html" class="nav-item"><i data-icon="calendar" class="icon icon-sm"></i>Sessões 1:1</a>
+      <a href="comunidade.html" class="nav-item"><i data-icon="message-circle" class="icon icon-sm"></i>Comunidade</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">— Negócio</div>
+      <a href="receitas.html" class="nav-item"><i data-icon="dollar" class="icon icon-sm"></i>Receitas</a>
+      <a href="checkout-builder.html" class="nav-item"><i data-icon="credit-card" class="icon icon-sm"></i>Checkout</a>
+      <a href="cupons.html" class="nav-item"><i data-icon="tag" class="icon icon-sm"></i>Cupons</a>
+      <a href="pagina-publica.html" class="nav-item"><i data-icon="globe" class="icon icon-sm"></i>Página pública</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">— Conta</div>
+      <a href="configuracoes.html" class="nav-item"><i data-icon="settings" class="icon icon-sm"></i>Configurações</a>
+      <a href="integracoes.html" class="nav-item"><i data-icon="external" class="icon icon-sm"></i>Integrações</a>
+    </div>
+  </div>
+  <div class="sidebar-footer-v3">
+    <a href="../account.html" class="user-pill-v3"><div class="avatar-sm">LV</div><div><div class="user-pill-v3-name">Lucas Vieira</div><div class="user-pill-v3-role">Seat 12</div></div></a>
+    <button class="sidebar-toggle-btn" data-sidebar-toggle><i data-icon="chevron-left" class="icon"></i><span>Recolher menu</span></button>
+  </div>
+</aside>
+
+<main class="main">
+  <div class="page-head">
+    <div class="page-head-text">
+      <div class="page-eyebrow"><span class="gold-rule"></span><span class="page-eyebrow-text">Studio · Biblioteca</span></div>
+      <h1 class="page-title">Sua <span class="page-title-serif-italic">biblioteca</span> de aulas.</h1>
+      <p class="page-sub">52 aulas no ar, 12 em produção. Upload via Mux, organização por módulos, distribuição automática para a mentoria escolhida.</p>
+    </div>
+    <button class="btn btn-chrome btn-sm"><i data-icon="upload" class="icon icon-sm"></i> Subir nova aula</button>
+  </div>
+
+  <div class="grid grid-4 mb-12" style="gap: 24px;">
+    <div class="stat-block"><div class="stat-eyebrow">— Aulas no ar</div><div class="stat-display">52</div><div class="stat-delta">+4 esta semana</div></div>
+    <div class="stat-block"><div class="stat-eyebrow">— Em produção</div><div class="stat-display">12</div><div class="stat-delta">3 aguardando revisão</div></div>
+    <div class="stat-block"><div class="stat-eyebrow">— Horas gravadas</div><div class="stat-display">31h</div><div class="stat-delta">Média 24 min/aula</div></div>
+    <div class="stat-block"><div class="stat-eyebrow">— Engagement</div><div class="stat-display">87%</div><div class="stat-delta">Top 10% plataforma</div></div>
+  </div>
+
+  <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 28px; flex-wrap: wrap;">
+    <span class="filter-pill active">Todos · 52</span>
+    <span class="filter-pill">Vieira de Liderança · 38</span>
+    <span class="filter-pill">P&amp;L Gerentes · 14</span>
+    <input type="search" class="search" placeholder="Buscar aula..." style="max-width: 280px; margin-left: auto;">
+  </div>
+
+  <!-- MÓDULO 03 (em destaque por ter rascunho) -->
+  <div class="mb-12">
+    <div class="modulo-head">
+      <div>
+        <div class="eyebrow-chrome" style="margin-bottom: 4px;">— Vieira de Liderança · Módulo 03</div>
+        <div class="section-title">Mentalidade de P&amp;L</div>
+        <div class="section-sub">9 aulas · 8 no ar + 1 rascunho · 4h32 total</div>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <button class="btn btn-outline btn-sm">Editar módulo</button>
+        <a href="aula-edit.html" class="btn btn-chrome btn-sm"><i data-icon="plus" class="icon icon-sm"></i> Nova aula</a>
+      </div>
+    </div>
+
+    <div class="aula-grid">
+      <a href="aula-edit.html" class="aula-card">
+        <div class="aula-thumb"><div class="aula-thumb-play"><i data-icon="play" class="icon"></i></div><div class="aula-thumb-duration">26:11</div></div>
+        <div class="aula-meta"><div class="aula-badges"><span class="badge badge-success" style="font-size: 9px;">No ar</span></div><div class="aula-title">P&amp;L 101 para não-financeiros</div><div class="aula-info">Aula 01 · 240 views</div></div>
+      </a>
+      <a href="aula-edit.html" class="aula-card">
+        <div class="aula-thumb"><div class="aula-thumb-play"><i data-icon="play" class="icon"></i></div><div class="aula-thumb-duration">24:11</div></div>
+        <div class="aula-meta"><div class="aula-badges"><span class="badge badge-warn" style="font-size: 9px;">Rascunho</span></div><div class="aula-title">Como pensar P&amp;L sendo gerente</div><div class="aula-info">Aula 02 · não publicada</div></div>
+      </a>
+      <a href="aula-edit.html" class="aula-card">
+        <div class="aula-thumb"><div class="aula-thumb-play"><i data-icon="play" class="icon"></i></div><div class="aula-thumb-duration">19:32</div></div>
+        <div class="aula-meta"><div class="aula-badges"><span class="badge badge-success" style="font-size: 9px;">No ar</span></div><div class="aula-title">Como apresentar P&amp;L pro board</div><div class="aula-info">Aula 05 · 142 views</div></div>
+      </a>
+      <a href="aula-edit.html" class="aula-card">
+        <div class="aula-thumb"><div class="aula-thumb-play"><i data-icon="play" class="icon"></i></div><div class="aula-thumb-duration">22:08</div></div>
+        <div class="aula-meta"><div class="aula-badges"><span class="badge badge-success" style="font-size: 9px;">No ar</span></div><div class="aula-title">Defender orçamento sem ser técnico</div><div class="aula-info">Aula 06 · 98 views</div></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- MÓDULO 01 -->
+  <div class="mb-12">
+    <div class="modulo-head">
+      <div>
+        <div class="eyebrow-chrome" style="margin-bottom: 4px;">— Vieira de Liderança · Módulo 01</div>
+        <div class="section-title">Posicionamento sênior</div>
+        <div class="section-sub">8 aulas · 100% no ar · 4h12 total</div>
+      </div>
+      <div style="display: flex; gap: 8px;"><button class="btn btn-outline btn-sm">Editar</button><a href="aula-edit.html" class="btn btn-ghost btn-sm"><i data-icon="plus" class="icon icon-sm"></i> Aula</a></div>
+    </div>
+
+    <div class="aula-grid">
+      <a href="aula-edit.html" class="aula-card"><div class="aula-thumb"><div class="aula-thumb-play"><i data-icon="play" class="icon"></i></div><div class="aula-thumb-duration">14:32</div></div><div class="aula-meta"><div class="aula-badges"><span class="badge badge-success" style="font-size: 9px;">No ar</span><span class="badge" style="font-size: 9px;">Grátis</span></div><div class="aula-title">Gerente vs executivo</div><div class="aula-info">Aula 01 · 387 views</div></div></a>
+      <a href="aula-edit.html" class="aula-card"><div class="aula-thumb"><div class="aula-thumb-play"><i data-icon="play" class="icon"></i></div><div class="aula-thumb-duration">22:08</div></div><div class="aula-meta"><div class="aula-badges"><span class="badge badge-success" style="font-size: 9px;">No ar</span><span class="badge" style="font-size: 9px;">Grátis</span></div><div class="aula-title">O erro de focar em performance</div><div class="aula-info">Aula 02 · 312 views</div></div></a>
+      <a href="aula-edit.html" class="aula-card"><div class="aula-thumb"><div class="aula-thumb-play"><i data-icon="play" class="icon"></i></div><div class="aula-thumb-duration">28:15</div></div><div class="aula-meta"><div class="aula-badges"><span class="badge badge-success" style="font-size: 9px;">No ar</span></div><div class="aula-title">Construindo seu trade pessoal</div><div class="aula-info">Aula 03 · 268 views</div></div></a>
+      <a href="aula-edit.html" class="aula-card"><div class="aula-thumb"><div class="aula-thumb-play"><i data-icon="play" class="icon"></i></div><div class="aula-thumb-duration">19:48</div></div><div class="aula-meta"><div class="aula-badges"><span class="badge badge-success" style="font-size: 9px;">No ar</span></div><div class="aula-title">Linguagem de board</div><div class="aula-info">Aula 04 · 198 views</div></div></a>
+    </div>
+  </div>
+
+  <!-- MÓDULO 02 -->
+  <div class="mb-12">
+    <div class="modulo-head">
+      <div>
+        <div class="eyebrow-chrome" style="margin-bottom: 4px;">— Vieira de Liderança · Módulo 02</div>
+        <div class="section-title">Comunicação executiva</div>
+        <div class="section-sub">8 aulas · 100% no ar · 3h48 total</div>
+      </div>
+      <div style="display: flex; gap: 8px;"><button class="btn btn-outline btn-sm">Editar</button></div>
+    </div>
+
+    <div class="aula-grid">
+      <a href="aula-edit.html" class="aula-card"><div class="aula-thumb"><div class="aula-thumb-play"><i data-icon="play" class="icon"></i></div><div class="aula-thumb-duration">18:24</div></div><div class="aula-meta"><div class="aula-badges"><span class="badge badge-success" style="font-size: 9px;">No ar</span></div><div class="aula-title">A regra do "menos é mais"</div><div class="aula-info">Aula 01 · 240 views</div></div></a>
+      <a href="aula-edit.html" class="aula-card"><div class="aula-thumb"><div class="aula-thumb-play"><i data-icon="play" class="icon"></i></div><div class="aula-thumb-duration">23:12</div></div><div class="aula-meta"><div class="aula-badges"><span class="badge badge-success" style="font-size: 9px;">No ar</span></div><div class="aula-title">Estrutura da decisão escrita</div><div class="aula-info">Aula 02 · 198 views</div></div></a>
+      <a href="aula-edit.html" class="aula-card"><div class="aula-thumb"><div class="aula-thumb-play"><i data-icon="play" class="icon"></i></div><div class="aula-thumb-duration">31:08</div></div><div class="aula-meta"><div class="aula-badges"><span class="badge badge-success" style="font-size: 9px;">No ar</span></div><div class="aula-title">One-pager que vende ideia</div><div class="aula-info">Aula 03 · 156 views</div></div></a>
+      <a href="aula-edit.html" class="aula-card"><div class="aula-thumb"><div class="aula-thumb-play"><i data-icon="play" class="icon"></i></div><div class="aula-thumb-duration">26:42</div></div><div class="aula-meta"><div class="aula-badges"><span class="badge badge-success" style="font-size: 9px;">No ar</span></div><div class="aula-title">Tom em momentos críticos</div><div class="aula-info">Aula 04 · 132 views</div></div></a>
+    </div>
+  </div>
+
+  <div style="text-align: center; padding: 24px;">
+    <button class="btn btn-outline">Ver todos os 8 módulos →</button>
+  </div>
+</main>
+</div>
+<div class="wf-note">Studio · Biblioteca de aulas</div>
+</body>
+</html>

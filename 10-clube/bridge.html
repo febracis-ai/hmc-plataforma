@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Bridge · HMC Clube</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_shared.css?v=16"><script src="../_icons.js?v=16" defer></script>
+<script src="../_modals.js?v=16" defer></script>
+<script src="../_persona.js?v=16" defer></script>
+<script>document.addEventListener("DOMContentLoaded",()=>{if(window.HMC_PERSONA&&window.HMC_PERSONA.applyTierAwareSidebar)window.HMC_PERSONA.applyTierAwareSidebar();});</script>
+<style>
+.bridge-hero { background: linear-gradient(135deg, #050A15, #0A1530 60%, #102b5e); border-radius: 20px; padding: 56px; margin-bottom: 36px; color: white; position: relative; overflow: hidden; }
+.bridge-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 20% 100%, rgba(168,230,255,0.16) 0%, transparent 60%); pointer-events: none; }
+.franquia-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; }
+.franquia-card { padding: 28px; background: var(--bg-card); border: 1px solid var(--divider); border-radius: 14px; text-decoration: none; color: inherit; transition: all 200ms; }
+.franquia-card:hover { border-color: var(--blue-realce); transform: translateY(-2px); }
+.franquia-flag { width: 44px; height: 44px; border-radius: 12px; background: linear-gradient(135deg, var(--blue-realce), var(--blue-chrome)); color: var(--blue-highlight); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; margin-bottom: 18px; }
+.franquia-title { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500; letter-spacing: -0.015em; margin-bottom: 6px; }
+.franquia-status { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; }
+.franquia-status.active { color: #2ecc71; }
+.franquia-status.busy { color: #f39c12; }
+.franquia-status.closed { color: var(--text-faint); }
+.franquia-stats { display: flex; gap: 18px; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--divider); font-size: 12px; }
+.franquia-stat-label { color: var(--text-muted); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; }
+.franquia-stat-val { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 500; margin-top: 4px; }
+</style>
+</head>
+<body data-persona-aware="mode-page" data-mode-context="clube" data-required-mode="clube">
+<button class="mobile-fab" data-sidebar-mobile-toggle aria-label="Menu"><i data-icon="menu" class="icon"></i></button>
+<div class="drawer-backdrop" data-sidebar-mobile-toggle></div>
+<div class="app">
+<aside class="sidebar">
+  <a href="../hub.html" class="sidebar-brand"><img src="../hmc-logo.png" alt="" class="brand-mark-img"><div><div class="brand-text">High Mentor Club</div><div class="brand-sub">Curated by Paulo Vieira · MMXXVI</div></div></a>
+  <div class="mode-switch">
+    <a href="../hub.html" class="mode-switch-item" data-short="H"><i data-icon="home" class="icon"></i><span>Hub</span></a>
+    <a href="../10-clube/01-dashboard.html" class="mode-switch-item active" data-short="C"><i data-icon="landmark" class="icon"></i><span>Clube</span></a>
+    <a href="../20-mentor/studio-home.html" class="mode-switch-item" data-short="S"><i data-icon="briefcase" class="icon"></i><span>Studio</span></a>
+    <a href="../30-mentorado/biblioteca.html" class="mode-switch-item" data-short="E"><i data-icon="book-open" class="icon"></i><span>Estudos</span></a>
+  </div>
+  <div class="sidebar-nav-scroll">
+    <div class="nav-section">
+      <a href="../notifications.html" class="nav-item has-badge"><i data-icon="bell" class="icon icon-sm"></i>Avisos <span class="badge-count">12</span></a>
+      <a href="../agenda.html" class="nav-item"><i data-icon="calendar" class="icon icon-sm"></i>Agenda</a>
+      <a href="../buscar.html" class="nav-item"><i data-icon="search" class="icon icon-sm"></i>Buscar</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">— A Plataforma</div>
+      <a href="01-dashboard.html" class="nav-item"><i data-icon="home" class="icon icon-sm"></i>Sala do Membro</a>
+      <a href="02-calendar.html" class="nav-item"><i data-icon="users" class="icon icon-sm"></i>Council</a>
+      <a href="03-codex.html" class="nav-item"><i data-icon="book" class="icon icon-sm"></i>Codex</a>
+      <a href="04-cross-floor.html" class="nav-item"><i data-icon="compass" class="icon icon-sm"></i>Cross-Floor</a>
+      <a href="05-yield.html" class="nav-item"><i data-icon="dollar" class="icon icon-sm"></i>Yield</a>
+      <a href="06-pilgrimages.html" class="nav-item"><i data-icon="map-pin" class="icon icon-sm"></i>Pilgrimages</a>
+      <a href="07-seal.html" class="nav-item"><i data-icon="award" class="icon icon-sm"></i>Selo</a>
+      <a href="perfil-tier.html" class="nav-item"><i data-icon="shield" class="icon icon-sm"></i>Meu Tier</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">— Tier III · Sovereign Mentor</div>
+      <a href="quatro-motores.html" class="nav-item"><i data-icon="zap" class="icon icon-sm"></i>Os Quatro Motores</a>
+      <a href="antechamber.html" class="nav-item"><i data-icon="lock" class="icon icon-sm"></i>Antechamber</a>
+      <a href="curator-address.html" class="nav-item"><i data-icon="mic" class="icon icon-sm"></i>Curator's Address</a>
+      <a href="bridge.html" class="nav-item active"><i data-icon="link" class="icon icon-sm"></i>The Bridge<span class="nav-dot"></span></a>
+    </div>
+  </div>
+  <div class="sidebar-footer-v3">
+    <a href="../account.html" class="user-pill-v3"><div class="avatar-sm">LV</div><div><div class="user-pill-v3-name">Lucas Vieira</div><div class="user-pill-v3-role">Seat 12 · Tier II</div></div></a>
+    <button class="sidebar-toggle-btn" data-sidebar-toggle><i data-icon="chevron-left" class="icon"></i><span>Recolher menu</span></button>
+  </div>
+</aside>
+
+<main class="main">
+
+  <div class="bridge-hero">
+    <div style="position: relative; z-index: 1; max-width: 720px;">
+      <div style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.10); border-radius: 100px; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; margin-bottom: 18px;">
+        <i data-icon="lock" class="icon icon-sm"></i> Tier III · Sovereign Mentor
+      </div>
+      <h1 style="font-family: 'Playfair Display', serif; font-size: 56px; font-weight: 500; letter-spacing: -0.035em; line-height: 1.05; margin-bottom: 18px;">The <span class="serif-italic" style="background: linear-gradient(135deg, #A8E6FF, #4DB8FF); -webkit-background-clip: text; background-clip: text; color: transparent;">Bridge</span></h1>
+      <p style="font-size: 16px; line-height: 1.6; color: rgba(255,255,255,0.72); max-width: 560px;">Ponte oficial entre o HMC e o rede de franquias do ecossistema PV. Indicação de mentorados pra franquias ativas, com comissão estruturada pelo HMC e pagamento direto via franquias do ecossistema PV.</p>
+      <div style="display: flex; gap: 30px; margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.12);">
+        <div><div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(168,230,255,0.65); font-weight: 700; margin-bottom: 4px;">— Indicações ativas</div><div style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 500;">7</div></div>
+        <div><div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(168,230,255,0.65); font-weight: 700; margin-bottom: 4px;">— Convertidas 2026</div><div style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 500;">12</div></div>
+        <div><div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(168,230,255,0.65); font-weight: 700; margin-bottom: 4px;">— Comissão YTD</div><div style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 500;">R$ 184k</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-head">
+    <div class="page-head-text">
+      <div class="page-eyebrow"><span class="gold-rule"></span><span class="page-eyebrow-text">Franquias franquias do ecossistema PV ativas</span></div>
+      <h2 class="page-title">Pra <span class="page-title-serif-italic">qual</span> abrir a porta?</h2>
+      <p class="page-sub">12 franquias ativas, 4 com fila de espera, 2 fechadas pra novos. Indique mentorado seu = comissão estruturada + tracking automático.</p>
+    </div>
+    <a href="franquia-detail.html" class="btn btn-chrome btn-sm"><i data-icon="user-plus" class="icon icon-sm"></i> Indicar mentorado</a>
+  </div>
+
+  <div class="franquia-grid">
+
+    <a href="franquia-detail.html" class="franquia-card">
+      <div class="franquia-flag">SP</div>
+      <div class="franquia-status active">— Ativa · aceita indicações</div>
+      <div class="franquia-title">São Paulo · Jardins</div>
+      <div class="muted" style="font-size: 13px; line-height: 1.55;">Franqueado: Carlos Ribeiro · 4 anos no sistema. Foco em executivos C-level finance.</div>
+      <div class="franquia-stats">
+        <div><div class="franquia-stat-label">Vagas</div><div class="franquia-stat-val">8</div></div>
+        <div><div class="franquia-stat-label">Comissão</div><div class="franquia-stat-val">8%</div></div>
+        <div><div class="franquia-stat-label">Pago em</div><div class="franquia-stat-val">12×</div></div>
+      </div>
+    </a>
+
+    <a href="franquia-detail.html" class="franquia-card">
+      <div class="franquia-flag">RJ</div>
+      <div class="franquia-status busy">— Fila de espera (3)</div>
+      <div class="franquia-title">Rio · Leblon</div>
+      <div class="muted" style="font-size: 13px; line-height: 1.55;">Franqueada: Marina Costa · 6 anos. Especialidade: founders de startup early-stage.</div>
+      <div class="franquia-stats">
+        <div><div class="franquia-stat-label">Vagas</div><div class="franquia-stat-val">0</div></div>
+        <div><div class="franquia-stat-label">Comissão</div><div class="franquia-stat-val">8%</div></div>
+        <div><div class="franquia-stat-label">Próx janela</div><div class="franquia-stat-val">ago/26</div></div>
+      </div>
+    </a>
+
+    <a href="franquia-detail.html" class="franquia-card">
+      <div class="franquia-flag">BH</div>
+      <div class="franquia-status active">— Ativa · alta demanda</div>
+      <div class="franquia-title">Belo Horizonte · Savassi</div>
+      <div class="muted" style="font-size: 13px; line-height: 1.55;">Franqueado: Pedro Salomão · 3 anos. Forte em médias empresas familiares mineiras.</div>
+      <div class="franquia-stats">
+        <div><div class="franquia-stat-label">Vagas</div><div class="franquia-stat-val">5</div></div>
+        <div><div class="franquia-stat-label">Comissão</div><div class="franquia-stat-val">10%</div></div>
+        <div><div class="franquia-stat-label">Pago em</div><div class="franquia-stat-val">12×</div></div>
+      </div>
+    </a>
+
+    <a href="franquia-detail.html" class="franquia-card">
+      <div class="franquia-flag">PE</div>
+      <div class="franquia-status active">— Ativa · nova franquia</div>
+      <div class="franquia-title">Recife · Boa Viagem</div>
+      <div class="muted" style="font-size: 13px; line-height: 1.55;">Franqueada: Lívia Albuquerque · 1 ano. Abertura forte no NE, foco em healthcare e agro.</div>
+      <div class="franquia-stats">
+        <div><div class="franquia-stat-label">Vagas</div><div class="franquia-stat-val">12</div></div>
+        <div><div class="franquia-stat-label">Comissão</div><div class="franquia-stat-val">12%</div></div>
+        <div><div class="franquia-stat-label">Bônus 1ª venda</div><div class="franquia-stat-val">+5%</div></div>
+      </div>
+    </a>
+
+    <a href="franquia-detail.html" class="franquia-card">
+      <div class="franquia-flag">DF</div>
+      <div class="franquia-status busy">— Última vaga</div>
+      <div class="franquia-title">Brasília · Lago Sul</div>
+      <div class="muted" style="font-size: 13px; line-height: 1.55;">Franqueado: Rodrigo Vasques · 5 anos. Especialidade em B2G e procurement público.</div>
+      <div class="franquia-stats">
+        <div><div class="franquia-stat-label">Vagas</div><div class="franquia-stat-val">1</div></div>
+        <div><div class="franquia-stat-label">Comissão</div><div class="franquia-stat-val">8%</div></div>
+        <div><div class="franquia-stat-label">Pago em</div><div class="franquia-stat-val">à vista</div></div>
+      </div>
+    </a>
+
+    <a href="franquia-detail.html" class="franquia-card">
+      <div class="franquia-flag">CE</div>
+      <div class="franquia-status closed">— Fechada · cap atingida</div>
+      <div class="franquia-title">Fortaleza · Sede Vieira</div>
+      <div class="muted" style="font-size: 13px; line-height: 1.55;">Sede do ecossistema PV. Não aceita indicações externas, fluxo direto Febracis.</div>
+      <div class="franquia-stats">
+        <div><div class="franquia-stat-label">Vagas</div><div class="franquia-stat-val">—</div></div>
+        <div><div class="franquia-stat-label">Comissão</div><div class="franquia-stat-val">—</div></div>
+        <div><div class="franquia-stat-label">Status</div><div class="franquia-stat-val">Sede</div></div>
+      </div>
+    </a>
+
+  </div>
+
+  <div style="margin-top: 32px; padding: 32px; background: var(--bg-card); border-left: 3px solid var(--blue-realce); border-radius: 12px;">
+    <div class="eyebrow-chrome" style="margin-bottom: 12px;">— Como funciona</div>
+    <ul style="list-style: none; padding: 0; font-size: 14px; line-height: 1.9; color: var(--text);">
+      <li>↳ Você indica um mentorado seu via formulário do HMC (não-revelado ao mentorado a princípio)</li>
+      <li>↳ A franquia entra em contato com pitch da franquia adequada</li>
+      <li>↳ Conversão: comissão estruturada (8-12% conforme franquia) cai direto na sua wallet HMC</li>
+      <li>↳ Pagamento mensal junto com Yield CIS, totalmente transparente</li>
+      <li>↳ Indicação não-convertida em 90 dias = libera mentorado pra outra franquia</li>
+    </ul>
+  </div>
+
+</main>
+</div>
+<div class="wf-note">Clube · The Bridge · Tier III</div>
+</body>
+</html>

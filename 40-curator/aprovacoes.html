@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aprovações · HMC Curator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../_shared.css?v=16">
+  <script src="../_icons.js?v=16" defer></script>
+<script src="../_persona.js?v=16" defer></script>
+<script src="../_modals.js?v=16" defer></script>
+</head>
+<body data-persona-aware="mode-page" data-mode-context="curator" data-required-mode="curator">
+
+<button class="mobile-fab" data-sidebar-mobile-toggle aria-label="Menu"><i data-icon="menu" class="icon"></i></button>
+<div class="drawer-backdrop" data-sidebar-mobile-toggle></div>
+
+<div class="app">
+  <aside class="sidebar">
+    <a href="../hub.html" class="sidebar-brand">
+      <img src="../hmc-logo.png" alt="" class="brand-mark-img">
+      <div>
+        <div class="brand-text">High Mentor Club</div>
+        <div class="brand-sub">Curated by Paulo Vieira · MMXXVI</div>
+      </div>
+    </a>
+
+    <div class="mode-switch">
+    <a href="../hub-curator.html" class="mode-switch-item" data-short="H"><i data-icon="home" class="icon"></i><span>Hub</span></a>
+    <a href="aprovacoes.html" class="mode-switch-item active" data-short="X"><i data-icon="shield-check" class="icon"></i><span>Curator</span></a>
+  </div>
+
+    <div class="sidebar-nav-scroll">
+      <div class="nav-section">
+        <a href="../notifications.html" class="nav-item has-badge" data-tooltip="Avisos"><i data-icon="bell" class="icon icon-sm"></i>Avisos <span class="badge-count">7</span></a>
+        <a href="../agenda.html" class="nav-item" data-tooltip="Agenda"><i data-icon="calendar" class="icon icon-sm"></i>Agenda</a>
+        <a href="../buscar.html" class="nav-item" data-tooltip="Buscar"><i data-icon="search" class="icon icon-sm"></i>Buscar</a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-label">— Curadoria</div>
+        <a href="aprovacoes.html" class="nav-item active has-badge" data-tooltip="Aprovações"><i data-icon="shield-check" class="icon icon-sm"></i>Aprovações <span class="badge-count">3</span><span class="nav-dot"></span></a>
+        <a href="membros-ativos.html" class="nav-item" data-tooltip="Membros ativos"><i data-icon="users" class="icon icon-sm"></i>Membros ativos</a>
+        <a href="tier-promotion.html" class="nav-item has-badge"><i data-icon="trending-up" class="icon icon-sm"></i>Promoções de Tier <span class="badge-count">5</span></a>
+      <a href="disputas-cross-floor.html" class="nav-item" data-tooltip="Disputas Cross-Floor"><i data-icon="alert" class="icon icon-sm"></i>Disputas Cross-Floor</a>
+        <a href="moderacao.html" class="nav-item" data-tooltip="Moderação"><i data-icon="message" class="icon icon-sm"></i>Moderação</a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-label">— Negócio HMC</div>
+        <a href="financeiro-consolidado.html" class="nav-item" data-tooltip="Financeiro"><i data-icon="dollar" class="icon icon-sm"></i>Financeiro consolidado</a>
+        <a href="yield-cis.html" class="nav-item" data-tooltip="Yield CIS"><i data-icon="trending-up" class="icon icon-sm"></i>Yield CIS</a>
+        <a href="analytics-clube.html" class="nav-item" data-tooltip="Analytics"><i data-icon="bar-chart" class="icon icon-sm"></i>Analytics do clube</a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-label">— Operação</div>
+        <a href="council-admin.html" class="nav-item" data-tooltip="Council"><i data-icon="landmark" class="icon icon-sm"></i>Council (agenda)</a>
+        <a href="pilgrimages-admin.html" class="nav-item" data-tooltip="Pilgrimages"><i data-icon="compass" class="icon icon-sm"></i>Pilgrimages</a>
+        <a href="codex-publishing.html" class="nav-item" data-tooltip="Codex"><i data-icon="book" class="icon icon-sm"></i>Codex publishing</a>
+        <a href="antechamber-admin.html" class="nav-item" data-tooltip="Antechamber"><i data-icon="mic" class="icon icon-sm"></i>Antechamber</a>
+      </div>
+    </div>
+
+    <div class="sidebar-footer-v3">
+      <a href="../account.html" class="user-pill-v3">
+        <div class="avatar-sm">MC</div>
+        <div>
+          <div class="user-pill-v3-name">Michelle</div>
+          <div class="user-pill-v3-role">Time Curadoria</div>
+        </div>
+      </a>
+      <button class="sidebar-toggle-btn" data-sidebar-toggle>
+        <i data-icon="chevron-left" class="icon"></i>
+        <span>Recolher menu</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div class="page-head">
+      <div class="page-head-text">
+        <div class="page-eyebrow">
+          <span class="gold-rule"></span>
+          <span class="page-eyebrow-text">Curator · Aprovações</span>
+        </div>
+        <h1 class="page-title">Fila de <span class="page-title-serif-italic">candidatos</span>.</h1>
+        <p class="page-sub">7 mentores aguardando veredito. Próxima Curatoria com PV: sábado 22 nov às 14h. Você pode decidir agora ou levar pra mesa.</p>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <button class="btn btn-outline">Exportar dossiê PDF</button>
+        <button class="btn btn-chrome">Reunião com PV</button>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="grid grid-4 mb-12" style="gap: 56px;">
+      <div class="stat-block">
+        <div class="stat-eyebrow">— Na fila</div>
+        <div class="stat-display">7</div>
+        <div class="stat-delta">5 com indicação · 2 externos</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-eyebrow">— Aprovados 2026</div>
+        <div class="stat-display">12</div>
+        <div class="stat-delta">11 ativos · 1 desistiu</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-eyebrow">— Taxa de admissão</div>
+        <div class="stat-display">31%</div>
+        <div class="stat-delta">↘ vs 38% no Q2</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-eyebrow">— Tempo médio decisão</div>
+        <div class="stat-display">9d</div>
+        <div class="stat-delta">Dossiê → veredito</div>
+      </div>
+    </div>
+
+    <!-- FILTROS -->
+    <div style="display: flex; gap: 12px; margin-bottom: 32px; align-items: center;">
+      <button class="btn btn-outline btn-sm" style="background: var(--bg-card-hover);">Todos <span style="color: var(--text-muted); margin-left: 6px;">7</span></button>
+      <button class="btn btn-ghost btn-sm">Com indicação <span style="color: var(--text-muted); margin-left: 6px;">5</span></button>
+      <button class="btn btn-ghost btn-sm">Externos <span style="color: var(--text-muted); margin-left: 6px;">2</span></button>
+      <button class="btn btn-ghost btn-sm">Aguardando PV <span style="color: var(--text-muted); margin-left: 6px;">3</span></button>
+      <input type="search" class="search" placeholder="Buscar candidato..." style="max-width: 280px; margin-left: auto;">
+    </div>
+
+    <!-- LISTA -->
+    <div class="surface" style="padding: 0;">
+
+      <!-- CANDIDATO 1 · QUASE APROVADO -->
+      <div style="display: grid; grid-template-columns: 96px 1fr auto; gap: 24px; padding: 32px 40px; border-bottom: 1px solid var(--divider); align-items: center;">
+        <div style="width: 96px; height: 96px; border-radius: 12px; background: linear-gradient(135deg, var(--blue-realce) 0%, var(--blue-chrome) 100%); display: flex; align-items: center; justify-content: center; color: var(--blue-highlight); font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 500;">MO</div>
+        <div>
+          <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+            <span class="badge badge-success">3/3 endorsos</span>
+            <span class="badge badge-accent">Indicado por Patrícia L.</span>
+            <span class="badge">Tier I solicitado</span>
+          </div>
+          <h3 style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; letter-spacing: -0.015em; margin-bottom: 4px;">Marcelo Otto</h3>
+          <div class="muted" style="font-size: 13px; margin-bottom: 12px;">Otto Vendas · R$ 38k médio · 18 mentorados ativos · São Paulo</div>
+          <div style="display: flex; gap: 24px; padding-top: 12px; border-top: 1px solid var(--divider); font-size: 12px;">
+            <div>
+              <div class="muted" style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">Endorsos</div>
+              <div style="margin-top: 4px;">Patrícia L. · André C. · Lucas V.</div>
+            </div>
+            <div>
+              <div class="muted" style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">Tempo na fila</div>
+              <div style="margin-top: 4px;">11 dias</div>
+            </div>
+            <div>
+              <div class="muted" style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">Status</div>
+              <div style="margin-top: 4px; color: var(--blue-realce); font-weight: 600;">Pronto para veredito</div>
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px; min-width: 180px;">
+          <button class="btn btn-chrome">Aprovar para Tier I</button>
+          <button class="btn btn-secondary btn-sm">Levar pra PV</button>
+          <button class="btn btn-ghost btn-sm">Vetar</button>
+        </div>
+      </div>
+
+      <!-- CANDIDATO 2 -->
+      <div style="display: grid; grid-template-columns: 96px 1fr auto; gap: 24px; padding: 32px 40px; border-bottom: 1px solid var(--divider); align-items: center;">
+        <div style="width: 96px; height: 96px; border-radius: 12px; background: linear-gradient(135deg, var(--blue-realce) 0%, var(--blue-chrome) 100%); display: flex; align-items: center; justify-content: center; color: var(--blue-highlight); font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 500;">JF</div>
+        <div>
+          <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+            <span class="badge badge-warn">2/3 endorsos</span>
+            <span class="badge badge-accent">Indicada por André C.</span>
+            <span class="badge">Tier I solicitado</span>
+          </div>
+          <h3 style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; letter-spacing: -0.015em; margin-bottom: 4px;">Júlia Fontes</h3>
+          <div class="muted" style="font-size: 13px; margin-bottom: 12px;">Fontes Carreira · R$ 32k médio · 24 mentoradas ativas · Belo Horizonte</div>
+          <div style="display: flex; gap: 24px; padding-top: 12px; border-top: 1px solid var(--divider); font-size: 12px;">
+            <div>
+              <div class="muted" style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">Endorsos</div>
+              <div style="margin-top: 4px;">André C. · Lucas V. <span class="faint">(falta 1)</span></div>
+            </div>
+            <div>
+              <div class="muted" style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">Tempo na fila</div>
+              <div style="margin-top: 4px;">7 dias</div>
+            </div>
+            <div>
+              <div class="muted" style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">Status</div>
+              <div style="margin-top: 4px;">Aguardando 3º endorso</div>
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px; min-width: 180px;">
+          <a href="candidato-dossie.html" class="btn btn-secondary btn-sm">Ver dossiê</a>
+          <button class="btn btn-outline btn-sm">Pedir endorso</button>
+          <button class="btn btn-ghost btn-sm">Vetar</button>
+        </div>
+      </div>
+
+      <!-- CANDIDATO 3 · EXTERNO -->
+      <div style="display: grid; grid-template-columns: 96px 1fr auto; gap: 24px; padding: 32px 40px; border-bottom: 1px solid var(--divider); align-items: center;">
+        <div style="width: 96px; height: 96px; border-radius: 12px; background: linear-gradient(135deg, var(--blue-realce) 0%, var(--blue-chrome) 100%); display: flex; align-items: center; justify-content: center; color: var(--blue-highlight); font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 500;">RB</div>
+        <div>
+          <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+            <span class="badge badge-warn">0/3 endorsos</span>
+            <span class="badge">Externo · sem indicação</span>
+            <span class="badge badge-tier-3">Tier II solicitado</span>
+          </div>
+          <h3 style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; letter-spacing: -0.015em; margin-bottom: 4px;">Rafael Bandeira</h3>
+          <div class="muted" style="font-size: 13px; margin-bottom: 12px;">Bandeira Liderança · R$ 58k médio · 31 mentorados ativos · Florianópolis</div>
+          <div style="background: var(--bg-card-hover); padding: 12px 14px; border-radius: 8px; border-left: 3px solid var(--blue-realce); font-size: 13px; font-style: italic; color: var(--text-muted); margin-bottom: 12px;">
+            "Foi indicado direto pelo Paulo após Imersão CIS 27. Já tem volume e método. Vale acelerar."<br>
+            <strong style="color: var(--text); font-style: normal; font-weight: 600;">— PV (Antechamber, 28 out)</strong>
+          </div>
+          <div style="display: flex; gap: 24px; padding-top: 12px; border-top: 1px solid var(--divider); font-size: 12px;">
+            <div>
+              <div class="muted" style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">Caso especial</div>
+              <div style="margin-top: 4px; color: var(--blue-realce); font-weight: 600;">Recomendação direta de PV</div>
+            </div>
+            <div>
+              <div class="muted" style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">Audiência</div>
+              <div style="margin-top: 4px;">Curatoria 22 nov</div>
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px; min-width: 180px;">
+          <button class="btn btn-chrome">Levar pra Curatoria</button>
+          <a href="candidato-dossie.html" class="btn btn-secondary btn-sm">Ver dossiê</a>
+          <button class="btn btn-ghost btn-sm">Devolver</button>
+        </div>
+      </div>
+
+      <!-- CANDIDATO 4 -->
+      <div style="display: grid; grid-template-columns: 96px 1fr auto; gap: 24px; padding: 32px 40px; border-bottom: 1px solid var(--divider); align-items: center;">
+        <div style="width: 96px; height: 96px; border-radius: 12px; background: linear-gradient(135deg, var(--blue-realce) 0%, var(--blue-chrome) 100%); display: flex; align-items: center; justify-content: center; color: var(--blue-highlight); font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 500;">CR</div>
+        <div>
+          <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+            <span class="badge badge-warn">1/3 endorsos</span>
+            <span class="badge badge-accent">Indicado por Ricardo B.</span>
+            <span class="badge">Tier I solicitado</span>
+          </div>
+          <h3 style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; letter-spacing: -0.015em; margin-bottom: 4px;">Camila Resende</h3>
+          <div class="muted" style="font-size: 13px;">Resende Coaching Executivo · R$ 28k médio · 16 mentoradas · Rio de Janeiro</div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px; min-width: 180px;">
+          <a href="candidato-dossie.html" class="btn btn-secondary btn-sm">Ver dossiê</a>
+          <button class="btn btn-ghost btn-sm">Devolver</button>
+        </div>
+      </div>
+
+      <!-- CANDIDATO 5 -->
+      <div style="display: grid; grid-template-columns: 96px 1fr auto; gap: 24px; padding: 32px 40px; align-items: center;">
+        <div style="width: 96px; height: 96px; border-radius: 12px; background: linear-gradient(135deg, var(--blue-realce) 0%, var(--blue-chrome) 100%); display: flex; align-items: center; justify-content: center; color: var(--blue-highlight); font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 500;">TR</div>
+        <div>
+          <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+            <span class="badge badge-warn">0/3 endorsos</span>
+            <span class="badge">Externo · candidatura aberta</span>
+            <span class="badge">Tier I solicitado</span>
+          </div>
+          <h3 style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; letter-spacing: -0.015em; margin-bottom: 4px;">Thiago Reis</h3>
+          <div class="muted" style="font-size: 13px;">Reis Mentoria · R$ 22k médio · 8 mentorados · Porto Alegre</div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px; min-width: 180px;">
+          <a href="candidato-dossie.html" class="btn btn-secondary btn-sm">Ver dossiê</a>
+          <button class="btn btn-ghost btn-sm">Devolver</button>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+
+<div class="wf-note">Curator · Aprovações</div>
+
+</body>
+</html>

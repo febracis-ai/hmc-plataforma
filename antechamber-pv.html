@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Antechamber · PV view · HMC</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_shared.css?v=16">
+<script src="_icons.js?v=16" defer></script>
+<script src="_modals.js?v=16" defer></script>
+<script src="_persona.js?v=16" defer></script>
+<style>
+.ac-layout { display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: 20px; align-items: start; min-height: 70vh; }
+@media (max-width: 900px) { .ac-layout { grid-template-columns: 1fr; } }
+
+.ac-list { background: var(--bg-card); border: 1px solid var(--divider); border-radius: 14px; padding: 14px; max-height: 80vh; overflow-y: auto; position: sticky; top: 16px; }
+.ac-list-head { padding: 8px 10px 14px; border-bottom: 1px solid var(--divider); margin-bottom: 10px; }
+.ac-list-title { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 500; margin-bottom: 4px; }
+.ac-list-sub { font-size: 11px; color: var(--text-muted); letter-spacing: 0.10em; text-transform: uppercase; font-weight: 600; }
+
+.ac-conv { display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; gap: 10px; padding: 12px 10px; border-radius: 8px; cursor: pointer; margin-bottom: 4px; align-items: center; transition: all 150ms; text-decoration: none; color: inherit; }
+.ac-conv:hover { background: var(--bg-card-hover); }
+.ac-conv.active { background: var(--blue-realce-muted); }
+.ac-conv.urgent::after { content: '!'; position: absolute; }
+.ac-conv-avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--blue-realce), var(--blue-chrome)); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 600; color: white; font-size: 13px; }
+.ac-conv-info { min-width: 0; }
+.ac-conv-name { font-weight: 600; font-size: 13px; margin-bottom: 3px; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.ac-conv-preview { font-size: 11px; color: var(--text-muted); line-height: 1.4; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.ac-conv-time { font-size: 10px; color: var(--text-faint); font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+.ac-conv-badge { font-size: 9px; padding: 2px 6px; border-radius: 4px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; }
+.ac-conv-badge.tier3 { background: var(--blue-deep); color: var(--blue-highlight); }
+.ac-conv-badge.urgent { background: rgba(229,83,83,0.15); color: #FF8888; }
+.ac-conv-unread { width: 7px; height: 7px; border-radius: 50%; background: var(--blue-realce); flex-shrink: 0; }
+
+.ac-thread { background: var(--bg-card); border: 1px solid var(--divider); border-radius: 14px; padding: 0; display: flex; flex-direction: column; min-height: 70vh; }
+.ac-thread-head { padding: 18px 26px; border-bottom: 1px solid var(--divider); display: flex; align-items: center; gap: 14px; }
+.ac-thread-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--blue-realce), var(--blue-chrome)); color: white; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 600; font-size: 14px; }
+.ac-thread-name { font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 500; }
+.ac-thread-sub { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+.ac-thread-tools { margin-left: auto; display: flex; gap: 6px; }
+
+.ac-feed { flex: 1; padding: 28px 32px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; }
+.ac-date-sep { text-align: center; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); font-weight: 600; padding: 8px 0; position: relative; }
+.ac-date-sep::before { content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: var(--divider); z-index: 0; }
+.ac-date-sep span { background: var(--bg-card); padding: 0 12px; position: relative; z-index: 1; }
+
+.ac-msg { display: flex; flex-direction: column; max-width: 80%; }
+.ac-msg.from-other { align-self: flex-start; }
+.ac-msg.from-pv { align-self: flex-end; align-items: flex-end; }
+.ac-msg-meta { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; padding: 0 4px; }
+.ac-bubble { padding: 14px 18px; border-radius: 14px; font-size: 14px; line-height: 1.55; }
+.ac-bubble.from-other { background: var(--bg); border: 1px solid var(--divider); }
+.ac-bubble.from-pv { background: linear-gradient(135deg, var(--blue-deep), var(--blue-realce)); color: white; }
+.ac-bubble.from-pv strong { color: white; }
+
+/* Composer */
+.ac-composer { padding: 16px 22px; border-top: 1px solid var(--divider); background: var(--bg-card); border-radius: 0 0 14px 14px; }
+.ac-composer-box { display: flex; gap: 10px; align-items: flex-end; padding: 10px 14px; background: var(--bg); border: 1px solid var(--divider); border-radius: 12px; }
+.ac-composer-box textarea { flex: 1; border: none; background: transparent; font-family: inherit; font-size: 14px; outline: none; padding: 6px 4px; color: var(--text); resize: none; min-height: 24px; line-height: 1.5; }
+.ac-composer-tools { display: flex; gap: 4px; }
+.ac-tool { width: 32px; height: 32px; border-radius: 8px; background: transparent; border: none; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.ac-tool:hover { background: var(--bg-card-hover); color: var(--text); }
+.ac-composer-foot { display: flex; justify-content: space-between; align-items: center; padding-top: 10px; }
+.ac-typing-hint { font-size: 11px; color: var(--text-muted); }
+.ac-typing-hint kbd { padding: 2px 6px; border: 1px solid var(--divider); border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 10px; }
+</style>
+</head>
+<body data-persona-aware="cross-context" data-active-mode="hub-pv">
+
+<button class="mobile-fab" data-sidebar-mobile-toggle aria-label="Menu"><i data-icon="menu" class="icon"></i></button>
+<div class="drawer-backdrop" data-sidebar-mobile-toggle></div>
+
+<div class="app">
+  <aside class="sidebar">
+    <a href="hub-pv.html" class="sidebar-brand"><img src="hmc-logo.png" alt="" class="brand-mark-img"><div><div class="brand-text">High Mentor Club</div><div class="brand-sub">Curated by Paulo Vieira · MMXXVI</div></div></a>
+    <div class="mode-switch">
+      <a href="hub-pv.html" class="mode-switch-item" data-short="H"><i data-icon="home" class="icon"></i><span>Hub</span></a>
+      <a href="10-clube/01-dashboard.html" class="mode-switch-item" data-short="C"><i data-icon="landmark" class="icon"></i><span>Clube</span></a>
+      <a href="40-curator/aprovacoes.html" class="mode-switch-item" data-short="X"><i data-icon="shield-check" class="icon"></i><span>Curator</span></a>
+    </div>
+    <div class="sidebar-nav-scroll">
+      <div class="nav-section">
+        <a href="notifications.html" class="nav-item has-badge"><i data-icon="bell" class="icon icon-sm"></i>Avisos <span class="badge-count">4</span></a>
+        <a href="agenda.html" class="nav-item"><i data-icon="calendar" class="icon icon-sm"></i>Agenda</a>
+        <a href="buscar.html" class="nav-item"><i data-icon="search" class="icon icon-sm"></i>Buscar</a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">— Curadoria PV</div>
+        <a href="curator-address-editor.html" class="nav-item"><i data-icon="mic" class="icon icon-sm"></i>Address (editor)</a>
+        <a href="antechamber-pv.html" class="nav-item active has-badge"><i data-icon="lock" class="icon icon-sm"></i>Antechamber <span class="badge-count">6</span><span class="nav-dot"></span></a>
+        <a href="40-curator/codex-publishing.html" class="nav-item"><i data-icon="book" class="icon icon-sm"></i>Codex publishing</a>
+        <a href="40-curator/aprovacoes.html" class="nav-item has-badge"><i data-icon="shield-check" class="icon icon-sm"></i>Aprovações <span class="badge-count">3</span></a>
+      </div>
+    </div>
+    <div class="sidebar-footer-v3">
+      <a href="account.html" class="user-pill-v3"><div class="avatar-sm" style="background: linear-gradient(135deg, var(--blue-deep), var(--blue-realce)); color: var(--blue-highlight);">PV</div><div><div class="user-pill-v3-name">Paulo Vieira</div><div class="user-pill-v3-role">The Curator · Founder</div></div></a>
+      <button class="sidebar-toggle-btn" data-sidebar-toggle><i data-icon="chevron-left" class="icon"></i><span>Recolher menu</span></button>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div class="page-head">
+      <div class="page-head-text">
+        <div class="page-eyebrow"><span class="gold-rule"></span><span class="page-eyebrow-text">Antechamber · vista PV</span></div>
+        <h1 class="page-title">Sua linha <span class="page-title-serif-italic">com cada Tier III</span>.</h1>
+        <p class="page-sub">6 conversas individuais · cada uma é privada e cega aos outros. Sua resposta tipicamente em 14h.</p>
+      </div>
+    </div>
+
+    <div class="ac-layout">
+
+      <!-- LISTA DE CONVERSAS -->
+      <aside class="ac-list">
+        <div class="ac-list-head">
+          <div class="ac-list-title">Conversas Tier III</div>
+          <div class="ac-list-sub">6 ativas · 2 urgentes</div>
+        </div>
+
+        <a href="antechamber-pv.html" class="ac-conv active">
+          <div class="ac-conv-avatar">CR</div>
+          <div class="ac-conv-info">
+            <div class="ac-conv-name">Carlos Ribeiro <span class="ac-conv-badge urgent">Urgente</span></div>
+            <div class="ac-conv-preview">"PV, recebi indicação interna pra abrir nova franquia em Curitiba via Bridge..."</div>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px;">
+            <span class="ac-conv-time">há 2h</span>
+            <span class="ac-conv-unread"></span>
+          </div>
+        </a>
+
+        <a href="antechamber-pv.html" class="ac-conv">
+          <div class="ac-conv-avatar">MC</div>
+          <div class="ac-conv-info">
+            <div class="ac-conv-name">Marina Costa <span class="ac-conv-badge urgent">Urgente</span></div>
+            <div class="ac-conv-preview">"Decisão sobre o convite pra board do family office Vinci — preciso da sua leitura antes de quinta..."</div>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px;">
+            <span class="ac-conv-time">há 5h</span>
+            <span class="ac-conv-unread"></span>
+          </div>
+        </a>
+
+        <a href="antechamber-pv.html" class="ac-conv">
+          <div class="ac-conv-avatar">PL</div>
+          <div class="ac-conv-info">
+            <div class="ac-conv-name">Patrícia Lemos</div>
+            <div class="ac-conv-preview">"Quero te trazer um caso que rebateu a estrutura do M03 da Renata, vale pra próxima Address?"</div>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px;">
+            <span class="ac-conv-time">ontem</span>
+            <span class="ac-conv-unread"></span>
+          </div>
+        </a>
+
+        <a href="antechamber-pv.html" class="ac-conv">
+          <div class="ac-conv-avatar">AC</div>
+          <div class="ac-conv-info">
+            <div class="ac-conv-name">André Castelo</div>
+            <div class="ac-conv-preview">"Confirmado pra hotseat do Council. Posso já preparar slide?"</div>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px;">
+            <span class="ac-conv-time">2d</span>
+            <span class="ac-conv-unread"></span>
+          </div>
+        </a>
+
+        <a href="antechamber-pv.html" class="ac-conv">
+          <div class="ac-conv-avatar">FA</div>
+          <div class="ac-conv-info">
+            <div class="ac-conv-name">Felipe Aragão</div>
+            <div class="ac-conv-preview">"Obrigado pela introdução com o family office. Reunião marcada pra terça."</div>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px;">
+            <span class="ac-conv-time">3d</span>
+            <span class="ac-conv-unread"></span>
+          </div>
+        </a>
+
+        <a href="antechamber-pv.html" class="ac-conv">
+          <div class="ac-conv-avatar">RB</div>
+          <div class="ac-conv-info">
+            <div class="ac-conv-name">Rafael Bandeira</div>
+            <div class="ac-conv-preview">"Vou estar em Fortaleza semana que vem, tem janela?"</div>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px;">
+            <span class="ac-conv-time">5d</span>
+            <span class="ac-conv-unread"></span>
+          </div>
+        </a>
+
+        <div style="padding: 14px 10px; font-size: 11px; color: var(--text-muted); border-top: 1px solid var(--divider); margin-top: 8px;">
+          <strong>Política:</strong> conversas resolvidas saem da lista após 30 dias · histórico arquivado em <a href="40-curator/logs.html" style="color: var(--blue-realce);">/logs</a>.
+        </div>
+      </aside>
+
+      <!-- THREAD ATIVO -->
+      <div class="ac-thread">
+        <div class="ac-thread-head">
+          <div class="ac-thread-avatar">CR</div>
+          <div>
+            <div class="ac-thread-name">Carlos Ribeiro <span class="ac-conv-badge tier3" style="margin-left: 6px;">Tier III</span></div>
+            <div class="ac-thread-sub">Seat 02 · Founding · franquia SP-Jardins (rede do ecossistema PV) · franqueado há 4 anos</div>
+          </div>
+          <div class="ac-thread-tools">
+            <button class="ac-tool" title="Marcar como urgente"><i data-icon="alert" class="icon icon-sm"></i></button>
+            <button class="ac-tool" title="Arquivar"><i data-icon="external" class="icon icon-sm"></i></button>
+            <button class="ac-tool" title="Histórico"><i data-icon="clock" class="icon icon-sm"></i></button>
+            <button class="ac-tool" title="Audit log"><i data-icon="file-text" class="icon icon-sm"></i></button>
+          </div>
+        </div>
+
+        <div class="ac-feed">
+          <div class="ac-date-sep"><span>Hoje · 10 de junho</span></div>
+
+          <div class="ac-msg from-other">
+            <div class="ac-msg-meta">Carlos · 10:42</div>
+            <div class="ac-bubble from-other">PV, recebi indicação interna do PV-corporativo pra abrir nova franquia do ecossistema PV em Curitiba via Bridge.</div>
+          </div>
+
+          <div class="ac-msg from-other">
+            <div class="ac-msg-meta">Carlos · 10:44</div>
+            <div class="ac-bubble from-other">Antes de aceitar, queria sua leitura sobre saturação. SP já tem a minha + RJ + BH + PE rodando. O Sul é estratégico ou viramos commodity?</div>
+          </div>
+
+          <div class="ac-msg from-other">
+            <div class="ac-msg-meta">Carlos · 10:46</div>
+            <div class="ac-bubble from-other">Sem pressa pra responder. Decisão é minha mas pesa muito ter sua perspectiva curatorial antes.</div>
+          </div>
+
+          <div class="ac-date-sep"><span>Resposta pendente · há 2h</span></div>
+
+          <div class="ac-msg from-pv" style="opacity: 0.5;">
+            <div class="ac-msg-meta">Você está escrevendo...</div>
+            <div class="ac-bubble from-pv" contenteditable="true">Carlos, três coisas antes da resposta direta.
+
+Primeiro: você não está vendo saturação geográfica, está vendo concentração de marca. Diferente.
+
+Segundo: o Bridge não é canal de expansão automática — é canal de exceção. Curitiba é geograficamente subatendida sim, mas o critério de abrir é qualitativo (existe líder local maduro o suficiente?), não geográfico.
+
+Terceiro, e essa é a importante: ...</div>
+          </div>
+        </div>
+
+        <div class="ac-composer">
+          <div class="ac-composer-box">
+            <textarea placeholder="Continuar resposta a Carlos..." rows="3">Continuando: ...</textarea>
+            <div class="ac-composer-tools">
+              <button class="ac-tool" title="Anexo"><i data-icon="paperclip" class="icon icon-sm"></i></button>
+              <button class="ac-tool" title="Áudio"><i data-icon="mic" class="icon icon-sm"></i></button>
+            </div>
+          </div>
+          <div class="ac-composer-foot">
+            <div class="ac-typing-hint">Auto-save · há 8 seg · <kbd>⌘ ↵</kbd> enviar · <kbd>⌘ K</kbd> rascunho</div>
+            <button class="btn btn-chrome btn-sm"><i data-icon="send" class="icon icon-sm"></i><span style="margin-left:6px">Enviar</span></button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+</div>
+<div class="wf-note">Antechamber · PV view</div>
+</body>
+</html>

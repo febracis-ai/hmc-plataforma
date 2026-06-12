@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cupons · HMC Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../_shared.css?v=16">
+  <script src="../_icons.js?v=16" defer></script>
+<script src="../_persona.js?v=16" defer></script>
+<script src="../_modals.js?v=16" defer></script>
+</head>
+<body data-persona-aware="mode-page" data-mode-context="studio" data-required-mode="studio">
+<button class="mobile-fab" data-sidebar-mobile-toggle aria-label="Menu"><i data-icon="menu" class="icon"></i></button>
+<div class="drawer-backdrop" data-sidebar-mobile-toggle></div>
+<div class="app">
+  <aside class="sidebar">
+    <a href="../hub.html" class="sidebar-brand"><img src="../hmc-logo.png" alt="" class="brand-mark-img"><div><div class="brand-text">High Mentor Club</div><div class="brand-sub">Curated by Paulo Vieira · MMXXVI</div></div></a>
+    <div class="mode-switch">
+      <a href="../hub.html" class="mode-switch-item" data-short="H"><i data-icon="home" class="icon"></i><span>Hub</span></a>
+      <a href="../10-clube/01-dashboard.html" class="mode-switch-item" data-short="C"><i data-icon="landmark" class="icon"></i><span>Clube</span></a>
+      <a href="../20-mentor/studio-home.html" class="mode-switch-item active" data-short="S"><i data-icon="briefcase" class="icon"></i><span>Studio</span></a>
+      <a href="../30-mentorado/biblioteca.html" class="mode-switch-item" data-short="E"><i data-icon="book-open" class="icon"></i><span>Estudos</span></a>
+    </div>
+    <div class="sidebar-nav-scroll">
+      <div class="nav-section">
+        <a href="../notifications.html" class="nav-item has-badge"><i data-icon="bell" class="icon icon-sm"></i>Avisos <span class="badge-count">12</span></a>
+        <a href="../agenda.html" class="nav-item"><i data-icon="calendar" class="icon icon-sm"></i>Agenda</a>
+        <a href="../buscar.html" class="nav-item"><i data-icon="search" class="icon icon-sm"></i>Buscar</a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">— Studio</div>
+        <a href="studio-home.html" class="nav-item"><i data-icon="briefcase" class="icon icon-sm"></i>Visão geral</a>
+        <a href="mentorias.html" class="nav-item"><i data-icon="video" class="icon icon-sm"></i>Mentorias</a>
+        <a href="aulas-biblioteca.html" class="nav-item"><i data-icon="film" class="icon icon-sm"></i>Aulas</a>
+        <a href="mentorados.html" class="nav-item"><i data-icon="users" class="icon icon-sm"></i>Mentorados</a>
+        <a href="sessoes-1-1.html" class="nav-item"><i data-icon="calendar" class="icon icon-sm"></i>Sessões 1:1</a>
+        <a href="comunidade.html" class="nav-item"><i data-icon="message-circle" class="icon icon-sm"></i>Comunidade</a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">— Negócio</div>
+        <a href="receitas.html" class="nav-item"><i data-icon="dollar" class="icon icon-sm"></i>Receitas</a>
+        <a href="checkout-builder.html" class="nav-item"><i data-icon="credit-card" class="icon icon-sm"></i>Checkout</a>
+        <a href="cupons.html" class="nav-item active"><i data-icon="tag" class="icon icon-sm"></i>Cupons<span class="nav-dot"></span></a>
+        <a href="pagina-publica.html" class="nav-item"><i data-icon="globe" class="icon icon-sm"></i>Página pública</a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">— Conta</div>
+        <a href="configuracoes.html" class="nav-item"><i data-icon="settings" class="icon icon-sm"></i>Configurações</a>
+        <a href="integracoes.html" class="nav-item"><i data-icon="external" class="icon icon-sm"></i>Integrações</a>
+      </div>
+    </div>
+    <div class="sidebar-footer-v3">
+      <a href="../account.html" class="user-pill-v3"><div class="avatar-sm">LV</div><div><div class="user-pill-v3-name">Lucas Vieira</div><div class="user-pill-v3-role">Seat 12</div></div></a>
+      <button class="sidebar-toggle-btn" data-sidebar-toggle><i data-icon="chevron-left" class="icon"></i><span>Recolher menu</span></button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="page-head">
+      <div class="page-head-text">
+        <div class="page-eyebrow"><span class="gold-rule"></span><span class="page-eyebrow-text">Studio · Negócio</span></div>
+        <h1 class="page-title">Seus <span class="page-title-serif-italic">cupons</span>.</h1>
+        <p class="page-sub">4 cupons ativos. Use para promoções, indicações, ou parcerias específicas. Validade, uso máximo e desconto configuráveis.</p>
+      </div>
+      <button class="btn btn-chrome btn-sm"><i data-icon="plus" class="icon icon-sm"></i> Novo cupom</button>
+    </div>
+
+    <div class="grid grid-3" style="gap: 20px; margin-bottom: 24px;">
+      <div class="surface" style="padding: 28px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;"><div><div class="eyebrow-chrome">— Códigos ativos</div><div class="stat-display" style="font-size: 36px; margin-top: 6px;">4</div></div></div>
+        <div class="muted" style="font-size: 12px;">2 públicos · 2 privados</div>
+      </div>
+      <div class="surface" style="padding: 28px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;"><div><div class="eyebrow-chrome">— Resgates 30d</div><div class="stat-display" style="font-size: 36px; margin-top: 6px;">23</div></div></div>
+        <div class="muted" style="font-size: 12px;">↗ +9 vs mês ant.</div>
+      </div>
+      <div class="surface" style="padding: 28px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;"><div><div class="eyebrow-chrome">— Receita gerada</div><div class="stat-display" style="font-size: 36px; margin-top: 6px;">R$ 432k</div></div></div>
+        <div class="muted" style="font-size: 12px;">Líquida após desconto</div>
+      </div>
+    </div>
+
+    <div class="surface" style="padding: 0;">
+      <div style="display: grid; grid-template-columns: 1fr 120px 100px 120px 100px auto; gap: 18px; padding: 14px 22px; border-bottom: 1px solid var(--divider); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">
+        <div>Código</div><div>Desconto</div><div>Resgates</div><div>Validade</div><div>Status</div><div></div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 120px 100px 120px 100px auto; gap: 18px; padding: 18px 22px; border-bottom: 1px solid var(--divider); align-items: center; font-size: 13px;">
+        <div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 14px; color: var(--blue-realce);">PV2026</div>
+          <div class="muted" style="font-size: 11px; margin-top: 3px;">Indicação Paulo Vieira · Vieira Liderança</div>
+        </div>
+        <div style="font-weight: 600;">15% off</div>
+        <div>14 / 50</div>
+        <div class="muted">31/12/2026</div>
+        <div><span class="badge badge-success">Ativo</span></div>
+        <button class="btn btn-secondary btn-sm">Editar</button>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 120px 100px 120px 100px auto; gap: 18px; padding: 18px 22px; border-bottom: 1px solid var(--divider); align-items: center; font-size: 13px;">
+        <div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 14px; color: var(--blue-realce);">EARLY-PL</div>
+          <div class="muted" style="font-size: 11px; margin-top: 3px;">Early bird P&amp;L Gerentes (público)</div>
+        </div>
+        <div style="font-weight: 600;">R$ 2.000 off</div>
+        <div>6 / 20</div>
+        <div class="muted">15/07/2026</div>
+        <div><span class="badge badge-success">Ativo</span></div>
+        <button class="btn btn-secondary btn-sm">Editar</button>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 120px 100px 120px 100px auto; gap: 18px; padding: 18px 22px; border-bottom: 1px solid var(--divider); align-items: center; font-size: 13px;">
+        <div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 14px; color: var(--blue-realce);">RENATA-PARTNER</div>
+          <div class="muted" style="font-size: 11px; margin-top: 3px;">Cross-promo com Renata Mendes · privado</div>
+        </div>
+        <div style="font-weight: 600;">10% off</div>
+        <div>3 / ∞</div>
+        <div class="muted">31/12/2026</div>
+        <div><span class="badge badge-success">Ativo</span></div>
+        <button class="btn btn-secondary btn-sm">Editar</button>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 120px 100px 120px 100px auto; gap: 18px; padding: 18px 22px; border-bottom: 1px solid var(--divider); align-items: center; font-size: 13px;">
+        <div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 14px; color: var(--blue-realce);">INDIQUEUM</div>
+          <div class="muted" style="font-size: 11px; margin-top: 3px;">Indicação de mentorado ativo (público)</div>
+        </div>
+        <div style="font-weight: 600;">R$ 1.000 off</div>
+        <div>0 / ∞</div>
+        <div class="muted">Permanente</div>
+        <div><span class="badge badge-success">Ativo</span></div>
+        <button class="btn btn-secondary btn-sm">Editar</button>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 120px 100px 120px 100px auto; gap: 18px; padding: 18px 22px; align-items: center; font-size: 13px;">
+        <div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 14px; color: var(--text-muted);">BLACKFRIDAY24</div>
+          <div class="muted" style="font-size: 11px; margin-top: 3px;">Promo Black Friday 2024 (expirado)</div>
+        </div>
+        <div style="font-weight: 600;">30% off</div>
+        <div>87 / 100</div>
+        <div class="muted">02/12/2024</div>
+        <div><span class="badge" style="font-size: 9px;">Expirado</span></div>
+        <button class="btn btn-secondary btn-sm">Duplicar</button>
+      </div>
+    </div>
+  </main>
+</div>
+<div class="wf-note">Studio · Cupons</div>
+</body>
+</html>

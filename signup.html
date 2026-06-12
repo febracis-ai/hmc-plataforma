@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Por onde você entra · HMC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_shared.css?v=16">
+  <script src="_icons.js?v=16" defer></script>
+  <style>
+    .role-card {
+      padding: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--divider);
+      border-radius: 14px;
+      transition: all 220ms;
+      position: relative;
+      overflow: hidden;
+    }
+    .role-card:hover { border-color: var(--text-muted); box-shadow: 0 8px 20px rgba(11,11,15,0.04); }
+    .role-card::before { content: ''; position: absolute; left: 0; top: 16px; bottom: 16px; width: 3px; border-radius: 0 3px 3px 0; background: transparent; transition: background 200ms; }
+    .role-card.recommended { border-color: rgba(77,184,255,0.30); background: linear-gradient(135deg, rgba(77,184,255,0.04), var(--bg-card)); }
+    .role-card.recommended::before { background: linear-gradient(180deg, var(--blue-realce), var(--blue-chrome)); }
+    .role-card.bridge { border-color: rgba(210,163,68,0.30); background: linear-gradient(135deg, rgba(210,163,68,0.04), var(--bg-card)); }
+    .role-card.bridge::before { background: linear-gradient(180deg, #d2a344, #8c6b1f); }
+
+    .role-grid { display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 14px; }
+    .role-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .role-icon.mentor    { background: var(--blue-realce); color: white; }
+    .role-icon.formar    { background: linear-gradient(135deg, #d2a344, #8c6b1f); color: white; }
+    .role-icon.mentorado { background: rgba(168,230,255,0.18); color: var(--blue-realce); }
+
+    .role-head { display: flex; gap: 8px; align-items: center; margin-bottom: 4px; flex-wrap: wrap; }
+    .role-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 500; letter-spacing: -0.01em; }
+    .role-badge { font-size: 9px; padding: 3px 8px; border-radius: 4px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; }
+    .role-badge.crivo { background: var(--blue-realce-muted); color: var(--blue-realce); }
+    .role-badge.bridge-tag { background: rgba(210,163,68,0.15); color: #b8862e; }
+    .role-badge.imediato { background: rgba(46,204,113,0.10); color: #2ecc71; }
+    .role-tagline { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+    .role-tagline strong { color: var(--text); font-weight: 600; }
+
+    /* Toggle "ver detalhes" */
+    .role-toggle {
+      background: none; border: none; cursor: pointer; padding: 8px 0 0;
+      display: inline-flex; align-items: center; gap: 4px;
+      font-family: inherit; font-size: 11px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text-muted);
+      transition: color 150ms;
+    }
+    .role-toggle:hover { color: var(--text); }
+    .role-toggle .icon { width: 12px !important; height: 12px !important; transition: transform 200ms; }
+    .role-card.expanded .role-toggle .icon { transform: rotate(180deg); }
+
+    /* Conteúdo expansível */
+    .role-expand {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 280ms ease;
+    }
+    .role-expand-inner { overflow: hidden; min-height: 0; }
+    .role-card.expanded .role-expand { grid-template-rows: 1fr; }
+
+    .role-expand-content {
+      padding-top: 14px;
+      margin-top: 14px;
+      border-top: 1px dashed var(--divider);
+    }
+    .role-desc { font-size: 13px; color: var(--text); line-height: 1.6; margin-bottom: 14px; }
+    .role-desc strong { font-weight: 600; }
+    .role-meta { display: flex; gap: 14px; flex-wrap: wrap; font-size: 11px; color: var(--text-muted); margin-bottom: 14px; }
+    .role-meta-item { display: inline-flex; align-items: center; gap: 5px; }
+    .role-meta-item .icon { width: 12px !important; height: 12px !important; opacity: 0.7; }
+
+    .cascata-note { padding: 12px 14px; background: var(--bg); border-radius: 8px; font-size: 12px; color: var(--text-muted); line-height: 1.55; border-left: 2px solid rgba(210,163,68,0.40); }
+    .cascata-note strong { color: var(--text); font-weight: 600; }
+
+    /* CTA real (link de destino) */
+    .role-cta-btn {
+      display: flex; align-items: center; justify-content: space-between; gap: 8px;
+      margin-top: 16px;
+      padding: 12px 16px;
+      background: var(--bg);
+      border: 1px solid var(--divider);
+      border-radius: 10px;
+      font-size: 13px; font-weight: 600;
+      color: var(--text); text-decoration: none;
+      transition: all 180ms;
+    }
+    .role-cta-btn:hover { transform: translateX(2px); }
+    .role-card.recommended .role-cta-btn { background: var(--blue-realce); border-color: var(--blue-realce); color: white; }
+    .role-card.recommended .role-cta-btn:hover { background: var(--blue-chrome); }
+    .role-card.bridge .role-cta-btn { background: linear-gradient(135deg, #d2a344, #8c6b1f); border-color: #d2a344; color: white; }
+    .role-card.bridge .role-cta-btn:hover { box-shadow: 0 8px 20px rgba(210,163,68,0.30); }
+    .role-card:not(.recommended):not(.bridge) .role-cta-btn:hover { border-color: var(--blue-realce); color: var(--blue-realce); }
+
+    @media (max-width: 520px) {
+      .role-grid { grid-template-columns: 44px minmax(0, 1fr); gap: 12px; }
+      .role-icon { width: 44px; height: 44px; }
+      .role-title { font-size: 17px; }
+    }
+
+    /* Banner discreto de versão (A/B test) */
+    .version-badge {
+      position: fixed; top: 16px; right: 16px;
+      padding: 6px 12px; background: rgba(11,11,15,0.85);
+      border: 1px solid var(--divider); border-radius: 999px;
+      font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700;
+      color: var(--blue-highlight); z-index: 100; backdrop-filter: blur(8px);
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .version-badge a { color: var(--text-muted); text-decoration: none; font-size: 9px; letter-spacing: 0.14em; }
+    .version-badge a:hover { color: var(--blue-realce); }
+  </style>
+</head>
+<body>
+
+<div class="version-badge">
+  V2 · 3 opções
+  <a href="signup-v1-2opcoes.html">V1</a>
+  <a href="signup-v3-construir.html">V3</a>
+  <a href="dev-login.html">↺ dev</a>
+</div>
+
+<div class="auth-shell">
+
+  <div class="auth-side">
+    <a href="landing.html" style="display: flex; align-items: center; gap: 12px; color: white; text-decoration: none;">
+      <img src="hmc-logo.png" alt="" style="width: 36px; height: 36px;">
+      <span style="font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 500;">High Mentor Club</span>
+    </a>
+
+    <div>
+      <div style="width: 48px; height: 1px; background: var(--blue-realce); margin-bottom: 20px;"></div>
+      <div style="font-size: 10px; color: var(--blue-highlight); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 600; margin-bottom: 16px;">— 3 jornadas, 1 ecossistema</div>
+      <h1 style="font-family: 'Playfair Display', serif; font-size: clamp(36px, 5vw, 56px); font-weight: 500; letter-spacing: -0.035em; line-height: 1.05; color: white; margin-bottom: 24px;">
+        Por onde você <span class="serif-italic">entra</span>?
+      </h1>
+      <p style="font-size: 15px; line-height: 1.65; color: var(--text-on-dark-muted); max-width: 380px; margin-bottom: 22px;">
+        O HMC é o clube. Mas se você ainda não é mentor, existe um caminho específico pra te formar antes — e ele faz parte do mesmo ecossistema.
+      </p>
+
+      <!-- mini diagrama cascata -->
+      <div style="padding: 18px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.10); border-radius: 12px; max-width: 380px;">
+        <div style="font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(168,230,255,0.65); font-weight: 700; margin-bottom: 10px;">— A cascata</div>
+        <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; align-items: center; font-size: 12px;">
+          <div style="text-align: center; padding: 10px 8px; background: rgba(210,163,68,0.10); border: 1px solid rgba(210,163,68,0.30); border-radius: 8px; color: rgba(255,255,255,0.85);">
+            <div style="font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 600; margin-bottom: 2px;">MELID</div>
+            <div style="font-size: 10px; color: rgba(255,255,255,0.55);">forma mentor</div>
+          </div>
+          <div style="color: var(--blue-highlight); font-size: 18px;">→</div>
+          <div style="text-align: center; padding: 10px 8px; background: rgba(77,184,255,0.10); border: 1px solid rgba(77,184,255,0.30); border-radius: 8px; color: rgba(255,255,255,0.85);">
+            <div style="font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 600; margin-bottom: 2px;">HMC</div>
+            <div style="font-size: 10px; color: rgba(255,255,255,0.55);">abraça mentor</div>
+          </div>
+        </div>
+        <div style="font-size: 11px; color: rgba(255,255,255,0.55); line-height: 1.55; margin-top: 12px;">Os dois são produtos do ecossistema <strong style="color: white;">Paulo Vieira · Febracis</strong>. MELID é a porta de entrada de quem ainda não opera. HMC é o clube de quem já opera.</div>
+      </div>
+    </div>
+
+    <div style="font-size: 10px; color: var(--text-on-dark-faint); letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600;">Curated by Paulo Vieira · MMXXVI</div>
+  </div>
+
+  <div class="auth-content">
+    <div class="auth-card" style="max-width: 560px;">
+
+      <div style="margin-bottom: 28px;">
+        <div class="eyebrow-chrome" style="margin-bottom: 8px;">— Sua jornada</div>
+        <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(24px, 3vw, 30px); font-weight: 500; letter-spacing: -0.025em;">Escolha o caminho</h2>
+        <p class="muted" style="font-size: 14px; margin-top: 8px; line-height: 1.55;">3 jornadas válidas. Você pode trocar depois — algumas pessoas operam como mentor <em>e</em> mentorado ao mesmo tempo.</p>
+      </div>
+
+      <div class="flex-col gap-3" style="margin-bottom: 28px;">
+
+        <!-- JORNADA 1 · MENTOR (já opera) -->
+        <div class="role-card recommended">
+          <div class="role-grid">
+            <div class="role-icon mentor"><i data-icon="mic" class="icon icon-lg"></i></div>
+            <div style="min-width: 0;">
+              <div class="role-head">
+                <h3 class="role-title">Já sou <span class="serif-italic">mentor</span></h3>
+                <span class="role-badge crivo">Por crivo · 4 etapas</span>
+              </div>
+              <p class="role-tagline">Você já opera mentoria com <strong>ticket ≥ R$ 25k</strong>.</p>
+              <button class="role-toggle" type="button" onclick="toggleCard(this)">Ver detalhes <i data-icon="chevron-down" class="icon"></i></button>
+            </div>
+          </div>
+          <div class="role-expand"><div class="role-expand-inner">
+            <div class="role-expand-content">
+              <p class="role-desc">Quer vender dentro do clube com checkout próprio (CISPay), Studio completo, Council mensal, Cross-Floor de vagas, Yield CIS e selo HMC. A entrada passa pelo crivo curatorial — endorsos + audiência com The Curator.</p>
+              <div class="role-meta">
+                <span class="role-meta-item"><i data-icon="check" class="icon"></i> Crivo curatorial</span>
+                <span class="role-meta-item"><i data-icon="users" class="icon"></i> 3 endorsos Tier II+</span>
+                <span class="role-meta-item"><i data-icon="clock" class="icon"></i> 14 dias janela</span>
+              </div>
+            </div>
+          </div></div>
+          <a href="signup-mentor-1.html" class="role-cta-btn">
+            <span>Iniciar candidatura</span>
+            <i data-icon="arrow-right" class="icon icon-sm"></i>
+          </a>
+        </div>
+
+        <!-- JORNADA 2 · FORMAR MENTOR (via MELID) -->
+        <div class="role-card bridge">
+          <div class="role-grid">
+            <div class="role-icon formar"><i data-icon="trending-up" class="icon icon-lg"></i></div>
+            <div style="min-width: 0;">
+              <div class="role-head">
+                <h3 class="role-title">Quero me tornar <span class="serif-italic">mentor</span></h3>
+                <span class="role-badge bridge-tag">Via MELID · 12 meses</span>
+              </div>
+              <p class="role-tagline">Você ainda <strong>não opera</strong> high-ticket, mas quer construir.</p>
+              <button class="role-toggle" type="button" onclick="toggleCard(this)">Ver detalhes <i data-icon="chevron-down" class="icon"></i></button>
+            </div>
+          </div>
+          <div class="role-expand"><div class="role-expand-inner">
+            <div class="role-expand-content">
+              <p class="role-desc">O caminho é o <strong>Mentor de Líderes (MELID)</strong> — programa irmão que forma high-tickets de R$ 25k+ em 12 meses, comandado pelo mesmo Curador (PV). Depois do MELID, você pode se candidatar ao HMC.</p>
+              <div class="role-meta">
+                <span class="role-meta-item"><i data-icon="award" class="icon"></i> Programa de formação</span>
+                <span class="role-meta-item"><i data-icon="calendar" class="icon"></i> 12 meses · 3ª turma</span>
+                <span class="role-meta-item"><i data-icon="landmark" class="icon"></i> MELID → HMC</span>
+              </div>
+              <div class="cascata-note">
+                <strong>Por que essa rota é real:</strong> 5 dos 12 mentores atuais do HMC vieram da formação MELID. Não é "consolação" — é a rota oficial pra quem chega antes do ticket validado.
+              </div>
+            </div>
+          </div></div>
+          <a href="melid-bridge.html" class="role-cta-btn">
+            <span>Conhecer o MELID</span>
+            <i data-icon="arrow-right" class="icon icon-sm"></i>
+          </a>
+        </div>
+
+        <!-- JORNADA 3 · MENTORADO -->
+        <div class="role-card">
+          <div class="role-grid">
+            <div class="role-icon mentorado"><i data-icon="book-open" class="icon icon-lg"></i></div>
+            <div style="min-width: 0;">
+              <div class="role-head">
+                <h3 class="role-title">Quero ser <span class="serif-italic">mentorado</span></h3>
+                <span class="role-badge imediato">Acesso imediato</span>
+              </div>
+              <p class="role-tagline">Você quer aprender com um dos <strong>mentores curados</strong>.</p>
+              <button class="role-toggle" type="button" onclick="toggleCard(this)">Ver detalhes <i data-icon="chevron-down" class="icon"></i></button>
+            </div>
+          </div>
+          <div class="role-expand"><div class="role-expand-inner">
+            <div class="role-expand-content">
+              <p class="role-desc">Acesso direto: cria conta, escolhe um dos 12 mentores ativos, paga via CISPay e começa em minutos. Você tem biblioteca Netflix-style, sessões 1:1, comunidade Discord-like e certificado HMC ao concluir.</p>
+              <div class="role-meta">
+                <span class="role-meta-item"><i data-icon="users" class="icon"></i> 12 mentores curados</span>
+                <span class="role-meta-item"><i data-icon="play" class="icon"></i> Aulas + 1:1 + comunidade</span>
+                <span class="role-meta-item"><i data-icon="award" class="icon"></i> Certificado HMC</span>
+              </div>
+            </div>
+          </div></div>
+          <a href="signup-mentorado.html" class="role-cta-btn">
+            <span>Criar conta agora</span>
+            <i data-icon="arrow-right" class="icon icon-sm"></i>
+          </a>
+        </div>
+
+      </div>
+
+      <script>
+        function toggleCard(btn) {
+          const card = btn.closest('.role-card');
+          card.classList.toggle('expanded');
+          btn.firstChild.textContent = card.classList.contains('expanded') ? 'Ocultar detalhes ' : 'Ver detalhes ';
+        }
+      </script>
+
+      <div style="display: flex; gap: 12px;">
+        <a href="landing.html" class="btn btn-outline w-full">← Voltar pra landing</a>
+      </div>
+
+      <div style="margin-top: 24px; text-align: center; font-size: 13px;" class="muted">
+        Já tem conta? <a href="login.html" style="color: var(--blue-realce); font-weight: 600;">Entrar</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

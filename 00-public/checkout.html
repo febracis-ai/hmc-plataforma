@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout · Mentoria Vieira de Liderança</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../_shared.css?v=16">
+  <script src="../_icons.js?v=16" defer></script>
+  <style>
+    body { background: var(--bg-page); min-height: 100vh; }
+    .checkout-shell { max-width: 1180px; margin: 0 auto; padding: 120px 56px 96px; }
+    .checkout-grid { display: grid; grid-template-columns: 1fr 440px; gap: 48px; }
+    .pay-method-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .pay-method {
+      padding: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--divider);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 180ms;
+      text-align: center;
+    }
+    .pay-method:hover { border-color: var(--blue-realce); }
+    .pay-method.active { border-color: var(--blue-realce); box-shadow: 0 0 0 3px var(--blue-realce-muted); }
+    .pay-method-name { font-weight: 600; margin-top: 8px; font-size: 14px; }
+    .pay-method-sub { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+    .form-row { margin-bottom: 16px; }
+    .form-label { font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 6px; }
+    .form-input {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--divider);
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-family: inherit;
+      font-size: 14px;
+    }
+    .form-input:focus { outline: none; border-color: var(--blue-realce); box-shadow: 0 0 0 3px var(--blue-realce-muted); }
+    .cispay-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px;
+      background: var(--blue-realce-muted);
+      border: 1px solid var(--blue-realce-divider);
+      border-radius: 10px;
+      margin-bottom: 24px;
+    }
+    .cispay-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: var(--blue-realce);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP NAV PÚBLICO UNIFICADO (versão simplificada para checkout) -->
+<nav class="top-nav liquid-glass" id="topNav">
+  <div class="top-nav-inner">
+    <a href="../landing.html" class="top-nav-brand">
+      <img src="../hmc-logo.png" alt="HMC">
+      <span class="top-nav-brand-text" style="color: white;">High Mentor Club</span>
+    </a>
+    <div class="top-nav-links">
+      <a href="catalog.html" class="top-nav-link">Mentores</a>
+      <a href="../landing.html#como-funciona" class="top-nav-link">Como funciona</a>
+      <span style="font-size: 11px; color: var(--blue-highlight); letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600; padding: 6px 14px; background: rgba(77,184,255,0.10); border: 1px solid rgba(77,184,255,0.25); border-radius: 999px;"><i data-icon="lock" class="icon icon-sm"></i> Checkout seguro</span>
+      <a href="../login.html" class="btn btn-outline btn-sm" style="background: transparent; border-color: rgba(255,255,255,0.20); color: white;">Já tenho conta</a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const nav = document.getElementById('topNav');
+  if (nav) window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+</script>
+
+<div class="checkout-shell">
+
+  <div style="margin-bottom: 40px;">
+    <a href="mentor-public.html" class="muted" style="font-size: 13px;">← Voltar para a página do mentor</a>
+    <div style="margin-top: 16px;">
+      <div class="eyebrow-chrome">— Finalize sua inscrição</div>
+      <h1 style="font-family: 'Playfair Display', serif; font-size: 40px; font-weight: 500; letter-spacing: -0.03em; margin-top: 8px;">Mentoria Vieira de Liderança</h1>
+    </div>
+  </div>
+
+  <div class="checkout-grid">
+
+    <!-- COLUNA ESQUERDA · DADOS -->
+    <div>
+
+      <!-- CISPAY BANNER -->
+      <div class="cispay-bar">
+        <div class="cispay-logo">CIS</div>
+        <div style="flex: 1;">
+          <div style="font-weight: 600; font-size: 13px;">Pagamento processado pelo CISPay</div>
+          <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">Gateway proprietário Febracis · antifraude integrado · split automático para o mentor</div>
+        </div>
+      </div>
+
+      <!-- DADOS PESSOAIS -->
+      <div class="surface" style="padding: 32px; margin-bottom: 20px;">
+        <div class="eyebrow-chrome" style="margin-bottom: 16px;">— 01 · Seus dados</div>
+
+        <div class="form-row">
+          <label class="form-label">Nome completo</label>
+          <input type="text" class="form-input" value="Mariana Souza" placeholder="Como aparece no documento">
+        </div>
+        <div class="grid grid-2" style="gap: 16px;">
+          <div class="form-row">
+            <label class="form-label">CPF</label>
+            <input type="text" class="form-input" placeholder="000.000.000-00">
+          </div>
+          <div class="form-row">
+            <label class="form-label">Celular (WhatsApp)</label>
+            <input type="text" class="form-input" placeholder="(11) 90000-0000">
+          </div>
+        </div>
+        <div class="form-row" style="margin-bottom: 0;">
+          <label class="form-label">E-mail</label>
+          <input type="email" class="form-input" value="mariana@empresa.com.br">
+        </div>
+      </div>
+
+      <!-- MÉTODO DE PAGAMENTO -->
+      <div class="surface" style="padding: 32px; margin-bottom: 20px;">
+        <div class="eyebrow-chrome" style="margin-bottom: 16px;">— 02 · Método de pagamento</div>
+
+        <div class="pay-method-row" style="margin-bottom: 24px;">
+          <div class="pay-method active">
+            <div style="font-size: 24px;"><i data-icon="credit-card" class="icon icon-lg"></i></div>
+            <div class="pay-method-name">Cartão</div>
+            <div class="pay-method-sub">12× sem juros</div>
+          </div>
+          <div class="pay-method">
+            <div style="font-size: 24px;"><i data-icon="zap" class="icon icon-lg"></i></div>
+            <div class="pay-method-name">PIX</div>
+            <div class="pay-method-sub">5% OFF · à vista</div>
+          </div>
+          <div class="pay-method">
+            <div style="font-size: 24px;"><i data-icon="file-text" class="icon icon-lg"></i></div>
+            <div class="pay-method-name">Boleto</div>
+            <div class="pay-method-sub">À vista</div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label class="form-label">Número do cartão</label>
+          <input type="text" class="form-input" placeholder="0000 0000 0000 0000">
+        </div>
+        <div class="grid grid-2" style="gap: 16px;">
+          <div class="form-row">
+            <label class="form-label">Validade</label>
+            <input type="text" class="form-input" placeholder="MM/AA">
+          </div>
+          <div class="form-row">
+            <label class="form-label">CVV</label>
+            <input type="text" class="form-input" placeholder="123">
+          </div>
+        </div>
+        <div class="form-row">
+          <label class="form-label">Nome no cartão</label>
+          <input type="text" class="form-input" placeholder="Como aparece no cartão">
+        </div>
+        <div class="form-row" style="margin-bottom: 0;">
+          <label class="form-label">Parcelas</label>
+          <select class="form-input" style="appearance: auto;">
+            <option>12× de R$ 6.800 (sem juros)</option>
+            <option>6× de R$ 13.600 (sem juros)</option>
+            <option>3× de R$ 27.200 (sem juros)</option>
+            <option>1× de R$ 68.000 (à vista)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- TERMOS -->
+      <div style="font-size: 12px; color: var(--text-muted); line-height: 1.6;">
+        Ao confirmar, você concorda com os termos de uso da plataforma HMC, política de garantia de 7 dias e termos do CISPay como instituição financeira processadora.
+      </div>
+    </div>
+
+    <!-- COLUNA DIREITA · RESUMO -->
+    <div>
+      <div class="surface" style="padding: 32px; position: sticky; top: 96px;">
+        <div class="eyebrow-chrome" style="margin-bottom: 16px;">— Resumo do pedido</div>
+
+        <div style="display: flex; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--divider);">
+          <div style="width: 64px; height: 64px; border-radius: 10px; background: linear-gradient(135deg, var(--blue-realce) 0%, var(--blue-chrome) 100%); flex-shrink: 0;"></div>
+          <div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 500; margin-bottom: 4px;">Mentoria Vieira de Liderança</div>
+            <div class="muted" style="font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600;">12 meses · 8 módulos · 64 aulas</div>
+            <div class="muted" style="font-size: 12px; margin-top: 6px;">Mentor: Lucas Vieira · Seat 12 · Tier II</div>
+          </div>
+        </div>
+
+        <!-- ORDER BUMP -->
+        <div style="padding: 16px 0; border-bottom: 1px solid var(--divider);">
+          <div style="display: flex; gap: 10px; align-items: flex-start;">
+            <input type="checkbox" checked style="margin-top: 4px;">
+            <div style="flex: 1;">
+              <div style="font-weight: 600; font-size: 13px;">+ Sessão extra 1:1 com Lucas <span class="badge badge-accent" style="margin-left: 4px;">50% OFF</span></div>
+              <div class="muted" style="font-size: 11px; margin-top: 2px;">Uma sessão adicional de 60 minutos durante o programa.</div>
+              <div style="margin-top: 6px;">
+                <span class="muted" style="font-size: 11px; text-decoration: line-through;">R$ 3.200</span>
+                <span style="font-weight: 600; color: var(--text); margin-left: 6px;">R$ 1.600</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TOTAIS -->
+        <div style="padding: 20px 0; border-bottom: 1px solid var(--divider);">
+          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px;">
+            <span class="muted">Mentoria</span>
+            <span class="tabular">R$ 68.000,00</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px;">
+            <span class="muted">Sessão extra</span>
+            <span class="tabular">R$ 1.600,00</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 13px; color: var(--blue-realce); font-weight: 600;">
+            <span>Cupom MEMBRO5</span>
+            <span class="tabular">− R$ 1.800,00</span>
+          </div>
+        </div>
+
+        <!-- TOTAL FINAL -->
+        <div style="padding: 24px 0; display: flex; justify-content: space-between; align-items: baseline;">
+          <div style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500;">Total</div>
+          <div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 500; letter-spacing: -0.025em; font-variant-numeric: tabular-nums;">R$ 67.800</div>
+            <div class="muted" style="font-size: 11px; text-align: right; margin-top: 2px;">ou 12× R$ 5.650</div>
+          </div>
+        </div>
+
+        <a href="../acesso-liberado.html" class="btn btn-chrome w-full" style="padding: 16px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+          <i data-icon="lock" class="icon icon-sm"></i> Confirmar via CISPay
+        </a>
+
+        <div style="display: flex; justify-content: center; gap: 16px; margin-top: 20px; font-size: 11px; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600;">
+          <span><i data-icon="shield-check" class="icon icon-sm"></i> Antifraude</span>
+          <span><i data-icon="key" class="icon icon-sm"></i> SSL 256</span>
+          <span><i data-icon="refresh" class="icon icon-sm"></i> 7 dias</span>
+        </div>
+
+        <!-- SPLIT INFO (transparência) -->
+        <div style="margin-top: 24px; padding: 16px; background: var(--bg-card-hover); border-radius: 10px; font-size: 11px;">
+          <div style="color: var(--text-muted); margin-bottom: 6px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600;">Split automático CISPay</div>
+          <div style="display: flex; justify-content: space-between; padding: 3px 0;">
+            <span class="muted">Mentor (Lucas)</span>
+            <span style="font-weight: 600;">R$ 61.020 · 90%</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 3px 0;">
+            <span class="muted">HMC (10% fee da casa)</span>
+            <span style="font-weight: 600;">R$ 6.780</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="wf-note">Público · Checkout</div>
+
+</body>
+</html>
