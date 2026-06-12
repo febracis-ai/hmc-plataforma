@@ -15,7 +15,7 @@
 - **Player vídeo:** `@mux/mux-player-react`
 
 ### Backend
-- **Opção A:** **NestJS** + Prisma (recomendado se ficar pesado de business logic — Yield calc, Cross-Floor matching, Codex generation)
+- **Opção A:** **NestJS** + Prisma (recomendado se ficar pesado de business logic — Success Fee calc, Cross-Floor matching, Codex generation)
 - **Opção B:** **Supabase Edge Functions** (recomendado se ficar leve — CRUD + webhooks CISPay + auth)
 - **Recomendação:** começar com **B** (Edge Functions) e migrar para A se a complexidade crescer
 
@@ -53,9 +53,9 @@
 |---|---|---|
 | **CDN / Edge cache** | Vercel Edge Network + ISR | Codex e catálogo público = ISR `revalidate(3600)` |
 | **Queue / Background jobs** | **Inngest** | Webhooks CISPay → payout calc, geração de certificado, Mux signed URLs refresh, digest semanal Council. Inngest > BullMQ pq não exige Redis dedicado + retry/replay nativo + observabilidade. |
-| **Cron jobs** | **Inngest scheduled functions** | Mesmo runtime das queues — evita 2 sistemas. Crons críticos: digest semanal, Yield mensal, Codex annual generation. |
+| **Cron jobs** | **Inngest scheduled functions** | Mesmo runtime das queues — evita 2 sistemas. Crons críticos: digest semanal, Success Fee mensal, Codex annual generation. |
 | **Search** | **Meilisearch** (self-host Railway) | Codex (busca por mentor/área), Cross-Floor (vagas), biblioteca de aulas. Meilisearch > Algolia pq custo R$ 0 vs ~R$ 3k/mês p/ <1k membros + LGPD (dados não saem do Brasil). |
-| **Email transacional** | **Resend** + React Email | Templates JSX = reuso com Next.js. Welcome, aprovação candidatura, Council reminder, Yield payout statement. |
+| **Email transacional** | **Resend** + React Email | Templates JSX = reuso com Next.js. Welcome, aprovação candidatura, Council reminder, Success Fee payout statement. |
 | **Monitoring crashes** | **Sentry** | Cobre crashes web/mobile (Capacitor). Source maps via Vercel integration. |
 | **Product analytics + flags** | **PostHog** (cloud ou self-host) | Substitui Vercel Analytics + LaunchDarkly. Funnels (signup mentorado → primeira aula), session replay, feature flags. |
 | **Push mobile** | **FCM** (Android) + **APNs** via `@capacitor/push-notifications` | Topics: `council`, `pilgrimage`, `yield`, `cross_floor` |

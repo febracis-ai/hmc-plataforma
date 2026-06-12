@@ -37,7 +37,7 @@
 | **The Curator's Address** | PGR mensal aberto pelo Curador, online ao vivo, ~2h, disponível para **todos os mentorados de todos os membros**. Multiplica marca do membro. |
 | **The Antechamber** | Grupo WhatsApp direto com o Curador. Acesso a membros ativos. **Regras tácitas:** sem bom-dia coletivo, sem aniversariante, sem pergunta de aluno. |
 | **Cross-Floor** | Marketplace interno de vagas cruzadas. **20% das vagas** de cada membro circulam para mentorados de outros membros. Metáfora "crossing the floor" parlamentar britânico. |
-| **HMC Yield** | Comissão de **16%** sobre vendas do Método CIS referidas pelo membro. Link único por High Mentor + dashboard + pagamento automatizado Febracis. |
+| **HMC Success Fee** | Comissão de **16%** sobre vendas do Método CIS referidas pelo membro. Link único por High Mentor + dashboard + pagamento automatizado Febracis. |
 | **The Bridge** | Pipeline curado de migração de mentorados às **franquias do ecossistema PV**. **Exclusivo Tier III.** Não é venda — é "travessia institucional" mediada pelo Curador. |
 | **The Pilgrimages** | Os 3 eventos premium anuais. "Peregrinação" — exige deslocamento, preparação, intenção. |
 | **The House** | Peregrinação americana, julho. Acesso restrito a quem fez o **Revolution**. Hospitalidade direta do Curador. Propósito: aproximar o membro do Curador como pessoa — não como autoridade. |
@@ -89,7 +89,7 @@
 | Termo | Definição |
 |---|---|
 | **Método CIS** | Metodologia central de Paulo Vieira. **Língua franca obrigatória** do HMC. |
-| **HMC Yield (CIS 16%)** | Cada High Mentor tem link único de indicação para Método CIS. 16% sobre vendas referidas. Pagamento automático mensal via financeiro Febracis. |
+| **HMC Success Fee (CIS 16%)** | Cada High Mentor tem link único de indicação para Método CIS. 16% sobre vendas referidas. Pagamento automático mensal via financeiro Febracis. |
 | **CIS** | Sigla do método (acrônimo interno). |
 
 ---

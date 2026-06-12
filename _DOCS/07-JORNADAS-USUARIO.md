@@ -168,7 +168,7 @@ hub.html → studio-home.html
   ├─→ 03-codex.html (anuário)
   │    └─→ codex-entry.html
   ├─→ 04-cross-floor.html (marketplace de vagas)
-  ├─→ 05-yield.html (HMC Yield · CIS 16%)
+  ├─→ 05-yield.html (HMC Success Fee · CIS 16%)
   ├─→ 06-pilgrimages.html (eventos)
   │    └─→ pilgrimage-detail.html
   │    └─→ summit-edicao.html

@@ -26,7 +26,7 @@
 |---|---|---|
 | 00 | [README.md](00-README.md) | Você está aqui — índice + regras críticas |
 | 01 | [PRD.md](01-PRD.md) | Product Requirements: visão, métricas, escopo, out-of-scope |
-| 02 | [GLOSSARIO.md](02-GLOSSARIO.md) | Vocabulário oficial completo (Tier, Council, Cross-Floor, Pilgrimage, Codex, Bridge, Seal, Antechamber, Yield…) |
+| 02 | [GLOSSARIO.md](02-GLOSSARIO.md) | Vocabulário oficial completo (Tier, Council, Cross-Floor, Pilgrimage, Codex, Bridge, Seal, Antechamber, Success Fee…) |
 | 03 | [PERSONAS-GOVERNANCA.md](03-PERSONAS-GOVERNANCA.md) | 10 personas + matriz RBAC de permissões |
 | 04 | [MAPA-DE-TELAS.md](04-MAPA-DE-TELAS.md) | Inventário das 58 telas (30 ✓ feitas · 28 ❌ faltam) |
 | 05 | [STACK-ARQUITETURA.md](05-STACK-ARQUITETURA.md) | Stack final + estratégia mobile híbrida (Capacitor + PWA) + RBAC implementation |
@@ -64,7 +64,7 @@ Plataforma-v1/
 │   ├── 02-calendar.html      ← Council
 │   ├── 03-codex.html         ← Codex (anuário)
 │   ├── 04-cross-floor.html   ← marketplace de vagas
-│   ├── 05-yield.html         ← HMC Yield (16% CIS)
+│   ├── 05-yield.html         ← HMC Success Fee (16% CIS)
 │   ├── 06-pilgrimages.html   ← eventos premium
 │   └── 07-seal.html          ← HMC Seal kit
 │

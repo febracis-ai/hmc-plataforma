@@ -84,7 +84,7 @@
 
 ### Clube
 - Cross-Floor completo (publicar vagas, applies, aprovação, cap 20%)
-- HMC Yield com integração Salesforce (16% CIS, dashboard, leads pipeline)
+- HMC Success Fee com integração Salesforce (16% CIS, dashboard, leads pipeline)
 - Pilgrimages com RSVP + elegibilidade automática
 - Perfil público do High Mentor (`/clube/codex/:slug`)
 - HMC Summit detalhado por edição
@@ -216,7 +216,7 @@
 
 ### Para shipar Polish
 - Cross-Floor com 5 vagas trocadas reais
-- HMC Yield calculando 16% CIS com Salesforce ao vivo
+- HMC Success Fee calculando 16% CIS com Salesforce ao vivo
 - Pelo menos 1 Council mensal completo via plataforma (RSVP + execução + post)
 - Curator analytics mostrando NPS > 60 nas primeiras cohorts
 

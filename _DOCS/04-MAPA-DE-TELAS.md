@@ -138,7 +138,7 @@
 | 31 | Codex | `/clube/codex` | `10-clube/03-codex.html` | ✅ |
 | 32 | Codex entry | `/clube/codex/:slug` | `10-clube/codex-entry.html` | ✅ |
 | 33 | Cross-Floor marketplace | `/clube/cross-floor` | `10-clube/04-cross-floor.html` | ✅ |
-| 34 | HMC Yield | `/clube/yield` | `10-clube/05-yield.html` | ✅ |
+| 34 | HMC Success Fee | `/clube/yield` | `10-clube/05-yield.html` | ✅ |
 | 35 | Pilgrimages catálogo | `/clube/pilgrimages` | `10-clube/06-pilgrimages.html` | ✅ |
 | 36 | Pilgrimage detail | `/clube/pilgrimages/:id` | `10-clube/pilgrimage-detail.html` | ✅ |
 | 37 | HMC Summit por edição | `/clube/summit/:id` | `10-clube/summit-edicao.html` | ✅ |
@@ -202,7 +202,7 @@
 | 74 | Disputas Cross-Floor | `/curator/disputes` | `40-curator/disputas-cross-floor.html` | ✅ |
 | 75 | Moderação | `/curator/moderacao` | `40-curator/moderacao.html` | ✅ |
 | 76 | Financeiro consolidado | `/curator/financeiro` | `40-curator/financeiro-consolidado.html` | ✅ |
-| 77 | Yield CIS | `/curator/yield` | `40-curator/yield-cis.html` | ✅ |
+| 77 | Success Fee CIS | `/curator/yield` | `40-curator/yield-cis.html` | ✅ |
 | 78 | Analytics global | `/curator/analytics` | `40-curator/analytics-clube.html` | ✅ |
 | 79 | Council host | `/curator/council` | `40-curator/council-admin.html` | ✅ |
 | 80 | Pilgrimages admin | `/curator/pilgrimages` | `40-curator/pilgrimages-admin.html` | ✅ |
@@ -231,7 +231,7 @@
 - **Telas com listas longas** (Codex 100+ membros, Cross-Floor): paginação cursor-based + Meilisearch
 - **Telas com realtime** (Council chat, Antechamber espelho, notifications): Supabase Realtime
 - **Telas com formulários complexos** (signup-mentor-4 etapas, candidatura): React Hook Form + Zod schema sharing via `packages/domain`
-- **Telas com cálculo financeiro** (Yield, Studio financeiro, Curator financeiro): jobs Inngest noturnos + cache via Supabase
+- **Telas com cálculo financeiro** (Success Fee, Studio financeiro, Curator financeiro): jobs Inngest noturnos + cache via Supabase
 
 ---
 

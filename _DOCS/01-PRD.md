@@ -11,7 +11,7 @@
 
 **3 mundos integrados sob a mesma conta:**
 
-1. **Clube** (ritualístico) — Council, Pilgrimages, Codex, Cross-Floor, Yield, Antechamber, Seal
+1. **Clube** (ritualístico) — Council, Pilgrimages, Codex, Cross-Floor, Success Fee, Antechamber, Seal
 2. **Studio** (comerce) — mentor vende mentoria com aulas Mux, checkout CISPay, comunidade Discord-like, CRM de mentorados
 3. **Mentorado** (consumo) — Netflix de aulas, sessões 1:1, comunidade, certificado verificável
 
@@ -39,7 +39,7 @@
 | High Mentors ativos no clube | 10–20 | 40–60 | 100+ |
 | Mentorados ativos pagantes | 200 | 1.000 | 5.000 |
 | Receita bruta processada via CISPay (mensal) | R$ 500k | R$ 3M | R$ 12M+ |
-| HMC Yield (16% CIS) gerado mensal | R$ 20k | R$ 100k | R$ 500k+ |
+| HMC Success Fee (16% CIS) gerado mensal | R$ 20k | R$ 100k | R$ 500k+ |
 | Cross-Floor — vagas trocadas/mês | 5 | 30 | 150+ |
 | Pilgrimages — taxa de RSVP (members elegíveis) | 60% | 75% | 85% |
 | Council attendance rate | 70% | 80% | 85% |
@@ -65,7 +65,7 @@
 6. Aprovado → recebe email com Seat assignment → `onboarding` → `hub` ativado
 7. Acessa Studio, sobe aulas via Mux, configura página pública, abre checkout CISPay
 8. Conforme mentorados compram, recebe split 90% (10% fee HMC) via CISPay
-9. Participa mensalmente do Council, vê Codex, recebe Yield CIS, decide vagas Cross-Floor
+9. Participa mensalmente do Council, vê Codex, recebe Success Fee CIS, decide vagas Cross-Floor
 
 ### 4.2 Jornada do Mentorado (descoberta → consumo)
 
@@ -95,7 +95,7 @@ Mentorado paga R$ 6.800/mês  ──CISPay──┬── 10% (R$ 680) → HMC h
                                        └── 90% (R$ 6.120) → High Mentor (cartão/PIX/boleto)
 
 Mentorado entra em Método CIS via link único do membro:
-  Vendido por R$ X → 16% comissão → HMC Yield do membro
+  Vendido por R$ X → 16% comissão → HMC Success Fee do membro
   (independente do split do Studio, paga separado pelo Financeiro Febracis)
 ```
 
@@ -107,7 +107,7 @@ Mentorado entra em Método CIS via link único do membro:
 
 **Fora do MVP (entra em V1/V2):**
 - Cross-Floor completo (marketplace)
-- HMC Yield com integração Salesforce
+- HMC Success Fee com integração Salesforce
 - Pilgrimages com RSVP automático
 - The Bridge
 - Curator's Address ao vivo (Mux Live)

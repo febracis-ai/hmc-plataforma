@@ -50,7 +50,7 @@
 - Chat assíncrono com Time Curadoria
 
 **Pode:** editar próprio dossiê até envio, ver timeline de status, conversar com Michelle
-**Não pode:** acessar Studio, Club, Yield, qualquer área de membro ativo
+**Não pode:** acessar Studio, Club, Success Fee, qualquer área de membro ativo
 **Workflow:** `draft` → `review` (após envio) → `approved` (vira `high_mentor`) ou `rejected` (dados retidos 5 anos LGPD)
 
 ---
@@ -86,7 +86,7 @@
 - Pode candidatar-se a vagas Cross-Floor abertas por membros (com consentimento do próprio mentor)
 
 **Pode:** tudo do consumo do programa, candidatar-se a Cross-Floor, receber convite p/ HMC Summit (Tier III mentors podem oferecer)
-**Não pode:** Studio admin, dados financeiros do mentor, Council, Codex (interno), Yield, Bridge
+**Não pode:** Studio admin, dados financeiros do mentor, Council, Codex (interno), Success Fee, Bridge
 **Recebe:** Curator's Address mensal (PGR do PV aberto)
 
 ---
@@ -99,7 +99,7 @@
 - **Mundo Clube:** Sala do Membro, Council (RSVP), Codex (read), Pilgrimages (T1 only), Seal Kit (bronze), Antechamber
 - **Mundo Studio:** próprio Studio com aulas Mux, mentorias, CRM, sessões, comunidade, financeiro
 - **Mundo Mentorado:** se comprou de outro mentor, acessa também
-- **HMC Yield:** dashboard próprio
+- **HMC Success Fee:** dashboard próprio
 
 **Pode:** operar Studio próprio, RSVPs em Council/Pilgrimages T1, baixar Seal bronze
 **Não pode:** publicar vagas no Cross-Floor (só APPLY, oferta limitada a 20%), HMC Summit (T2+), The Bridge (T3)
@@ -210,7 +210,7 @@ Legenda: **R** read · **W** write · **A** approve · **—** sem acesso · **o
 | Codex (anuário) | — | — | — | R | R+spread destacado | R+founder spread | RW | RW+decreto | R |
 | Cross-Floor | — | — | apply only | R+apply (limitado) | RW (publica) | RW | R+dispute | R+dispute | R |
 | The Bridge | — | — | — | — | — | RW indicação | R | RW | R |
-| HMC Yield (CIS 16%) | — | — | — | R own | R own | R own | R consolidado | R consolidado | R |
+| HMC Success Fee (CIS 16%) | — | — | — | R own | R own | R own | R consolidado | R consolidado | R |
 | CISPay (gateway) | — | — | checkout | R own payouts | R own payouts | R own payouts | R agregado | R bruto | R logs |
 | Pilgrimages | — | — | — | R+RSVP (T1) | R+RSVP | R+RSVP+priority | RW | RW | R |
 | Seal Kit (download) | — | — | — | R+download | R+download | R+download+custom | RW templates | RW | R |
